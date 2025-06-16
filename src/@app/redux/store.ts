@@ -1,0 +1,149 @@
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+
+import app from "./app/slice";
+import dashboard from "./dashboard/slice";
+import user from "./user/slice";
+import accessibility from "./accessibility/slice";
+import functions from "./functions/slice";
+import generalParam from "./generalParam/slice";
+import adminAccounts from "./adminAccounts/slice";
+import prodCodes from "./prodCode/slice";
+import prodFees from "./prodFee/slice";
+import tranCodes from "./tranCode/slice";
+import roleCodes from "./role/slice";
+import credAppLims from "./credAppLim/slice";
+import queue from "./queue/slice";
+import activity from "./queue/slice";
+import activityAct from "./queue/slice";
+import glas from "./gla/slice";
+import taxCodes from "./taxCode/slice";
+import activityChk from "./queue/slice";
+
+import workgroup from "./workgroup/slice";
+import workgroupuser from "./workgroupuser/slice";
+import product from "./product/slice";
+import passwordPolicy from "./passwordPolicy/slice";
+import backupDatabase from "./backup/slice";
+import feeCode from "./feeCode/slice";
+import application from "./application/slice";
+import pappar from "./pappar/slice";
+
+import fileManagement from "./fileManage/slice";
+import tableKey from "./tableKey/slice";
+import entity from "./entity/slice";
+import checkerMaker from "./checkerMaker/slice";
+import request from "./request/slice";
+import loancalculator from "./loanCalculator/slice";
+import loanAccount from "./accountManagement/slice";
+
+import testReceiver from "./testReceiver/slice";
+import notificationTemplate from "./notificationtemplate/slice";
+import scheduleDetail from "./notificationsheduledetail/slice";
+import metadata from "./metadata/slice";
+import notSentHistory from "./notificationSentHistory/slice";
+import segment from "./segment/slice";
+import notificationGroup from "./notificationGroup/slice";
+import notificationGroupData from "./notificationGroupData/slice";
+import notificationSubs from "./notificationSubscription/slice";
+import channelCode from "./channelCode/slice";
+import notificationCategory from "./notificationCategory/slice";
+import pushParam from "./pshprm/slice";
+import reports from './reports/slice';
+import rewards from './reports/slice';
+import member from './member/slice';
+import prods from './prod/slice';
+import prodCom from  './prodCom/slice';
+import dsagent from './dsagent/slice';
+import contract from './contract/slice';
+import holiday from './holiday/slice';
+import workday from './workday/slice';
+import announcement from './announcement/slice';
+import promotion from './promotion/slice';
+import commission from './commission/slice';
+import agent from './agentIncentive/slice';
+import currat from './currencyRate/slice';
+import compars from './compar/slice';
+import dealDate from './dealDate/slice';
+
+export function makeStore() {
+  return configureStore({
+    reducer: {
+      announcement,
+      app,
+      dashboard,
+      user,
+      accessibility,
+      prodCom,
+      holiday,
+      workday,
+      dsagent,
+      currat,
+      agent,
+      functions,
+      generalParam,
+      adminAccounts,
+      prodCodes,
+      prods,
+      queue,
+      activity,
+      activityAct,
+      activityChk,
+      pappar,
+      workgroup,
+      workgroupuser,
+      product,
+      prodFees,
+      glas,
+      taxCodes,
+      tranCodes,
+      compars,
+      roleCodes,
+      credAppLims,
+      fileManagement,
+      tableKey,
+      passwordPolicy,
+      backupDatabase,
+      feeCode,
+      application,
+      entity,
+      checkerMaker,
+      request,
+      loancalculator,
+      loanAccount,
+      testReceiver,
+      notificationTemplate,
+      scheduleDetail,
+      metadata,
+      notSentHistory,
+      segment,
+      notificationGroup,
+      notificationGroupData,
+      notificationSubs,
+      channelCode,
+      notificationCategory,
+      pushParam,
+      reports,
+      rewards,
+      member,
+      promotion,
+      contract,
+      commission,
+      dealDate,
+    },
+  });
+}
+
+const store = makeStore();
+
+export type AppState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  AppState,
+  unknown,
+  Action<string>
+>;
+
+export default store;
