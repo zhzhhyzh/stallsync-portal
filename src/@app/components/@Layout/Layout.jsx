@@ -37,7 +37,7 @@ export default function Layout(props) {
 
 	const getActiveRoute = (routes) => {
 		const pathname = router?.pathname
-		let activeRoute = 'Go-Agent';
+		let activeRoute = 'StallSync';
 		for (const route of routes) {
 			if (route.children) {
 				let collapseActiveRoute = getActiveRoute(route.children);

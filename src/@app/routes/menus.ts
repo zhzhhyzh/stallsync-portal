@@ -1,5 +1,6 @@
 import {
   RiHome5Line,
+  RiBriefcase2Line,
   RiSettings2Line,
   RiUser2Line,
   RiAppsLine,
@@ -9,6 +10,13 @@ import {
   RiFolderHistoryLine,
   RiBellFill,
 } from "react-icons/ri";
+
+import {
+  FaUserCircle,
+  FaRegClipboard,
+  FaScribd, FaGlobe,
+  FaList
+} from "react-icons/fa";
 import { accessType } from "../utils/access-matrix";
 import { CgBrowser } from "react-icons/cg";
 import { GoChecklist } from "react-icons/go";
@@ -31,232 +39,36 @@ export const menus: Array<NavItem> = [
       {
         label: "Dashboard",
         href: "/dashboard",
-        root: "Dashboard",  
+        root: "Dashboard",
         icon: RiHome5Line,
       },
-           
       {
-        label: "Applications",
-        icon: RiAppsLine,
-        root: "Applications",
-        href:"/application",
-        permissions: [accessType.APPLAPV_VIEW],
-      },
-      {
-        label: "Applications",
-        icon: RiAppsLine,
-        root: "Applications",
-        href: "/applicationAgent",
-        permissions: [accessType.APPLAGT_VIEW],
-      },
-    
-      {
-        label: "Agent Profiles",
-        icon: IoPersonOutline,
-        root: "Agent Profiles",
-        children: [
-    
-          {
-            label: "My Profile",
-            href: "/agentProfile",
-            permissions: [accessType.AGTPRF_VIEW],
-          },
-          {
-            label: "My Group",
-            href: "/member",
-            permissions: [accessType.AGTPRF_VIEW], 
-          },
-        ],
-        permissions: [accessType.AGTPRF_VIEW],
+        label: "Staff",
+        href: "/staff",
+        root: "Staff",
+        icon: RiBriefcase2Line,
 
       },
-     
+
       {
-        label: "Agent Profiles",
-        icon: IoPersonOutline,
-        root: "Agent Profiles",
-        href:"/member",
-        permissions: [accessType.AGTLST_VIEW], 
-
-
-      },
-      {
-        label: "Commissions",
-        icon: IoPersonOutline,
-        root: "Commissions",
-        href:"/commissions",
-        permissions: [accessType.COM_VIEW], 
-
-
-      },
- 
-      {
-        label: "Promotion",
-        icon: IoPersonOutline,
-        root: "Promotion",
-        href:"/promotions",
-        permissions: [accessType.PROMOTION_VIEW], 
-
-
-      },
-      {
-        label: "Sales Contract",
-        icon: IoPersonOutline,
-        root: "Sales Contract",
-        href:"/contract",
-        permissions: [accessType.CON_VIEW], 
-
-
-      },
- 
-      {
-        label: "Notifications",
-        icon: RiBellFill,
-        root: "Notifications",
-        children: [
-          {
-            label: "Parameters",
-            children: [
-              {
-                label: "Announcement",
-                href: "/announcement",
-                permissions: [accessType.ANNOUNCE_VIEW],
-              },
-              {
-                label: "Notification Template",
-                href: "/notificationTemplate",
-                permissions: [accessType.NOT_VIEW],
-              },
-              // {
-              //   label: "Notification Segment",
-              //   href: "/segment",
-              //   permissions: [accessType.SEG_VIEW],
-              // },
-              {
-                label: "Notification Group",
-                href: "/notificationGroup",
-                permissions: [accessType.NOTGRP_VIEW],
-              },
-              {
-                label: "Subscription",
-                href: "/notificationSubscription",
-                permissions: [accessType.NOTSUBS_VIEW],
-              },
-              {
-                label: "Comm Channel",
-                href: "/channelCode",
-                permissions: [accessType.CHNLCOM_VIEW],
-              },
-              {
-                label: "Test Recipients",
-                href: "/testReceiver",
-                permissions: [accessType.TRCV_VIEW],
-              },
-              {
-                label: "Push Notification Control",
-                href: "/pushNotificationParam",
-                permissions: [accessType.PSHPRM_VIEW],
-              },
-           
-            ],
-            permissions: [
-              accessType.ANNOUNCE_VIEW,
-              accessType.NOT_VIEW,
-              //accessType.SEG_VIEW,
-              accessType.NOTGRP_VIEW,
-              accessType.NOTSUBS_VIEW,
-              accessType.CHNLCOM_VIEW,
-              accessType.TRCV_VIEW,
-              accessType.PSHPRM_VIEW,
-            ],
-          },
-          {
-            label: "Notification",
-            children: [
-              {
-                label: "New Messages",
-                href: "/notificationAdHoc",
-                permissions: [accessType.NOTNEW_ADD],
-              },
-              {
-                label: "Scheduled Messages",
-                href: "/notificationSchedules",
-                permissions: [accessType.NOTSCHED_VIEW],
-              },
-              {
-                label: "Sent History",
-                href: "/notificationSentHistory",
-                permissions: [accessType.NOTSNDH_VIEW],
-              },
-              {
-                label: "Metadata",
-                href: "/metadata",
-                permissions: [accessType.MTDA_VIEW],
-              },
-            ],
-            permissions: [
-              accessType.NOTNEW_ADD,
-              accessType.NOTSCHED_VIEW,
-              accessType.NOTSNDH_VIEW,
-              accessType.MTDA_VIEW,
-            ],
-          },
-          {
-            label: "Omnisend Reports",
-            href: "/omnisendReport",
-            // permissions: [accessType.RREPORT_VIEW], //todo
-          },
-        ],
-        permissions: [
-          accessType.NOT_VIEW,
-          //accessType.SEG_VIEW,
-          accessType.NOTGRP_VIEW,
-          accessType.NOTSUBS_VIEW,
-          accessType.CHNLCOM_VIEW,
-          accessType.TRCV_VIEW,
-          accessType.PSHPRM_VIEW,
-          accessType.NOTNEW_ADD,
-          accessType.NOTSCHED_VIEW,
-          accessType.NOTSNDH_VIEW,
-          accessType.MTDA_VIEW,
-        ],
+        label: "Customer",
+        href: "/customer",
+        root: "Customer",
+        icon: FaUserCircle,
       },
 
-     
-      
       {
-        label: "Reporting",
-        icon: RiFolderHistoryLine,
-        root: "Reporting",
-        href: "/report",
-        // permissions: [
-        // ],
+        label: "Order",
+        href: "/order",
+        root: "Order",
+        icon: FaRegClipboard,
       },
       {
         label: "Parameter",
-        icon: CgBrowser,
+        icon: FaGlobe,
         root: "Param",
         children: [
-          {
-            label: "Deal Date",
-            href: "/dealDate",
-            permissions: [accessType.DEAL_DATE_VIEW],
-          },
-          {
-            label: "Checker Maker Control",
-            href: "/checkerMaker",
-            // root: "Checker Maker",
-            // icon: RiCoupon2Fill,
-            permissions: [accessType.CHKMKRPAR_VIEW],
-          },
-          
-          {
-            label: "Checker Approval",
-            href: "/checkerMakerAppv",
-            // root: "CM Approval",
-            // icon: GoChecklist,
-            permissions: [accessType.CHKMKRAPV_VIEW],
-          },
+
           {
             label: "General Parameter",
             permissions: [accessType.GEN_VIEW],
@@ -266,11 +78,7 @@ export const menus: Array<NavItem> = [
                 href: "/generalParameter",
                 permissions: [accessType.GEN_VIEW],
               },
-              // {
-              //   label: "Entity Group",
-              //   href: "/entity",
-              //   // permissions: [],
-              // },
+
             ],
           },
           {
@@ -281,7 +89,7 @@ export const menus: Array<NavItem> = [
               accessType.ACES_VIEW,
               accessType.ROLE_VIEW,
               accessType.ADMA_VIEW,
-              accessType.WRKGRP_VIEW,
+              // accessType.WRKGRP_VIEW,
               accessType.PWPOLICY_VIEW,
               accessType.PWPOLICY_EDIT,
               accessType.FILEMANAGE_VIEW,
@@ -308,18 +116,18 @@ export const menus: Array<NavItem> = [
                 href: "/adminAccounts",
                 permissions: [accessType.ADMA_VIEW],
               },
-              {
-                label: "Workgroup",
-                href: "/workgroups",
-                permissions: [accessType.WRKGRP_VIEW],
-              },
+              // {
+              //   label: "Workgroup",
+              //   href: "/workgroups",
+              //   permissions: [accessType.WRKGRP_VIEW],
+              // },
               {
                 label: "System Table",
                 href: "/fileManagements",
                 permissions: [accessType.FILEMANAGE_VIEW],
               },
-             
-              
+
+
               {
                 label: "Password Policy",
                 href: "/passwordPolicy",
@@ -343,7 +151,7 @@ export const menus: Array<NavItem> = [
           {
             label: "Currency Rate",
             href: "/currencyRate",
-           
+
             permissions: [accessType.CURRAT_VIEW],
           },
 
@@ -356,6 +164,11 @@ export const menus: Array<NavItem> = [
             label: "Transaction Code",
             href: "/tranCode",
             permissions: [accessType.TRANCODE_VIEW],
+          },
+          {
+            label: "Merchant",
+            href: "/merchant",
+            permissions: [accessType.MCH_VIEW],
           },
           {
             label: "Products",
@@ -371,7 +184,7 @@ export const menus: Array<NavItem> = [
                 href: "/productCodes",
                 permissions: [accessType.PRODCODE_VIEW],
               },
-             
+
               {
                 label: "Payment Priority",
                 href: "/pappar",
@@ -462,12 +275,142 @@ export const menus: Array<NavItem> = [
           },
         ],
         permissions: [
-          accessType.FILEMANAGE_VIEW,
-          accessType.ADMA_VIEW,
           accessType.PROF_VIEW,
-          accessType.BACKUP_VIEW,
         ],
       },
+
+
+
+
+
+
+
+
+
+      {
+        label: "Notifications",
+        icon: RiBellFill,
+        root: "Notifications",
+        children: [
+          {
+            label: "Parameters",
+            children: [
+              {
+                label: "Announcement",
+                href: "/announcement",
+                permissions: [accessType.ANNOUNCE_VIEW],
+              },
+              {
+                label: "Notification Template",
+                href: "/notificationTemplate",
+                permissions: [accessType.NOT_VIEW],
+              },
+              // {
+              //   label: "Notification Segment",
+              //   href: "/segment",
+              //   permissions: [accessType.SEG_VIEW],
+              // },
+              {
+                label: "Notification Group",
+                href: "/notificationGroup",
+                permissions: [accessType.NOTGRP_VIEW],
+              },
+              {
+                label: "Subscription",
+                href: "/notificationSubscription",
+                permissions: [accessType.NOTSUBS_VIEW],
+              },
+              {
+                label: "Comm Channel",
+                href: "/channelCode",
+                permissions: [accessType.CHNLCOM_VIEW],
+              },
+              {
+                label: "Test Recipients",
+                href: "/testReceiver",
+                permissions: [accessType.TRCV_VIEW],
+              },
+              {
+                label: "Push Notification Control",
+                href: "/pushNotificationParam",
+                permissions: [accessType.PSHPRM_VIEW],
+              },
+
+            ],
+            permissions: [
+              accessType.ANNOUNCE_VIEW,
+              accessType.NOT_VIEW,
+              //accessType.SEG_VIEW,
+              accessType.NOTGRP_VIEW,
+              accessType.NOTSUBS_VIEW,
+              accessType.CHNLCOM_VIEW,
+              accessType.TRCV_VIEW,
+              accessType.PSHPRM_VIEW,
+            ],
+          },
+          {
+            label: "Notification",
+            children: [
+              {
+                label: "New Messages",
+                href: "/notificationAdHoc",
+                permissions: [accessType.NOTNEW_ADD],
+              },
+              {
+                label: "Scheduled Messages",
+                href: "/notificationSchedules",
+                permissions: [accessType.NOTSCHED_VIEW],
+              },
+              {
+                label: "Sent History",
+                href: "/notificationSentHistory",
+                permissions: [accessType.NOTSNDH_VIEW],
+              },
+              {
+                label: "Metadata",
+                href: "/metadata",
+                permissions: [accessType.MTDA_VIEW],
+              },
+            ],
+            permissions: [
+              accessType.NOTNEW_ADD,
+              accessType.NOTSCHED_VIEW,
+              accessType.NOTSNDH_VIEW,
+              accessType.MTDA_VIEW,
+            ],
+          },
+          {
+            label: "Omnisend Reports",
+            href: "/omnisendReport",
+            // permissions: [accessType.RREPORT_VIEW], //todo
+          },
+        ],
+        permissions: [
+          accessType.NOT_VIEW,
+          //accessType.SEG_VIEW,
+          accessType.NOTGRP_VIEW,
+          accessType.NOTSUBS_VIEW,
+          accessType.CHNLCOM_VIEW,
+          accessType.TRCV_VIEW,
+          accessType.PSHPRM_VIEW,
+          accessType.NOTNEW_ADD,
+          accessType.NOTSCHED_VIEW,
+          accessType.NOTSNDH_VIEW,
+          accessType.MTDA_VIEW,
+        ],
+      },
+
+
+
+      {
+        label: "Reporting",
+        icon: RiFolderHistoryLine,
+        root: "Reporting",
+        href: "/report",
+        // permissions: [
+        // ],
+      },
+
     ],
   },
 ];

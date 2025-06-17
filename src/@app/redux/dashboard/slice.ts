@@ -3,7 +3,7 @@ import type { AppState, AppThunk } from '../store'
 import { getMain, getTop10, getCommission, getSales } from './api'
 
 export interface State {
-    memberTiers: any[];
+    numberBoard: any[];
     totalCommission : any[];
     top10Agents: any[];
     applications: any[];
@@ -11,7 +11,7 @@ export interface State {
 }
 
 const initialState: State = {
-    memberTiers: [],
+    numberBoard: [],
     totalCommission: [],
     top10Agents: [],
     applications: [],
@@ -66,7 +66,7 @@ export const reducerSlice = createSlice({
         builder
             .addCase(fetchMain.fulfilled, (state, action) => {
                 state.applications = action.payload?.message?.applications
-                state.memberTiers = action.payload?.message?.memberTiers
+                state.numberBoard = action.payload?.message?.numberBoard
                 state.totalSales = action.payload?.message?.totalSales
                 state.totalCommission = action.payload?.message?.totalCommission
                 state.top10Agents = action.payload?.message?.top10Agents
@@ -92,7 +92,7 @@ export const { clearDashboardData } = reducerSlice.actions
 export const selectApplications = (state: AppState) => state.dashboard?.applications
 export const selectTotalSales = (state: AppState) => state.dashboard?.totalSales
 export const selectTotalCommission = (state: AppState) => state.dashboard?.totalCommission
-export const selectMemberTiers = (state: AppState) => state.dashboard?.memberTiers
+export const selectMemberTiers = (state: AppState) => state.dashboard?.numberBoard
 export const selecTop10Agents = (state: AppState) => state.dashboard?.top10Agents
 
 export default reducerSlice.reducer

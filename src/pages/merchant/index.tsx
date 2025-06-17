@@ -21,83 +21,107 @@ import Spacing from "@app/constants/Spacing";
 
 import Card from "@app/components/common/Card/Card";
 
+import { formatDate } from "@app/utils/DateUtils";
 import Table from "@app/components/common/Table/Table";
 import { IoAdd, IoTrash, IoWarningOutline } from "react-icons/io5";
+import { FiMoreVertical } from "react-icons/fi";
+import { AiFillEye } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
 import { closeGlobalModal, openGlobalModal, refreshTable, selectHome } from "@app/redux/app/slice";
 
 import { showModal } from "@app/helpers/modalHelper";
 import { useRouter } from "next/router";
 import useApi from "@app/hooks/useApi";
+import useFetchMerchants from "@app/hooks/selector/useFetchMerchants";
+import {
+  fetchmerchants,
+  getremoveMerchant,
+} from "@app/redux/merchant/slice";
+import useFetchDDL from "@app/hooks/selector/useFetchDDL";
+import { DDL_TYPES } from "@app/interfaces/ddl.types";
 import TableMenu from "@app/components/common/TableMenu/TableMenu";
 import { BsPencil } from "react-icons/bs";
-import useFetchFunctions from "@app/hooks/selector/useFetchFunctions";
-import { deleteAdmin, fetchFunctions } from "@app/redux/functions/slice";
 import { accessType, checkAccessMatrix } from "@app/utils/access-matrix";
 import Buttons from "@app/components/common/Buttons/Buttons";
 import Breadcrumbs from "@app/components/common/Breadcrumbs/Breadcrumbs";
-import useFetchDDL from "@app/hooks/selector/useFetchDDL";
-import { DDL_TYPES } from "@app/interfaces/ddl.types";
+import { MdLockReset } from "react-icons/md";
 
-export default function FunctionsPage() {
+export default function MerchantPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { sendRequest, loading } = useApi({ title: "Functions" });
-  const homeData = useAppSelector(selectHome);  
-  //sample code how to use this hook
-  const [tableData, refreshFn, totalRecords, extra] = useFetchFunctions();
-  //pass tableData to table
-  // const [pageSize, setPageSize] = useState(10);
-  // const [page, setPage] = useState(1);
-  const [ddlData] = useFetchDDL({ code: ["FUNGRP"] });
+  const { sendRequest, loading } = useApi({ title: "Merchant" });
+  const homeData = useAppSelector(selectHome);
 
+  //sample code how to use this hook
+  const [tableData, refreshFn, totalRecords, extra] = useFetchMerchants({});
+  // const [ddlData] = useFetchDDL({ code: ["GTCAT"] });
+  //pass tableData to table
+  const [ddlData] = useFetchDDL({ code: ["YESORNO"] });
   const [search, setSearch] = useState();
-  const [functionGroup, setFunctionGroup] = useState();
+  const [status, setStatus] = useState();
 
   const columns: any[] = [
     {
-      title: "Function Code",
-      dataIndex: "prfuncde",
-      key: "prfuncde",
+      title: "Merchant Id",
+      dataIndex: "psmrcuid",
+      key: "psmrcuid",
     },
+    {
+      title: "Name",
+      dataIndex: "psmrcnme",
+      key: "psmrcnme",
+    },
+
     {
       title: "Description",
-      dataIndex: "prfunnme",
-      key: "prfunnme",
+      dataIndex: "psmrcdsc",
+      key: "psmrcdsc",
     },
+
     {
-      title: "Function Group",
-      dataIndex: "prfungrpdsc",
-      key: "prfungrpdsc",
-    },
-    {
-      title: "Active",
-      dataIndex: "prfunsts",
-      key: "prfunsts",
-      render: (_: Boolean, record: any) => (
-        Boolean(_) === true ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.SUCCESS,
-          borderRadius: 10
-        }}>Yes</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.DANGER,
-          borderRadius: 10,
-        }}>No</Text>
+      title: "Owner",
+      dataIndex: "psmrcown",
+      key: "psmrcown",
+      render: (_: any, record: any) => (
+        <Text>{`${record.psmrcowndsc}`}</Text>
       )
     },
     {
-      title: "Actions",
+      title: "Rating",
+      dataIndex: "psmrcrtg",
+      key: "psmrcrtg",
+    },
+    {
+      title: "Join Date",
+      dataIndex: "psmrcjdt",
+      key: "psmrcjdt",
+    },
+
+
+    {
+      title: "Status",
+      dataIndex: "psmrcsts",
+      key: "psmrcsts",
+      render: (_: any, record: any) => (
+        <Text>{`${record.psmrcsts} - ${record.psmrcstsdsc}`}</Text>
+
+      )
+    },
+    {
+      title: "Action",
       key: "action",
       align: "center",
-      width: "10rem",
       render: (_: any, record: any) => (
         <Flex justifyContent="flex-end">
           <Space size="small">
+            {/* <IconButton
+              // colorScheme={"blue"}
+              icon={<AiFillEye />}
+              aria-label={"view"}
+              onClick={() => showInfo(record)}
+            /> */}
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.FUNC_EDIT)) && (
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.MCH_EDIT)) && (
                 <Tooltip label='Edit' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -110,10 +134,12 @@ export default function FunctionsPage() {
                     onClick={() => goEdit(record?.id)}
                   />
                 </Tooltip>
+
               )
             }
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.FUNC_DEL)) && (
+              // todo
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.MCH_DEL)) && (
                 <Tooltip label='Delete' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -123,58 +149,67 @@ export default function FunctionsPage() {
                     sx={{ _hover: { backgroundColor: Colors.DANGER, color: Colors.BACKGROUND } }}
                     icon={<IoTrash />}
                     aria-label={"delete"}
-                    onClick={() => alertRemove(record?.id, record?.prfunnme)}
+                    onClick={() => alertRemove(record?.id, record?.psmrcnme)}
                   />
                 </Tooltip>
               )
             }
-            
-            <TableMenu
-              menus={[
-                {
-                  url: `/maintLogs`,
-                  query: {
-                    id: record?.id,
-                    file: extra.file,
-                  },
-                  label: "Maint Log",
-                  breadcrumbRoute: [
-                    {
-                      title: "Functions",
-                      href: `/functions`,// Add parameter if needed eg. /generalParameter/?id=123
-                    },
-                    {
-                      title: "Maintenance Log",
-                    },
-                  ]
+
+            <TableMenu menus={[
+              {
+                url: `/maintLogs`,
+                query: {
+                  id: record?.id,
+                  file: extra.file
                 },
-              ]}
-            />
+                label: "Maint Log",
+                breadcrumbRoute: [
+                  {
+                    title: "Merchant",
+                    href: `/merchant`,// Add parameter if needed eg. /generalParameter/?id=123
+                  },
+                  {
+                    title: "Maintenance Log",
+                  },
+                ]
+              }
+            ]} />
+
           </Space>
         </Flex>
       ),
     },
   ];
 
+  // function showInfo(record: any, index: number) {
+  //   dispatch(
+  //     openGlobalModal({
+  //       title: "Function Account Detail",
+  //       status: "custom",
+  //       message: <ShowDetail data={record} />,
+  //     })
+  //   );
+  // }
+
   function alertRemove(id: string, desc: string) {
+
     dispatch(
       openGlobalModal({
-        title: "Delete Record",
+        title: "",
         message: RemoveDetail(id, desc),
         status: "warning",
         actions: [
           {
             title: "Confirm",
-            onClick: () => onRemove(id),
+            onClick: () => {
+              onRemove(id);
+            },
+
           },
           {
             title: "Cancel",
             isClose: true,
-            props: {
-              variant: "danger",
-            },
           },
-          
         ],
       })
     );
@@ -182,23 +217,24 @@ export default function FunctionsPage() {
 
   async function onRemove(id: string) {
     const { success } = await sendRequest({
-      fn: deleteAdmin({ id }),
+      fn: getremoveMerchant({ id }),
     });
-    
     if (success) {
-      dispatch(refreshTable())
+
       setTimeout(() => {
+        dispatch(refreshTable())
         showModal(dispatch, {
-          title: "Delete Record",
-          message: "Record Deleted",
+          title: "Remove item",
+          message: "Removed",
         });
+        router.push("/merchant");
       }, 200);
     }
   }
 
   function goAdd() {
     router.push({
-      pathname: "/functions/Detail",
+      pathname: "/merchant/Detail",
       query: {
         id: "",
         mode: "ADD"
@@ -208,10 +244,20 @@ export default function FunctionsPage() {
 
   function goEdit(id: string) {
     router.push({
-      pathname: "/functions/Detail",
+      pathname: "/merchant/Detail",
       query: {
         id: id,
         mode: "EDIT"
+      },
+    });
+  }
+
+  function goView(id: string) {
+    router.push({
+      pathname: "/merchant/Detail",
+      query: {
+        id: id,
+        mode: "VIEW"
       },
     });
   }
@@ -220,35 +266,38 @@ export default function FunctionsPage() {
     setSearch(event.target.value);
   }
 
-  function functionGroupOnChange(event: any) {
-    setFunctionGroup(event.target.value);
+
+  function statusOnChange(event: any) {
+    setStatus(event.target.value);
   }
+
+
 
   return (
     <>
       <Box>
         <Flex justifyContent={"space-between"} pl={4} pr={4} pt={4}>
           <Flex direction={"column"} alignSelf={"center"}>
-            <Text fontSize={"3xl"} fontWeight="500" mb={1}>
-              Functions
+            <Text fontSize={"3xl"} fontWeight="normal" mb={1}>
+              Merchant
             </Text>
             <Breadcrumbs breadcrumbItems={[
               {
-                title: "Functions"
+                title: "Merchant"
               },
             ]} />
           </Flex>
           <Box
             display={"flex"}
             alignSelf={"center"}
-              pr={{
-                base: 0,
-                md: Spacing.containerPx,
-              }}
+            pr={{
+              base: 0,
+              md: Spacing.containerPx,
+            }}
           >
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.FUNC_ADD)) && (
-                <Buttons 
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.MCH_ADD)) && (
+                <Buttons
                   buttonDefaultType={"ADD"} onclick={() => goAdd()}
                 />
               )
@@ -272,30 +321,36 @@ export default function FunctionsPage() {
                   placeholder="Search"
                   value={search}
                 />
+
                 <Select
-                  name="functionGroup"
-                  onChange={functionGroupOnChange}
-                  placeholder="Choose Function Group"
-                  value={functionGroup}
+                  name="Status"
+                  onChange={statusOnChange}
+                  placeholder="Please Select Merchant Status"
+                  value={status}
                 >
-                  {ddlData?.FUNGRP?.map((option: DDL_TYPES) => (
+                  {ddlData?.YESORNO?.map((option: DDL_TYPES) => (
                     <option key={option.prgecode} value={option.prgecode}>
                       {option.prgedesc}
                     </option>
                   ))}
                 </Select>
+
+
               </Space>
             </Box>
           </Flex>
           <Table
             columns={columns}
             data={tableData}
-            refreshFn={fetchFunctions}
+            refreshFn={fetchmerchants}
             totalRecords={totalRecords}
             extraParams={{
-               search,
-              prfungrp: functionGroup,
+              search: search,
+              psmrcsts: status,
+
             }}
+          //onDoubleClick={showInfo}
+          //length={pageSize}
           />
         </Card>
       </Box>
@@ -303,7 +358,8 @@ export default function FunctionsPage() {
   );
 }
 
-const RemoveDetail = (item: string, itemDesc: string ) => {
+
+const RemoveDetail = (item: string, itemDesc: string) => {
   return (
     <Box w={"100%"} display="flex" flexDirection="column" alignItems="center">
       {/* <Icon as={IoWarningOutline} w={150} h={150} color={Colors.DANGER}/> */}

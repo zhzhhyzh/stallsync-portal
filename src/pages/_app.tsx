@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <RouteGuard>
         <Layout>
-          <Head><title>Go-Agent</title></Head>
+          <Head><title>StallSync</title></Head>
           <Component {...pageProps} />
         </Layout>
       </RouteGuard>

@@ -90,25 +90,25 @@ const StatisticCard: React.FC<StatisticCardProps> = ({ icon, bgColor, title, amo
 const dummyStatisticData = [
   {
     bgColor: "teal.500",
-    title: "Wealth Advisors",
+    title: "Merchants",
     amount: "20",
     icon: <BsStars size={72} opacity={0.1}/>, // Replace with your actual icon component
   },
   {
     bgColor: "blue.500",
-    title: "Assistant Managers",
+    title: "Members",
     amount: "60",
     icon: <BsStars size={72} opacity={0.1}/>, // Replace with your actual icon component
   },
   {
     bgColor: "red.500",
-    title: "Managers",
+    title: "Products",
     amount: "80",
     icon: <BsStars size={72} opacity={0.1}/> // Replace with your actual icon component
   },
   {
     bgColor: "purple.500",
-    title: "Managers",
+    title: "Orders",
     amount: "80",
     icon: <BsStars size={72} opacity={0.1}/> // Replace with your actual icon component
   },
@@ -126,8 +126,8 @@ const ThreeStatisticCards: React.FC<ThreeStatisticCardsProps>  = ({data:statisti
         <StatisticCard
           key={index}
           bgColor={dummyStatisticData[index]?.bgColor}
-          title={data.psdsgdsc}
-          amount={data.activeMemberCount}
+          title={data.description}
+          amount={data.counts}
           icon={dummyStatisticData[index]?.icon}
         />
       ))}

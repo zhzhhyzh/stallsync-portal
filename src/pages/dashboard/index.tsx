@@ -37,7 +37,7 @@ export default function Dashboard() {
   const applications = useAppSelector(selectApplications)
   const totalSales = useAppSelector(selectTotalSales)
   const totalCommission = useAppSelector(selectTotalCommission)
-  const memberTiers = useAppSelector(selectMemberTiers)
+  const numberBoard = useAppSelector(selectMemberTiers)
   const top10Agents = useAppSelector(selecTop10Agents)
  
   useEffect(() => {
@@ -68,12 +68,18 @@ export default function Dashboard() {
     { ranking: 10, name: "Anson", points: 150 },
   ];
   const iconBoxInside = useColorModeValue("white", "white");
-
+const test = [
+  {counts: 8,description: "Merchant"},
+  {counts: 8,description: "Order"},
+  {counts: 8,description: "Member"},
+  {counts: 8,description: "Product"},
+]
   return (
     <Flex flexDirection="column" gap={Spacing.containerPx} pt={`${Spacing.containerPx}`}>
       <Flex flexDirection="row" gap={Spacing.containerPx} >
-        <PieChart data={Array.isArray(applications)?applications:[]}/>
-        <ThreeStatisticCards data={Array.isArray(memberTiers)?memberTiers:[]}/>
+        {/* <PieChart data={Array.isArray(applications)?applications:[]}/> */}
+        <ThreeStatisticCards data={Array.isArray(numberBoard)?numberBoard:[]}/>
+        {/* <ThreeStatisticCards data={Array.isArray(test)?test:[]}/> */}
       </Flex>
       <Flex flexDirection="row" gap={Spacing.containerPx} >
         <LineChartCard data={Array.isArray(totalSales)?totalSales:[]}/>

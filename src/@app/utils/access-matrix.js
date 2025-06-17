@@ -120,16 +120,7 @@ export const accessType = {
     function: "FUNC",
     action: "DEL",
   },
-  ACES_VIEW: {
-    type: "PARAM",
-    function: "ACES",
-    action: "VIEW",
-  },
-  ACES_EDIT: {
-    type: "PARAM",
-    function: "ACES",
-    action: "EDIT",
-  },
+
   GEN_VIEW: {
     type: "PARAM",
     function: "GEN",
@@ -931,13 +922,13 @@ export const accessType = {
     function: "CON",
     action: "VIEW",
   },
- 
+
   CON_ADD: {
     type: "AGT",
     function: "CON",
     action: "ADD",
   },
- 
+
   CON_EDIT: {
     type: "AGT",
     function: "CON",
@@ -948,7 +939,60 @@ export const accessType = {
     function: "CON",
     action: "DEL",
   },
- 
+
+  // ----------Seperator----------- ::;
+  ACES_VIEW: {
+    type: "PARAM",
+    function: "ACES",
+    action: "VIEW",
+  },
+  ACES_EDIT: {
+    type: "PARAM",
+    function: "ACES",
+    action: "EDIT",
+  },
+
+  STAFF_VIEW: {
+    type: "STAFF",
+    function: "STAFF",
+    action: "VIEW",
+  },
+  STAFF_ADD: {
+    type: "STAFF",
+    function: "STAFF",
+    action: "ADD",
+  },
+  STAFF_EDIT: {
+    type: "STAFF",
+    function: "STAFF",
+    action: "EDIT",
+  },
+  STAFF_DEL: {
+    type: "STAFF",
+    function: "STAFF",
+    action: "DEL",
+  },
+
+  MCH_VIEW: {
+    type: "PARAM",
+    function: "MCH",
+    action: "VIEW",
+  },
+  MCH_ADD: {
+    type: "PARAM",
+    function: "MCH",
+    action: "ADD",
+  },
+  MCH_EDIT: {
+    type: "PARAM",
+    function: "MCH",
+    action: "EDIT",
+  },
+  MCH_DEL: {
+    type: "PARAM",
+    function: "MCH",
+    action: "DEL",
+  },
 };
 
 const accessPath = {
@@ -1001,7 +1045,7 @@ const accessPath = {
   //   accessType.ENTITY_DEL,
   // ],
 
-  // "/accessibility": accessType.ACES_VIEW,
+
 
   "/generalParameter": accessType.GEN_VIEW,
   "/generalParameter/Detail": [
@@ -1015,7 +1059,7 @@ const accessPath = {
     accessType.GEN_EDIT,
     accessType.GEN_DEL
   ],
-   // "/prod": accessType.PROD_VIEW,
+  // "/prod": accessType.PROD_VIEW,
   // "/prod/Detail": [
   //   accessType.PROD_ADD,
   //   accessType.PROD_EDIT,
@@ -1145,7 +1189,7 @@ const accessPath = {
     accessType.PAPPAR_DEL,
   ],
 
- 
+
 
   "/profile/changePassword": accessType.PROF_EDIT,
   "/profile/myProfile": accessType.PROF_EDIT,
@@ -1250,24 +1294,39 @@ const accessPath = {
 
   "/application": accessType.APPLAPV_VIEW,
   "/application/Detail": [
-  //   accessType.CHNLCOM_ADD,
-  //   accessType.CHNLCOM_EDIT,
-  //   accessType.CHNLCOM_DEL,
+    //   accessType.CHNLCOM_ADD,
+    //   accessType.CHNLCOM_EDIT,
+    //   accessType.CHNLCOM_DEL,
   ],
   "/applicationAgent": accessType.APPLAGT_VIEW,
   "/applicationAgent/Detail": [
-  //   accessType.CHNLCOM_ADD,
-  //   accessType.CHNLCOM_EDIT,
-  //   accessType.CHNLCOM_DEL,
+    //   accessType.CHNLCOM_ADD,
+    //   accessType.CHNLCOM_EDIT,
+    //   accessType.CHNLCOM_DEL,
   ],
   "/agentProfile": accessType.AGTPRF_VIEW,
   // "/member": accessType.AGTPRF_VIEW,
   "/member/Detail": [
-  //   accessType.CHNLCOM_ADD,
-  //   accessType.CHNLCOM_EDIT,
-  //   accessType.CHNLCOM_DEL,
+    //   accessType.CHNLCOM_ADD,
+    //   accessType.CHNLCOM_EDIT,
+    //   accessType.CHNLCOM_DEL,
   ],
   "/pushNotificationParam": [accessType.PSHPRM_VIEW, accessType.PSHPRM_EDIT],
+
+  // ----------Seperator----------- ::;
+  "/accessibility": accessType.ACES_VIEW,
+  "/staff": accessType.STAFF_VIEW,
+  "/staff/Detail": [
+    accessType.STAFF_ADD,
+    accessType.STAFF_EDIT,
+    accessType.STAFF_DEL,
+  ],
+  "/merchant": accessType.MCH_VIEW,
+  "/merchant/Detail": [
+    accessType.MCH_ADD,
+    accessType.MCH_EDIT,
+    accessType.MCH_DEL,
+  ],
 };
 
 export function checkAccessMatrixRedirect(router, accessMatrix) {

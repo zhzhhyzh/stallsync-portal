@@ -31,7 +31,7 @@ export default function Footer(props) {
       >
         &copy; {1900 + new Date().getYear()},{" "}
         <Text as="span">
-          Go-Agent
+          StallSync
         </Text>
       </Text>
       {/* <List display="flex">

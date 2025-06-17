@@ -1,13 +1,87 @@
 export const API_ROUTES = {
+  //-----::;
+
+  //DASHBOARD
   DASHBOARD_MAIN: "dashboard/main",
-  DASHBOARD_TOP_10: "dashboard/getTop10PersonsBySales",
-  DASHBOARD_SALES: "dashboard/getMonthlySalesForPast12MonthsWithDescription",
-  DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",
+  DASHBOARD_TOP_10: "dashboard/getTopMerchants",
+
+  //DDL
+  DDL_GENERAL: "ddl/general",
+  DDL_ROLECODE: "ddl/psrolpar",
+
+
+  //ANNOUNCEMENT
   ANNOUNCEMENT_LIST: "pssysann/list",
   ANNOUNCEMENT_DETAIL: "pssysann/detail",
   ANNOUNCEMENT_CREATE: "pssysann/create",
   ANNOUNCEMENT_UPDATE: "pssysann/update",
   ANNOUNCEMENT_DELETE: "pssysann/delete",
+
+  // STAFF
+  STAFF_LIST: "psstfpar/list",
+  STAFF_DETAIL: "psstfpar/detail",
+  STAFF_CREATE: "psstfpar/create",
+  STAFF_UPDATE: "psstfpar/update",
+  STAFF_DELETE: "psstfpar/delete",
+
+  // MERCHANT
+  MCH_LIST: "psmrcpar/list",
+  MCH_DETAIL: "psmrcpar/detail",
+  MCH_CREATE: "psmrcpar/create",
+  MCH_UPDATE: "psmrcpar/update",
+  MCH_DELETE: "psmrcpar/delete",
+
+
+  // MAINTENANCE LOG
+  MAINT_LOG: "mntlog/list",
+
+  // USER 
+  USER_LOGIN: "psusrprf/login",
+  USER_PROFILE: "psusrprf/profile",
+  USER_PROFILE_UPDATE: "psusrprf/update_profile",
+  USER_PROFILE_CHANGEPASSWORD: "psusrprf/change_password",
+  HOME: "psusrprf/home",
+  ADMIN_LIST: "psusrprf/list",
+  ADMIN_DETAIL: "psusrprf/detail",
+  ADMIN_CREATE: "psusrprf/create",
+  ADMIN_UPDATE: "psusrprf/update",
+  ADMIN_DELETE: "psusrprf/delete",
+  ADMIN_PW_RESET: "psusrprf/change_admin_pwd",
+  FORGOT_PASSWORD: "psusrprf/admin_reset",
+
+  // DOCUMENT
+  DOCUMENT_UPLOAD: "document/upload",
+  DOCUMENT_BULK_UPLOAD: "document/bulk_upload",
+
+  // FUNCTION
+  FUNCTIONS_LIST: "prfuncde/list",
+  FUNCTIONS_DETAIL: "prfuncde/detail",
+  FUNCTIONS_CREATE: "prfuncde/create",
+  FUNCTIONS_UPDATE: "prfuncde/update",
+  FUNCTIONS_DELETE: "prfuncde/delete",
+
+  // ACCESSIBILITY
+  ACCESSIBILITY_LIST: "prfunacs/list_role",
+  ACCESSIBILITY_UPDATE: "prfunacs/action",
+
+  // GENERAL TYPE
+  GENTYP_LIST: "prgentyp/list",
+  GENTYP_DETAIL: "prgentyp/detail",
+  GENTYP_CREATE: "prgentyp/create",
+  GENTYP_UPDATE: "prgentyp/update",
+  GENTYP_DELETE: "prgentyp/delete",
+
+  // GENERAL CODE
+  GENCDE_LIST: "prgencde/list",
+  GENCDE_DETAIL: "prgencde/detail",
+  GENCDE_CREATE: "prgencde/create",
+  GENCDE_UPDATE: "prgencde/update",
+  GENCDE_DELETE: "prgencde/delete",
+
+  //-----::;
+  DASHBOARD_SALES: "dashboard/getMonthlySalesForPast12MonthsWithDescription",
+  DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",
+
   ANNOUNCEMENT_ANNOUNCEMENT: "pssysann/announcement",
   MEMBER_DETAIL: "psmbrprf/detail",
   MEMBER_LIST: "psmbrprf/list",
@@ -15,11 +89,11 @@ export const API_ROUTES = {
   MEMBER_UPDATE_PROFILE: "psmbrprf/update_profile",
   MEMBER_PROFILE: "psmbrprf/profile",
   MEMBER_SALES: "psmbrprf/sales",
-  AGENT_LIST:"psagtinc/list",
-  AGENT_CREATE:"psagtinc/create",
-  AGENT_DETAIL:"psagtinc/detail",
-  AGENT_UPDATE:"psagtinc/update",
-  AGENT_DELETE:"psagtinc/delete",
+  AGENT_LIST: "psagtinc/list",
+  AGENT_CREATE: "psagtinc/create",
+  AGENT_DETAIL: "psagtinc/detail",
+  AGENT_UPDATE: "psagtinc/update",
+  AGENT_DELETE: "psagtinc/delete",
   APPLICATION_DETAIL: "application/detail",
   APPLICATION_LIST: "application/list",
   APPLICATION_CREATE: "application/create",
@@ -52,16 +126,13 @@ export const API_ROUTES = {
   DDL_TABLE_KEYS: "ddl/fieldNames", //latest
   MAINT_SUBFILE_LOG: "mntlog/sub_list",
 
-  HOME: "psusrprf/home",
   DDL_CURRENCY: "ddl/pscurrat",
   DOC_DOWNLOAD: "document/download",
   DDL_ENTITY: "ddl/psentmas",
-  DDL_GENERAL: "ddl/general",
   DDL_FEECODE: "ddl/psfeecde",
   DDL_GLACPF: "ddl/psglacpf",
   DDL_TAXPAR: "ddl/pstaxpar",
   DDL_DSAGENT: "ddl/psdsgpar",
-  DDL_ROLECODE: "ddl/psrolpar",
   DDL_ACTWRKGRP: "ddl/workgroup",
   DDL_TRANSCODE: "ddl/transactioncode",
   DDL_PRICODE: "ddl/pricingplan",
@@ -69,42 +140,13 @@ export const API_ROUTES = {
   DDL_ACTION: "ddl/action",
   DDL_PRODUCT: "ddl/psprdpar",
   DDL_AGENT: "ddl/psmbrprf",
-  MAINT_LOG: "mntlog/list",
-  USER_LOGIN: "psusrprf/login",
-  USER_PROFILE: "psusrprf/profile",
-  USER_PROFILE_UPDATE: "psusrprf/update_profile",
-  USER_PROFILE_CHANGEPASSWORD: "psusrprf/change_password",
-  DOCUMENT_UPLOAD: "document/upload",
-  DOCUMENT_BULK_UPLOAD: "document/bulk_upload",
-  FUNCTIONS_LIST: "prfuncde/list",
-  FUNCTIONS_DETAIL: "prfuncde/detail",
-  FUNCTIONS_CREATE: "prfuncde/create",
-  FUNCTIONS_UPDATE: "prfuncde/update",
-  FUNCTIONS_DELETE: "prfuncde/delete",
-  ACCESSIBILITY_LIST: "prfunacs/list_role",
-  ACCESSIBILITY_UPDATE: "prfunacs/action",
-  GENTYP_LIST: "prgentyp/list",
-  GENTYP_DETAIL: "prgentyp/detail",
-  GENTYP_CREATE: "prgentyp/create",
-  GENTYP_UPDATE: "prgentyp/update",
-  GENTYP_DELETE: "prgentyp/delete",
-  GENCDE_LIST: "prgencde/list",
-  GENCDE_DETAIL: "prgencde/detail",
-  GENCDE_CREATE: "prgencde/create",
-  GENCDE_UPDATE: "prgencde/update",
-  GENCDE_DELETE: "prgencde/delete",
+
   CONTRACT_LIST: "psconmas/list",
   CONTRACT_DETAIL: "psconmas/detail",
   CONTRACT_CREATE: "psconmas/create",
   CONTRACT_UPDATE: "psconmas/update",
   CONTRACT_DELETE: "psconmas/delete",
-  ADMIN_LIST: "psusrprf/list",
-  ADMIN_DETAIL: "psusrprf/detail",
-  ADMIN_CREATE: "psusrprf/create",
-  ADMIN_UPDATE: "psusrprf/update",
-  ADMIN_DELETE: "psusrprf/delete",
-  ADMIN_PW_RESET: "psusrprf/change_admin_pwd",
-  FORGOT_PASSWORD: "psusrprf/admin_reset",
+
 
   //QUEUE
   QUEUE_DETAIL: "prquecde/detail",
@@ -183,11 +225,11 @@ export const API_ROUTES = {
   HOLIDAY_UPDATE: "psholpar/update",
   HOLIDAY_DELETE: "psholpar/delete",
 
- WORKDAY_LIST: "pswdypar/list",
- WORKDAY_DETAIL: "pswdypar/detail",
- WORKDAY_CREATE: "pswdypar/create",
- WORKDAY_UPDATE: "pswdypar/update",
- WORKDAY_DELETE: "pswdypar/delete",
+  WORKDAY_LIST: "pswdypar/list",
+  WORKDAY_DETAIL: "pswdypar/detail",
+  WORKDAY_CREATE: "pswdypar/create",
+  WORKDAY_UPDATE: "pswdypar/update",
+  WORKDAY_DELETE: "pswdypar/delete",
 
   PRODUCT_LIST: "prquecde/prodList", //PRODUCT_QUEUE_LIST
   PRODUCT_QUEUE_LINK: "prquecde/prodLink",
@@ -249,7 +291,7 @@ export const API_ROUTES = {
   PASSWORD_POLICY_UPDATE: "prpwdpol/update",
 
   APPLICATION: "application/application",
- 
+
   APPLICATION_UPLOAD_DOC: "application/upload_document",
   APPLICATION_UPDATE_DOC: "application/update_document",
   APPLICATION_LIST_DOCS: "application/list_documents",
@@ -386,7 +428,7 @@ export const API_ROUTES = {
   REPORT_GENERATEREWARD: "report/generateRewardReport",
   REPORT_LISTREWARD: "report/listReward",
   REPORT_DOWNLOAD: "report/download",
-  
+
   NOT_SCHEDULE_DETAIL: "psnotipf/schedule",
   NOT_SCHEDULE_CREATE: "psnotipf/create_schedule",
   NOT_SCHEDULE_UPDATE: "psnotipf/update_schedule",

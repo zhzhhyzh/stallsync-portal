@@ -11,9 +11,9 @@ export default function SubHeader(props: SubHeaderDefaultProps) {
   return (
     <Flex alignItems={"center"} flexDirection={"row"} mb={"20px"}>
     <Divider orientation='vertical' height={"15px"}
-      borderWidth="2px" borderColor="#6392D6" mr={2} opacity={"100%"} />
+      borderWidth="2px" borderColor="#C2A76D" mr={2} opacity={"100%"} />
 
-    <Text fontSize="15pt" fontWeight={"500"} color={"#6392D6"}>
+    <Text fontSize="15pt" fontWeight={"500"} color={"#C2A76D"}>
     {labelText}
     </Text>
   </Flex>

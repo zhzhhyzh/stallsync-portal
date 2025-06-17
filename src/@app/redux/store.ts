@@ -1,5 +1,8 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-
+//::;
+import staffs from "./staff/slice";
+import merchants from "./merchant/slice";
+//::;
 import app from "./app/slice";
 import dashboard from "./dashboard/slice";
 import user from "./user/slice";
@@ -52,7 +55,7 @@ import reports from './reports/slice';
 import rewards from './reports/slice';
 import member from './member/slice';
 import prods from './prod/slice';
-import prodCom from  './prodCom/slice';
+import prodCom from './prodCom/slice';
 import dsagent from './dsagent/slice';
 import contract from './contract/slice';
 import holiday from './holiday/slice';
@@ -68,6 +71,10 @@ import dealDate from './dealDate/slice';
 export function makeStore() {
   return configureStore({
     reducer: {
+      //::;
+      staffs,
+      merchants,
+      //::;
       announcement,
       app,
       dashboard,
