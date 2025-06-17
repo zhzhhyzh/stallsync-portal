@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MouseEventHandler } from 'react';
 import type { AppState, AppThunk } from '../store';
-import { ddlRoleCode, ddlGlacpf, ddlTaxpar, ddlAction, downloadDocument,ddlFeeCode,ddl, ddlDsagent,ddlPriceCode, ddlTransCode, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlEntity,ddlProdCode, ddlActWrkGrp, ddlChkMkrParam,  ddlUser, ddlWorkgroups, ddlEntityBank, notificationMetadata, notificationGroupDDL, ddlChannelSender, ddlCustomer, ddlAgent, ddlProduct, ddlCompany, ddlCurrency} from './api';
+import { ddlRoleCode, ddlGlacpf, ddlTaxpar, ddlAction, downloadDocument, ddlFeeCode, ddl, ddlDsagent, ddlPriceCode, ddlTransCode, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlEntity, ddlProdCode, ddlActWrkGrp, ddlChkMkrParam, ddlUser, ddlWorkgroups, ddlEntityBank, notificationMetadata, notificationGroupDDL, ddlChannelSender, ddlCustomer, ddlAgent, ddlProduct, ddlCompany, ddlCurrency, ddlMchuser } from './api';
 import { StepStatus } from '@chakra-ui/react';
 
 
@@ -46,8 +46,8 @@ export interface State {
   subMaintTotal: number;
   entities: any[];
   chkMkr: any[];
-  user:any[]
-  workgroups:any[]
+  user: any[]
+  workgroups: any[]
 
   entitybanks: any[];
   notMetadata: any[];
@@ -59,6 +59,7 @@ export interface State {
   agent: any[];
   companies: any[];
   currencies: any[];
+  mchUser: any[];
 }
 
 const initialState: State = {
@@ -74,6 +75,7 @@ const initialState: State = {
   refresh: '',
   isLogined: false,
   ddl: {},
+  mchUser: [],
   maintLogs: [],
   feeCode: [],
   glacpf: [],
@@ -94,8 +96,8 @@ const initialState: State = {
   entities: [],
   actions: [],
   chkMkr: [],
-  user:[],
-  workgroups:[],
+  user: [],
+  workgroups: [],
   entitybanks: [],
   notMetadata: [],
   extraDataField: [],
@@ -104,8 +106,8 @@ const initialState: State = {
   customer: [],
   product: [],
   agent: [],
-companies:[],
-currencies:[],
+  companies: [],
+  currencies: [],
   maintExtra: undefined
 };
 export const fetchDDLCheckerMaker = createAsyncThunk(
@@ -145,6 +147,14 @@ export const fetchSubFileMaintlogs = createAsyncThunk(
   "app/fetchSubFileMaintlogs",
   async (data: any) => {
     const response = await listSubFileMaintlog(data);
+    return response;
+  }
+);
+
+export const fetchDDLMchuser = createAsyncThunk(
+  "app/fetchDDLMchuser",
+  async (data: any) => {
+    const response = await ddlMchuser(data);
     return response;
   }
 );
@@ -481,6 +491,9 @@ export const reducerSlice = createSlice({
       .addCase(fetchHomeApi.fulfilled, (state, action) => {
         state.home = action.payload?.message
       })
+      .addCase(fetchDDLMchuser.fulfilled, (state, action) => {
+        state.mchUser = action.payload?.message.data
+      })
       .addCase(fetchDDLTransCode.fulfilled, (state, action) => {
         // Check if action.payload and action.payload.message are defined
         if (action.payload && action.payload.message && action.payload.message.data) {
@@ -533,10 +546,10 @@ export const reducerSlice = createSlice({
       .addCase(fetchDDLActWrkGrp.fulfilled, (state, action) => {
         state.actWrkGrp = action.payload?.message.data
       })
-      
+
       .addCase(fetchDDLEntity.fulfilled, (state, action) => {
         state.entities = action.payload?.message.data
-      })  
+      })
       // .addCase(fetchDDLEntity.fulfilled, (state, action) => {
       //   state.entities = action.payload?.message.data
       // })
@@ -617,7 +630,7 @@ export const selectIsLogined = (state: AppState) => state.app?.isLogined;
 
 export const selectMaintLog = (state: AppState) => state.app?.maintLogs;
 export const selectMaintTotal = (state: AppState) => state.app?.maintTotal;
-  
+
 export const selectTableRefreshCount = (state: AppState) => state.app?.tableRefreshCount;
 export const selectHome = (state: AppState) => state.app.home
 export const selectUser = (state: AppState) => state.app?.user
@@ -640,5 +653,6 @@ export const selectDDLAgent = (state: AppState) => state.app?.agent;
 export const selectDDLProduct = (state: AppState) => state.app?.product;
 export const selectDDLCompany = (state: AppState) => state.app?.companies;
 export const selectDDLCurrency = (state: AppState) => state.app?.currencies;
+export const selectMchuser = (state: AppState) => state.app?.mchUser;
 
 export default reducerSlice.reducer;

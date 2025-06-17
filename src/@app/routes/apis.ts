@@ -8,6 +8,7 @@ export const API_ROUTES = {
   //DDL
   DDL_GENERAL: "ddl/general",
   DDL_ROLECODE: "ddl/psrolpar",
+  DDL_MCHUSER: "ddl/merchantUser",
 
 
   //ANNOUNCEMENT

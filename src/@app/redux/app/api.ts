@@ -164,3 +164,8 @@ export async function ddlCustomer(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_CUSTOMER, 'GET', data)
     return result
 }
+
+export async function ddlMchuser(data: any = []): Promise<any> {
+    const result = await api(API_ROUTES.DDL_MCHUSER, 'GET', data)
+    return result
+}

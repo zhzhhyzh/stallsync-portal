@@ -75,6 +75,7 @@ import { MerchantSchema } from "@app/components/forms/@schemas/merchantSchema";
 import dayjs from 'dayjs'
 import { formatDate } from "@app/utils/DateUtils";
 import CustomFormLabel from "@app/components/common/FormLabel/CustomFormLabel";
+import useFetchDDLMchuser from "@app/hooks/selector/useFetchDDLMchuser";
 
 
 export default function MerchantForm(props: any) {
@@ -86,8 +87,10 @@ export default function MerchantForm(props: any) {
   const dummyReq = async () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
   };
-  // Merchant Type
 
+  const [ddlData1] = useFetchDDLMchuser();
+
+  // Merchant Type
   const [avaAction, setAvaAction] = useState<{ key: string, label: string }[]>([]);
   const [action, setAction] = useState<{ key: string, label: string, status: number }[]>([]);
 
@@ -312,7 +315,7 @@ export default function MerchantForm(props: any) {
     psmrcdsc: null,
     psmrclds: null,
     psmrcjdt: null,
-    psmrcown: null,
+    psmrcown: "",
     psmrcssm: null,
     psmrcssc: null,
     psmrcsts: true,
@@ -367,50 +370,50 @@ export default function MerchantForm(props: any) {
         setAction(detailData?.psmrclbl);
       }
 
-     if (detailData?.psmrcssc) {
-  setSelectedSsc([
-    {
-      uid: detailData.psmrcssc,
-      name: detailData.psmrcssc,
-      status: "done",
-      fileStatus: "old",
-      url: genDocumentUrl(detailData.psmrcssc, "4"),
-      thumbUrl: genDocumentUrl(detailData.psmrcssc, "4"),
-    },
-  ]);
-} else {
-  setSelectedSsc([]);
-}
+      if (detailData?.psmrcssc) {
+        setSelectedSsc([
+          {
+            uid: detailData.psmrcssc,
+            name: detailData.psmrcssc,
+            status: "done",
+            fileStatus: "old",
+            url: genDocumentUrl(detailData.psmrcssc, "4"),
+            thumbUrl: genDocumentUrl(detailData.psmrcssc, "4"),
+          },
+        ]);
+      } else {
+        setSelectedSsc([]);
+      }
 
-if (detailData?.psmrcsfi) {
-  setSelectedSfi([
-    {
-      uid: detailData.psmrcsfi,
-      name: detailData.psmrcsfi,
-      status: "done",
-      fileStatus: "old",
-      url: genDocumentUrl(detailData.psmrcsfi, "3"),
-      thumbUrl: genDocumentUrl(detailData.psmrcsfi, "3"),
-    },
-  ]);
-} else {
-  setSelectedSfi([]);
-}
+      if (detailData?.psmrcsfi) {
+        setSelectedSfi([
+          {
+            uid: detailData.psmrcsfi,
+            name: detailData.psmrcsfi,
+            status: "done",
+            fileStatus: "old",
+            url: genDocumentUrl(detailData.psmrcsfi, "3"),
+            thumbUrl: genDocumentUrl(detailData.psmrcsfi, "3"),
+          },
+        ]);
+      } else {
+        setSelectedSfi([]);
+      }
 
-if (detailData?.psmrcppi) {
-  setSelectedPpi([
-    {
-      uid: detailData.psmrcppi,
-      name: detailData.psmrcppi,
-      status: "done",
-      fileStatus: "old",
-      url: genDocumentUrl(detailData.psmrcppi, "3"),
-      thumbUrl: genDocumentUrl(detailData.psmrcppi, "3"),
-    },
-  ]);
-} else {
-  setSelectedPpi([]);
-}
+      if (detailData?.psmrcppi) {
+        setSelectedPpi([
+          {
+            uid: detailData.psmrcppi,
+            name: detailData.psmrcppi,
+            status: "done",
+            fileStatus: "old",
+            url: genDocumentUrl(detailData.psmrcppi, "3"),
+            thumbUrl: genDocumentUrl(detailData.psmrcppi, "3"),
+          },
+        ]);
+      } else {
+        setSelectedPpi([]);
+      }
 
     }
   }, [detailData]);
@@ -1348,6 +1351,39 @@ if (detailData?.psmrcppi) {
                     )}
                   </FormControl> : ""
               }
+
+              <FormControl
+                id="psmrcown"
+                isInvalid={
+                  Boolean(formik.errors.psmrcown) &&
+                  Boolean(formik.touched.psmrcown)
+                }
+              >
+                <FormLabel>Merchant Owner</FormLabel>
+                <Select
+                  placeholder="Please Select User"
+                  value={formik.values.psmrcown}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  isDisabled={mode === "VIEW" ? true : false}
+                >
+                  {Array.isArray(ddlData1) &&
+                    ddlData1
+                      .map((option: any) => (
+                        <option
+                          key={option.psusrunm}
+                          value={option.psusrnam}
+                        >
+                          {option.psusrunm + " - " + option.psusrnam}
+                        </option>
+                      ))}
+                </Select>
+                {formik.errors.psmrcown && (
+                  <FormErrorMessage>
+                    {formik.errors.psmrcown}
+                  </FormErrorMessage>
+                )}
+              </FormControl>
 
             </Box>
           </div>

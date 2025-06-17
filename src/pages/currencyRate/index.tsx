@@ -137,7 +137,7 @@ export default function CURRATPage() {
                     variant="outline"
                     size={"sm"}
                     borderRadius={2}
-                    colorScheme="blue"
+                    colorScheme="yellow"
                     sx={{ _hover: { backgroundColor: Colors.PRIMARY, color: Colors.BACKGROUND } }}
                     icon={<BsPencil />}
                     aria-label={"edit"}

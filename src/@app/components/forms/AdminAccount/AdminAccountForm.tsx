@@ -42,7 +42,6 @@ import { DDL_TYPES } from "@app/interfaces/ddl.types";
 import Breadcrumbs from "@app/components/common/Breadcrumbs/Breadcrumbs";
 import Buttons from "@app/components/common/Buttons/Buttons";
 import Accessibility from "@app/components/pages/accessibility/Accessibility";
-import useFetchDDLEntity from "@app/hooks/selector/useFetchDDLEntity";
 
 export default function AdminAccountsForm(props: any) {
   const { sendRequest, loading } = useApi({ title: "Admin Account" });
@@ -52,8 +51,7 @@ export default function AdminAccountsForm(props: any) {
   const mode = props.mode;
   const [detailData] = useFetchAdminAccountsDetail(id);
 
-  const [ddlData] = useFetchDDL({ code: ["USRSTS", "USRROLE"] });
-  const [entities] = useFetchDDLEntity();
+  const [ddlData] = useFetchDDL({ code: ["USRSTS", "HPPRE", "USRROLE"] });
 
   const initialValues = {
     psusrunm: "",
@@ -63,6 +61,7 @@ export default function AdminAccountsForm(props: any) {
     psusrpwd: "",
     psusrrol: "",
     psusrsts: "",
+    psusrpre: "",
     psisagnt: "N",
     //psaplaid: "",
     psentuid: "",
@@ -276,6 +275,32 @@ export default function AdminAccountsForm(props: any) {
                     </Box>
                     <Box display="flex" flexDir="column" gap={6} width="100%">
                       <FormControl
+                        id="psusrpre"
+                        isInvalid={Boolean(formik.errors.psusrpre) && Boolean(formik.touched.psusrpre)}
+                        isReadOnly={mode === "VIEW" ? true : false}
+                      >
+                        {/* <FormLabel>Debit/Credit*</FormLabel> */}
+                        <CustomFormLabel labelText="Contact No. Prefix" />
+                        <Select
+                          placeholder="Select Contact No. Prefix"
+                          value={formik.values.psusrpre || ""}
+                          onChange={formik.handleChange}
+                          style={{
+                            fontSize: 14,
+                          }}
+                        // isDisabled={mode === "VIEW" ? true : false}
+                        >
+                          {ddlData?.HPPRE?.map((option: DDL_TYPES) => ( //change code
+                            <option key={option.prgecode} value={option.prgecode}>
+                              {option.prgecode} | {option.prgedesc}
+                            </option>
+                          ))}
+                        </Select>
+                        {formik.errors.psusrpre && (
+                          <FormErrorMessage>{formik.errors.psusrpre}</FormErrorMessage>
+                        )}
+                      </FormControl>
+                      <FormControl
                         id="psusrphn"
                         isInvalid={
                           Boolean(formik.errors.psusrphn) &&
@@ -390,94 +415,7 @@ export default function AdminAccountsForm(props: any) {
                     </Box>
                   </div>
                 </Flex>
-                <Flex gap={6} flexDir={"column"}>
-                  <FormControl
-                    id="psisagnt"
-                    isInvalid={
-                      Boolean(formik.errors.psisagnt) &&
-                      Boolean(formik.touched.psisagnt)
-                    }
-                  >
-                    <FormLabel>Is Agent?</FormLabel>
-                    <RadioGroup
-                      name="psisagnt"
-                      value={formik.values.psisagnt}
-                      onChange={(value) =>
-                        formik.handleChange({
-                          target: { value, name: "psisagnt" },
-                        })
-                      }
-                      pt={1}
-                    >
-                      <Stack gap={3} direction="row">
-                        <Radio value="Y">Yes</Radio>
-                        <Radio value="N">No</Radio>
-                      </Stack>
-                    </RadioGroup>
-                  </FormControl>
-                  {formik.values.psisagnt != "N" && (
-                    <>
-                      {/* <FormControl
-                        id="psaplaid"
-                        isInvalid={
-                          Boolean(formik.errors.psaplaid) &&
-                          Boolean(formik.touched.psaplaid)
-                        }
-                        isReadOnly={mode === "VIEW" ? true : false}
-                      >
-                        <FormLabel>Agent ID</FormLabel>
-                        <Input
-                          placeholder={"Enter Agent ID"}
-                          type="text"
-                          name="psaplaid"
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          value={formik.values.psaplaid}
-                          //isDisabled={mode === "EDIT" ? true : false}
-                          isDisabled={mode === "VIEW" ? true : false}
-                        />
-                        {formik.errors.psaplaid && (
-                          <FormErrorMessage>
-                            {formik.errors.psaplaid}
-                          </FormErrorMessage>
-                        )}
-                      </FormControl> */}
-                      <FormControl
-                        id="psentuid"
-                        isInvalid={
-                          Boolean(formik.errors.psentuid) &&
-                          Boolean(formik.touched.psentuid)
-                        }
-                      >
-                        <FormLabel>Entity ID</FormLabel>
-                        <Select
-                          placeholder="Please Select Entity"
-                          value={formik.values.psentuid}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          isDisabled={mode === "VIEW" ? true : false}
-                        >
-                          {Array.isArray(entities) &&
-                            entities
-                              ?.filter((ent: any) => !id || ent.psentuid !== id)
-                              .map((option: any) => (
-                                <option
-                                  key={option.psentuid}
-                                  value={option.psentuid}
-                                >
-                                  {option.psentuid + " - " + option.psentnme}
-                                </option>
-                              ))}
-                        </Select>
-                        {formik.errors.psentuid && (
-                          <FormErrorMessage>
-                            {formik.errors.psentuid}
-                          </FormErrorMessage>
-                        )}
-                      </FormControl>
-                    </>
-                  )}
-                </Flex>
+
               </Flex>
             </Card>
           </Box>
