@@ -325,15 +325,15 @@ export default function MerchantForm(props: any) {
     psmrcbnm: null,
     psmrclbl: []
   };
- // Date Processor
-     function convertDateToString(date: Date) {
+  // Date Processor
+  function convertDateToString(date: Date) {
     if (date instanceof Date && !isNaN(date.getTime()))
       return (
         date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
       );
     else return "";
   }
-  
+
 
 
   const [ddlData] = useFetchDDL({ code: ["YESORNO", "BANK", "MRCTYP"] });
@@ -356,7 +356,7 @@ export default function MerchantForm(props: any) {
       formik.setValues({
         ...detailData,
         id: detailData.psmrcuid,
-         psmrcjdt: dayjs(detailData?.psmrcjdt),
+        psmrcjdt: dayjs(detailData?.psmrcjdt),
       });
 
       if (detailData?.psavllbl?.length > 0) {
@@ -366,10 +366,56 @@ export default function MerchantForm(props: any) {
       if (detailData?.psmrclbl?.length > 0) {
         setAction(detailData?.psmrclbl);
       }
+
+     if (detailData?.psmrcssc) {
+  setSelectedSsc([
+    {
+      uid: detailData.psmrcssc,
+      name: detailData.psmrcssc,
+      status: "done",
+      fileStatus: "old",
+      url: genDocumentUrl(detailData.psmrcssc, "4"),
+      thumbUrl: genDocumentUrl(detailData.psmrcssc, "4"),
+    },
+  ]);
+} else {
+  setSelectedSsc([]);
+}
+
+if (detailData?.psmrcsfi) {
+  setSelectedSfi([
+    {
+      uid: detailData.psmrcsfi,
+      name: detailData.psmrcsfi,
+      status: "done",
+      fileStatus: "old",
+      url: genDocumentUrl(detailData.psmrcsfi, "3"),
+      thumbUrl: genDocumentUrl(detailData.psmrcsfi, "3"),
+    },
+  ]);
+} else {
+  setSelectedSfi([]);
+}
+
+if (detailData?.psmrcppi) {
+  setSelectedPpi([
+    {
+      uid: detailData.psmrcppi,
+      name: detailData.psmrcppi,
+      status: "done",
+      fileStatus: "old",
+      url: genDocumentUrl(detailData.psmrcppi, "3"),
+      thumbUrl: genDocumentUrl(detailData.psmrcppi, "3"),
+    },
+  ]);
+} else {
+  setSelectedPpi([]);
+}
+
     }
   }, [detailData]);
 
-  
+
   useEffect(() => {
     if (mode === "ADD") {
       if (Object.keys(ddlData).length > 0 && ddlData?.MRCTYP?.length > 0) {
@@ -511,13 +557,13 @@ export default function MerchantForm(props: any) {
       }
     }
 
-   
+
     const { success } = await sendRequest({
       fn: getmanageMerchant({
         id: mode === "EDIT" ? data.id : "", ...data,
         psmrcsts: formik.values.psmrcsts ? "Y" : "N",
         psmrclbl: action.map(a => a.key),
-       psmrcjdt: convertDateToString(new Date(data.psmrcjdt))
+        psmrcjdt: convertDateToString(new Date(data.psmrcjdt))
       }),
       formik,
     });
@@ -1163,34 +1209,34 @@ export default function MerchantForm(props: any) {
                   : ""}
                 <Box display="flex" flexDir="column" gap={6} width="100%">
                   <FormControl
-                id="psmrcjdt"
-                isInvalid={
-                  Boolean(formik.errors.psmrcjdt) &&
-                  Boolean(formik.touched.psmrcjdt)
-                }
-              //    isReadOnly
-              >
-                <FormLabel>Join Date</FormLabel>
-                <DatePicker disabled={mode === "VIEW"}
-                  format={"DD/MM/YYYY"}
-                  style={{ width: "100%" }}
-                  value={
-                    formik.values.psmrcjdt
-                      ? dayjs(formik.values.psmrcjdt)
-                      : null
-                  }
-                  onChange={(value) =>
-                    formik.handleChange({
-                      target: { value, name: "psmrcjdt" },
-                    })
-                  }
-                  onBlur={formik.handleBlur}
-                // disabled={true}
-                />
-                {formik.errors.psmrcjdt && (
-                  <FormErrorMessage>{formik.errors.psmrcjdt}</FormErrorMessage>
-                )}
-              </FormControl>
+                    id="psmrcjdt"
+                    isInvalid={
+                      Boolean(formik.errors.psmrcjdt) &&
+                      Boolean(formik.touched.psmrcjdt)
+                    }
+                  //    isReadOnly
+                  >
+                    <FormLabel>Join Date</FormLabel>
+                    <DatePicker disabled={mode === "VIEW"}
+                      format={"DD/MM/YYYY"}
+                      style={{ width: "100%" }}
+                      value={
+                        formik.values.psmrcjdt
+                          ? dayjs(formik.values.psmrcjdt)
+                          : null
+                      }
+                      onChange={(value) =>
+                        formik.handleChange({
+                          target: { value, name: "psmrcjdt" },
+                        })
+                      }
+                      onBlur={formik.handleBlur}
+                    // disabled={true}
+                    />
+                    {formik.errors.psmrcjdt && (
+                      <FormErrorMessage>{formik.errors.psmrcjdt}</FormErrorMessage>
+                    )}
+                  </FormControl>
 
                 </Box>
               </div>
