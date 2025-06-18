@@ -223,7 +223,7 @@ export default function RoleCodeForm(props: any) {
                   <FormErrorMessage>{formik.errors.psrollds}</FormErrorMessage>
                 )}
               </FormControl>
-              <FormControl
+              {/* <FormControl
                 id="psrolibi"
                 isInvalid={Boolean(formik.errors.psrolibi) && Boolean(formik.touched.psrolibi)}
                 isReadOnly={mode === "VIEW" ? true : false}
@@ -272,7 +272,7 @@ export default function RoleCodeForm(props: any) {
                 {formik.errors.psrolibm && (
                   <FormErrorMessage>{formik.errors.psrolibm}</FormErrorMessage>
                 )}
-              </FormControl>
+              </FormControl> */}
 
 
             </Box>

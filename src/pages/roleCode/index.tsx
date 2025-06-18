@@ -70,23 +70,23 @@ export default function RoleCodePage() {
       dataIndex: "psroldsc",
       key: "psroldsc",
     },
-    {
-      title: "Inter Branch Inquiry",
-      dataIndex: "psrolibi",
-      key: "psrolibi",
-      render: (_: any, record: any) => (
-        <Text>{`${record.psrolibidsc}`}</Text>
-      )
-    },
+    // {
+    //   title: "Inter Branch Inquiry",
+    //   dataIndex: "psrolibi",
+    //   key: "psrolibi",
+    //   render: (_: any, record: any) => (
+    //     <Text>{`${record.psrolibidsc}`}</Text>
+    //   )
+    // },
 
-    {
-      title: "Inter Branch Maintenance",
-      dataIndex: "psrolibm",
-      key: "psrolibm",
-      render: (_: any, record: any) => (
-        <Text>{`${record.psrolibmdsc}`}</Text>
-      )
-    },
+    // {
+    //   title: "Inter Branch Maintenance",
+    //   dataIndex: "psrolibm",
+    //   key: "psrolibm",
+    //   render: (_: any, record: any) => (
+    //     <Text>{`${record.psrolibmdsc}`}</Text>
+    //   )
+    // },
     {
       title: "Action",
       key: "action",
