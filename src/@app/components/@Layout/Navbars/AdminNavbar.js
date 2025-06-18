@@ -16,7 +16,7 @@ import { AiOutlineArrowLeft, AiOutlineMenu } from "react-icons/ai";
 
 import Link from "next/link";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiHome5Fill } from "react-icons/ri";
 import AdminNavbarLinks from "./AdminNavbarLinks";
 import { useBoolean } from '@chakra-ui/react'
@@ -80,6 +80,53 @@ export default function AdminNavbar(props) {
     }
   };
   window.addEventListener("scroll", changeNavbar);
+
+  const [weather, setWeather] = useState("");
+  const [localTime, setLocalTime] = useState(new Date());
+
+  useEffect(() => {
+    fetchWeather();
+    const timer = setInterval(() => {
+      setLocalTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+const fetchWeather = async () => {
+  try {
+    // Get user's current location
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      const res = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+      );
+      const data = await res.json();
+      const condition = data?.current_weather?.weathercode;
+
+      setWeather(getWeatherEmoji(condition));
+    }, (error) => {
+      console.error("Geolocation error:", error);
+    });
+  } catch (err) {
+    console.error("Failed to fetch weather:", err);
+  }
+};
+
+
+  const getWeatherEmoji = (code) => {
+    // Example Open-Meteo code to emoji mapping
+    if (code === 0) return "☀️"; // Clear
+    if (code === 1 || code === 2) return "⛅"; // Mainly clear
+    if (code === 3) return "☁️"; // Cloudy
+    if (code >= 45 && code <= 48) return "🌫️"; // Fog
+    if (code >= 51 && code <= 67) return "🌦️"; // Drizzle
+    if (code >= 71 && code <= 77) return "❄️"; // Snow
+    if (code >= 80 && code <= 82) return "🌧️"; // Rain showers
+    if (code >= 95) return "⛈️"; // Thunder
+    return "🌡️"; // Default
+  };
+
   return (
     <Flex
       position={navbarPosition}
@@ -142,7 +189,11 @@ export default function AdminNavbar(props) {
           />
         </Flex>
         <Box mb={{ sm: "8px", md: "0px" }}>
-          <Text>Good {daySession()}, {userName}</Text>
+          <Text>
+            Good {daySession()}, {userName} {weather} • {localTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          </Text>
+
+          {/* <Text>Good {daySession()}, {userName}</Text> */}
           {/* <Text fontSize={"xl"} fontWeight="medium" mb={1}>
             {brandText}
           </Text>

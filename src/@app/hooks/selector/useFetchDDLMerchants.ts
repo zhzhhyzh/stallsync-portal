@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
-import { fetchDDLMchuser, logout, selectMchuser } from "@app/redux/app/slice";
+import { fetchDDLMerchant, logout, selectMerchant } from "@app/redux/app/slice";
 import { selectIsLogined } from "@app/redux/app/slice";
 import { useRouter } from "next/router";
 
-function useFetchDDLMchuser(psmrcuid:any) {
+function useFetchDDLMerchants() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const data = useAppSelector(selectMchuser);
+  const data = useAppSelector(selectMerchant);
   const [loading, setLoading] = useState(false);
   const isLogined = useAppSelector(selectIsLogined);
 
@@ -21,8 +21,7 @@ function useFetchDDLMchuser(psmrcuid:any) {
 
   async function onInit() {
       setLoading(true);
-      const { payload } = await dispatch(
-        fetchDDLMchuser({psmrcuid}));
+      const { payload } = await dispatch(fetchDDLMerchant({}));
       if (payload?.code === "UNAUTHORIZED" || payload?.code === "MULTIPLELOGIN") {
         dispatch(logout());
       }
@@ -32,4 +31,4 @@ function useFetchDDLMchuser(psmrcuid:any) {
   return [data, onInit, loading];
 }
 
-export default useFetchDDLMchuser;
+export default useFetchDDLMerchants;

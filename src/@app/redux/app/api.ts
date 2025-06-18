@@ -77,6 +77,11 @@ export async function ddlCurrency(data: any = []): Promise<any> {
     return result
 }
 
+export async function ddlAvluser(data: any = []): Promise<any> {
+    const result = await api(API_ROUTES.DDL_AVLUSER, 'GET', data)
+    return result
+}
+
 export async function ddlPriceCode(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_PRICODE, 'GET', data)
     return result
@@ -165,7 +170,12 @@ export async function ddlCustomer(data: any = []): Promise<any> {
     return result
 }
 
-export async function ddlMchuser(data: any = []): Promise<any> {
+export async function ddlMchuser(data: any = {}): Promise<any> {
     const result = await api(API_ROUTES.DDL_MCHUSER, 'GET', data)
+    return result
+}
+
+export async function ddlMerchant(data: any = {}): Promise<any> {
+    const result = await api(API_ROUTES.DDL_MCH, 'GET', data)
     return result
 }

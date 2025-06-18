@@ -97,13 +97,21 @@ export default function StaffPage() {
       key: "psstfjdt",
     },
     {
-      title: "Status",
+      title: "Active",
       dataIndex: "psstfsts",
       key: "psstfsts",
-      render: (_: any, record: any) => (
-        // <Text>{`${record.psstfjdt} - ${record.psstfjdtdsc}`}</Text>
-        <Text>{`${record.psstfsts} - ${record.psstfstsdsc}`}</Text>
-
+      render: (_: Boolean, record: any) => (
+        Boolean(_) === true ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+          width: 40,
+          height: 20,
+          backgroundColor: Colors.SUCCESS,
+          borderRadius: 10
+        }}>Yes</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+          width: 40,
+          height: 20,
+          backgroundColor: Colors.DANGER,
+          borderRadius: 10,
+        }}>No</Text>
       )
     },
     {
@@ -113,12 +121,25 @@ export default function StaffPage() {
       render: (_: any, record: any) => (
         <Flex justifyContent="flex-end">
           <Space size="small">
-            {/* <IconButton
-              // colorScheme={"blue"}
-              icon={<AiFillEye />}
-              aria-label={"view"}
-              onClick={() => showInfo(record)}
-            /> */}
+           {
+                        (homeData?.access && checkAccessMatrix(homeData?.access, accessType.MCH_VIEW)) && (
+          
+                          <Tooltip label='View' fontSize='sm'>
+          
+                            <IconButton
+                              variant="outline"
+                              size={"sm"}
+                              borderRadius={2}
+                              colorScheme="teal"
+                              sx={{ _hover: { backgroundColor: Colors.SUCCESS2, color: Colors.BACKGROUND } }}
+          
+                              icon={<AiFillEye />}
+                              aria-label={"view"}
+                              onClick={() => goView(record?.id)}
+                            />
+                          </Tooltip>
+                        )
+                      }
             {
               (homeData?.access && checkAccessMatrix(homeData?.access, accessType.STAFF_EDIT)) && (
                 <Tooltip label='Edit' fontSize='sm'>
