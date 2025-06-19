@@ -11,6 +11,7 @@ export const API_ROUTES = {
   DDL_MCHUSER: "ddl/merchantUser",
   DDL_MCH: "ddl/psmrcpar",
   DDL_AVLUSER: "ddl/availableUser",
+  DDL_TABLE_KEYS: "ddl/fieldNames", 
 
 
   //ANNOUNCEMENT
@@ -88,6 +89,12 @@ export const API_ROUTES = {
   GENCDE_UPDATE: "prgencde/update",
   GENCDE_DELETE: "prgencde/delete",
 
+  //ROLE PARAMETER
+  ROLE_LIST: "psrolpar/list",
+  ROLE_DETAIL: "psrolpar/detail",
+  ROLE_CREATE: "psrolpar/create",
+  ROLE_UPDATE: "psrolpar/update",
+  ROLE_DELETE: "psrolpar/delete",
   //-----::;
   DASHBOARD_SALES: "dashboard/getMonthlySalesForPast12MonthsWithDescription",
   DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",
@@ -125,11 +132,9 @@ export const API_ROUTES = {
   REQUEST_DETAIL: "pscmkrqt/detail",
   REQUEST_CREATE: "pscmkrqt/create",
   REQUEST_APPROVE: "pscmkrqt/approve",
-  DDL_CHK_MKR: "ddl/pscmkpar",
   DDL_USER: "ddl/psusrprf",
   DDL_WORKGROUPS: "ddl/workgroup",
 
-  DDL_TABLE_KEYS: "ddl/fieldNames", //latest
   MAINT_SUBFILE_LOG: "mntlog/sub_list",
 
   DDL_CURRENCY: "ddl/pscurrat",
@@ -154,35 +159,8 @@ export const API_ROUTES = {
   CONTRACT_DELETE: "psconmas/delete",
 
 
-  //QUEUE
-  QUEUE_DETAIL: "prquecde/detail",
-  // QUEUE_FINDONE: "prquecde/find-one-code",
-  QUEUE_LIST: "prquecde/list",
-  QUEUE_CREATE: "prquecde/create",
-  QUEUE_EDIT: "prquecde/edit",
-  QUEUE_DELETE: "prquecde/delete",
+  
 
-  //ACTIVITY
-  QUEUE_ACTLIST: "prquecde/actList",
-  QUEUE_ACTDETAIL: "prquecde/actDetail",
-  QUEUE_CREATEACT: "prquecde/createAct",
-  QUEUE_EDITACT: "prquecde/editAct",
-  QUEUE_DELETEACT: "prquecde/deleteAct",
-
-  //ACTIVITY CHKLIST
-  QUEUE_ACTCHKLIST: "prquecde/actChkList",
-  QUEUE_ACTCHKDETAIL: "prquecde/actChkDetail",
-  QUEUE_CREATEACTCHK: "prquecde/createActChk",
-  QUEUE_EDITACTCHK: "prquecde/editActChk",
-  QUEUE_DELETEACTCHK: "prquecde/deleteActChk",
-
-  //ACTIVITY ACTIONS
-  QUEUE_ACTACTLIST: "prquecde/actActList",
-  QUEUE_ACTACTDETAIL: "prquecde/actActDetail",
-  QUEUE_CREATEACTACT: "prquecde/createActAct",
-  QUEUE_EDITACTACT: "prquecde/editActAct",
-  QUEUE_DELETEACTACT: "prquecde/deleteActAct",
-  QUEUE_CHKFIND: "prquecde/chkFind",
 
   //WORKGROUP
   WORKGROUP_DETAIL: "prawrkgrp/detail",
@@ -195,35 +173,11 @@ export const API_ROUTES = {
   WORKGROUP_USER_LINK: "prawrkgrp/linkUser",
   WORKGROUP_USER_UNLINK: "prawrkgrp/unLinkUser",
 
-  PROD_CODE_LIST: "psprdcod/list",
-  PROD_CODE_DETAIL: "psprdcod/detail",
-  PROD_CODE_CREATE: "psprdcod/create",
-  PROD_CODE_UPDATE: "psprdcod/update",
-  PROD_CODE_DELETE: "psprdcod/delete",
-
-  PROD_LIST: "psprdpar/list",
-  PROD_DETAIL: "psprdpar/detail",
-  PROD_CREATE: "psprdpar/create",
-  PROD_UPDATE: "psprdpar/update",
-  PROD_DELETE: "psprdpar/delete",
-
-  PRODCOM_LIST: "psprdcom/list",
-  PRODCOM_DETAIL: "psprdcom/detail",
-  PRODCOM_CREATE: "psprdcom/create",
-  PRODCOM_UPDATE: "psprdcom/update",
-  PRODCOM_DELETE: "psprdcom/delete",
-
   DSAGENT_LIST: "psdsgpar/list",
   DSAGENT_DETAIL: "psdsgpar/detail",
   DSAGENT_CREATE: "psdsgpar/create",
   DSAGENT_UPDATE: "psdsgpar/update",
   DSAGENT_DELETE: "psdsgpar/delete",
-
-  CURRAT_LIST: "pscurrat/list",
-  CURRAT_DETAIL: "pscurrat/detail",
-  CURRAT_CREATE: "pscurrat/create",
-  CURRAT_UPDATE: "pscurrat/update",
-  CURRAT_DELETE: "pscurrat/delete",
 
   HOLIDAY_LIST: "psholpar/list",
   HOLIDAY_DETAIL: "psholpar/detail",
@@ -254,13 +208,6 @@ export const API_ROUTES = {
   COMPAR_CREATE: "pscompar/create",
   COMPAR_UPDATE: "pscompar/update",
   COMPAR_DELETE: "pscompar/delete",
-
-  // PRODUCT FEE
-  PROD_FEE_LIST: "psprdfee/list",
-  PROD_FEE_DETAIL: "psprdfee/detail",
-  PROD_FEE_CREATE: "psprdfee/create",
-  PROD_FEE_UPDATE: "psprdfee/update",
-  PROD_FEE_DELETE: "psprdfee/delete",
 
 
   // TAX PARAMETER
@@ -310,12 +257,7 @@ export const API_ROUTES = {
   UPDATE_ENTITY: "psentmas/update",
   DELETE_ENTITY: "psentmas/delete",
 
-  //ROLE PARAMETER
-  ROLE_LIST: "psrolpar/list",
-  ROLE_DETAIL: "psrolpar/detail",
-  ROLE_CREATE: "psrolpar/create",
-  ROLE_UPDATE: "psrolpar/update",
-  ROLE_DELETE: "psrolpar/delete",
+  
 
   //LOAN
   CALCULATE_LOAN: "loancalr/calculate_loan",

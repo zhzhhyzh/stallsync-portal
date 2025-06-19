@@ -10,20 +10,12 @@ import accessibility from "./accessibility/slice";
 import functions from "./functions/slice";
 import generalParam from "./generalParam/slice";
 import adminAccounts from "./adminAccounts/slice";
-import prodCodes from "./prodCode/slice";
-import prodFees from "./prodFee/slice";
 import tranCodes from "./tranCode/slice";
 import roleCodes from "./role/slice";
 import credAppLims from "./credAppLim/slice";
-import queue from "./queue/slice";
-import activity from "./queue/slice";
-import activityAct from "./queue/slice";
-import taxCodes from "./taxCode/slice";
-import activityChk from "./queue/slice";
 
 import workgroup from "./workgroup/slice";
 import workgroupuser from "./workgroupuser/slice";
-import product from "./product/slice";
 import passwordPolicy from "./passwordPolicy/slice";
 import backupDatabase from "./backup/slice";
 import application from "./application/slice";
@@ -50,8 +42,6 @@ import pushParam from "./pshprm/slice";
 import reports from './reports/slice';
 import rewards from './reward/slice';
 import member from './member/slice';
-import prods from './prod/slice';
-import prodCom from './prodCom/slice';
 import dsagent from './dsagent/slice';
 import contract from './contract/slice';
 import holiday from './holiday/slice';
@@ -75,7 +65,6 @@ export function makeStore() {
       dashboard,
       user,
       accessibility,
-      prodCom,
       holiday,
       workday,
       dsagent,
@@ -83,17 +72,10 @@ export function makeStore() {
       functions,
       generalParam,
       adminAccounts,
-      prodCodes,
-      prods,
-      queue,
-      activity,
-      activityAct,
-      activityChk,
+    
       workgroup,
       workgroupuser,
-      product,
-      prodFees,
-      taxCodes,
+     
       tranCodes,
       compars,
       roleCodes,

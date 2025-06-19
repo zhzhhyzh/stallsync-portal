@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MouseEventHandler } from 'react';
 import type { AppState, AppThunk } from '../store';
-import { ddlRoleCode, ddlGlacpf,ddlMerchant, ddlTaxpar, ddlAction, downloadDocument, ddlFeeCode, ddl, ddlDsagent, ddlPriceCode, ddlTransCode, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlEntity, ddlProdCode, ddlActWrkGrp, ddlChkMkrParam, ddlUser, ddlWorkgroups, ddlEntityBank, notificationMetadata, notificationGroupDDL, ddlChannelSender, ddlCustomer, ddlAgent, ddlProduct, ddlCompany, ddlCurrency, ddlMchuser, ddlAvluser } from './api';
+import { ddlRoleCode,ddlMerchant, ddlTaxpar, ddlAction, downloadDocument, ddl, ddlDsagent, ddlPriceCode, ddlTransCode, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlEntity, ddlProdCode,  ddlUser, ddlWorkgroups, ddlEntityBank, notificationMetadata, notificationGroupDDL, ddlChannelSender, ddlCustomer, ddlAgent, ddlProduct, ddlCompany,  ddlMchuser, ddlAvluser } from './api';
 import { StepStatus } from '@chakra-ui/react';
 
 
@@ -35,9 +35,7 @@ export interface State {
   merchant: any[];
   breadcrumbInfo: any[];
   sideBarRoot: string;
-  feeCode: any[];
-  glacpf: any[];
-  taxpar: any[];
+  
   dsagent: any[];
   roleCode: any[];
   actWrkGrp: any[];
@@ -46,7 +44,6 @@ export interface State {
   subMaintLogs: any[];
   subMaintTotal: number;
   entities: any[];
-  chkMkr: any[];
   user: any[]
   workgroups: any[]
 
@@ -80,9 +77,6 @@ const initialState: State = {
   mchUser: [],
   maintLogs: [],
   merchant:[],
-  feeCode: [],
-  glacpf: [],
-  taxpar: [],
   dsagent: [],
   roleCode: [],
   actWrkGrp: [],
@@ -98,7 +92,6 @@ const initialState: State = {
   tableKeys: [],
   entities: [],
   actions: [],
-  chkMkr: [],
   user: [],
   workgroups: [],
   entitybanks: [],
@@ -114,13 +107,7 @@ const initialState: State = {
   maintExtra: undefined,
   avluser:[],
 };
-export const fetchDDLCheckerMaker = createAsyncThunk(
-  "app/fetchDDLCheckerMaker",
-  async (data: any) => {
-    const response = await ddlChkMkrParam(data);
-    return response;
-  }
-);
+
 export const fetchDDLWorkgroup = createAsyncThunk(
   "app/fetchDDLWorkgroup",
   async (data: any) => {
@@ -240,21 +227,6 @@ export const fetchDDLAgent = createAsyncThunk(
   }
 );
 
-export const fetchDDLFeeCode = createAsyncThunk(
-  "app/fetchDDLFeeCode",
-  async (data: any) => {
-    const response = await ddlFeeCode(data);
-    return response;
-  }
-);
-
-export const fetchDDLGlacpf = createAsyncThunk(
-  "app/fetchDDLGlacpf",
-  async (data: any) => {
-    const response = await ddlGlacpf(data);
-    return response;
-  }
-);
 
 export const fetchDDLTaxpar = createAsyncThunk(
   "app/fetchDDLTaxpar",
@@ -288,13 +260,7 @@ export const fetchDDLRoleCode = createAsyncThunk(
   }
 );
 
-export const fetchDDLActWrkGrp = createAsyncThunk(
-  "app/fetchDDLActWrkGrp",
-  async (data: any) => {
-    const response = await ddlActWrkGrp(data);
-    return response;
-  }
-);
+
 
 export const fetchMaintlogs = createAsyncThunk(
   "app/maintlog",
@@ -397,21 +363,8 @@ export const fetchDDLCustomer = createAsyncThunk(
     return response;
   }
 );
-export const fetchCurrencies = createAsyncThunk(
-  "app/fetchCurrencies",
-  async (data: any) => {
-    const response = await ddlCurrency(data);
-    return response;
-  }
-);
 
-// export const postRegister = createAsyncThunk(
-//   'app/postRegister',
-//   async (data: any = {}) => {
-//     const response = await register(data);
-//     return response;
-//   }
-// );
+
 
 export const reducerSlice = createSlice({
   name: 'app',
@@ -505,9 +458,7 @@ export const reducerSlice = createSlice({
       .addCase(fetchDDLUser.fulfilled, (state, action) => {
         state.user = action.payload?.message?.data
       })
-      .addCase(fetchDDLCheckerMaker.fulfilled, (state, action) => {
-        state.chkMkr = action.payload?.message?.data
-      })
+     
       .addCase(fetchHomeApi.fulfilled, (state, action) => {
         state.home = action.payload?.message
       })
@@ -538,17 +489,7 @@ export const reducerSlice = createSlice({
       .addCase(fetchDDLProdCode.fulfilled, (state, action) => {
         state.prodCode = action.payload?.message.data
       })
-      .addCase(fetchDDLFeeCode.fulfilled, (state, action) => {
-        state.feeCode = action.payload?.message.data
-      })
-
-      .addCase(fetchDDLGlacpf.fulfilled, (state, action) => {
-        state.glacpf = action.payload?.message.data
-      })
-      .addCase(fetchDDLTaxpar.fulfilled, (state, action) => {
-        state.taxpar = action.payload?.message.data
-      })
-
+     
       .addCase(fetchDDLDsagent.fulfilled, (state, action) => {
         // state.dsagent = action.payload?.message.data
         if (action.payload && action.payload.message && action.payload.message.data) {
@@ -571,9 +512,7 @@ export const reducerSlice = createSlice({
           state.roleCode = []; // or whatever default state you prefer
         }
       })
-      .addCase(fetchDDLActWrkGrp.fulfilled, (state, action) => {
-        state.actWrkGrp = action.payload?.message.data
-      })
+    
 
       .addCase(fetchDDLEntity.fulfilled, (state, action) => {
         state.entities = action.payload?.message.data
@@ -624,9 +563,7 @@ export const reducerSlice = createSlice({
       .addCase(fetchCompanies.fulfilled, (state, action) => {
         state.companies = action.payload?.message?.data
       })
-      .addCase(fetchCurrencies.fulfilled, (state, action) => {
-        state.currencies = action.payload?.message?.data
-      })
+     
   },
 });
 
@@ -642,16 +579,13 @@ export const selectDDL = (state: AppState) => state.app?.ddl
 export const selectTransCode = (state: AppState) => state.app?.transCode
 export const selectPriceCode = (state: AppState) => state.app?.priceCode
 export const selectProdCode = (state: AppState) => state.app?.prodCode
-export const selectFeeCode = (state: AppState) => state.app?.feeCode
-export const selectGlacpf = (state: AppState) => state.app?.glacpf
-export const selectTaxpar = (state: AppState) => state.app?.taxpar
+
 export const selectDsagent = (state: AppState) => state.app?.dsagent
 export const selectRoleCode = (state: AppState) => state.app?.roleCode
 export const selectActWrkGrp = (state: AppState) => state.app?.actWrkGrp
 export const selectSubMaintLog = (state: AppState) => state.app?.subMaintLogs;
 export const selectSubMaintTotal = (state: AppState) => state.app?.subMaintTotal;
 export const selectEntities = (state: AppState) => state.app?.entities;
-export const selectDDLChkMkr = (state: AppState) => state.app?.chkMkr;
 
 export const selectToken = (state: AppState) => state.app?.token;
 export const selectIsLogined = (state: AppState) => state.app?.isLogined;

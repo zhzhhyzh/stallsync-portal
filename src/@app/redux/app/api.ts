@@ -5,14 +5,7 @@ export async function login(data: any = {}): Promise<any> {
     const result = await api(API_ROUTES.USER_LOGIN, 'POST', data)
     return result
 }
-// export async function register(data: any = {}): Promise<any> {
-//     const result = await api(API_ROUTES.USER_LOGIN, 'POST', data)
-//     return result
-// }
-export async function ddlChkMkrParam(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_CHK_MKR, 'GET', data)
-    return result
-}
+
 export async function ddlCompany(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.COMPANY_DDL, 'GET', data)
     return result
@@ -72,10 +65,7 @@ export async function ddlEntity(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_ENTITY, 'GET', data)
     return result
 }
-export async function ddlCurrency(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_CURRENCY, 'GET', data)
-    return result
-}
+
 
 export async function ddlAvluser(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_AVLUSER, 'GET', data)
@@ -86,15 +76,7 @@ export async function ddlPriceCode(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_PRICODE, 'GET', data)
     return result
 }
-export async function ddlFeeCode(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_FEECODE, 'GET', data)
-    return result
-}
 
-export async function ddlGlacpf(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_GLACPF, 'GET', data)
-    return result
-}
 export async function ddlTaxpar(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_TAXPAR, 'GET', data)
     return result
@@ -105,10 +87,7 @@ export async function ddlRoleCode(data: any = []): Promise<any> {
     return result
 }
 
-export async function ddlActWrkGrp(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_ACTWRKGRP, 'GET', data)
-    return result
-}
+
 export async function ddlUser(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_USER, 'GET', data)
     return result
