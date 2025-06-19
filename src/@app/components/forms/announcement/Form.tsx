@@ -98,7 +98,6 @@ export default function ProdTypeForm(props: any) {
     psannttl: "",
     psanntyp: "",
     psannsts: true,
-    psannnot: true,
     psannmsg: "",
     psannimg: "",
   };
@@ -123,7 +122,6 @@ export default function ProdTypeForm(props: any) {
           id: detailData?.psanncde,
           pstypstd: dayjs(detailData?.pstypstd),
           psannsts: detailData?.psannsts === "Y" ? true : false,
-          psannnot: detailData?.psannsts === "Y" ? true : false,
         });
 
         //Set File
@@ -160,14 +158,6 @@ export default function ProdTypeForm(props: any) {
     }
   };
 
-  const handleSwitch2 = () => {
-    formik.setFieldValue("psannnot", !formik.values.psannnot);
-    if (!formik.values.psannnot) {
-      console.log("green"); //on
-    } else {
-      console.log("red"); //off
-    }
-  };
 
   async function onSubmit(data: any) {
     //Default Attachment
@@ -205,7 +195,6 @@ export default function ProdTypeForm(props: any) {
         ...data,
         psdocnme: data.attachments[0],
         psannsts: formik.values.psannsts === true ? "Y" : "N",
-        psannnot: formik.values.psannnot === true ? "Y" : "N",
       }),
       formik,
     });
@@ -463,34 +452,7 @@ export default function ProdTypeForm(props: any) {
                     </FormErrorMessage>
                   )}
                 </FormControl>
-                <FormControl
-                  id="psannnot"
-                  isReadOnly={mode === "VIEW" ? true : false}
-                  isInvalid={Boolean(formik.errors.psannnot)}
-                  // columns={{ base: 2, lg: 4 }}
-                >
-                  <CustomFormLabel labelText={"Announce Notified"} />
-
-                  <Switch
-                    id="psannnot"
-                    size="md"
-                    name="psannnot"
-                    isChecked={formik.values.psannnot}
-                    onChange={handleSwitch2}
-                    colorScheme={"green"}
-                    sx={{
-                      "span.chakra-switch__track:not([data-checked])": {
-                        backgroundColor: Colors.DANGER,
-                      },
-                    }}
-                  />
-
-                  {formik.errors.psannnot && (
-                    <FormErrorMessage>
-                      {formik.errors.psannnot}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
+                
                 {/* </Box>
               <Box display="flex" flexDir="column" gap={6} width="100%"> */}
 

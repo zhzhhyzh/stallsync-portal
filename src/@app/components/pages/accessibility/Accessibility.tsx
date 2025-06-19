@@ -36,7 +36,10 @@ import useFetchDDLRoleCode from "@app/hooks/selector/useFetchDDLRoleCode";
 
 export default function Accessibility({ selectedRole }: { selectedRole?: string }) {
     const dispatch = useAppDispatch();
-    const { sendRequest, loading } = useApi({ title: "Accessibility" });
+    const api = useApi({ title: "Accessibility" });
+    const loading = api?.loading ?? false;
+    const sendRequest = api?.sendRequest ?? (() => Promise.resolve({ success: false }));
+
     const homeData = useAppSelector(selectHome);
 
     const [ddlData] = useFetchDDL({ code: ["USRROLE", "FUNACT"] });
@@ -484,10 +487,8 @@ export default function Accessibility({ selectedRole }: { selectedRole?: string 
                                                                             // &&
                                                                             // option.prgecode in checkboxState[functions.pracsfun]
                                                                         ) {
-                                                                            let isLoading =
-                                                                                checkboxState[functions.pracsfun][
-                                                                                    act
-                                                                                ].loading;
+                                                                            let isLoading = checkboxState?.[functions.pracsfun]?.[act]?.loading ?? false;
+
                                                                             return isLoading ? (
                                                                                 <Box display={"flex"} flexDir={'column'} alignItems={'center'} w={"60px"} h="20px">
                                                                                     <Spinner color={Colors.SUCCESS} />
@@ -496,9 +497,8 @@ export default function Accessibility({ selectedRole }: { selectedRole?: string 
                                                                                 <Box display={"flex"} flexDir={'column'} alignItems={'center'} w={"60px"}>
                                                                                     <Switch
                                                                                         isChecked={
-                                                                                            checkboxState[functions.pracsfun][
-                                                                                                act
-                                                                                            ].check
+                                                                                            checkboxState?.[functions.pracsfun]?.[act]?.check ?? false
+
                                                                                         }
                                                                                         onChange={() =>
                                                                                             handleCheckBoxOnChange(

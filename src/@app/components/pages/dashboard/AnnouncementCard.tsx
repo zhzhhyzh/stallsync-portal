@@ -119,8 +119,8 @@ export default function AnnouncementCard() {
                                 }}
                                 icon={<AiFillEye />}
                                 aria-label={"view"}
-        
-        onClick={() => goView(record?.id)}
+
+                                onClick={() => goView(record?.id)}
                             />
                         </Tooltip>
 
@@ -130,53 +130,7 @@ export default function AnnouncementCard() {
                 </Flex>
             ),
         },
-        // {
-        //     title: "Announcement Type",
-        //     dataIndex: "psanntyp",
-        //     key: "psanntyp",
-        //     render: (_: any, record: any) => (
-        //         // <Text>{`${record.psanntyp} - ${record.psanntypdsc}`}</Text>
-        //         <Text>{`${record.psanntyp} - ${record.psanntypdsc}`}</Text>
-
-        //     )
-        // },
-
-        // {
-        //     title: "Announce Notified",
-        //     dataIndex: "psannnot",
-        //     key: "psannnot",
-        //     render: (_: any) => (
-        //         _ === "Y" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-        //             width: 40,
-        //             height: 20,
-        //             backgroundColor: Colors.SUCCESS,
-        //             borderRadius: 10
-        //         }}>Yes</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-        //             width: 40,
-        //             height: 20,
-        //             backgroundColor: Colors.DANGER,
-        //             borderRadius: 10,
-        //         }}>No</Text>
-        //     )
-        // },
-        // {
-        //     title: "Status",
-        //     dataIndex: "psannsts",
-        //     key: "psannsts",
-        //     render: (_: any) => (
-        //         _ === "Y" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-        //             width: 40,
-        //             height: 20,
-        //             backgroundColor: Colors.SUCCESS,
-        //             borderRadius: 10
-        //         }}>Yes</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-        //             width: 40,
-        //             height: 20,
-        //             backgroundColor: Colors.DANGER,
-        //             borderRadius: 10,
-        //         }}>No</Text>
-        //     )
-        // },
+       
 
 
 
@@ -198,31 +152,31 @@ export default function AnnouncementCard() {
     >([]);
 
     let { data: detailData, loading, refetch } = useFetchAnnouncementDetail(selectedId);
-const[temp, setTemp] = useState(false);
-    const goView =  (id: string) => {
+    const [temp, setTemp] = useState(false);
+    const goView = (id: string) => {
         setSelectedId(id)
         setTemp(!temp);
 
     };
-    useEffect(()=>{
-       if(selectedId!= ""){
-        try {
-            detailData =  refetch();
-            console.log(detailData)
-            setViewModalOpen(true);
-        } catch (error) {
-            console.error("Error fetching details:", error);
+    useEffect(() => {
+        if (selectedId != "") {
+            try {
+                detailData = refetch();
+                console.log(detailData)
+                setViewModalOpen(true);
+            } catch (error) {
+                console.error("Error fetching details:", error);
+            }
         }
-       }
-    },[temp])
+    }, [temp])
     useEffect(() => {
         console.log("viewModalOpen changed to:", viewModalOpen);
     }, [viewModalOpen]);
     useEffect(() => {
         if (detailData) {
             if (detailData?.psannimg) {
-                // const fileUrl = genDocumentUrl(detailData?.psannimg, "3");
-                const fileUrl = detailData?.document_link;
+                const fileUrl = genDocumentUrl(detailData?.psannimg, "6");
+                // const fileUrl = detailData?.document_link;
 
                 setSelectedAnnouncementFile([
                     {
@@ -300,6 +254,8 @@ const[temp, setTemp] = useState(false);
                             <ModalHeader></ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
+                                <Text mb={3}> <span style={{fontWeight:"bold"}} >Title:</span><span> {detailData?.psannttl}</span></Text>
+                              
                                 <Text fontWeight="bold" mb={3}>Message:</Text>
 
 
@@ -314,7 +270,7 @@ const[temp, setTemp] = useState(false);
                                         alt={selectedAnnouncementFile[0].name}
                                         width={500}
                                         height={300}
-                                        style={{ marginTop:"20px", borderRadius: "8px", objectFit: "contain" }}
+                                        style={{ marginTop: "20px", borderRadius: "8px", objectFit: "contain" }}
                                     />
                                 )}
                             </ModalBody>

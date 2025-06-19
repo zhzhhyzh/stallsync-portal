@@ -58,8 +58,8 @@ export default function PaymentMethodsPage() {
   const columns: any[] = [
     {
       title: "Announcement Code",
-      dataIndex: "psanncde",
-      key: "psanncde",
+      dataIndex: "psannuid",
+      key: "psannuid",
     },
     {
       title: "Announcement Titles",
@@ -82,24 +82,7 @@ export default function PaymentMethodsPage() {
       key: "psanndat"
     },
    
-    {
-      title: "Announce Notified",
-      dataIndex: "psannnot",
-      key: "psannnot",
-      render: (_: any) => (
-        _ === "Y" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.SUCCESS,
-          borderRadius: 10
-        }}>Yes</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.DANGER,
-          borderRadius: 10,
-        }}>No</Text>
-      )
-    },
+    
     {
       title: "Status",
       dataIndex: "psannsts",

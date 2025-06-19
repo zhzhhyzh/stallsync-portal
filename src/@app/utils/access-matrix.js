@@ -5,22 +5,22 @@ export const accessType = {
     action: "VIEW",
   },
   ANNOUNCE_VIEW: {
-    type: "OMNI",
+    type: "ANNOUNCE",
     function: "ANNOUNCE",
     action: "VIEW",
   },
   ANNOUNCE_ADD: {
-    type: "OMNI",
+    type: "ANNOUNCE",
     function: "ANNOUNCE",
     action: "ADD",
   },
   ANNOUNCE_EDIT: {
-    type: "OMNI",
+    type: "ANNOUNCE",
     function: "ANNOUNCE",
     action: "EDIT",
   },
   ANNOUNCE_DEL: {
-    type: "OMNI",
+    type: "ANNOUNCE",
     function: "ANNOUNCE",
     action: "DEL",
   },
@@ -722,6 +722,26 @@ export const accessType = {
     function: "RWD",
     action: "DEL",
   },
+  PROD_VIEW: {
+    type: "PARAM",
+    function: "PROD",
+    action: "VIEW",
+  },
+  PROD_ADD: {
+    type: "PARAM",
+    function: "PROD",
+    action: "ADD",
+  },
+  PROD_EDIT: {
+    type: "PARAM",
+    function: "PROD",
+    action: "EDIT",
+  },
+  PROD_DEL: {
+    type: "PARAM",
+    function: "PROD",
+    action: "DEL",
+  },
 };
 
 const accessPath = {
@@ -825,14 +845,6 @@ const accessPath = {
     accessType.CREDAPP_EDIT,
     accessType.CREDAPP_DEL,
   ],
-
-  "/pappar": accessType.PAPPAR_VIEW,
-  "/pappar/Detail": [
-    accessType.PAPPAR_ADD,
-    accessType.PAPPAR_EDIT,
-    accessType.PAPPAR_DEL,
-  ],
-
 
 
   "/profile/changePassword": accessType.PROF_EDIT,
@@ -970,6 +982,12 @@ const accessPath = {
     accessType.RWD_ADD,
     accessType.RWD_EDIT,
     accessType.RWD_DEL,
+  ],
+  "/product": accessType.PROD_VIEW,
+  "/product/Detail": [
+    accessType.PROD_ADD,
+    accessType.PROD_EDIT,
+    accessType.PROD_DEL,
   ],
 };
 

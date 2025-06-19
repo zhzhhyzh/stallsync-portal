@@ -15,7 +15,8 @@ import {
   FaUserCircle,
   FaRegClipboard,
   FaScribd, FaGlobe,
-  FaList
+  FaList,
+  FaBullhorn
 } from "react-icons/fa";
 import { accessType } from "../utils/access-matrix";
 import { CgBrowser } from "react-icons/cg";
@@ -62,6 +63,12 @@ export const menus: Array<NavItem> = [
         href: "/order",
         root: "Order",
         icon: FaRegClipboard,
+      },
+      {
+        label: "Announcement",
+        href: "/announcement",
+        icon: FaBullhorn,
+        permissions: [accessType.ANNOUNCE_VIEW],
       },
       {
         label: "Parameter",
@@ -114,7 +121,7 @@ export const menus: Array<NavItem> = [
                 href: "/adminAccounts",
                 permissions: [accessType.ADMA_VIEW],
               },
-           
+
               {
                 label: "System Table",
                 href: "/fileManagements",
@@ -132,13 +139,13 @@ export const menus: Array<NavItem> = [
               },
             ],
           },
-         
+
           {
             label: "Company Parameter",
             href: "/company",
             permissions: [accessType.COMPAR_VIEW],
           },
-          
+
 
           {
             label: "Agent Designation",
@@ -156,12 +163,17 @@ export const menus: Array<NavItem> = [
             permissions: [accessType.MCH_VIEW],
           },
           {
+            label: "Product",
+            href: "/product",
+            permissions: [accessType.PROD_VIEW],
+          },
+          {
             label: "Reward",
             href: "/reward",
             permissions: [accessType.RWD_VIEW],
           },
-          
-         
+
+
           {
             label: "System",
             permissions: [accessType.FILEMANAGE_VIEW, accessType.BACKUP_VIEW],
@@ -174,7 +186,6 @@ export const menus: Array<NavItem> = [
               {
                 label: "System Calendar",
                 href: "/calendar",
-                // permissions: [accessType.FILEMANAGE_VIEW],
               },
               {
                 label: "Database Backup",
@@ -184,12 +195,10 @@ export const menus: Array<NavItem> = [
             ],
           },
         ],
-        permissions: [
-          accessType.GEN_VIEW,
-          // accessType.ACES_VIEW,
-          accessType.FUNC_VIEW,
-          // accessType.PWPOLICY_VIEW,
-        ],
+        // permissions: [
+        //   accessType.BACKUP_VIEW,
+        //   accessType.FILEMANAGE_VIEW,
+        // ],
       },
       {
         label: "Setting",
@@ -228,11 +237,7 @@ export const menus: Array<NavItem> = [
           {
             label: "Parameters",
             children: [
-              {
-                label: "Announcement",
-                href: "/announcement",
-                permissions: [accessType.ANNOUNCE_VIEW],
-              },
+
               {
                 label: "Notification Template",
                 href: "/notificationTemplate",
