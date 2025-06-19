@@ -89,11 +89,9 @@ export const menus: Array<NavItem> = [
               accessType.ACES_VIEW,
               accessType.ROLE_VIEW,
               accessType.ADMA_VIEW,
-              // accessType.WRKGRP_VIEW,
               accessType.PWPOLICY_VIEW,
               accessType.PWPOLICY_EDIT,
               accessType.FILEMANAGE_VIEW,
-              accessType.DEAL_DATE_VIEW,
             ],
             children: [
               {
@@ -116,11 +114,7 @@ export const menus: Array<NavItem> = [
                 href: "/adminAccounts",
                 permissions: [accessType.ADMA_VIEW],
               },
-              // {
-              //   label: "Workgroup",
-              //   href: "/workgroups",
-              //   permissions: [accessType.WRKGRP_VIEW],
-              // },
+           
               {
                 label: "System Table",
                 href: "/fileManagements",
@@ -138,22 +132,13 @@ export const menus: Array<NavItem> = [
               },
             ],
           },
-          {
-            label: "Trust Fund Product",
-            href: "/prod",
-            permissions: [accessType.PROD_VIEW],
-          },
+         
           {
             label: "Company Parameter",
             href: "/company",
             permissions: [accessType.COMPAR_VIEW],
           },
-          {
-            label: "Currency Rate",
-            href: "/currencyRate",
-
-            permissions: [accessType.CURRAT_VIEW],
-          },
+          
 
           {
             label: "Agent Designation",
@@ -175,65 +160,8 @@ export const menus: Array<NavItem> = [
             href: "/reward",
             permissions: [accessType.RWD_VIEW],
           },
-          {
-            label: "Products",
-            permissions: [
-              // accessType.PRODCODE_VIEW,
-              // accessType.PAPPAR_VIEW,
-              // accessType.TRANCODE_VIEW,
-              // accessType.FEECODE_VIEW,
-            ],
-            children: [
-              {
-                label: "Product Code",
-                href: "/productCodes",
-                permissions: [accessType.PRODCODE_VIEW],
-              },
-
-              {
-                label: "Payment Priority",
-                href: "/pappar",
-                permissions: [accessType.PAPPAR_VIEW], //add inside queue not separate menu
-              },
-              {
-                label: "Transaction Code",
-                href: "/tranCode",
-                permissions: [accessType.TRANCODE_VIEW],
-              },
-              {
-                label: "Fee Code",
-                href: "/feeCodes",
-                permissions: [accessType.FEECODE_VIEW],
-              },
-              {
-                label: "Tax Code",
-                href: "/taxCode",
-                // permissions: [],
-              },
-              {
-                label: "GL Chart Of Account ",
-                href: "/gla",
-                // permissions: [],
-              },
-            ],
-          },
-          {
-            label: "Queue",
-            permissions: [accessType.QUEUE_VIEW, accessType.CREDAPP_VIEW],
-            children: [
-              {
-                label: "Queue",
-                href: "/queues",
-                root: "Queue",
-                permissions: [accessType.QUEUE_VIEW],
-              },
-              {
-                label: "Credit Approval Limit",
-                href: "/credAppLim",
-                permissions: [accessType.CREDAPP_VIEW],
-              },
-            ],
-          },
+          
+         
           {
             label: "System",
             permissions: [accessType.FILEMANAGE_VIEW, accessType.BACKUP_VIEW],

@@ -160,47 +160,6 @@ export const accessType = {
     type: "SET",
     function: "ADMA",
     action: "DEL",
-  },
-  CHKMKRPAR_VIEW: {
-    type: "PARAM",
-    function: "CHKMKRPAR",
-    action: "VIEW",
-  },
-  CHKMKRPAR_ADD: {
-    type: "PARAM",
-    function: "CHKMKRPAR",
-    action: "ADD",
-  },
-  CHKMKRPAR_EDIT: {
-    type: "PARAM",
-    function: "CHKMKRPAR",
-    action: "EDIT",
-  },
-  CHKMKRPAR_DEL: {
-    type: "PARAM",
-    function: "CHKMKRPAR",
-    action: "DEL",
-  }
-  ,
-  CURRAT_VIEW: {
-    type: "PARAM",
-    function: "CURRAT",
-    action: "VIEW",
-  },
-  CURRAT_ADD: {
-    type: "PARAM",
-    function: "CURRAT",
-    action: "ADD",
-  },
-  CURRAT_EDIT: {
-    type: "PARAM",
-    function: "CURRAT",
-    action: "EDIT",
-  },
-  CURRAT_DEL: {
-    type: "PARAM",
-    function: "CURRAT",
-    action: "DEL",
   }
   ,
   COMPAR_VIEW: {
@@ -224,16 +183,6 @@ export const accessType = {
     action: "DEL",
   }
   ,
-  CHKMKRAPV_VIEW: {
-    type: "PARAM",
-    function: "CHKMKRAPV",
-    action: "VIEW",
-  },
-  CHKMKRAPV_EDIT: {
-    type: "PARAM",
-    function: "CHKMKRAPV",
-    action: "EDIT",
-  },
   WRKGRP_VIEW: {
     type: "PARAM",
     function: "WRKGRP",
@@ -271,186 +220,6 @@ export const accessType = {
   },
 
 
-
-  QUEUE_VIEW: {
-    type: "PARAM",
-    function: "QUEUE",
-    action: "VIEW",
-  },
-  QUEUE_ADD: {
-    type: "PARAM",
-    function: "QUEUE",
-    action: "ADD",
-  },
-  QUEUE_EDIT: {
-    type: "PARAM",
-    function: "QUEUE",
-    action: "EDIT",
-  },
-  QUEUE_DEL: {
-    type: "PARAM",
-    function: "QUEUE",
-    action: "DEL",
-  },
-  GLA_VIEW: {
-    type: "PARAM",
-    function: "GLA",
-    action: "VIEW",
-  },
-  GLA_ADD: {
-    type: "PARAM",
-    function: "GLA",
-    action: "ADD",
-  },
-  GLA_EDIT: {
-    type: "PARAM",
-    function: "GLA",
-    action: "EDIT",
-  },
-  GLA_DEL: {
-    type: "PARAM",
-    function: "GLA",
-    action: "DEL",
-  },
-
-  TAXPARAM_VIEW: {
-    type: "PARAM",
-    function: "TAXPARAM",
-    action: "VIEW",
-  },
-  TAXPARAM_ADD: {
-    type: "PARAM",
-    function: "TAXPARAM",
-    action: "ADD",
-  },
-  TAXPARAM_EDIT: {
-    type: "PARAM",
-    function: "TAXPARAM",
-    action: "EDIT",
-  },
-  TAXPARAM_DEL: {
-    type: "PARAM",
-    function: "TAXPARAM",
-    action: "DEL",
-  },
-  ACTVTY_VIEW: {
-    type: "PARAM",
-    function: "ACTVTY",
-    action: "VIEW",
-  },
-  ACTVTY_ADD: {
-    type: "PARAM",
-    function: "ACTVTY",
-    action: "ADD",
-  },
-  ACTVTY_EDIT: {
-    type: "PARAM",
-    function: "ACTVTY",
-    action: "EDIT",
-  },
-  ACTVTY_DEL: {
-    type: "PARAM",
-    function: "ACTVTY",
-    action: "DEL",
-  },
-  ACTCHK_VIEW: {
-    type: "PARAM",
-    function: "ACTCHK",
-    action: "VIEW",
-  },
-  ACTCHK_ADD: {
-    type: "PARAM",
-    function: "ACTCHK",
-    action: "ADD",
-  },
-  ACTCHK_EDIT: {
-    type: "PARAM",
-    function: "ACTCHK",
-    action: "EDIT",
-  },
-  ACTCHK_DEL: {
-    type: "PARAM",
-    function: "ACTCHK",
-    action: "DEL",
-  },
-  ACTACT_VIEW: {
-    type: "PARAM",
-    function: "ACTACT",
-    action: "VIEW",
-  },
-  ACTACT_ADD: {
-    type: "PARAM",
-    function: "ACTACT",
-    action: "ADD",
-  },
-  ACTACT_EDIT: {
-    type: "PARAM",
-    function: "ACTACT",
-    action: "EDIT",
-  },
-  ACTACT_DEL: {
-    type: "PARAM",
-    function: "ACTACT",
-    action: "DEL",
-  },
-
-  PRODCODE_VIEW: {
-    type: "PARAM",
-    function: "PRODCODE",
-    action: "VIEW",
-  },
-  PRODCODE_ADD: {
-    type: "PARAM",
-    function: "PRODCODE",
-    action: "ADD",
-  },
-  PRODCODE_EDIT: {
-    type: "PARAM",
-    function: "PRODCODE",
-    action: "EDIT",
-  },
-  PRODCODE_DEL: {
-    type: "PARAM",
-    function: "PRODCODE",
-    action: "DEL",
-  },
-  FEECODE_VIEW: {
-    type: "PARAM",
-    function: "FEECODE",
-    action: "VIEW",
-  },
-  FEECODE_ADD: {
-    type: "PARAM",
-    function: "FEECODE",
-    action: "ADD",
-  },
-  FEECODE_EDIT: {
-    type: "PARAM",
-    function: "FEECODE",
-    action: "EDIT",
-  },
-  FEECODE_DEL: {
-    type: "PARAM",
-    function: "FEECODE",
-    action: "DEL",
-  },
-
-  PRODUCTQ_VIEW: {
-    type: "PARAM",
-    function: "PRODUCTQ",
-    action: "VIEW",
-  },
-  PRODUCTQ_LINK: {
-    type: "PARAM",
-    function: "PRODUCTQ",
-    action: "LINK",
-  },
-  PRODUCTQ_UNLINK: {
-    type: "PARAM",
-    function: "PRODUCTQ",
-    action: "UNLINK",
-  },
-
   TRANCODE_VIEW: {
     type: "PARAM",
     function: "TRANCODE",
@@ -472,26 +241,6 @@ export const accessType = {
     action: "DEL",
   },
 
-  PROD_VIEW: {
-    type: "PARAM",
-    function: "PROD",
-    action: "VIEW",
-  },
-  PROD_ADD: {
-    type: "PARAM",
-    function: "PROD",
-    action: "ADD",
-  },
-  PROD_EDIT: {
-    type: "PARAM",
-    function: "PROD",
-    action: "EDIT",
-  },
-  PROD_DEL: {
-    type: "PARAM",
-    function: "PROD",
-    action: "DEL",
-  },
   DSAGENT_VIEW: {
     type: "PARAM",
     function: "DSAGENT",
@@ -512,26 +261,7 @@ export const accessType = {
     function: "DSAGENT",
     action: "DEL",
   },
-  PRODFEE_VIEW: {
-    type: "PARAM",
-    function: "PRODFEE",
-    action: "VIEW",
-  },
-  PRODFEE_ADD: {
-    type: "PARAM",
-    function: "PRODFEE",
-    action: "ADD",
-  },
-  PRODFEE_EDIT: {
-    type: "PARAM",
-    function: "PRODFEE",
-    action: "EDIT",
-  },
-  PRODFEE_DEL: {
-    type: "PARAM",
-    function: "PRODFEE",
-    action: "DEL",
-  },
+
   PROF_VIEW: {
     type: "SET",
     function: "PROF",
@@ -626,27 +356,6 @@ export const accessType = {
   ROLE_DELETE: {
     type: "PARAM",
     function: "ROLE",
-    action: "DEL",
-  },
-
-  PAPPAR_VIEW: {
-    type: "PARAM",
-    function: "PAPPAR",
-    action: "VIEW",
-  },
-  PAPPAR_ADD: {
-    type: "PARAM",
-    function: "PAPPAR",
-    action: "ADD",
-  },
-  PAPPAR_EDIT: {
-    type: "PARAM",
-    function: "PAPPAR",
-    action: "EDIT",
-  },
-  PAPPAR_DEL: {
-    type: "PARAM",
-    function: "PAPPAR",
     action: "DEL",
   },
 
@@ -1028,13 +737,7 @@ const accessPath = {
   //   accessType.ENTITY_EDIT,
   //   accessType.ENTITY_DEL,
   // ],
-  "/prod": accessType.PROD_VIEW,
-  "/prod/Detail": [
-    // accessType.CON_ADD,
-    accessType.PROD_ADD,
-    accessType.PROD_DEL,
-    accessType.PROD_EDIT,
-  ],
+
   "/dsagent": accessType.DSAGENT_VIEW,
   "/dsagent/Detail": [
     // accessType.CON_ADD,
@@ -1060,10 +763,6 @@ const accessPath = {
     accessType.ENTITY_EDIT,
     accessType.ENTITY_DEL,
   ],
-  // "/entity": accessType.ENTITY_VIEW,
-  //   accessType.ENTITY_EDIT,
-  //   accessType.ENTITY_DEL,
-  // ],
 
 
 
@@ -1079,19 +778,6 @@ const accessPath = {
     accessType.GEN_EDIT,
     accessType.GEN_DEL
   ],
-  // "/prod": accessType.PROD_VIEW,
-  // "/prod/Detail": [
-  //   accessType.PROD_ADD,
-  //   accessType.PROD_EDIT,
-  //   accessType.PROD_DEL,
-  // ],
-
-  //   "/dsagent": accessType.DSAGENT_VIEW,
-  // "/dsagent/Detail": [
-  //   accessType.DSAGENT_ADD,
-  //   accessType.DSAGENT_EDIT,
-  //   accessType.DSAGENT_DEL,
-  // ],
 
   "/adminAccounts": accessType.ADMA_VIEW,
   "/adminAccounts/Detail": [
@@ -1100,12 +786,6 @@ const accessPath = {
     accessType.ADMA_DEL
   ],
 
-  "/currencyRate": accessType.CURRAT_VIEW,
-  "/currencyRate/Detail": [
-    accessType.CURRAT_ADD,
-    accessType.CURRAT_EDIT,
-    accessType.CURRAT_DEL
-  ],
   "/company": accessType.COMPAR_VIEW,
   "/company/Detail": [
     accessType.COMPAR_ADD,
@@ -1130,50 +810,6 @@ const accessPath = {
   "/workgroupusers": accessType.WRKGRPUSR_VIEW,
   "/workgroupusers/Detail": [accessType.WRKGRPUSR_LINK, accessType.WRKGRPUSR_UNLINK],
 
-
-  "/queues": accessType.QUEUE_VIEW,
-  "/queues/Detail": [
-    accessType.QUEUE_ADD,
-    accessType.QUEUE_EDIT,
-    accessType.QUEUE_DEL,
-  ],
-  "/queues/activity": accessType.ACTVTY_VIEW,
-  "/queues/activity/Detail": [
-    accessType.ACTVTY_ADD,
-    accessType.ACTVTY_EDIT,
-    accessType.ACTVTY_DEL,
-  ],
-  "/queues/activity/actChecklist": accessType.ACTCHK_VIEW,
-  "/queues/activity/actChecklist/Detail": [
-    accessType.ACTCHK_ADD,
-    accessType.ACTCHK_EDIT,
-    accessType.ACTCHK_DEL,
-  ],
-  "/queue/activity/actAction": accessType.ACTACT_VIEW,
-  "/queue/activity/actAction/Detail": [
-    accessType.ACTACT_ADD,
-    accessType.ACTACT_EDIT,
-    accessType.ACTACT_DEL,
-  ],
-
-
-  "/queues/productCodes": accessType.PRODCODE_VIEW,
-  "/queues/productCodes/Detail": [
-    accessType.PRODCODE_ADD,
-    accessType.PRODCODE_EDIT,
-    accessType.PRODCODE_DEL,
-  ],
-
-  "/productCodes": accessType.PRODCODE_VIEW,
-  "/productCodes/Detail": [accessType.PRODCODE_ADD, accessType.PRODCODE_DEL, accessType.PRODCODE_EDIT],
-  "/productCodes/productFees": accessType.PRODFEE_VIEW,
-  "/productCodes/productFees/Detail": [accessType.PRODFEE_ADD, accessType.PRODFEE_DEL, accessType.PRODFEE_EDIT],
-  // "/queues/productCodes/productQueues": accessType.PRODUCTQ_VIEW,
-  // "/queues/productCodes/productQueues/Detail": [accessType.PRODUCTQ_LINK, accessType.PRODUCTQ_UNLINK],
-
-  "/queues/productCodes/productQueues": accessType.PRODUCTQ_VIEW,
-  "/queues/productCodes/productQueues/Detail": [accessType.PRODUCTQ_LINK, accessType.PRODUCTQ_UNLINK],
-
   "/tranCode": accessType.TRANCODE_VIEW,
   "/tranCode/Detail": [
     accessType.TRANCODE_ADD,
@@ -1182,19 +818,7 @@ const accessPath = {
   ],
   "/commissions": accessType.COM_VIEW,
 
-  "/gla": accessType.GLA_VIEW,
-  "/gla/Detail": [
-    accessType.GLA_ADD,
-    accessType.GLA_EDIT,
-    accessType.GLA_DEL,
-  ],
 
-  "/taxCode": accessType.TAXPARAM_VIEW,
-  "/taxCode/Detail": [
-    accessType.TAXPARAM_ADD,
-    accessType.TAXPARAM_EDIT,
-    accessType.TAXPARAM_DEL,
-  ],
   "/credAppLim": accessType.CREDAPP_VIEW,
   "/credAppLim/Detail": [
     accessType.CREDAPP_ADD,
@@ -1217,14 +841,8 @@ const accessPath = {
   "/passwordPolicy": [accessType.PWPOLICY_VIEW, accessType.PWPOLICY_EDIT],
 
   "/backup": accessType.BACKUP_VIEW,
-  "/checkerMaker": accessType.CHKMKRPAR_VIEW,
-  "/checkerMaker/Detail": [
-    accessType.CHKMKRPAR_ADD,
-    accessType.CHKMKRPAR_EDIT,
-    accessType.CHKMKRPAR_DEL
-  ],
-  "/checkerMakerAppv/": accessType.CHKMKRAPV_VIEW,
-  "/checkerMakerAppv/Detail": [accessType.CHKMKRAPV_EDIT],
+
+
 
 
   "/testReceiver": accessType.TRCV_VIEW,
@@ -1347,7 +965,7 @@ const accessPath = {
     accessType.MCH_EDIT,
     accessType.MCH_DEL,
   ],
-   "/reward": accessType.RWD_VIEW,
+  "/reward": accessType.RWD_VIEW,
   "/reward/Detail": [
     accessType.RWD_ADD,
     accessType.RWD_EDIT,
