@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MouseEventHandler } from 'react';
 import type { AppState, AppThunk } from '../store';
-import { ddlRoleCode,ddlMerchant, ddlTaxpar, ddlAction, downloadDocument, ddl, ddlDsagent, ddlPriceCode, ddlTransCode, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlEntity, ddlProdCode,  ddlUser, ddlWorkgroups, ddlEntityBank, notificationMetadata, notificationGroupDDL, ddlChannelSender, ddlCustomer, ddlAgent, ddlProduct, ddlCompany,  ddlMchuser, ddlAvluser } from './api';
+import { ddlRoleCode, ddlMerchant, ddlAction, downloadDocument, ddl, ddlDsagent, ddlPriceCode, ddlTransCode, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlEntity, ddlProdCode, ddlUser, ddlWorkgroups, ddlEntityBank, ddlCustomer, ddlAgent, ddlProduct, ddlCompany, ddlMchuser, ddlAvluser } from './api';
 import { StepStatus } from '@chakra-ui/react';
 
 
@@ -35,28 +35,22 @@ export interface State {
   merchant: any[];
   breadcrumbInfo: any[];
   sideBarRoot: string;
-  
+
   dsagent: any[];
   roleCode: any[];
-  actWrkGrp: any[];
   actions: any[];
   tableKeys: any[];
   subMaintLogs: any[];
   subMaintTotal: number;
   entities: any[];
   user: any[]
-  workgroups: any[]
 
   entitybanks: any[];
-  notMetadata: any[];
   extraDataField: any[];
-  ddlNotGroup: any;
-  ddlChannelSender: any[];
   customer: any[];
   product: any[];
   agent: any[];
   companies: any[];
-  currencies: any[];
   mchUser: any[];
   avluser: any[];
 }
@@ -76,10 +70,9 @@ const initialState: State = {
   ddl: {},
   mchUser: [],
   maintLogs: [],
-  merchant:[],
+  merchant: [],
   dsagent: [],
   roleCode: [],
-  actWrkGrp: [],
   maintTotal: 0,
   tableRefreshCount: 0,
   home: {},
@@ -93,19 +86,14 @@ const initialState: State = {
   entities: [],
   actions: [],
   user: [],
-  workgroups: [],
   entitybanks: [],
-  notMetadata: [],
   extraDataField: [],
-  ddlNotGroup: {},
-  ddlChannelSender: [],
   customer: [],
   product: [],
   agent: [],
   companies: [],
-  currencies: [],
   maintExtra: undefined,
-  avluser:[],
+  avluser: [],
 };
 
 export const fetchDDLWorkgroup = createAsyncThunk(
@@ -228,13 +216,7 @@ export const fetchDDLAgent = createAsyncThunk(
 );
 
 
-export const fetchDDLTaxpar = createAsyncThunk(
-  "app/fetchDDLTaxpar",
-  async (data: any) => {
-    const response = await ddlTaxpar(data);
-    return response;
-  }
-);
+
 
 export const fetchDDLDsagent = createAsyncThunk(
   "app/fetchDDLDsagent",
@@ -324,37 +306,6 @@ export const fetchDDLEntityBank = createAsyncThunk(
   }
 );
 
-export const fetchMetadata = createAsyncThunk(
-  "app/fetchMetadata",
-  async (data: any) => {
-    const response = await notificationMetadata(data);
-    return response;
-  }
-);
-
-export const fetchExtraDataField = createAsyncThunk(
-  "app/fetchExtraDataField",
-  async (data: any) => {
-    const response = await notificationMetadata(data);
-    return response;
-  }
-);
-
-export const ddlNotificationGroup = createAsyncThunk(
-  "app/ddlNotificationGroup",
-  async (data: any) => {
-    const response = await notificationGroupDDL(data);
-    return response;
-  }
-);
-
-export const fetchDDLChannelSender = createAsyncThunk(
-  "app/fetchDDLChannelSender",
-  async (data: any) => {
-    const response = await ddlChannelSender(data);
-    return response;
-  }
-);
 
 export const fetchDDLCustomer = createAsyncThunk(
   "app/fetchDDLCustomer",
@@ -458,7 +409,7 @@ export const reducerSlice = createSlice({
       .addCase(fetchDDLUser.fulfilled, (state, action) => {
         state.user = action.payload?.message?.data
       })
-     
+
       .addCase(fetchHomeApi.fulfilled, (state, action) => {
         state.home = action.payload?.message
       })
@@ -466,11 +417,11 @@ export const reducerSlice = createSlice({
         state.mchUser = action.payload?.message.data
       })
 
-       .addCase(fetchDDLAvluser.fulfilled, (state, action) => {
+      .addCase(fetchDDLAvluser.fulfilled, (state, action) => {
         state.avluser = action.payload?.message.data
       })
 
-         .addCase(fetchDDLMerchant.fulfilled, (state, action) => {
+      .addCase(fetchDDLMerchant.fulfilled, (state, action) => {
         state.merchant = action.payload?.message.data
       })
       .addCase(fetchDDLTransCode.fulfilled, (state, action) => {
@@ -489,7 +440,7 @@ export const reducerSlice = createSlice({
       .addCase(fetchDDLProdCode.fulfilled, (state, action) => {
         state.prodCode = action.payload?.message.data
       })
-     
+
       .addCase(fetchDDLDsagent.fulfilled, (state, action) => {
         // state.dsagent = action.payload?.message.data
         if (action.payload && action.payload.message && action.payload.message.data) {
@@ -512,7 +463,7 @@ export const reducerSlice = createSlice({
           state.roleCode = []; // or whatever default state you prefer
         }
       })
-    
+
 
       .addCase(fetchDDLEntity.fulfilled, (state, action) => {
         state.entities = action.payload?.message.data
@@ -533,24 +484,11 @@ export const reducerSlice = createSlice({
       .addCase(fetchDDLAction.fulfilled, (state, action) => {
         state.actions = action.payload?.message
       })
-      .addCase(fetchDDLWorkgroup.fulfilled, (state, action) => {
-        state.workgroups = action.payload?.message
-      })
+
       .addCase(fetchDDLEntityBank.fulfilled, (state, action) => {
         state.entitybanks = action.payload?.message.data;
       })
-      .addCase(fetchMetadata.fulfilled, (state, action) => {
-        state.notMetadata = action.payload?.message
-      })
-      .addCase(fetchExtraDataField.fulfilled, (state, action) => {
-        state.extraDataField = action.payload?.message
-      })
-      .addCase(ddlNotificationGroup.fulfilled, (state, action) => {
-        state.ddlNotGroup = action.payload?.message?.data
-      })
-      .addCase(fetchDDLChannelSender.fulfilled, (state, action) => {
-        state.ddlChannelSender = action.payload?.message?.data
-      })
+
       .addCase(fetchDDLCustomer.fulfilled, (state, action) => {
         state.customer = action.payload?.message?.data
       })
@@ -563,7 +501,7 @@ export const reducerSlice = createSlice({
       .addCase(fetchCompanies.fulfilled, (state, action) => {
         state.companies = action.payload?.message?.data
       })
-     
+
   },
 });
 
@@ -582,7 +520,6 @@ export const selectProdCode = (state: AppState) => state.app?.prodCode
 
 export const selectDsagent = (state: AppState) => state.app?.dsagent
 export const selectRoleCode = (state: AppState) => state.app?.roleCode
-export const selectActWrkGrp = (state: AppState) => state.app?.actWrkGrp
 export const selectSubMaintLog = (state: AppState) => state.app?.subMaintLogs;
 export const selectSubMaintTotal = (state: AppState) => state.app?.subMaintTotal;
 export const selectEntities = (state: AppState) => state.app?.entities;
@@ -603,18 +540,13 @@ export const selectSideBarRoot = (state: AppState) => state.app.sideBarRoot;
 export const selectTableKeys = (state: AppState) => state.app?.tableKeys;
 export const selectMaintExtra = (state: AppState) => state.app?.maintExtra;
 export const selectActions = (state: AppState) => state.app?.actions;
-export const selectWorkgroups = (state: AppState) => state.app?.workgroups;
 export const selectEntityBanks = (state: AppState) => state.app?.entitybanks;
 
-export const selectNotMetadata = (state: AppState) => state.app?.notMetadata;
 export const selectExtraDataField = (state: AppState) => state.app?.extraDataField;
-export const selectDDLNotificationGroup = (state: AppState) => state.app?.ddlNotGroup
-export const selectChannelSender = (state: AppState) => state.app?.ddlChannelSender;
 export const selectCustomer = (state: AppState) => state.app?.customer;
 export const selectDDLAgent = (state: AppState) => state.app?.agent;
 export const selectDDLProduct = (state: AppState) => state.app?.product;
 export const selectDDLCompany = (state: AppState) => state.app?.companies;
-export const selectDDLCurrency = (state: AppState) => state.app?.currencies;
 export const selectMchuser = (state: AppState) => state.app?.mchUser;
 export const selectAvluser = (state: AppState) => state.app?.avluser;
 export const selectMerchant = (state: AppState) => state.app?.merchant;

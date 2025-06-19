@@ -77,10 +77,7 @@ export async function ddlPriceCode(data: any = []): Promise<any> {
     return result
 }
 
-export async function ddlTaxpar(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_TAXPAR, 'GET', data)
-    return result
-}
+
 
 export async function ddlRoleCode(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_ROLECODE, 'GET', data)
@@ -129,20 +126,8 @@ export async function ddlEntityBank(data: any = []): Promise<any> {
     return result
 }
 
-export async function notificationMetadata(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.NOT_METADATA, 'GET', data)
-    return result
-}
 
-export async function notificationGroupDDL(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_NOTIFICATION_GROUP, 'GET', data)
-    return result
-}
 
-export async function ddlChannelSender(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_CHANNEL_SENDER, 'GET', data)
-    return result
-}
 
 export async function ddlCustomer(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_CUSTOMER, 'GET', data)
