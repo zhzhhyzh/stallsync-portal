@@ -993,6 +993,26 @@ export const accessType = {
     function: "MCH",
     action: "DEL",
   },
+  RWD_VIEW: {
+    type: "PARAM",
+    function: "RWD",
+    action: "VIEW",
+  },
+  RWD_ADD: {
+    type: "PARAM",
+    function: "RWD",
+    action: "ADD",
+  },
+  RWD_EDIT: {
+    type: "PARAM",
+    function: "RWD",
+    action: "EDIT",
+  },
+  RWD_DEL: {
+    type: "PARAM",
+    function: "RWD",
+    action: "DEL",
+  },
 };
 
 const accessPath = {
@@ -1326,6 +1346,12 @@ const accessPath = {
     accessType.MCH_ADD,
     accessType.MCH_EDIT,
     accessType.MCH_DEL,
+  ],
+   "/reward": accessType.RWD_VIEW,
+  "/reward/Detail": [
+    accessType.RWD_ADD,
+    accessType.RWD_EDIT,
+    accessType.RWD_DEL,
   ],
 };
 

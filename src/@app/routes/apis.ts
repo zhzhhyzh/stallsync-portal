@@ -34,6 +34,13 @@ export const API_ROUTES = {
   MCH_UPDATE: "psmrcpar/update",
   MCH_DELETE: "psmrcpar/delete",
 
+  // REWARD
+  RWD_LIST: "psrwdpar/list",
+  RWD_DETAIL: "psrwdpar/detail",
+  RWD_CREATE: "psrwdpar/create",
+  RWD_UPDATE: "psrwdpar/update",
+  RWD_DELETE: "psrwdpar/delete",
+
 
   // MAINTENANCE LOG
   MAINT_LOG: "mntlog/list",

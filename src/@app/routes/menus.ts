@@ -171,6 +171,11 @@ export const menus: Array<NavItem> = [
             permissions: [accessType.MCH_VIEW],
           },
           {
+            label: "Reward",
+            href: "/reward",
+            permissions: [accessType.RWD_VIEW],
+          },
+          {
             label: "Products",
             permissions: [
               // accessType.PRODCODE_VIEW,

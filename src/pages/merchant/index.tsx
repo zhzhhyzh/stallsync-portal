@@ -20,7 +20,7 @@ import { DatePicker, Space, Tag } from "antd";
 import Spacing from "@app/constants/Spacing";
 
 import Card from "@app/components/common/Card/Card";
-
+import { Rate } from "antd";
 import { formatDate } from "@app/utils/DateUtils";
 import Table from "@app/components/common/Table/Table";
 import { IoAdd, IoTrash, IoWarningOutline } from "react-icons/io5";
@@ -90,7 +90,19 @@ export default function MerchantPage() {
       title: "Rating",
       dataIndex: "psmrcrtg",
       key: "psmrcrtg",
+      render: (rating: any) => {
+        const numericRating = parseFloat(rating) || 0;
+
+        return (
+          <Flex alignItems="center" gap={2}>
+            <Rate allowHalf disabled defaultValue={numericRating} />
+            {/* <Text fontSize="sm">{numericRating.toFixed(1)}</Text> */}
+          </Flex>
+        );
+      },
+
     },
+
     {
       title: "Join Date",
       dataIndex: "psmrcjdt",
@@ -102,8 +114,8 @@ export default function MerchantPage() {
       title: "Active",
       dataIndex: "psmrcsts",
       key: "psmrcsts",
-      render: (_: Boolean, record: any) => (
-        Boolean(_) === true ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+      render: (_: any, record: any) => (
+        _ === "Y" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
           width: 40,
           height: 20,
           backgroundColor: Colors.SUCCESS,

@@ -1,35 +1,31 @@
 import { useState, useEffect } from "react";
-
 import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
-import { fetchDDLMchuser, logout, selectMchuser } from "@app/redux/app/slice";
-import { selectIsLogined } from "@app/redux/app/slice";
-import { useRouter } from "next/router";
+import { fetchDDLMchuser, logout, selectMchuser, selectIsLogined } from "@app/redux/app/slice";
 
-function useFetchDDLMchuser(psmrcuid:any) {
+function useFetchMchuser() {
   const dispatch = useAppDispatch();
-  const router = useRouter();
-
   const data = useAppSelector(selectMchuser);
-  const [loading, setLoading] = useState(false);
   const isLogined = useAppSelector(selectIsLogined);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {}, []);
-
+  // Load once on login
   useEffect(() => {
-    if (isLogined) onInit();
+    if (isLogined) {
+      reload(); // Initial load with no param
+    }
   }, [isLogined]);
 
-  async function onInit() {
-      setLoading(true);
-      const { payload } = await dispatch(
-        fetchDDLMchuser({psmrcuid}));
-      if (payload?.code === "UNAUTHORIZED" || payload?.code === "MULTIPLELOGIN") {
-        dispatch(logout());
-      }
-      setLoading(false);
-  }
+  // Reload function with dynamic param
+  const reload = async (psmrcuid?: string) => {
+    setLoading(true);
+    const { payload } = await dispatch(fetchDDLMchuser({ psmrcuid }));
+    if (payload?.code === "UNAUTHORIZED" || payload?.code === "MULTIPLELOGIN") {
+      dispatch(logout());
+    }
+    setLoading(false);
+  };
 
-  return [data, onInit, loading];
+  return [data, reload, loading] as const; // return as fixed tuple
 }
 
-export default useFetchDDLMchuser;
+export default useFetchMchuser;

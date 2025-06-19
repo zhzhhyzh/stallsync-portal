@@ -52,7 +52,7 @@ import channelCode from "./channelCode/slice";
 import notificationCategory from "./notificationCategory/slice";
 import pushParam from "./pshprm/slice";
 import reports from './reports/slice';
-import rewards from './reports/slice';
+import rewards from './reward/slice';
 import member from './member/slice';
 import prods from './prod/slice';
 import prodCom from './prodCom/slice';

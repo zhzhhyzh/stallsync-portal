@@ -307,7 +307,7 @@ export default function MerchantForm(props: any) {
 
 
   const [detailData] = useFetchMerchantDetail(id);
-  const [ddlData1] = useFetchDDLMchuser(detailData?.psmrcuid);
+  const [ddlData1, reloadDDLData1] = useFetchDDLMchuser();
 
   const initialValues = {
     psmrcnme: null,
@@ -414,10 +414,15 @@ export default function MerchantForm(props: any) {
       } else {
         setSelectedPpi([]);
       }
+      reloadDDLData1(detailData?.psmrcuid);
 
     }
   }, [detailData]);
-
+useEffect(() => {
+    if (formik.values.psmrcuid) {
+      reloadDDLData1(formik.values.psmrcuid);
+    }
+  }, [formik.values.psmrcuid]);
 
   useEffect(() => {
     if (mode === "ADD") {
@@ -566,7 +571,7 @@ export default function MerchantForm(props: any) {
         id: mode === "EDIT" ? data.id : "", ...data,
         psmrcsts: formik.values.psmrcsts ? "Y" : "N",
         psmrclbl: action.map(a => a.key),
-        psmrcjdt: convertDateToString(new Date(data.psmrcjdt))
+        // psmrcjdt: convertDateToString(new Date(data.psmrcjdt))
       }),
       formik,
     });
@@ -1372,7 +1377,7 @@ export default function MerchantForm(props: any) {
                       .map((option: any) => (
                         <option
                           key={option.psusrunm}
-                          value={option.psusrnam}
+                          value={option.psusrunm}
                         >
                           {option.psusrunm + " - " + option.psusrnam}
                         </option>

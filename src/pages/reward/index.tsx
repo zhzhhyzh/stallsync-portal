@@ -32,11 +32,11 @@ import { closeGlobalModal, openGlobalModal, refreshTable, selectHome } from "@ap
 import { showModal } from "@app/helpers/modalHelper";
 import { useRouter } from "next/router";
 import useApi from "@app/hooks/useApi";
-import useFetchStaffs from "@app/hooks/selector/useFetchStaffs";
+import useFetchRewards from "@app/hooks/selector/useFetchRewards";
 import {
-  fetchstaffs,
-  getremoveStaff,
-} from "@app/redux/staff/slice";
+  fetchrewards,
+  getremoveReward,
+} from "@app/redux/reward/slice";
 import useFetchDDL from "@app/hooks/selector/useFetchDDL";
 import { DDL_TYPES } from "@app/interfaces/ddl.types";
 import TableMenu from "@app/components/common/TableMenu/TableMenu";
@@ -46,74 +46,109 @@ import Buttons from "@app/components/common/Buttons/Buttons";
 import Breadcrumbs from "@app/components/common/Breadcrumbs/Breadcrumbs";
 import { MdLockReset } from "react-icons/md";
 
-export default function StaffPage() {
+export default function TranCodePage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { sendRequest, loading } = useApi({ title: "Staff" });
+  const { sendRequest, loading } = useApi({ title: "Reward" });
   const homeData = useAppSelector(selectHome);
 
   //sample code how to use this hook
-  const [tableData, refreshFn, totalRecords, extra] = useFetchStaffs({});
+  const [tableData, refreshFn, totalRecords, extra] = useFetchRewards({});
   // const [ddlData] = useFetchDDL({ code: ["GTCAT"] });
   //pass tableData to table
-  const [ddlData] = useFetchDDL({ code: ["STAFFTYP", "YESORNO", "NATION"] });
+  const [ddlData] = useFetchDDL({ code: ["DISTYPE", "RWDSTS"] });
   const [search, setSearch] = useState();
-  const [type, setType] = useState();
-  const [status, setStatus] = useState();
-  const [nation, setNation] = useState();
+  const [category, setCategory] = useState();
   const [aff, setAff] = useState();
 
   const columns: any[] = [
     {
-      title: "Staff Id",
-      dataIndex: "psstfuid",
-      key: "psstfuid",
+      title: "Reward Code",
+      dataIndex: "psrwduid",
+      key: "psrwduid",
     },
     {
       title: "Name",
-      dataIndex: "psstfnme",
-      key: "psstfnme",
+      dataIndex: "psrwdnme",
+      key: "psrwdnme",
     },
     {
-      title: "Type",
-      dataIndex: "psstftyp",
-      key: "psstftyp",
-      render: (_: any, record: any) => (
-        <Text>{`${record.psstftypdsc}`}</Text>
-      )
+      title: "Description",
+      dataIndex: "psrwddsc",
+      key: "psrwddsc",
+      render: (text: string) => (
+        <Tooltip label={text} placement="top" hasArrow>
+          <Text noOfLines={1} maxW="200px">
+            {text}
+          </Text>
+        </Tooltip>
+      ),
     },
+    {
+      title: "Reward Type",
+      dataIndex: "psrwdtyp",
+      key: "psrwdtyp",
+      render: (_: any, record: any) => (
+        <Text>{`${record.psrwdtypdsc}`}</Text>
+        // <Text>{`${record.psrwdtyp} - ${record.psrwdtypdsc}`}</Text>
 
-    {
-      title: "Nationality",
-      dataIndex: "psstfnat",
-      key: "psstfnat",
-      render: (_: any, record: any) => (
-        <Text>{`${record.psstfnatdsc}`}</Text>
       )
     },
     {
-      title: "Join Date",
-      dataIndex: "psstfjdt",
-      key: "psstfjdt",
+      title: "Quantity",
+      dataIndex: "psrwdqty",
+      key: "psrwdqty",
     },
     {
       title: "Active",
-      dataIndex: "psstfsts",
-      key: "psstfsts",
-      render: (_: any, record: any) => (
-        _ === "Y" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.SUCCESS,
-          borderRadius: 10
-        }}>Yes</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.DANGER,
-          borderRadius: 10,
-        }}>No</Text>
-      )
-    },
+      dataIndex: "psrwdsts",
+      key: "psrwdsts",
+      render: (_: any, record: any) => {
+        let text = "";
+        let bgColor = "";
+
+        switch (_) {
+          case "A":
+            text = "Available";
+            bgColor = Colors.WARNING || "#f0ad4e";
+            break;
+          case "I":
+            text = "Incoming";
+            bgColor = Colors.SUCCESS || "#5cb85c";
+            break;
+          case "P":
+            text = "Past";
+            bgColor = Colors.DANGER || "#d9534f";
+            break;
+          case "O":
+            text = "Out Of Stock";
+            bgColor = Colors.DANGER || "#d9534f";
+            break;
+          default:
+            return null;
+        }
+
+        return (
+          <Text
+            fontWeight="normal"
+            color="white"
+            textAlign="center"
+            style={{
+              width: 90,
+              height: 20,
+              backgroundColor: bgColor,
+              borderRadius: 10,
+              display: "inline-block",
+              lineHeight: "20px"
+            }}
+          >
+            {text}
+          </Text>
+        );
+      }
+    }
+    ,
+
     {
       title: "Action",
       key: "action",
@@ -141,7 +176,7 @@ export default function StaffPage() {
               )
             }
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.STAFF_EDIT)) && (
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.TRANCODE_EDIT)) && (
                 <Tooltip label='Edit' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -159,7 +194,7 @@ export default function StaffPage() {
             }
             {
               // todo
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.STAFF_DEL)) && (
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.TRANCODE_DEL)) && (
                 <Tooltip label='Delete' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -169,7 +204,7 @@ export default function StaffPage() {
                     sx={{ _hover: { backgroundColor: Colors.DANGER, color: Colors.BACKGROUND } }}
                     icon={<IoTrash />}
                     aria-label={"delete"}
-                    onClick={() => alertRemove(record?.id, record?.psstfnme)}
+                    onClick={() => alertRemove(record?.id, record?.psrwdnme)}
                   />
                 </Tooltip>
               )
@@ -186,7 +221,7 @@ export default function StaffPage() {
                 breadcrumbRoute: [
                   {
                     title: "TranCode",
-                    href: `/staff`,// Add parameter if needed eg. /generalParameter/?id=123
+                    href: `/reward`,// Add parameter if needed eg. /generalParameter/?id=123
                   },
                   {
                     title: "Maintenance Log",
@@ -237,7 +272,7 @@ export default function StaffPage() {
 
   async function onRemove(id: string) {
     const { success } = await sendRequest({
-      fn: getremoveStaff({ id }),
+      fn: getremoveReward({ id }),
     });
     if (success) {
 
@@ -247,14 +282,14 @@ export default function StaffPage() {
           title: "Remove item",
           message: "Removed",
         });
-        router.push("/staff");
+        router.push("/reward");
       }, 200);
     }
   }
 
   function goAdd() {
     router.push({
-      pathname: "/staff/Detail",
+      pathname: "/reward/Detail",
       query: {
         id: "",
         mode: "ADD"
@@ -264,7 +299,7 @@ export default function StaffPage() {
 
   function goEdit(id: string) {
     router.push({
-      pathname: "/staff/Detail",
+      pathname: "/reward/Detail",
       query: {
         id: id,
         mode: "EDIT"
@@ -274,7 +309,7 @@ export default function StaffPage() {
 
   function goView(id: string) {
     router.push({
-      pathname: "/staff/Detail",
+      pathname: "/reward/Detail",
       query: {
         id: id,
         mode: "VIEW"
@@ -286,18 +321,13 @@ export default function StaffPage() {
     setSearch(event.target.value);
   }
 
-  function typeOnchange(event: any) {
-    setType(event.target.value);
+  function categoryOnchange(event: any) {
+    setCategory(event.target.value);
   }
 
-  function nationOnchange(event: any) {
-    setNation(event.target.value);
+  function affOnchange(event: any) {
+    setAff(event.target.value);
   }
-  function statusOnChange(event: any) {
-    setStatus(event.target.value);
-  }
-
-
 
   return (
     <>
@@ -305,11 +335,11 @@ export default function StaffPage() {
         <Flex justifyContent={"space-between"} pl={4} pr={4} pt={4}>
           <Flex direction={"column"} alignSelf={"center"}>
             <Text fontSize={"3xl"} fontWeight="normal" mb={1}>
-              Staff
+              Reward
             </Text>
             <Breadcrumbs breadcrumbItems={[
               {
-                title: "Staff"
+                title: "Reward"
               },
             ]} />
           </Flex>
@@ -322,7 +352,7 @@ export default function StaffPage() {
             }}
           >
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.STAFF_ADD)) && (
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.TRANCODE_ADD)) && (
                 <Buttons
                   buttonDefaultType={"ADD"} onclick={() => goAdd()}
                 />
@@ -348,12 +378,12 @@ export default function StaffPage() {
                   value={search}
                 />
                 <Select
-                  name="staffType"
-                  onChange={typeOnchange}
-                  placeholder="Please Select Staff Type"
-                  value={type}
+                  name="DebitOrCredit"
+                  onChange={categoryOnchange}
+                  placeholder="Please Select Reward Status"
+                  value={category}
                 >
-                  {ddlData?.STAFFTYP?.map((option: DDL_TYPES) => (
+                  {ddlData?.RWDSTS?.map((option: DDL_TYPES) => (
                     <option key={option.prgecode} value={option.prgecode}>
                       {option.prgedesc}
                     </option>
@@ -361,44 +391,29 @@ export default function StaffPage() {
                 </Select>
 
                 <Select
-                  name="nation"
-                  onChange={nationOnchange}
-                  placeholder="Please Select Nation"
-                  value={nation}
+                  name="aff"
+                  onChange={affOnchange}
+                  placeholder="Please Select Discount Type"
+                  value={aff}
                 >
-                  {ddlData?.NATION?.map((option: DDL_TYPES) => (
+                  {ddlData?.DISTYPE?.map((option: DDL_TYPES) => (
                     <option key={option.prgecode} value={option.prgecode}>
                       {option.prgedesc}
                     </option>
                   ))}
                 </Select>
-                <Select
-                  name="Status"
-                  onChange={statusOnChange}
-                  placeholder="Please Select Staff Status"
-                  value={status}
-                >
-                  {ddlData?.YESORNO?.map((option: DDL_TYPES) => (
-                    <option key={option.prgecode} value={option.prgecode}>
-                      {option.prgedesc}
-                    </option>
-                  ))}
-                </Select>
-
-
               </Space>
             </Box>
           </Flex>
           <Table
             columns={columns}
             data={tableData}
-            refreshFn={fetchstaffs}
+            refreshFn={fetchrewards}
             totalRecords={totalRecords}
             extraParams={{
               search: search,
-              psstftyp: type,
-              psstfsts: status,
-              psstfnat: nation,
+              psrwdsts: category,
+              psrwdtyp: aff
 
             }}
           //onDoubleClick={showInfo}
