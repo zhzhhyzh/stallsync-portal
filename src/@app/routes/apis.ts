@@ -120,11 +120,7 @@ export const API_ROUTES = {
   CONTRACT_DOC_UPDATE: "psconmas/update_document",
   CONTRACT_DOC_DELETE: "psconmas/delete_document",
   CONTRACT_DOC_UPLOAD: "psconmas/upload_document",
-  CHECKER_MAKER_LIST: "pscmkpar/list",
-  CHECKER_MAKER_DETAIL: "pscmkpar/detail",
-  CHECKER_MAKER_CREATE: "pscmkpar/create",
-  CHECKER_MAKER_UPDATE: "pscmkpar/update",
-  CHECKER_MAKER_DELETE: "pscmkpar/delete",
+
   REQUEST_LIST: "pscmkrqt/list",
   REQUEST_DETAIL: "pscmkrqt/detail",
   REQUEST_CREATE: "pscmkrqt/create",
@@ -265,19 +261,7 @@ export const API_ROUTES = {
   PROD_FEE_CREATE: "psprdfee/create",
   PROD_FEE_UPDATE: "psprdfee/update",
   PROD_FEE_DELETE: "psprdfee/delete",
-  // FEE CODE
-  FEE_CODE_LIST: "psfeecde/list",
-  FEE_CODE_DETAIL: "psfeecde/detail",
-  FEE_CODE_CREATE: "psfeecde/create",
-  FEE_CODE_UPDATE: "psfeecde/update",
-  FEE_CODE_DELETE: "psfeecde/delete",
 
-  // GL ACCOUNT
-  GLA_LIST: "psglacpf/list",
-  GLA_DETAIL: "psglacpf/detail",
-  GLA_CREATE: "psglacpf/create",
-  GLA_UPDATE: "psglacpf/update",
-  GLA_DELETE: "psglacpf/delete",
 
   // TAX PARAMETER
   TAXPARAM_LIST: "pstaxpar/list",
@@ -307,12 +291,6 @@ export const API_ROUTES = {
   APPLICATION_LIST_DOCS: "application/list_documents",
   APPLICATION_DELETE_DOC: "application/delete_document",
 
-  //PAYMENT ALLOCATION PRIORITY PARAMETER
-  PAPPAR_LIST: "pspappar/list",
-  PAPPAR_DETAIL: "pspappar/detail",
-  PAPPAR_CREATE: "pspappar/create",
-  PAPPAR_UPDATE: "pspappar/update",
-  PAPPAR_DELETE: "pspappar/delete",
 
   FILE_MANAGE_LIST: "pstblmas/list",
   CREATE_FILE_MANAGE: "pstblmas/create",

@@ -18,7 +18,6 @@ import credAppLims from "./credAppLim/slice";
 import queue from "./queue/slice";
 import activity from "./queue/slice";
 import activityAct from "./queue/slice";
-import glas from "./gla/slice";
 import taxCodes from "./taxCode/slice";
 import activityChk from "./queue/slice";
 
@@ -27,14 +26,11 @@ import workgroupuser from "./workgroupuser/slice";
 import product from "./product/slice";
 import passwordPolicy from "./passwordPolicy/slice";
 import backupDatabase from "./backup/slice";
-import feeCode from "./feeCode/slice";
 import application from "./application/slice";
-import pappar from "./pappar/slice";
 
 import fileManagement from "./fileManage/slice";
 import tableKey from "./tableKey/slice";
 import entity from "./entity/slice";
-import checkerMaker from "./checkerMaker/slice";
 import request from "./request/slice";
 import loancalculator from "./loanCalculator/slice";
 import loanAccount from "./accountManagement/slice";
@@ -64,7 +60,6 @@ import announcement from './announcement/slice';
 import promotion from './promotion/slice';
 import commission from './commission/slice';
 import agent from './agentIncentive/slice';
-import currat from './currencyRate/slice';
 import compars from './compar/slice';
 import dealDate from './dealDate/slice';
 
@@ -84,7 +79,6 @@ export function makeStore() {
       holiday,
       workday,
       dsagent,
-      currat,
       agent,
       functions,
       generalParam,
@@ -95,12 +89,10 @@ export function makeStore() {
       activity,
       activityAct,
       activityChk,
-      pappar,
       workgroup,
       workgroupuser,
       product,
       prodFees,
-      glas,
       taxCodes,
       tranCodes,
       compars,
@@ -110,10 +102,8 @@ export function makeStore() {
       tableKey,
       passwordPolicy,
       backupDatabase,
-      feeCode,
       application,
       entity,
-      checkerMaker,
       request,
       loancalculator,
       loanAccount,
