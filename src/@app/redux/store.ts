@@ -14,8 +14,6 @@ import tranCodes from "./tranCode/slice";
 import roleCodes from "./role/slice";
 import credAppLims from "./credAppLim/slice";
 
-import workgroup from "./workgroup/slice";
-import workgroupuser from "./workgroupuser/slice";
 import passwordPolicy from "./passwordPolicy/slice";
 import backupDatabase from "./backup/slice";
 import application from "./application/slice";
@@ -27,18 +25,6 @@ import request from "./request/slice";
 import loancalculator from "./loanCalculator/slice";
 import loanAccount from "./accountManagement/slice";
 
-import testReceiver from "./testReceiver/slice";
-import notificationTemplate from "./notificationtemplate/slice";
-import scheduleDetail from "./notificationsheduledetail/slice";
-import metadata from "./metadata/slice";
-import notSentHistory from "./notificationSentHistory/slice";
-import segment from "./segment/slice";
-import notificationGroup from "./notificationGroup/slice";
-import notificationGroupData from "./notificationGroupData/slice";
-import notificationSubs from "./notificationSubscription/slice";
-import channelCode from "./channelCode/slice";
-import notificationCategory from "./notificationCategory/slice";
-import pushParam from "./pshprm/slice";
 import reports from './reports/slice';
 import rewards from './reward/slice';
 import member from './member/slice';
@@ -73,9 +59,6 @@ export function makeStore() {
       generalParam,
       adminAccounts,
     
-      workgroup,
-      workgroupuser,
-     
       tranCodes,
       compars,
       roleCodes,
@@ -89,18 +72,7 @@ export function makeStore() {
       request,
       loancalculator,
       loanAccount,
-      testReceiver,
-      notificationTemplate,
-      scheduleDetail,
-      metadata,
-      notSentHistory,
-      segment,
-      notificationGroup,
-      notificationGroupData,
-      notificationSubs,
-      channelCode,
-      notificationCategory,
-      pushParam,
+     
       reports,
       rewards,
       member,

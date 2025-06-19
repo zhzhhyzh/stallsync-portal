@@ -229,114 +229,114 @@ export const menus: Array<NavItem> = [
 
 
 
-      {
-        label: "Notifications",
-        icon: RiBellFill,
-        root: "Notifications",
-        children: [
-          {
-            label: "Parameters",
-            children: [
+      // {
+      //   label: "Notifications",
+      //   icon: RiBellFill,
+      //   root: "Notifications",
+      //   children: [
+      //     {
+      //       label: "Parameters",
+      //       children: [
 
-              {
-                label: "Notification Template",
-                href: "/notificationTemplate",
-                permissions: [accessType.NOT_VIEW],
-              },
-              // {
-              //   label: "Notification Segment",
-              //   href: "/segment",
-              //   permissions: [accessType.SEG_VIEW],
-              // },
-              {
-                label: "Notification Group",
-                href: "/notificationGroup",
-                permissions: [accessType.NOTGRP_VIEW],
-              },
-              {
-                label: "Subscription",
-                href: "/notificationSubscription",
-                permissions: [accessType.NOTSUBS_VIEW],
-              },
-              {
-                label: "Comm Channel",
-                href: "/channelCode",
-                permissions: [accessType.CHNLCOM_VIEW],
-              },
-              {
-                label: "Test Recipients",
-                href: "/testReceiver",
-                permissions: [accessType.TRCV_VIEW],
-              },
-              {
-                label: "Push Notification Control",
-                href: "/pushNotificationParam",
-                permissions: [accessType.PSHPRM_VIEW],
-              },
+      //         {
+      //           label: "Notification Template",
+      //           href: "/notificationTemplate",
+      //           permissions: [accessType.NOT_VIEW],
+      //         },
+      //         // {
+      //         //   label: "Notification Segment",
+      //         //   href: "/segment",
+      //         //   permissions: [accessType.SEG_VIEW],
+      //         // },
+      //         {
+      //           label: "Notification Group",
+      //           href: "/notificationGroup",
+      //           permissions: [accessType.NOTGRP_VIEW],
+      //         },
+      //         {
+      //           label: "Subscription",
+      //           href: "/notificationSubscription",
+      //           permissions: [accessType.NOTSUBS_VIEW],
+      //         },
+      //         {
+      //           label: "Comm Channel",
+      //           href: "/channelCode",
+      //           permissions: [accessType.CHNLCOM_VIEW],
+      //         },
+      //         {
+      //           label: "Test Recipients",
+      //           href: "/testReceiver",
+      //           permissions: [accessType.TRCV_VIEW],
+      //         },
+      //         {
+      //           label: "Push Notification Control",
+      //           href: "/pushNotificationParam",
+      //           permissions: [accessType.PSHPRM_VIEW],
+      //         },
 
-            ],
-            permissions: [
-              accessType.ANNOUNCE_VIEW,
-              accessType.NOT_VIEW,
-              //accessType.SEG_VIEW,
-              accessType.NOTGRP_VIEW,
-              accessType.NOTSUBS_VIEW,
-              accessType.CHNLCOM_VIEW,
-              accessType.TRCV_VIEW,
-              accessType.PSHPRM_VIEW,
-            ],
-          },
-          {
-            label: "Notification",
-            children: [
-              {
-                label: "New Messages",
-                href: "/notificationAdHoc",
-                permissions: [accessType.NOTNEW_ADD],
-              },
-              {
-                label: "Scheduled Messages",
-                href: "/notificationSchedules",
-                permissions: [accessType.NOTSCHED_VIEW],
-              },
-              {
-                label: "Sent History",
-                href: "/notificationSentHistory",
-                permissions: [accessType.NOTSNDH_VIEW],
-              },
-              {
-                label: "Metadata",
-                href: "/metadata",
-                permissions: [accessType.MTDA_VIEW],
-              },
-            ],
-            permissions: [
-              accessType.NOTNEW_ADD,
-              accessType.NOTSCHED_VIEW,
-              accessType.NOTSNDH_VIEW,
-              accessType.MTDA_VIEW,
-            ],
-          },
-          {
-            label: "Omnisend Reports",
-            href: "/omnisendReport",
-            // permissions: [accessType.RREPORT_VIEW], //todo
-          },
-        ],
-        permissions: [
-          accessType.NOT_VIEW,
-          //accessType.SEG_VIEW,
-          accessType.NOTGRP_VIEW,
-          accessType.NOTSUBS_VIEW,
-          accessType.CHNLCOM_VIEW,
-          accessType.TRCV_VIEW,
-          accessType.PSHPRM_VIEW,
-          accessType.NOTNEW_ADD,
-          accessType.NOTSCHED_VIEW,
-          accessType.NOTSNDH_VIEW,
-          accessType.MTDA_VIEW,
-        ],
-      },
+      //       ],
+      //       permissions: [
+      //         accessType.ANNOUNCE_VIEW,
+      //         accessType.NOT_VIEW,
+      //         //accessType.SEG_VIEW,
+      //         accessType.NOTGRP_VIEW,
+      //         accessType.NOTSUBS_VIEW,
+      //         accessType.CHNLCOM_VIEW,
+      //         accessType.TRCV_VIEW,
+      //         accessType.PSHPRM_VIEW,
+      //       ],
+      //     },
+      //     {
+      //       label: "Notification",
+      //       children: [
+      //         {
+      //           label: "New Messages",
+      //           href: "/notificationAdHoc",
+      //           permissions: [accessType.NOTNEW_ADD],
+      //         },
+      //         {
+      //           label: "Scheduled Messages",
+      //           href: "/notificationSchedules",
+      //           permissions: [accessType.NOTSCHED_VIEW],
+      //         },
+      //         {
+      //           label: "Sent History",
+      //           href: "/notificationSentHistory",
+      //           permissions: [accessType.NOTSNDH_VIEW],
+      //         },
+      //         {
+      //           label: "Metadata",
+      //           href: "/metadata",
+      //           permissions: [accessType.MTDA_VIEW],
+      //         },
+      //       ],
+      //       permissions: [
+      //         accessType.NOTNEW_ADD,
+      //         accessType.NOTSCHED_VIEW,
+      //         accessType.NOTSNDH_VIEW,
+      //         accessType.MTDA_VIEW,
+      //       ],
+      //     },
+      //     {
+      //       label: "Omnisend Reports",
+      //       href: "/omnisendReport",
+      //       // permissions: [accessType.RREPORT_VIEW], //todo
+      //     },
+      //   ],
+      //   permissions: [
+      //     accessType.NOT_VIEW,
+      //     //accessType.SEG_VIEW,
+      //     accessType.NOTGRP_VIEW,
+      //     accessType.NOTSUBS_VIEW,
+      //     accessType.CHNLCOM_VIEW,
+      //     accessType.TRCV_VIEW,
+      //     accessType.PSHPRM_VIEW,
+      //     accessType.NOTNEW_ADD,
+      //     accessType.NOTSCHED_VIEW,
+      //     accessType.NOTSNDH_VIEW,
+      //     accessType.MTDA_VIEW,
+      //   ],
+      // },
 
 
 

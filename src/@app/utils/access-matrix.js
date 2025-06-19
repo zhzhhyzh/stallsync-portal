@@ -183,41 +183,6 @@ export const accessType = {
     action: "DEL",
   }
   ,
-  WRKGRP_VIEW: {
-    type: "PARAM",
-    function: "WRKGRP",
-    action: "VIEW",
-  },
-  WRKGRP_ADD: {
-    type: "PARAM",
-    function: "WRKGRP",
-    action: "ADD",
-  },
-  WRKGRP_EDIT: {
-    type: "PARAM",
-    function: "WRKGRP",
-    action: "EDIT",
-  },
-  WRKGRP_DEL: {
-    type: "PARAM",
-    function: "WRKGRP",
-    action: "DEL",
-  },
-  WRKGRPUSR_VIEW: {
-    type: "PARAM",
-    function: "WRKGRPUSR",
-    action: "VIEW",
-  },
-  WRKGRPUSR_LINK: {
-    type: "PARAM",
-    function: "WRKGRPUSR",
-    action: "LINK",
-  },
-  WRKGRPUSR_UNLINK: {
-    type: "PARAM",
-    function: "WRKGRPUSR",
-    action: "UNLINK",
-  },
 
 
   TRANCODE_VIEW: {
@@ -380,217 +345,8 @@ export const accessType = {
     function: "ENTITY",
     action: "DEL",
   },
-  NOT_VIEW: {
-    type: "OMNI",
-    function: "NOT",
-    action: "VIEW",
-  },
-  NOT_ADD: {
-    type: "OMNI",
-    function: "NOT",
-    action: "ADD",
-  },
-  NOT_EDIT: {
-    type: "OMNI",
-    function: "NOT",
-    action: "EDIT",
-  },
-  NOT_DEL: {
-    type: "OMNI",
-    function: "NOT",
-    action: "DEL",
-  },
-  NOTSCH_VIEW: {
-    type: "OMNI",
-    function: "NOTSCH",
-    action: "VIEW",
-  },
-  NOTSCH_EDIT: {
-    type: "OMNI",
-    function: "NOTSCH",
-    action: "EDIT",
-  },
-  MTDA_VIEW: {
-    type: "OMNI",
-    function: "MTDA",
-    action: "VIEW",
-  },
-  MTDA_ADD: {
-    type: "OMNI",
-    function: "MTDA",
-    action: "ADD",
-  },
-  MTDA_EDIT: {
-    type: "OMNI",
-    function: "MTDA",
-    action: "EDIT",
-  },
-  MTDA_DEL: {
-    type: "OMNI",
-    function: "MTDA",
-    action: "DEL",
-  },
-  MTDA_UPLOAD: {
-    type: "OMNI",
-    function: "MTDA",
-    action: "UPLOAD",
-  },
-
-  SEG_VIEW: {
-    type: "OMNI",
-    function: "SEG",
-    action: "VIEW",
-  },
-  SEG_ADD: {
-    type: "OMNI",
-    function: "SEG",
-    action: "ADD",
-  },
-  SEG_EDIT: {
-    type: "OMNI",
-    function: "SEG",
-    action: "EDIT",
-  },
-  SEG_DEL: {
-    type: "OMNI",
-    function: "SEG",
-    action: "DEL",
-  },
-  NOTNEW_ADD: {
-    type: "OMNI",
-    function: "NOTNEW",
-    action: "ADD",
-  },
-  NOTGRP_VIEW: {
-    type: "OMNI",
-    function: "NOTGRP",
-    action: "VIEW",
-  },
-  NOTGRP_EDIT: {
-    type: "OMNI",
-    function: "NOTGRP",
-    action: "EDIT",
-  },
-  NOTGRP_ADD: {
-    type: "OMNI",
-    function: "NOTGRP",
-    action: "ADD",
-  },
-  NOTGRP_DEL: {
-    type: "OMNI",
-    function: "NOTGRP",
-    action: "DEL",
-  },
-  NOTGRPD_VIEW: {
-    type: "OMNI",
-    function: "NOTGRPD",
-    action: "VIEW",
-  },
-  NOTGRPD_EDIT: {
-    type: "OMNI",
-    function: "NOTGRPD",
-    action: "EDIT",
-  },
-  NOTGRPD_ADD: {
-    type: "OMNI",
-    function: "NOTGRPD",
-    action: "ADD",
-  },
-  NOTGRPD_DEL: {
-    type: "OMNI",
-    function: "NOTGRPD",
-    action: "DEL",
-  },
-  NOTSUBS_VIEW: {
-    type: "OMNI",
-    function: "NOTSUBS",
-    action: "VIEW",
-  },
-  NOTSUBS_EDIT: {
-    type: "OMNI",
-    function: "NOTSUBS",
-    action: "EDIT",
-  },
-  NOTSUBS_ADD: {
-    type: "OMNI",
-    function: "NOTSUBS",
-    action: "ADD",
-  },
-  NOTSUBS_DEL: {
-    type: "OMNI",
-    function: "NOTSUBS",
-    action: "DEL",
-  },
-  CHNLCOM_VIEW: {
-    type: "OMNI",
-    function: "CHNLCOM",
-    action: "VIEW",
-  },
-  CHNLCOM_ADD: {
-    type: "OMNI",
-    function: "CHNLCOM",
-    action: "ADD",
-  },
-  CHNLCOM_EDIT: {
-    type: "OMNI",
-    function: "CHNLCOM",
-    action: "EDIT",
-  },
-  CHNLCOM_DEL: {
-    type: "OMNI",
-    function: "CHNLCOM",
-    action: "DEL",
-  },
-  TRCV_VIEW: {
-    type: "OMNI",
-    function: "TRCV",
-    action: "VIEW",
-  },
-  TRCV_ADD: {
-    type: "OMNI",
-    function: "TRCV",
-    action: "ADD",
-  },
-  TRCV_EDIT: {
-    type: "OMNI",
-    function: "TRCV",
-    action: "EDIT",
-  },
-  TRCV_DEL: {
-    type: "OMNI",
-    function: "TRCV",
-    action: "DEL",
-  },
-  PSHPRM_VIEW: {
-    type: "OMNI",
-    function: "PSHPRM",
-    action: "VIEW",
-  },
-  PSHPRM_EDIT: {
-    type: "OMNI",
-    function: "PSHPRM",
-    action: "EDIT",
-  },
-  NOTSCHED_VIEW: {
-    type: "OMNI",
-    function: "NOTSCHED",
-    action: "VIEW",
-  },
-  NOTSCHED_EDIT: {
-    type: "OMNI",
-    function: "NOTSCHED",
-    action: "EDIT",
-  },
-  NOTSCHED_DEL: {
-    type: "OMNI",
-    function: "NOTSCHED",
-    action: "DEL",
-  },
-  NOTSNDH_VIEW: {
-    type: "OMNI",
-    function: "NOTSNDH",
-    action: "VIEW",
-  },
+  
+ 
   MBRPROF_VIEW: {
     type: "SET",
     function: "NOTSCHED",
@@ -751,13 +507,7 @@ const accessPath = {
   //   accessType.FUNC_EDIT,
   //   accessType.FUNC_DEL,
   // ],
-  // "/entity": accessType.ENTITY_VIEW,
-  // "/entity/Detail": [
-  //   accessType.ENTITY_ADD,
-  //   accessType.ENTITY_EDIT,
-  //   accessType.ENTITY_DEL,
-  // ],
-
+ 
   "/dsagent": accessType.DSAGENT_VIEW,
   "/dsagent/Detail": [
     // accessType.CON_ADD,
@@ -813,12 +563,7 @@ const accessPath = {
     accessType.COMPAR_DEL
   ],
 
-  "/workgroups": accessType.WRKGRP_VIEW,
-  "/workgroups/Detail": [
-    accessType.WRKGRP_ADD,
-    accessType.WRKGRP_EDIT,
-    accessType.WRKGRP_DEL
-  ],
+  
 
   "/roleCode": accessType.ROLE_VIEW,
   "/roleCode/Detail": [
@@ -826,9 +571,6 @@ const accessPath = {
     accessType.ROLE_EDIT,
     accessType.ROLE_DELETE
   ],
-
-  "/workgroupusers": accessType.WRKGRPUSR_VIEW,
-  "/workgroupusers/Detail": [accessType.WRKGRPUSR_LINK, accessType.WRKGRPUSR_UNLINK],
 
   "/tranCode": accessType.TRANCODE_VIEW,
   "/tranCode/Detail": [
@@ -857,84 +599,13 @@ const accessPath = {
 
 
 
-  "/testReceiver": accessType.TRCV_VIEW,
-  "/testReceiver/Detail": [
-    accessType.TRCV_ADD,
-    accessType.TRCV_EDIT,
-    accessType.TRCV_VIEW,
-  ],
-
-  "/notificationTemplate": accessType.NOT_VIEW,
-  "/notificationTemplate/Detail": [
-    accessType.NOT_ADD,
-    accessType.NOT_EDIT,
-    accessType.NOT_DEL,
-  ],
-
-  "/notificationSchedules": accessType.NOTSCHED_VIEW,
-  "/notificationSchedules/Detail": [accessType.NOTSCHED_EDIT],
-
-  "/notificationScheduleDetail": [
-    //accessType.NOTSCH_EDIT,
-    accessType.NOT_EDIT,
-  ],
-
-  "/metadata": accessType.MTDA_VIEW,
-  "/metadata/Detail": [
-    accessType.MTDA_ADD,
-    accessType.MTDA_EDIT,
-    accessType.MTDA_DEL,
-  ],
-
-  "/segment": accessType.SEG_VIEW,
-  "/segment/Detail": [
-    accessType.SEG_ADD,
-    accessType.SEG_EDIT,
-    accessType.SEG_DEL,
-  ],
-
-  "/notificationAdHoc": accessType.NOTNEW_ADD,
-  "/notificationGroup": accessType.NOTGRP_VIEW,
-  "/notificationGroup/Detail": [
-    accessType.NOTGRP_ADD,
-    accessType.NOTGRP_EDIT,
-    accessType.NOTGRP_DEL,
-  ],
-
-  "/notificationGroup/notificationGroupData": accessType.NOTGRP_VIEW,
-  "/notificationGroup/notificationGroupData/Detail": [
-    accessType.NOTGRP_ADD,
-    accessType.NOTGRP_EDIT,
-    accessType.NOTGRP_DEL,
-  ],
-
-  "/notificationSubscription": accessType.NOTSUBS_VIEW,
-  "/notificationSubscription/Detail": [
-    accessType.NOTSUBS_ADD,
-    accessType.NOTSUBS_EDIT,
-    accessType.NOTSUBS_DEL,
-  ],
-
-  "/notificationSentHistory": accessType.NOTSNDH_VIEW,
   "/announcement": accessType.ANNOUNCE_VIEW,
   "/announcement/Detail": [
     accessType.ANNOUNCE_ADD,
     accessType.ANNOUNCE_EDIT,
     accessType.ANNOUNCE_DEL,
   ],
-  "/channelCode": accessType.CHNLCOM_VIEW,
-  "/channelCode/Detail": [
-    accessType.CHNLCOM_ADD,
-    accessType.CHNLCOM_EDIT,
-    accessType.CHNLCOM_DEL,
-  ],
-
-  "/channelCode/notificationCategory": accessType.CHNLCOM_VIEW,
-  "/channelCode/notificationCategory/Detail": [
-    accessType.CHNLCOM_ADD,
-    accessType.CHNLCOM_EDIT,
-    accessType.CHNLCOM_DEL,
-  ],
+  
   "/dealDate": accessType.DEAL_DATE_VIEW,
   "/dealDate/Detail": [
     accessType.DEAL_DATE_ADD,
@@ -961,7 +632,6 @@ const accessPath = {
     //   accessType.CHNLCOM_EDIT,
     //   accessType.CHNLCOM_DEL,
   ],
-  "/pushNotificationParam": [accessType.PSHPRM_VIEW, accessType.PSHPRM_EDIT],
 
   // ----------Seperator----------- ::;
   "/accessibility": accessType.ACES_VIEW,

@@ -142,10 +142,7 @@ export const API_ROUTES = {
   DOC_DOWNLOAD: "document/download",
   DDL_ENTITY: "ddl/psentmas",
   DDL_FEECODE: "ddl/psfeecde",
-  DDL_GLACPF: "ddl/psglacpf",
-  DDL_TAXPAR: "ddl/pstaxpar",
   DDL_DSAGENT: "ddl/psdsgpar",
-  DDL_ACTWRKGRP: "ddl/workgroup",
   DDL_TRANSCODE: "ddl/transactioncode",
   DDL_PRICODE: "ddl/pricingplan",
   DDL_PROCODE: "ddl/products",
@@ -211,12 +208,6 @@ export const API_ROUTES = {
   COMPAR_DELETE: "pscompar/delete",
 
 
-  // TAX PARAMETER
-  TAXPARAM_LIST: "pstaxpar/list",
-  TAXPARAM_DETAIL: "pstaxpar/detail",
-  TAXPARAM_CREATE: "pstaxpar/create",
-  TAXPARAM_UPDATE: "pstaxpar/update",
-  TAXPARAM_DELETE: "pstaxpar/delete",
 
   // CREDIT APPROVAL LIMIT
   CRED_APP_LIST: "pscraplm/list",
@@ -274,75 +265,10 @@ export const API_ROUTES = {
   ACCOUNT_MESSAGE_LIST: "psaccmsg/list",
 
   DDL_ENTITY_BANK: "ddl/entitybank",
-  DDL_NOTIFICATION_GROUP: "ddl/psnotgrp",
   DDL_CHANNEL_SENDER: "ddl/channelSender",
-  DDL_SEGMENT: "ddl/segment",
   DDL_CUSTOMER: "ddl/pscifmas",
 
   MANUAL_TRANS_RAISE_REQ: "psacctrx/raise_request",
-
-  NOT_TEMPLATE_LIST: "psnotipf/list",
-  NOT_TEMPLATE_DETAIL: "psnotipf/detail",
-  NOT_TEMPLATE_MAINTAIN: "psnotipf/maintain",
-  NOT_TEMPLATE_DELETE: "psnotipf/delete",
-  NOT_VALIDATE_TEMPLATE: "psnotipf/validateTemplate",
-  NOT_METADATA: "ddl/metadata",
-  NOT_TEST_SEND: "psnotipf/send",
-  NOT_NEWMESSAGE_SEND: "psnotipf/new_message",
-
-  NOTIFICATION_GROUP_LIST: "psnotgrp/list",
-  NOTIFICATION_GROUP_DETAIL: "psnotgrp/detail",
-  NOTIFICATION_GROUP_CREATE: "psnotgrp/create",
-  NOTIFICATION_GROUP_UPDATE: "psnotgrp/update",
-  NOTIFICATION_GROUP_DELETE: "psnotgrp/delete",
-
-  NOTICATION_GROUP_DATA_LIST: "psnotgrd/list",
-  NOTICATION_GROUP_DATA_DETAIL: "psnotgrd/detail",
-  NOTICATION_GROUP_DATA_CREATE: "psnotgrd/create",
-  NOTICATION_GROUP_DATA_UPDATE: "psnotgrd/update",
-  NOTICATION_GROUP_DATA_DELETE: "psnotgrd/delete",
-
-  NOTIFICATION_SUBSCRIPTION_LIST: "psntspar/list",
-  NOTIFICATION_SUBSCRIPTION_DETAIL: "psntspar/detail",
-  NOTIFICATION_SUBSCRIPTION_CREATE: "psntspar/create",
-  NOTIFICATION_SUBSCRIPTION_UPDATE: "psntspar/update",
-  NOTIFICATION_SUBSCRIPTION_DELETE: "psntspar/delete",
-
-  CHANNEL_CODE_LIST: "pschnpar/list",
-  CHANNEL_CODE_DETAIL: "pschnpar/detail",
-  CHANNEL_CODE_CREATE: "pschnpar/create",
-  CHANNEL_CODE_UPDATE: "pschnpar/update",
-  CHANNEL_CODE_DELETE: "pschnpar/delete",
-
-  NOTIFICATION_CATEGORY_LIST: "pschnncp/list",
-  NOTIFICATION_CATEGORY_DETAIL: "pschnncp/detail",
-  NOTIFICATION_CATEGORY_CREATE: "pschnncp/create",
-  NOTIFICATION_CATEGORY_DELETE: "pschnncp/delete",
-
-  TEST_RECEIVER_ADD: "prnottrc/create",
-  TEST_RECEIVER_UPDATE: "prnottrc/update",
-  TEST_RECEIVER_LIST: "prnottrc/list",
-  TEST_RECEIVER_DETAIL: "prnottrc/detail",
-  TEST_RECEIVER_DELETE: "prnottrc/delete",
-  TEST_RECEIVER_TEST: "prnottrc/test",
-
-  PSHPAR_DETAIL: "pspshpar/detail",
-  PSHPAR_MAINTAIN: "pspshpar/maintain",
-
-  METADATA_LIST: "psnotmda/list",
-  METADATA_DETAIL: "psnotmda/detail",
-  METADATA_CREATE: "psnotmda/create",
-  METADATA_UPDATE: "psnotmda/update",
-  METADATA_DELETE: "psnotmda/delete",
-  METADATA_UPLOAD: "psnotmda/upload",
-  METADATA_UPLOAD_JSON: "psnotmda/uploadJson",
-
-  NOT_SEGMENT_LIST: "psnotsgp/list",
-  NOT_SEGMENT_DETAIL: "psnotsgp/detail",
-  NOT_SEGMENT_CREATE: "psnotsgp/create",
-  NOT_SEGMENT_UPDATE: "psnotsgp/update",
-  NOT_SEGMENT_DELETE: "psnotsgp/delete",
-  NOT_SEGMENT_PREVIEW_LIST: "psnotsgp/preview",
 
   DEAL_DATE_LIST: "psddtpar/list",
   DEAL_DATE_DETAIL: "psddtpar/detail",
@@ -350,31 +276,11 @@ export const API_ROUTES = {
   DEAL_DATE_UPDATE: "psddtpar/update",
   DEAL_DATE_DELETE: "psddtpar/delete",
 
-  OMNI_REPORT_HISTORY: "omnisendReport/list",
-  OMNI_REPORT_GENERATE: "omnisendReport/generate",
-  OMNI_REPORT_DOWNLOAD: "omnisendReport/download",
-
   REPORT_HISTORY: "report/list",
   REPORT_GENERATE: "report/generate",
   REPORT_GENERATEREWARD: "report/generateRewardReport",
   REPORT_LISTREWARD: "report/listReward",
   REPORT_DOWNLOAD: "report/download",
-
-  NOT_SCHEDULE_DETAIL: "psnotipf/schedule",
-  NOT_SCHEDULE_CREATE: "psnotipf/create_schedule",
-  NOT_SCHEDULE_UPDATE: "psnotipf/update_schedule",
-  NOT_SCHEDULE_LIST: "psnotipf/upcoming_schedule",
-  NOT_SCHEDULE_LIST_DETAIL: "psnotipf/upcoming_schedule_detail",
-  NOT_SCHEDULE_DELETE: "psnotipf/delete_schedule",
-  NOT_SCHEDULE_RECIPIENTS: "psnotipf/list_scheduled_recipients",
-
-  NOT_HISTORY_CUSTOMER_LIST: "psnotipf/list_history",
-  NOT_HISTORY_TEMPLATE_LIST: "psnotipf/list_history_template",
-  NOT_HISTORY_TEMPLATE_LIST_DETAIL: "psnotipf/list_history_template_detail",
-  NOT_HISTORY_RECIPIENTS: "psnotipf/list_history_recipients",
-
-  NOT_HISTORY_ACCOUNT_LIST: "psnotipf/list_history_account",
-  //NOT_HISTORY_ACCOUNT_LIST_DETAIL: "psnotipf/list_history_account_detail",
 
 
   PROMOTION_LISTING: "psmbrprm/list",
