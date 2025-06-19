@@ -19,7 +19,7 @@ export default function CustomTabs(props: CustomTabsDefaultProps) {
           md: Spacing.containerPx,
         }}
         fontWeight={selectedTabIndex === index ? "medium" : "normal"}
-        color={selectedTabIndex === index ? "blue.600" : "gray"} 
+        color={selectedTabIndex === index ? "yellow.600" : "gray"} 
         paddingBottom="3px"
         borderBottomWidth={2}
         {...rest}

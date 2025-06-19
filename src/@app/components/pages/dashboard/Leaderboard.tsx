@@ -57,7 +57,7 @@ const Leaderboard = ({
                     fontWeight="medium"
                     pb=".3rem"
                 >
-                    Top 20 Agents
+                    Top 10 Merchants
                 </Text>
                 <Flex>
                 <Select onChange={onChange} value={option}>

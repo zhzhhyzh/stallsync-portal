@@ -11,7 +11,7 @@ export const API_ROUTES = {
   DDL_MCHUSER: "ddl/merchantUser",
   DDL_MCH: "ddl/psmrcpar",
   DDL_AVLUSER: "ddl/availableUser",
-  DDL_TABLE_KEYS: "ddl/fieldNames", 
+  DDL_TABLE_KEYS: "ddl/fieldNames",
 
 
   //ANNOUNCEMENT
@@ -41,6 +41,7 @@ export const API_ROUTES = {
   RWD_CREATE: "psrwdpar/create",
   RWD_UPDATE: "psrwdpar/update",
   RWD_DELETE: "psrwdpar/delete",
+  RWD_LISTRDMP: "psrwdpar/listRdmp",
 
 
   // MAINTENANCE LOG
@@ -159,7 +160,7 @@ export const API_ROUTES = {
   CONTRACT_DELETE: "psconmas/delete",
 
 
-  
+
 
 
   //WORKGROUP
@@ -257,7 +258,7 @@ export const API_ROUTES = {
   UPDATE_ENTITY: "psentmas/update",
   DELETE_ENTITY: "psentmas/delete",
 
-  
+
 
   //LOAN
   CALCULATE_LOAN: "loancalr/calculate_loan",

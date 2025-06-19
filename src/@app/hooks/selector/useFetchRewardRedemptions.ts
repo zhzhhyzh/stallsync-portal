@@ -4,13 +4,13 @@ import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
 import { logout, } from "@app/redux/app/slice";
 import { selectIsLogined } from "@app/redux/app/slice";
 import { useRouter } from "next/router";
-import { fetchrewards, selectExtra, selectrewards, selectTotal } from "@app/redux/reward/slice";
+import { fetchredemptions, selectExtra, selectredemptions, selectTotal } from "@app/redux/reward/slice";
 
-function useFetchRewards(props:any) {
+function useFetchRewardRedemptions(props: any) {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const data = useAppSelector(selectrewards);
+  const data = useAppSelector(selectredemptions);
   const total = useAppSelector(selectTotal)
   const extra = useAppSelector(selectExtra)
   const [loading, setLoading] = useState(false);
@@ -20,10 +20,10 @@ function useFetchRewards(props:any) {
     if (isLogined) onInit({});
   }, [isLogined]);
 
-  async function onInit({ page, limit }: useFetchRewardsProps) {
+  async function onInit({ page, limit }: useFetchRewardRedemptionsProps) {
     setLoading(true);
     const { payload } = await dispatch(
-      fetchrewards({
+      fetchredemptions({
         page: page || 0,
         limit: limit || 10,
         ...props,
@@ -38,9 +38,9 @@ function useFetchRewards(props:any) {
   return [data, onInit, total, extra, loading];
 }
 
-interface useFetchRewardsProps {
+interface useFetchRewardRedemptionsProps {
   page?: number;
   limit?: number;
 }
 
-export default useFetchRewards;
+export default useFetchRewardRedemptions;

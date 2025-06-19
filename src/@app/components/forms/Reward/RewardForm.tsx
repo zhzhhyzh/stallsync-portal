@@ -13,15 +13,22 @@ import {
   Switch,
   InputGroup,
   Stack,
-
+  Tabs,
+  TabList, Tooltip,
 } from "@chakra-ui/react";
+import Table from "@app/components/common/Table/Table";
+
 import {
   DownloadOutlined,
   FolderViewOutlined,
   DeleteOutlined
 } from '@ant-design/icons';
 import { postUploadFile } from "@app/redux/app/slice";
+import CustomTabs from "@app/components/common/Tabs/CustomTabs";
+import {
+  fetchredemptions,
 
+} from "@app/redux/reward/slice";
 import {
   numberWithCommas,
   parseThousandsToNumber,
@@ -58,6 +65,8 @@ import { RewardSchema } from "@app/components/forms/@schemas/rewardSchema";
 import dayjs from 'dayjs'
 import { formatDate } from "@app/utils/DateUtils";
 import CustomFormLabel from "@app/components/common/FormLabel/CustomFormLabel";
+import { useToast } from "@chakra-ui/react";
+import useFetchRewardRedemptions from "@app/hooks/selector/useFetchRewardRedemptions";
 
 
 export default function RewardForm(props: any) {
@@ -71,6 +80,8 @@ export default function RewardForm(props: any) {
   const [ddlData1] = useFetchDDLMerchants();
   const [skillArr, setSkillArr] = useState<string[]>([]);
 
+  const [tabIndex, setTabIndex] = useState(0)
+  const toast = useToast()
 
 
   const initialValues = {
@@ -116,34 +127,19 @@ export default function RewardForm(props: any) {
   };
 
   const autoUpdateRewardStatus = (from: any, to: any) => {
-    console.log("FROM: ", from, "\nTOO:", to)
     if (!from || !to) return;
-    console.log("FROM: ", from, "\nTOO:", to)
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     const fromDate = new Date(from);
     const toDate = new Date(to);
-    console.log("FROM DATE: ", fromDate, "\nTOO DATREE:", toDate)
-
     if (fromDate <= today && today <= toDate) {
-      console.log("FROM DATE: ", fromDate, "\nTOO DATREE:", toDate, "THSII SI AA")
-
       formik.setFieldValue("psrwdsts", "A"); // Active
-      console.log(formik.values.psrwdsts, " WATCH ME ")
-
     } else if (today < fromDate) {
-      console.log("FROM DATE: ", fromDate, "\nTOO DATREE:", toDate, "THSII SI II")
-
       formik.setFieldValue("psrwdsts", "I"); // Incoming
-      console.log(formik.values.psrwdsts, " WATCH ME ")
     } else {
-      console.log("FROM DATE: ", fromDate, "\nTOO DATREE:", toDate, "THISIS PPP")
-
       formik.setFieldValue("psrwdsts", "P"); // Past (optional)
-      console.log(formik.values.psrwdsts, " WATCH ME ")
-
     }
   };
 
@@ -164,8 +160,10 @@ export default function RewardForm(props: any) {
         id: detailData.psrwduid,
         psrwdfdt: dayjs(detailData?.psrwdfdt),
         psrwdtdt: dayjs(detailData?.psrwdtdt),
-
-
+        psrwdica: detailData?.psrwdica == "Y" ? true : false,
+        psrwdism: detailData?.psrwdism == "Y" ? true : false,
+        psrwdaam: detailData?.psrwdaam == "Y" ? true : false,
+        psrwddtl: detailData?.psrwddtl ? setSkillArr(detailData?.psrwddtl) : setSkillArr([])
       });
     }
   }, [detailData]);
@@ -213,6 +211,43 @@ export default function RewardForm(props: any) {
     }
   }
 
+  // Second tab - List
+
+  const [tableData, refreshFn, totalRecords, extra] = useFetchRewardRedemptions({});
+  const columns: any[] = [
+    {
+      title: "Order Id",
+      dataIndex: "psorduid",
+      key: "psorduid",
+    },
+    {
+      title: "Order Date",
+      dataIndex: "psordodt",
+      key: "psordodt",
+    },
+
+    {
+      title: "Member Redeem",
+      dataIndex: "psmbruid",
+      key: "psmbruid",
+      render: (_: any, record: any) => (
+        // <Text>{`${record.psrwdtypdsc}`}</Text>
+        <Text>{`${record.psmbruid} - ${record.psmbrnam}`}</Text>
+
+      )
+    }
+
+  ];
+  const [dateError, setDateError] = useState(false);
+
+  const [tempFromDate, setTempFromDate] = useState<any>();
+  const [tempToDate, setTempToDate] = useState<any>();
+  useEffect(() => {
+    if (tempToDate && tempFromDate && tempToDate < tempFromDate)
+      setDateError(true);
+    else setDateError(false);
+  }, [tempFromDate, tempToDate]);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Flex justifyContent={"space-between"} pl={4} pr={4} pt={4}>
@@ -243,7 +278,7 @@ export default function RewardForm(props: any) {
               buttonDefaultType={"BACK"} onclick={() => router.back()}
             />
             {
-              mode && mode !== "VIEW" && (
+              mode && mode !== "VIEW" && tabIndex == 0 && (
                 <Buttons
                   buttonDefaultType={"SAVE"} buttonLoading={loading}
                 />
@@ -251,522 +286,636 @@ export default function RewardForm(props: any) {
           </Space>
         </Box>
       </Flex>
-      <Card
-        p={4}
-        mt={`${Spacing.containerPx}`}
-        className="grid grid-cols-1 gap-6"
-      >
-        <Box>
-          <div className="flex flex-col sm:flex-row gap-6">
-            <Box display="flex" flexDir="column" gap={6} width="100%">
-              <Flex justifyContent="space-between" alignItems="center" gap={5}>
+      {mode != "ADD" && <Flex mt={4} bgColor="#fff" py={2}>
+        <Tabs
+          index={tabIndex}
+          onChange={(index) => {
+            let same = true;
 
-                <FormControl
-                  id="psrwduid"
-                  isInvalid={Boolean(formik.errors.psrwduid) && Boolean(formik.touched.psrwduid)}
-                  isReadOnly={mode === "VIEW" ? true : false}
-                >
-                  {/* <FormLabel>Reward*</FormLabel> */}
-                  <CustomFormLabel labelText="Reward" />
-                  <Input
-                    placeholder={"Enter Reward"}
-                    type="text"
-                    name="psrwduid"
-                    onChange={formik.handleChange}
-                    value={formik.values.psrwduid || ""}
-                    isDisabled={mode === "EDIT"}
-                  />
-                  {formik.errors.psrwduid && (
-                    <FormErrorMessage>{formik.errors.psrwduid}</FormErrorMessage>
-                  )}
-                </FormControl>
 
+
+            setTabIndex(index)
+
+
+
+
+
+
+          }}>
+          <Flex
+            bgColor="#fff"
+            justifyContent={"space-between"}
+            alignItems={"flex-end"}
+            gap={5}
+          >
+            <TabList
+
+              border={0}
+            >
+              <CustomTabs label="Reward Detail" index={0} selectedTabIndex={tabIndex} />
+              <CustomTabs label="Reward Redemption" index={1} selectedTabIndex={tabIndex} />
+
+
+            </TabList>
+          </Flex>
+        </Tabs>
+      </Flex>}
+      {tabIndex == 0 &&
+        <Card
+          p={4}
+          mt={`${Spacing.containerPx}`}
+          className="grid grid-cols-1 gap-6"
+        >
+          <Box>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Box display="flex" flexDir="column" gap={6} width="100%">
+                <Flex justifyContent="space-between" alignItems="center" gap={5}>
+
+                  <FormControl
+                    id="psrwduid"
+                    isInvalid={Boolean(formik.errors.psrwduid) && Boolean(formik.touched.psrwduid)}
+                    isReadOnly={mode === "VIEW" ? true : false}
+                  >
+                    {/* <FormLabel>Reward*</FormLabel> */}
+                    <CustomFormLabel labelText="Reward" />
+                    <Input
+                      placeholder={"Enter Reward"}
+                      type="text"
+                      name="psrwduid"
+                      onChange={formik.handleChange}
+                      value={formik.values.psrwduid || ""}
+                      isDisabled={mode === "EDIT"}
+                    />
+                    {formik.errors.psrwduid && (
+                      <FormErrorMessage>{formik.errors.psrwduid}</FormErrorMessage>
+                    )}
+                  </FormControl>
+
+                  <FormControl
+                    id="psrwdnme"
+                    isInvalid={Boolean(formik.errors.psrwdnme) && Boolean(formik.touched.psrwdnme)}
+                    isReadOnly={mode === "VIEW" ? true : false}
+                  >
+                    {/* <FormLabel>Description*</FormLabel> */}
+                    <CustomFormLabel labelText="Reward Name" />
+                    <Input
+                      placeholder={"Enter Reward Name"}
+                      type="text"
+                      name="psrwdnme"
+                      onChange={formik.handleChange}
+                      value={formik.values.psrwdnme || ""}
+                    />
+                    {formik.errors.psrwdnme && (
+                      <FormErrorMessage>{formik.errors.psrwdnme}</FormErrorMessage>
+                    )}
+                  </FormControl>
+
+                </Flex>
                 <FormControl
-                  id="psrwdnme"
-                  isInvalid={Boolean(formik.errors.psrwdnme) && Boolean(formik.touched.psrwdnme)}
+                  id="psrwddsc"
+                  isInvalid={Boolean(formik.errors.psrwddsc) && Boolean(formik.touched.psrwddsc)}
                   isReadOnly={mode === "VIEW" ? true : false}
                 >
                   {/* <FormLabel>Description*</FormLabel> */}
-                  <CustomFormLabel labelText="Reward Name" />
+                  <CustomFormLabel labelText="Description" />
                   <Input
-                    placeholder={"Enter Reward Name"}
+                    placeholder={"Enter Description"}
                     type="text"
-                    name="psrwdnme"
+                    name="psrwddsc"
                     onChange={formik.handleChange}
-                    value={formik.values.psrwdnme || ""}
+                    value={formik.values.psrwddsc || ""}
                   />
-                  {formik.errors.psrwdnme && (
-                    <FormErrorMessage>{formik.errors.psrwdnme}</FormErrorMessage>
+                  {formik.errors.psrwddsc && (
+                    <FormErrorMessage>{formik.errors.psrwddsc}</FormErrorMessage>
+                  )}
+                </FormControl>
+                <FormControl
+                  id="psrwdlds"
+                  isInvalid={Boolean(formik.errors.psrwdlds) && Boolean(formik.touched.psrwdlds)}
+                  isReadOnly={mode === "VIEW" ? true : false}
+                >
+                  <FormLabel>Local Description</FormLabel>
+                  <Input
+                    placeholder={"Enter Local Description"}
+                    type="text"
+                    name="psrwdlds"
+                    onChange={formik.handleChange}
+                    value={formik.values.psrwdlds || ""}
+                  />
+                  {formik.errors.psrwdlds && (
+                    <FormErrorMessage>{formik.errors.psrwdlds}</FormErrorMessage>
                   )}
                 </FormControl>
 
-              </Flex>
-              <FormControl
-                id="psrwddsc"
-                isInvalid={Boolean(formik.errors.psrwddsc) && Boolean(formik.touched.psrwddsc)}
-                isReadOnly={mode === "VIEW" ? true : false}
-              >
-                {/* <FormLabel>Description*</FormLabel> */}
-                <CustomFormLabel labelText="Description" />
-                <Input
-                  placeholder={"Enter Description"}
-                  type="text"
-                  name="psrwddsc"
-                  onChange={formik.handleChange}
-                  value={formik.values.psrwddsc || ""}
-                />
-                {formik.errors.psrwddsc && (
-                  <FormErrorMessage>{formik.errors.psrwddsc}</FormErrorMessage>
-                )}
-              </FormControl>
-              <FormControl
-                id="psrwdlds"
-                isInvalid={Boolean(formik.errors.psrwdlds) && Boolean(formik.touched.psrwdlds)}
-                isReadOnly={mode === "VIEW" ? true : false}
-              >
-                <FormLabel>Local Description</FormLabel>
-                <Input
-                  placeholder={"Enter Local Description"}
-                  type="text"
-                  name="psrwdlds"
-                  onChange={formik.handleChange}
-                  value={formik.values.psrwdlds || ""}
-                />
-                {formik.errors.psrwdlds && (
-                  <FormErrorMessage>{formik.errors.psrwdlds}</FormErrorMessage>
-                )}
-              </FormControl>
-
-
-              <FormControl
-                id="psrwdsts"
-                isInvalid={Boolean(formik.errors.psrwdsts) && Boolean(formik.touched.psrwdsts)}
-                isReadOnly={mode === "VIEW" ? true : false}
-              >
-                <FormLabel>Reward Status</FormLabel>
-                {/* <CustomFormLabel labelText="Reward Status" /> */}
-                <Select
-                  placeholder="Select Reward Status"
-                  value={formik.values.psrwdsts || ""}
-                  onChange={formik.handleChange}
-                  style={{
-                    fontSize: 14,
-                  }}
-                  isDisabled
-                >
-                  {ddlData?.RWDSTS?.map((option: DDL_TYPES) => ( //change code
-                    <option key={option.prgecode} value={option.prgecode}>
-                      {option.prgedesc}
-                    </option>
-                  ))}
-                </Select>
-                {formik.errors.psrwdsts && (
-                  <FormErrorMessage>{formik.errors.psrwdsts}</FormErrorMessage>
-                )}
-              </FormControl>
-              <Flex justifyContent="space-between" alignItems="center" gap={5}>
 
                 <FormControl
-                  id="psrwdtyp"
-                  isInvalid={Boolean(formik.errors.psrwdtyp) && Boolean(formik.touched.psrwdtyp)}
+                  id="psrwdsts"
+                  isInvalid={Boolean(formik.errors.psrwdsts) && Boolean(formik.touched.psrwdsts)}
+                  isReadOnly={mode === "VIEW" ? true : false}
                 >
-                  {/* <FormLabel>Affect Code 1*</FormLabel> */}
-                  <CustomFormLabel labelText="Reward Type" />
+                  <FormLabel>Reward Status</FormLabel>
+                  {/* <CustomFormLabel labelText="Reward Status" /> */}
                   <Select
-                    placeholder="Select Reward Type"
-                    value={formik.values.psrwdtyp || ""}
+                    placeholder="Select Reward Status"
+                    value={formik.values.psrwdsts || ""}
                     onChange={formik.handleChange}
                     style={{
                       fontSize: 14,
                     }}
-                  // isDisabled={mode === "VIEW" ? true : false}
+                    isDisabled
                   >
-                    {ddlData?.DISTYPE?.map((option: DDL_TYPES) => ( //change code
+                    {ddlData?.RWDSTS?.map((option: DDL_TYPES) => ( //change code
                       <option key={option.prgecode} value={option.prgecode}>
                         {option.prgedesc}
                       </option>
                     ))}
-                  </Select>{formik.errors.psrwdtyp && (
-                    <FormErrorMessage>{formik.errors.psrwdtyp}</FormErrorMessage>
+                  </Select>
+                  {formik.errors.psrwdsts && (
+                    <FormErrorMessage>{formik.errors.psrwdsts}</FormErrorMessage>
                   )}
                 </FormControl>
+                <Flex justifyContent="space-between" alignItems="center" gap={5}>
 
-                <FormControl
-                  id="psrwddva"
-                  isInvalid={Boolean(formik.errors.psrwddva) && Boolean(formik.touched.psrwddva)}
-                  isReadOnly={mode == "VIEW" || !formik.values.psrwdtyp}
-                >
-                  {
-                    formik.values.psrwdtyp ? <CustomFormLabel labelText="Discount Value" /> : <FormLabel>Discount Value</FormLabel>
-                  }
-
-
-
-                  <Stack spacing={4}>
-                    <InputGroup>
-
-                      <Input
-                        type="text"
-                        name="psrwddva"
-                        placeholder={formik.values.psrwdtyp == "P" ? "0.1234" : formik.values.psrwdtyp == "V" ? "345.34" : "Enter Discount Value"}
-                        value={numberWithCommas(formik.values.psrwddva)}
-                        pattern={numberPattern}
-                        onChange={(event) => {
-                          const value = event.target.value;
-
-                          // Check if the value is a valid number or empty
-                          if (!value || /^[0-9.,]*$/.test(value)) {
-                            formik.handleChange({
-                              target: {
-                                value: parseThousandsToNumber(value),
-                                name: "psrwddva",
-                              },
-                            });
-                          }
-                        }}
-                        onBlur={formik.handleBlur}
-                      />
-                    </InputGroup>
-                  </Stack>
-                  {formik.errors.psrwddva && (
-                    <FormErrorMessage>{formik.errors.psrwddva}</FormErrorMessage>
-                  )}
-                </FormControl>
-              </Flex>
-
-
-
-
-            </Box>
-
-            <Box display="flex" flexDir="column" gap={6} width="100%">
-
-              <FormControl
-                id="psrwdqty"
-                isInvalid={Boolean(formik.errors.psrwdqty) && Boolean(formik.touched.psrwdqty)}
-                isReadOnly={mode == 'VIEW'}
-              >
-                {/* <FormLabel>Quantity</FormLabel> */}
-                <CustomFormLabel labelText="Quantity" />
-                <Stack spacing={4}>
-                  <InputGroup>
-
-                    <Input
-                      type="text"
-                      name="psrwdqty"
-                      placeholder="Enter Quantity"
-                      value={numberWithCommas(formik.values.psrwdqty)}
-                      pattern={numberPattern}
-                      onChange={(event) => {
-                        const value = event.target.value;
-
-                        // Check if the value is a valid number or empty
-                        if (!value || /^[0-9.,]*$/.test(value)) {
-                          formik.handleChange({
-                            target: {
-                              value: parseThousandsToNumber(value),
-                              name: "psrwdqty",
-                            },
-                          });
-                        }
+                  <FormControl
+                    id="psrwdtyp"
+                    isInvalid={Boolean(formik.errors.psrwdtyp) && Boolean(formik.touched.psrwdtyp)}
+                  >
+                    {/* <FormLabel>Affect Code 1*</FormLabel> */}
+                    <CustomFormLabel labelText="Reward Type" />
+                    <Select
+                      placeholder="Select Reward Type"
+                      value={formik.values.psrwdtyp || ""}
+                      onChange={formik.handleChange}
+                      style={{
+                        fontSize: 14,
                       }}
-                      onBlur={formik.handleBlur}
-                    />
-                  </InputGroup>
-                </Stack>
-                {formik.errors.psrwdqty && (
-                  <FormErrorMessage>{formik.errors.psrwdqty}</FormErrorMessage>
-                )}
-              </FormControl>
+                    // isDisabled={mode === "VIEW" ? true : false}
+                    >
+                      {ddlData?.DISTYPE?.map((option: DDL_TYPES) => ( //change code
+                        <option key={option.prgecode} value={option.prgecode}>
+                          {option.prgedesc}
+                        </option>
+                      ))}
+                    </Select>{formik.errors.psrwdtyp && (
+                      <FormErrorMessage>{formik.errors.psrwdtyp}</FormErrorMessage>
+                    )}
+                  </FormControl>
 
-              <Flex justifyContent="space-between" alignItems="center" gap={5}>
+                  <FormControl
+                    id="psrwddva"
+                    isInvalid={Boolean(formik.errors.psrwddva) && Boolean(formik.touched.psrwddva)}
+                    isReadOnly={mode == "VIEW" || !formik.values.psrwdtyp}
+                  >
+                    {
+                      formik.values.psrwdtyp ? <CustomFormLabel labelText="Discount Value" /> : <FormLabel>Discount Value</FormLabel>
+                    }
 
+
+
+                    <Stack spacing={4}>
+                      <InputGroup>
+
+                        <Input
+                          type="text"
+                          name="psrwddva"
+                          placeholder={formik.values.psrwdtyp == "P" ? "0.1234" : formik.values.psrwdtyp == "V" ? "345.34" : "Enter Discount Value"}
+                          value={numberWithCommas(formik.values.psrwddva)}
+                          pattern={numberPattern}
+                          onChange={(event) => {
+                            const value = event.target.value;
+
+                            // Check if the value is a valid number or empty
+                            if (!value || /^[0-9.,]*$/.test(value)) {
+                              formik.handleChange({
+                                target: {
+                                  value: parseThousandsToNumber(value),
+                                  name: "psrwddva",
+                                },
+                              });
+                            }
+                          }}
+                          onBlur={formik.handleBlur}
+                        />
+                      </InputGroup>
+                    </Stack>
+                    {formik.errors.psrwddva && (
+                      <FormErrorMessage>{formik.errors.psrwddva}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                </Flex>
+
+
+
+
+              </Box>
+
+              <Box display="flex" flexDir="column" gap={6} width="100%">
 
                 <FormControl
-                  id="psrwdism"
-                  w={"49%"}
-                  isInvalid={
-                    Boolean(formik.errors.psrwdism) &&
-                    Boolean(formik.touched.psrwdism)
-                  }
-                  isReadOnly={mode == "VIEW" ? true : false}
+                  id="psrwdqty"
+                  isInvalid={Boolean(formik.errors.psrwdqty) && Boolean(formik.touched.psrwdqty)}
+                  isReadOnly={mode == 'VIEW'}
                 >
-                  <FormLabel>Minimum Spend</FormLabel>
-                  <Switch
+                  {/* <FormLabel>Quantity</FormLabel> */}
+                  <CustomFormLabel labelText="Quantity" />
+                  <Stack spacing={4}>
+                    <InputGroup>
+
+                      <Input
+                        type="text"
+                        name="psrwdqty"
+                        placeholder="Enter Quantity"
+                        value={numberWithCommas(formik.values.psrwdqty)}
+                        pattern={numberPattern}
+                        onChange={(event) => {
+                          const value = event.target.value;
+
+                          // Check if the value is a valid number or empty
+                          if (!value || /^[0-9.,]*$/.test(value)) {
+                            formik.handleChange({
+                              target: {
+                                value: parseThousandsToNumber(value),
+                                name: "psrwdqty",
+                              },
+                            });
+                          }
+                        }}
+                        onBlur={formik.handleBlur}
+                      />
+                    </InputGroup>
+                  </Stack>
+                  {formik.errors.psrwdqty && (
+                    <FormErrorMessage>{formik.errors.psrwdqty}</FormErrorMessage>
+                  )}
+                </FormControl>
+
+                <Flex justifyContent="space-between" alignItems="center" gap={5}>
+
+
+                  <FormControl
                     id="psrwdism"
-                    name="psrwdism"
-                    isChecked={formik.values.psrwdism}
-                    onChange={handleISMChange}
-                    onBlur={formik.handleBlur}
-                    size="lg"
-                    colorScheme={"green"}
-                    sx={{
-                      "span.chakra-switch__track:not([data-checked])": {
-                        backgroundColor: Colors.DANGER,
-                      },
-                    }}
-                    mt={1}
-                  />
-                  {formik.errors.psrwdism && (
-                    <FormErrorMessage>
-                      {formik.errors.psrwdism}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
-                <FormControl
-                  id="psrwdmin"
-                  isInvalid={Boolean(formik.errors.psrwdmin) && Boolean(formik.touched.psrwdmin)}
-                  isReadOnly={mode == "VIEW" || !formik.values.psrwdism}
-                >
-                  {
+                    w={"49%"}
+                    isInvalid={
+                      Boolean(formik.errors.psrwdism) &&
+                      Boolean(formik.touched.psrwdism)
+                    }
+                    isReadOnly={mode == "VIEW" ? true : false}
+                  >
+                    <FormLabel>Minimum Spend</FormLabel>
+                    <Switch
+                      id="psrwdism"
+                      name="psrwdism"
+                      isChecked={formik.values.psrwdism}
+                      onChange={handleISMChange}
+                      onBlur={formik.handleBlur}
+                      size="lg"
+                      colorScheme={"green"}
+                      sx={{
+                        "span.chakra-switch__track:not([data-checked])": {
+                          backgroundColor: Colors.DANGER,
+                        },
+                      }}
+                      mt={1}
+                    />
+                    {formik.errors.psrwdism && (
+                      <FormErrorMessage>
+                        {formik.errors.psrwdism}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    id="psrwdmin"
+                    isInvalid={Boolean(formik.errors.psrwdmin) && Boolean(formik.touched.psrwdmin)}
+                    isReadOnly={mode == "VIEW" || !formik.values.psrwdism}
+                  >
+                    {
 
-                    formik.values.psrwdism ? <CustomFormLabel labelText="Minimum Amount" /> : <FormLabel>Minimum Amount</FormLabel>
-                  }
+                      formik.values.psrwdism ? <CustomFormLabel labelText="Minimum Amount" /> : <FormLabel>Minimum Amount</FormLabel>
+                    }
 
-                  <Stack spacing={4}>
-                    <InputGroup>
+                    <Stack spacing={4}>
+                      <InputGroup>
 
-                      <Input
-                        type="text"
-                        name="psrwdmin"
-                        placeholder="Enter Minimum Amount"
-                        value={numberWithCommas(formik.values.psrwdmin)}
-                        pattern={numberPattern}
-                        onChange={(event) => {
-                          const value = event.target.value;
+                        <Input
+                          type="text"
+                          name="psrwdmin"
+                          placeholder="Enter Minimum Amount"
+                          value={numberWithCommas(formik.values.psrwdmin)}
+                          pattern={numberPattern}
+                          onChange={(event) => {
+                            const value = event.target.value;
 
-                          // Check if the value is a valid number or empty
-                          if (!value || /^[0-9.,]*$/.test(value)) {
-                            formik.handleChange({
-                              target: {
-                                value: parseThousandsToNumber(value),
-                                name: "psrwdmin",
-                              },
-                            });
-                          }
-                        }}
-                        onBlur={formik.handleBlur}
-                      />
-                    </InputGroup>
-                  </Stack>
-                  {formik.errors.psrwdmin && (
-                    <FormErrorMessage>{formik.errors.psrwdmin}</FormErrorMessage>
-                  )}
-                </FormControl>
+                            // Check if the value is a valid number or empty
+                            if (!value || /^[0-9.,]*$/.test(value)) {
+                              formik.handleChange({
+                                target: {
+                                  value: parseThousandsToNumber(value),
+                                  name: "psrwdmin",
+                                },
+                              });
+                            }
+                          }}
+                          onBlur={formik.handleBlur}
+                        />
+                      </InputGroup>
+                    </Stack>
+                    {formik.errors.psrwdmin && (
+                      <FormErrorMessage>{formik.errors.psrwdmin}</FormErrorMessage>
+                    )}
+                  </FormControl>
 
-              </Flex>
-              <Flex justifyContent="space-between" alignItems="center" gap={5}>
-                <FormControl
-                  id="psrwdica"
-                  w={"49%"}
-                  isInvalid={
-                    Boolean(formik.errors.psrwdica) &&
-                    Boolean(formik.touched.psrwdica)
-                  }
-                  isReadOnly={mode == "VIEW" ? true : false}
-                >
-                  <FormLabel>Capped Spend</FormLabel>
-                  <Switch
+                </Flex>
+                <Flex justifyContent="space-between" alignItems="center" gap={5}>
+                  <FormControl
                     id="psrwdica"
-                    name="psrwdica"
-                    isChecked={formik.values.psrwdica}
-                    onChange={handleICAChange}
-                    onBlur={formik.handleBlur}
-                    size="lg"
-                    colorScheme={"green"}
-                    sx={{
-                      "span.chakra-switch__track:not([data-checked])": {
-                        backgroundColor: Colors.DANGER,
-                      },
-                    }}
-                    mt={1}
-                  />
-                  {formik.errors.psrwdica && (
-                    <FormErrorMessage>
-                      {formik.errors.psrwdica}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
-                <FormControl
-                  id="psrwdcap"
-                  isInvalid={Boolean(formik.errors.psrwdcap) && Boolean(formik.touched.psrwdcap)}
-                  isReadOnly={mode == "VIEW" || !formik.values.psrwdica}
-                >
-                  {
-
-                    formik.values.psrwdica ? <CustomFormLabel labelText="Capped Amount" /> : <FormLabel>Capped Amount</FormLabel>
-                  }
-
-                  <Stack spacing={4}>
-                    <InputGroup>
-
-                      <Input
-                        type="text"
-                        name="psrwdcap"
-                        placeholder="Enter Capped Amount"
-                        value={numberWithCommas(formik.values.psrwdcap)}
-                        pattern={numberPattern}
-                        onChange={(event) => {
-                          const value = event.target.value;
-
-                          // Check if the value is a valid number or empty
-                          if (!value || /^[0-9.,]*$/.test(value)) {
-                            formik.handleChange({
-                              target: {
-                                value: parseThousandsToNumber(value),
-                                name: "psrwdcap",
-                              },
-                            });
-                          }
-                        }}
-                        onBlur={formik.handleBlur}
-                      />
-                    </InputGroup>
-                  </Stack>
-                  {formik.errors.psrwdcap && (
-                    <FormErrorMessage>{formik.errors.psrwdcap}</FormErrorMessage>
-                  )}
-                </FormControl>
-              </Flex>
-
-              <Flex justifyContent="space-between" alignItems="center" gap={5}>
-
-                <FormControl
-                  id="psrwdfdt"
-                  isInvalid={
-                    Boolean(formik.errors.psrwdfdt) &&
-                    Boolean(formik.touched.psrwdfdt)
-                  }
-                //    isReadOnly
-                >
-                  <FormLabel>From Date</FormLabel>
-                  <DatePicker disabled={mode === "VIEW"}
-                    format={"DD/MM/YYYY"}
-                    style={{ width: "100%" }}
-                    value={
-                      formik.values.psrwdfdt
-                        ? dayjs(formik.values.psrwdfdt)
-                        : null
+                    w={"49%"}
+                    isInvalid={
+                      Boolean(formik.errors.psrwdica) &&
+                      Boolean(formik.touched.psrwdica)
                     }
-                    onChange={(value) => {
-                      formik.setFieldValue("psrwdfdt", value);
-                      autoUpdateRewardStatus(value, formik.values.psrwdtdt);
-                    }}
+                    isReadOnly={mode == "VIEW" ? true : false}
+                  >
+                    <FormLabel>Capped Spend</FormLabel>
+                    <Switch
+                      id="psrwdica"
+                      name="psrwdica"
+                      isChecked={formik.values.psrwdica}
+                      onChange={handleICAChange}
+                      onBlur={formik.handleBlur}
+                      size="lg"
+                      colorScheme={"green"}
+                      sx={{
+                        "span.chakra-switch__track:not([data-checked])": {
+                          backgroundColor: Colors.DANGER,
+                        },
+                      }}
+                      mt={1}
+                    />
+                    {formik.errors.psrwdica && (
+                      <FormErrorMessage>
+                        {formik.errors.psrwdica}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    id="psrwdcap"
+                    isInvalid={Boolean(formik.errors.psrwdcap) && Boolean(formik.touched.psrwdcap)}
+                    isReadOnly={mode == "VIEW" || !formik.values.psrwdica}
+                  >
+                    {
 
-                    onBlur={formik.handleBlur}
-                  // disabled={true}
-                  />
-                  {formik.errors.psrwdfdt && (
-                    <FormErrorMessage>{formik.errors.psrwdfdt}</FormErrorMessage>
-                  )}
-                </FormControl>
-                <FormControl
-                  id="psrwdtdt"
-                  isInvalid={
-                    Boolean(formik.errors.psrwdtdt) &&
-                    Boolean(formik.touched.psrwdtdt)
-                  }
-                //    isReadOnly
-                >
-                  <FormLabel>To Date</FormLabel>
-                  <DatePicker disabled={mode === "VIEW"}
-                    format={"DD/MM/YYYY"}
-                    style={{ width: "100%" }}
-                    value={
-                      formik.values.psrwdtdt
-                        ? dayjs(formik.values.psrwdtdt)
-                        : null
+                      formik.values.psrwdica ? <CustomFormLabel labelText="Capped Amount" /> : <FormLabel>Capped Amount</FormLabel>
                     }
-                    onChange={(value) => {
-                      formik.setFieldValue("psrwdtdt", value);
-                      autoUpdateRewardStatus(formik.values.psrwdfdt, value);
-                    }}
 
-                    onBlur={formik.handleBlur}
-                  // disabled={true}
-                  />
-                  {formik.errors.psrwdtdt && (
-                    <FormErrorMessage>{formik.errors.psrwdtdt}</FormErrorMessage>
-                  )}
-                </FormControl>
-              </Flex>
+                    <Stack spacing={4}>
+                      <InputGroup>
+
+                        <Input
+                          type="text"
+                          name="psrwdcap"
+                          placeholder="Enter Capped Amount"
+                          value={numberWithCommas(formik.values.psrwdcap)}
+                          pattern={numberPattern}
+                          onChange={(event) => {
+                            const value = event.target.value;
+
+                            // Check if the value is a valid number or empty
+                            if (!value || /^[0-9.,]*$/.test(value)) {
+                              formik.handleChange({
+                                target: {
+                                  value: parseThousandsToNumber(value),
+                                  name: "psrwdcap",
+                                },
+                              });
+                            }
+                          }}
+                          onBlur={formik.handleBlur}
+                        />
+                      </InputGroup>
+                    </Stack>
+                    {formik.errors.psrwdcap && (
+                      <FormErrorMessage>{formik.errors.psrwdcap}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                </Flex>
+
+                <Flex justifyContent="space-between" alignItems="center" gap={5}>
+
+                  <FormControl
+                    id="psrwdfdt"
+                    isInvalid={
+                      Boolean(formik.errors.psrwdfdt) &&
+                      Boolean(formik.touched.psrwdfdt)
+                    }
+                  //    isReadOnly
+                  >
+                    <FormLabel>From Date</FormLabel>
+                    <DatePicker disabled={mode === "VIEW"}
+                      format={"DD/MM/YYYY"}
+                      style={{ width: "100%" }}
+                      value={
+                        formik.values.psrwdfdt
+                          ? dayjs(formik.values.psrwdfdt)
+                          : null
+                      }
+                      onChange={(value) => {
+                        formik.setFieldValue("psrwdfdt", value);
+                        autoUpdateRewardStatus(value, formik.values.psrwdtdt);
+                      }}
+
+                      onBlur={formik.handleBlur}
+                    // disabled={true}
+                    />
+                    {formik.errors.psrwdfdt && (
+                      <FormErrorMessage>{formik.errors.psrwdfdt}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    id="psrwdtdt"
+                    isInvalid={
+                      Boolean(formik.errors.psrwdtdt) &&
+                      Boolean(formik.touched.psrwdtdt)
+                    }
+                  //    isReadOnly
+                  >
+                    <FormLabel>To Date</FormLabel>
+                    <DatePicker disabled={mode === "VIEW"}
+                      format={"DD/MM/YYYY"}
+                      style={{ width: "100%" }}
+                      value={
+                        formik.values.psrwdtdt
+                          ? dayjs(formik.values.psrwdtdt)
+                          : null
+                      }
+                      onChange={(value) => {
+                        formik.setFieldValue("psrwdtdt", value);
+                        autoUpdateRewardStatus(formik.values.psrwdfdt, value);
+                      }}
+
+                      onBlur={formik.handleBlur}
+                    // disabled={true}
+                    />
+                    {formik.errors.psrwdtdt && (
+                      <FormErrorMessage>{formik.errors.psrwdtdt}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                </Flex>
 
 
-              <Flex justifyContent="space-between" alignItems="center" gap={5}>
+                <Flex justifyContent="space-between" alignItems="center" gap={5}>
 
 
 
-                <FormControl
-                  id="psrwdaam"
-                  w={"49%"}
-                  isInvalid={
-                    Boolean(formik.errors.psrwdaam) &&
-                    Boolean(formik.touched.psrwdaam)
-                  }
-                  isReadOnly={mode == "VIEW" ? true : false}
-                >
-                  <FormLabel whiteSpace={"nowrap"}>Allow All Merchant</FormLabel>
-                  <Switch
+                  <FormControl
                     id="psrwdaam"
-                    name="psrwdaam"
-                    isChecked={formik.values.psrwdaam}
-                    onChange={handleAAMChange}
-                    onBlur={formik.handleBlur}
-                    size="lg"
-                    colorScheme={"green"}
-                    sx={{
-                      "span.chakra-switch__track:not([data-checked])": {
-                        backgroundColor: Colors.DANGER,
-                      },
-                    }}
-                    mt={1}
-                  />
-                  {formik.errors.psrwdaam && (
-                    <FormErrorMessage>
-                      {formik.errors.psrwdaam}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
+                    w={"49%"}
+                    isInvalid={
+                      Boolean(formik.errors.psrwdaam) &&
+                      Boolean(formik.touched.psrwdaam)
+                    }
+                    isReadOnly={mode == "VIEW" ? true : false}
+                  >
+                    <FormLabel whiteSpace={"nowrap"}>Allow All Merchant</FormLabel>
+                    <Switch
+                      id="psrwdaam"
+                      name="psrwdaam"
+                      isChecked={formik.values.psrwdaam}
+                      onChange={handleAAMChange}
+                      onBlur={formik.handleBlur}
+                      size="lg"
+                      colorScheme={"green"}
+                      sx={{
+                        "span.chakra-switch__track:not([data-checked])": {
+                          backgroundColor: Colors.DANGER,
+                        },
+                      }}
+                      mt={1}
+                    />
+                    {formik.errors.psrwdaam && (
+                      <FormErrorMessage>
+                        {formik.errors.psrwdaam}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
 
-                <FormControl
-                  // id="psrwddtl"
-                  // isInvalid={Boolean(formik?.errors.psrwddtl)}
-                  isReadOnly={mode === "VIEW" ? true : false}
-                >
-                  {
-                    formik.values.psrwdaam ? <FormLabel>Merchant Included</FormLabel> : <CustomFormLabel labelText="Merchant Included" />
-                  }
+                  <FormControl
+                    // id="psrwddtl"
+                    // isInvalid={Boolean(formik?.errors.psrwddtl)}
+                    isReadOnly={mode === "VIEW" ? true : false}
+                  >
+                    {
+                      formik.values.psrwdaam ? <FormLabel>Merchant Included</FormLabel> : <CustomFormLabel labelText="Merchant Included" />
+                    }
 
-                  <AntdSelect
-                    mode="multiple"
-                    disabled={mode === "VIEW" || formik.values.psrwdaam == true ? true : false}
+                    <AntdSelect
+                      mode="multiple"
+                      disabled={mode === "VIEW" || formik.values.psrwdaam == true ? true : false}
 
-                    style={{ width: '100%' }}
-                    placeholder="Please Select Skill"
-                    onChange={setSkillArr}
-                    value={skillArr}
-                    options={Array.isArray(ddlData1)
-                      ? ddlData1.map((item: any) => ({
-                        label: item.psmrcnme,
-                        value: item.psmrcuid,
-                      }))
-                      : []}
-                  />
-                  {/* {formik?.errors.psrwddtl && (
+                      style={{ width: '100%' }}
+                      placeholder="Please Select Skill"
+                      onChange={setSkillArr}
+                      value={skillArr}
+                      options={Array.isArray(ddlData1)
+                        ? ddlData1.map((item: any) => ({
+                          label: item.psmrcnme,
+                          value: item.psmrcuid,
+                        }))
+                        : []}
+                    />
+                    {/* {formik?.errors.psrwddtl && (
                       <FormErrorMessage>{formik?.errors.psrwddtl}</FormErrorMessage>
                     )} */}
+                  </FormControl>
+                </Flex>
+              </Box>
+
+
+
+
+
+
+            </div>
+          </Box>
+        </Card>
+      }
+      {tabIndex == 1 && mode != "ADD" &&
+        <Card p={1} mt={4}>
+          <Flex bgColor="#fff" justifyContent={"space-between"} p={3}>
+            <Box
+              pr={{
+                base: 0,
+                md: Spacing.containerPx,
+              }}
+              display="flex"
+            >
+              <Space size="middle">
+                <Box display="flex" flexDir={"row"} gap={4} alignItems={"center"}>
+                  <Text minW={"35%"}>From Date</Text>
+
+                  <DatePicker
+                    format="DD/MM/YYYY"
+                    className="w-full"
+                    placeholder="From Date"
+                    onChange={(d) => {
+                      // @ts-ignore
+                      // if (new Date(formatDate(d)) instanceof Date && !isNaN(new Date(formatDate(d)))) setTempFromDate(formatDate(d))
+                      // else setTempFromDate("")
+                      setTempFromDate(d);
+                    }}
+                    value={tempFromDate}
+                  />
+                  {/* <RangePicker style={{ width: '100%' }} placeholder={['From Date', 'To Date']} /> */}
+                </Box>
+                <FormControl isInvalid={dateError}>
+                  <Box display="flex" flexDir="column">
+                    <Box
+                      display="flex"
+                      flexDir={"row"}
+                      gap={4}
+                      alignItems={"center"}
+                    >
+                      <Text minW={"35%"}>To Date</Text>
+
+                      <DatePicker
+                        format="DD/MM/YYYY"
+                        className="w-full"
+                        placeholder="To Date"
+                        onChange={(d) => {
+                          // @ts-ignore
+                          // if (new Date(formatDate(d)) instanceof Date && !isNaN(new Date(formatDate(d)))) setTempToDate(formatDate(d))
+                          // else setTempToDate("")
+
+                          setTempToDate(d);
+                        }}
+                        value={tempToDate}
+                      />
+                    </Box>
+                    {dateError && (
+                      <FormErrorMessage>
+                        {"From Date cannot be greater than To Date"}
+                      </FormErrorMessage>
+                    )}
+                  </Box>
                 </FormControl>
-              </Flex>
+              </Space>
             </Box>
+          </Flex>
+          <Table
+            columns={columns}
+            data={tableData}
+            refreshFn={fetchredemptions}
+            totalRecords={totalRecords}
+            extraParams={{
+              id: props.id,
+              from: new Date(tempFromDate),
+              to: new Date(tempToDate)
 
-
-
-
-
-
-          </div>
-        </Box>
-      </Card>
+            }}
+          //onDoubleClick={showInfo}
+          //length={pageSize}
+          />
+        </Card>
+      }
       <Flex justifyContent="flex-end" pl={10} pr={10} pt={10} >
         <Box>
           <Space size="small">
@@ -774,7 +923,7 @@ export default function RewardForm(props: any) {
               buttonDefaultType={"BACK"} onclick={() => router.back()}
             />
             {
-              mode && mode !== "VIEW" && (
+              mode && mode !== "VIEW" && tabIndex == 0 && (
                 <Buttons
                   buttonDefaultType={"SAVE"} buttonLoading={loading}
                 />

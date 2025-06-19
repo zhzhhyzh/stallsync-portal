@@ -22,3 +22,7 @@ export async function removeReward(data: any = {}): Promise<any> {
   return result;
 }
 
+export async function listRewardRedemption(data: any = {}): Promise<any> {
+  const result = await api(API_ROUTES.RWD_LISTRDMP, "GET", data);
+  return result;
+}
