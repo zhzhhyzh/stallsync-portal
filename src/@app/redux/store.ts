@@ -1,8 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 //::;
-import staffs from "./staff/slice";
-import merchants from "./merchant/slice";
-//::;
+
 import app from "./app/slice";
 import dashboard from "./dashboard/slice";
 import user from "./user/slice";
@@ -10,29 +8,36 @@ import accessibility from "./accessibility/slice";
 import functions from "./functions/slice";
 import generalParam from "./generalParam/slice";
 import adminAccounts from "./adminAccounts/slice";
-import tranCodes from "./tranCode/slice";
 import roleCodes from "./role/slice";
+import passwordPolicy from "./passwordPolicy/slice";
+import fileManagement from "./fileManage/slice";
+import tableKey from "./tableKey/slice";
+
+import staffs from "./staff/slice";
+import merchants from "./merchant/slice";
+import products from "./product/slice";
+import rewards from './reward/slice';
+import holiday from './holiday/slice';
+import workday from './workday/slice';
+import announcement from './announcement/slice';
+//::;
+
+import tranCodes from "./tranCode/slice";
 import credAppLims from "./credAppLim/slice";
 
-import passwordPolicy from "./passwordPolicy/slice";
 import backupDatabase from "./backup/slice";
 import application from "./application/slice";
 
-import fileManagement from "./fileManage/slice";
-import tableKey from "./tableKey/slice";
 import entity from "./entity/slice";
 import request from "./request/slice";
 import loancalculator from "./loanCalculator/slice";
 import loanAccount from "./accountManagement/slice";
 
 import reports from './reports/slice';
-import rewards from './reward/slice';
 import member from './member/slice';
 import dsagent from './dsagent/slice';
 import contract from './contract/slice';
-import holiday from './holiday/slice';
-import workday from './workday/slice';
-import announcement from './announcement/slice';
+
 import promotion from './promotion/slice';
 import commission from './commission/slice';
 import agent from './agentIncentive/slice';
@@ -58,7 +63,7 @@ export function makeStore() {
       functions,
       generalParam,
       adminAccounts,
-    
+      products,
       tranCodes,
       compars,
       roleCodes,
@@ -72,7 +77,7 @@ export function makeStore() {
       request,
       loancalculator,
       loanAccount,
-     
+
       reports,
       rewards,
       member,

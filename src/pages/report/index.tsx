@@ -20,7 +20,6 @@ import {
 import { API_ROUTES } from "@app/routes/apis";
 
 import React, { ChangeEventHandler, useEffect, useState } from "react";
-import Form from "@app/components/forms/omnisendReportForm/ReportForm";
 import axios from "axios";
 import { DatePicker, Space, Tag } from "antd";
 import Spacing from "@app/constants/Spacing";
@@ -29,7 +28,7 @@ import Card from "@app/components/common/Card/Card";
 
 import { formatDate } from "@app/utils/DateUtils";
 import Table from "@app/components/common/Table/Table";
-import { IoAdd, IoDownload, IoTrash, IoWarningOutline } from "react-icons/io5";
+import { IoAdd, IoBarChartOutline, IoDownload, IoTrash, IoTrendingUpOutline, IoWarningOutline } from "react-icons/io5";
 import { FiMoreVertical } from "react-icons/fi";
 import { AiFillEye } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
@@ -43,8 +42,8 @@ import useFetchDDL from "@app/hooks/selector/useFetchDDL";
 import { DDL_TYPES } from "@app/interfaces/ddl.types";
 import TableMenu from "@app/components/common/TableMenu/TableMenu";
 import { BsDownload, BsPencil } from "react-icons/bs";
-import ReportForm from "@app/components/forms/omnisendReportForm/ReportForm";
-import { fetchReports, fetchDownloadReport } from "@app/redux/reports/slice";
+import ReportForm from "@app/components/forms/Report/ReportForm";
+import { fetchReports, fetchDownloadReport, fetchForecast } from "@app/redux/reports/slice";
 import Buttons from "@app/components/common/Buttons/Buttons";
 import Breadcrumbs from "@app/components/common/Breadcrumbs/Breadcrumbs";
 import { accessType, checkAccessMatrix } from "@app/utils/access-matrix";
@@ -54,7 +53,7 @@ export default function ReportPage() {
   const dispatch = useAppDispatch();
   const { sendRequest, loading } = useApi({ title: "Omnisend Reports" });
   const homeData = useAppSelector(selectHome);
-  
+
   //sample code how to use this hook
   const [tableData, refreshFn, totalRecords, extra] = useFetchReports();
   const [ddlData] = useFetchDDL({ code: ["RPTTYPE"] });
@@ -101,6 +100,16 @@ export default function ReportPage() {
       key: "prrptgdt",
     },
     {
+      title: "Merchant",
+      dataIndex: "prrptmch",
+      key: "prrptmch",
+      render: (_: any, record: any) => (
+        <>
+          {record?.psrptmch} - {record?.psrptmchdsc}
+        </>
+      ),
+    },
+    {
       title: "Actions",
       key: "action",
       align: "center",
@@ -108,45 +117,100 @@ export default function ReportPage() {
       render: (_: any, record: any) => (
         <Flex justifyContent="center">
           <Space size="middle">
-            {/* <IconButton
-              // colorScheme={"blue"}
-              icon={<AiFillEye />}
-              aria-label={"view"}
-              onClick={() => showInfo(record)}
-            /> */}
-            {/* {homeData?.access &&
-              checkAccessMatrix(homeData?.access, accessType.RPT_DOWNLOAD) && */}
-        {
 
-             record?.prrptsts === "C" && (
-              <Tooltip label='Download' fontSize='sm'>
-              <IconButton
-                variant="outline"
-                size={"sm"}
-                borderRadius={2}
-                colorScheme="blue"
-                sx={{ _hover: { backgroundColor: Colors.PRIMARY, color: Colors.BACKGROUND } }}
-                icon={<IoDownload />}
-                aria-label={"edit"}
-                onClick={() => goDownload(record?.prrptnme)}
-              />
-            </Tooltip>
+            {
+
+              record?.prrptsts === "C" && (
+                <Tooltip label='Download' fontSize='sm'>
+                  <IconButton
+                    variant="outline"
+                    size={"sm"}
+                    borderRadius={2}
+                    colorScheme="yellow"
+                    sx={{ _hover: { backgroundColor: Colors.PRIMARY, color: Colors.BACKGROUND } }}
+                    icon={<IoDownload />}
+                    aria-label={"edit"}
+                    onClick={() => fetchForecast(record?.prrptnme)}
+                  />
+                </Tooltip>
               )}
+            {
+
+              record?.prrptsts === "C" && record?.prrptfcs == "N" &&(
+                <Tooltip label='Forecast Sales' fontSize='sm'>
+                  <IconButton
+                    variant="outline"
+                    size={"sm"}
+                    borderRadius={2}
+                    colorScheme="yellow"
+                    sx={{ _hover: { backgroundColor: Colors.PRIMARY, color: Colors.BACKGROUND } }}
+                    icon={<IoTrendingUpOutline />}
+                    aria-label={"edit"}
+                    onClick={() => alertForecast(record?.prrptnme, "S")}
+                  />
+                </Tooltip>
+              )}
+            {
+
+              record?.prrptsts === "C" && record?.prrptfco == "N" &&(
+                <Tooltip label='Forecast Order Counts' fontSize='sm'>
+                  <IconButton
+                    variant="outline"
+                    size={"sm"}
+                    borderRadius={2}
+                    colorScheme="yellow"
+                    sx={{ _hover: { backgroundColor: Colors.PRIMARY, color: Colors.BACKGROUND } }}
+                    icon={<IoBarChartOutline />}
+                    aria-label={"edit"}
+                    onClick={() => alertForecast(record?.prrptnme, "O")}
+                  />
+                </Tooltip>
+              )}
+            {
+
+              record?.prrptsts === "C" && (
+                <TableMenu menus={[
+                  {
+                    url: `/report/forecast`,
+                    query: {
+                      prrptnme: record?.prrptnme,
+                      prrptfco: record?.prrptfco,
+                      prrptfcs: record?.prrptfcs,
+                    },
+                    label: "Forecast",
+                  },
+                ]} />
+              )}
+
           </Space>
         </Flex>
       ),
     },
   ];
 
-  // function showInfo(record: any, index: number) {
-  //   dispatch(
-  //     openGlobalModal({
-  //       title: "Admin Account Detail",
-  //       status: "custom",
-  //       message: <ShowDetail data={record} />,
-  //     })
-  //   );
-  // }
+  function alertForecast(prrptnme: string, forecast_type: string) {
+
+    dispatch(
+      openGlobalModal({
+        title: "",
+        message: ForecastDetail(prrptnme, forecast_type),
+        status: "warning",
+        actions: [
+          {
+            title: "Confirm",
+            onClick: () => {
+              fetchForecast({ prrptnme, forecast_type });
+            },
+
+          },
+          {
+            title: "Cancel",
+            isClose: true,
+          },
+        ],
+      })
+    );
+  }
 
   async function goDownload(filename: string) {
     var fileDownload = require("js-file-download");
@@ -327,50 +391,12 @@ export default function ReportPage() {
   );
 }
 
-// const ShowDetail = ({ data }: { data: any }) => (
-//   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-//     <div className="">
-//       <Text fontSize="sm" color={Colors.GRAY}>
-//         User ID
-//       </Text>
-//       <Text>{data?.id}</Text>
-//     </div>
-//     <div className="">
-//       <Text fontSize="sm" color={Colors.GRAY}>
-//         Name
-//       </Text>
-//       <Text>{data?.psusrnam}</Text>
-//     </div>
-//     <div className="">
-//       <Text fontSize="sm" color={Colors.GRAY}>
-//         Role
-//       </Text>
-//       <Text>{data?.psusrtypdsc}</Text>
-//     </div>
-//     <div className="">
-//       <Text fontSize="sm" color={Colors.GRAY}>
-//         Status
-//       </Text>
-//       <Text>{data?.psusrstsdsc}</Text>
-//     </div>
-//     <div className="">
-//       <Text fontSize="sm" color={Colors.GRAY}>
-//         Email
-//       </Text>
-//       <Text>{data?.psusreml}</Text>
-//     </div>
-//     <div className="">
-//       <Text fontSize="sm" color={Colors.GRAY}>
-//         Phone no.
-//       </Text>
-//       <Text>{data?.psusrphn}</Text>
-//     </div>
-//   </div>
-// );
-
-const RemoveDetail = () => (
-  <Box w={"100%"} display="flex" flexDirection="column" alignItems="center">
-    <Icon as={IoWarningOutline} w={150} h={150} color={Colors.DANGER} />
-    <Text p={3}>Are you sure to remove this item?</Text>
-  </Box>
-);
+const ForecastDetail = (item: string, itemDesc: string) => {
+  return (
+    <Box w={"100%"} display="flex" flexDirection="column" alignItems="center">
+      {/* <Icon as={IoWarningOutline} w={150} h={150} color={Colors.DANGER}/> */}
+      <Text p={3}>It will spends time to forecast the result.</Text>
+      <Text>{item} - {itemDesc == "O" ? "Order Counts Forecasting" : "Sales Forecasting"}</Text>
+    </Box>
+  )
+};

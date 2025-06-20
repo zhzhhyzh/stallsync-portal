@@ -43,6 +43,14 @@ export const API_ROUTES = {
   RWD_DELETE: "psrwdpar/delete",
   RWD_LISTRDMP: "psrwdpar/listRdmp",
 
+  // PRODUCT
+  PROD_LIST: "psprdpar/list",
+  PROD_DETAIL: "psprdpar/detail",
+  PROD_CREATE: "psprdpar/create",
+  PROD_UPDATE: "psprdpar/update",
+  PROD_DELETE: "psprdpar/delete",
+  PROD_LISTRDMP: "psprdpar/listRdmp",
+
 
   // MAINTENANCE LOG
   MAINT_LOG: "mntlog/list",
@@ -96,6 +104,13 @@ export const API_ROUTES = {
   ROLE_CREATE: "psrolpar/create",
   ROLE_UPDATE: "psrolpar/update",
   ROLE_DELETE: "psrolpar/delete",
+
+  //REPORT
+  REPORT_HISTORY: "report/list",
+  REPORT_GENERATE: "report/generate",
+  REPORT_DOWNLOAD: "report/download",
+  REPORT_FORECAST: "report/forecast",
+  REPORT_DETAILFORECAST: "report/findForecast",
   //-----::;
   DASHBOARD_SALES: "dashboard/getMonthlySalesForPast12MonthsWithDescription",
   DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",
@@ -138,10 +153,8 @@ export const API_ROUTES = {
 
   MAINT_SUBFILE_LOG: "mntlog/sub_list",
 
-  DDL_CURRENCY: "ddl/pscurrat",
   DOC_DOWNLOAD: "document/download",
   DDL_ENTITY: "ddl/psentmas",
-  DDL_FEECODE: "ddl/psfeecde",
   DDL_DSAGENT: "ddl/psdsgpar",
   DDL_TRANSCODE: "ddl/transactioncode",
   DDL_PRICODE: "ddl/pricingplan",
@@ -276,11 +289,7 @@ export const API_ROUTES = {
   DEAL_DATE_UPDATE: "psddtpar/update",
   DEAL_DATE_DELETE: "psddtpar/delete",
 
-  REPORT_HISTORY: "report/list",
-  REPORT_GENERATE: "report/generate",
-  REPORT_GENERATEREWARD: "report/generateRewardReport",
-  REPORT_LISTREWARD: "report/listReward",
-  REPORT_DOWNLOAD: "report/download",
+
 
 
   PROMOTION_LISTING: "psmbrprm/list",

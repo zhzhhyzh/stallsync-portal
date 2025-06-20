@@ -9,6 +9,7 @@ import {
   RiFileHistoryLine,
   RiFolderHistoryLine,
   RiBellFill,
+  RiExchangeBoxLine,
 } from "react-icons/ri";
 
 import {
@@ -76,87 +77,23 @@ export const menus: Array<NavItem> = [
         root: "Param",
         children: [
 
-          {
-            label: "General Parameter",
-            permissions: [accessType.GEN_VIEW],
-            children: [
-              {
-                label: "General Type",
-                href: "/generalParameter",
-                permissions: [accessType.GEN_VIEW],
-              },
-
-            ],
-          },
-          {
-            label: "Administration",
-            permissions: [
-              accessType.GEN_VIEW,
-              accessType.FUNC_VIEW,
-              accessType.ACES_VIEW,
-              accessType.ROLE_VIEW,
-              accessType.ADMA_VIEW,
-              accessType.PWPOLICY_VIEW,
-              accessType.PWPOLICY_EDIT,
-              accessType.FILEMANAGE_VIEW,
-            ],
-            children: [
-              {
-                label: "Functions",
-                href: "/functions",
-                permissions: [accessType.FUNC_VIEW],
-              },
-              {
-                label: "Accessibility",
-                href: "/accessibility",
-                permissions: [accessType.ACES_VIEW],
-              },
-              {
-                label: "Roles",
-                href: "/roleCode",
-                permissions: [accessType.ROLE_VIEW],
-              },
-              {
-                label: "User Accounts",
-                href: "/adminAccounts",
-                permissions: [accessType.ADMA_VIEW],
-              },
-
-              {
-                label: "System Table",
-                href: "/fileManagements",
-                permissions: [accessType.FILEMANAGE_VIEW],
-              },
+          // {
+          //   label: "Company Parameter",
+          //   href: "/company",
+          //   permissions: [accessType.COMPAR_VIEW],
+          // },
 
 
-              {
-                label: "Password Policy",
-                href: "/passwordPolicy",
-                permissions: [
-                  accessType.PWPOLICY_VIEW,
-                  accessType.PWPOLICY_EDIT,
-                ],
-              },
-            ],
-          },
-
-          {
-            label: "Company Parameter",
-            href: "/company",
-            permissions: [accessType.COMPAR_VIEW],
-          },
-
-
-          {
-            label: "Agent Designation",
-            href: "/dsagent",
-            permissions: [accessType.DSAGENT_VIEW],
-          },
-          {
-            label: "Transaction Code",
-            href: "/tranCode",
-            permissions: [accessType.TRANCODE_VIEW],
-          },
+          // {
+          //   label: "Agent Designation",
+          //   href: "/dsagent",
+          //   permissions: [accessType.DSAGENT_VIEW],
+          // },
+          // {
+          //   label: "Transaction Code",
+          //   href: "/tranCode",
+          //   permissions: [accessType.TRANCODE_VIEW],
+          // },
           {
             label: "Merchant",
             href: "/merchant",
@@ -172,8 +109,70 @@ export const menus: Array<NavItem> = [
             href: "/reward",
             permissions: [accessType.RWD_VIEW],
           },
+          {
+            label: "Reporting",
+            icon: RiFolderHistoryLine,
+            root: "Reporting",
+            href: "/report",
+            // permissions: [
+            // ],
+          },
+           {
+            label: "Transaction",
+            root: "Transaction",
+            href: "/transaction",
+            // permissions: [
+            // ],
+          },
 
 
+
+        ],
+
+      },
+      {
+        label: "Configuration",
+        icon: RiExchangeBoxLine,
+        root: "Configuration",
+        children: [
+          {
+            label: "Accessibility",
+            href: "/accessibility",
+            permissions: [accessType.ACES_VIEW],
+          },
+          {
+            label: "Functions",
+            href: "/functions",
+            permissions: [accessType.FUNC_VIEW],
+          },
+          {
+            label: "General Type",
+            href: "/generalParameter",
+            permissions: [accessType.GEN_VIEW],
+          },
+          {
+            label: "Password Policy",
+            href: "/passwordPolicy",
+            permissions: [
+              accessType.PWPOLICY_VIEW,
+              accessType.PWPOLICY_EDIT,
+            ],
+          },
+          {
+            label: "Roles",
+            href: "/roleCode",
+            permissions: [accessType.ROLE_VIEW],
+          },
+          {
+            label: "System Table",
+            href: "/fileManagements",
+            permissions: [accessType.FILEMANAGE_VIEW],
+          },
+          {
+            label: "User Accounts",
+            href: "/adminAccounts",
+            permissions: [accessType.ADMA_VIEW],
+          },
           {
             label: "System",
             permissions: [accessType.FILEMANAGE_VIEW, accessType.BACKUP_VIEW],
@@ -194,12 +193,10 @@ export const menus: Array<NavItem> = [
               },
             ],
           },
-        ],
-        // permissions: [
-        //   accessType.BACKUP_VIEW,
-        //   accessType.FILEMANAGE_VIEW,
-        // ],
-      },
+        ]
+      }
+      ,
+
       {
         label: "Setting",
         icon: RiSettings2Line,
@@ -220,135 +217,6 @@ export const menus: Array<NavItem> = [
           accessType.PROF_VIEW,
         ],
       },
-
-
-
-
-
-
-
-
-
-      // {
-      //   label: "Notifications",
-      //   icon: RiBellFill,
-      //   root: "Notifications",
-      //   children: [
-      //     {
-      //       label: "Parameters",
-      //       children: [
-
-      //         {
-      //           label: "Notification Template",
-      //           href: "/notificationTemplate",
-      //           permissions: [accessType.NOT_VIEW],
-      //         },
-      //         // {
-      //         //   label: "Notification Segment",
-      //         //   href: "/segment",
-      //         //   permissions: [accessType.SEG_VIEW],
-      //         // },
-      //         {
-      //           label: "Notification Group",
-      //           href: "/notificationGroup",
-      //           permissions: [accessType.NOTGRP_VIEW],
-      //         },
-      //         {
-      //           label: "Subscription",
-      //           href: "/notificationSubscription",
-      //           permissions: [accessType.NOTSUBS_VIEW],
-      //         },
-      //         {
-      //           label: "Comm Channel",
-      //           href: "/channelCode",
-      //           permissions: [accessType.CHNLCOM_VIEW],
-      //         },
-      //         {
-      //           label: "Test Recipients",
-      //           href: "/testReceiver",
-      //           permissions: [accessType.TRCV_VIEW],
-      //         },
-      //         {
-      //           label: "Push Notification Control",
-      //           href: "/pushNotificationParam",
-      //           permissions: [accessType.PSHPRM_VIEW],
-      //         },
-
-      //       ],
-      //       permissions: [
-      //         accessType.ANNOUNCE_VIEW,
-      //         accessType.NOT_VIEW,
-      //         //accessType.SEG_VIEW,
-      //         accessType.NOTGRP_VIEW,
-      //         accessType.NOTSUBS_VIEW,
-      //         accessType.CHNLCOM_VIEW,
-      //         accessType.TRCV_VIEW,
-      //         accessType.PSHPRM_VIEW,
-      //       ],
-      //     },
-      //     {
-      //       label: "Notification",
-      //       children: [
-      //         {
-      //           label: "New Messages",
-      //           href: "/notificationAdHoc",
-      //           permissions: [accessType.NOTNEW_ADD],
-      //         },
-      //         {
-      //           label: "Scheduled Messages",
-      //           href: "/notificationSchedules",
-      //           permissions: [accessType.NOTSCHED_VIEW],
-      //         },
-      //         {
-      //           label: "Sent History",
-      //           href: "/notificationSentHistory",
-      //           permissions: [accessType.NOTSNDH_VIEW],
-      //         },
-      //         {
-      //           label: "Metadata",
-      //           href: "/metadata",
-      //           permissions: [accessType.MTDA_VIEW],
-      //         },
-      //       ],
-      //       permissions: [
-      //         accessType.NOTNEW_ADD,
-      //         accessType.NOTSCHED_VIEW,
-      //         accessType.NOTSNDH_VIEW,
-      //         accessType.MTDA_VIEW,
-      //       ],
-      //     },
-      //     {
-      //       label: "Omnisend Reports",
-      //       href: "/omnisendReport",
-      //       // permissions: [accessType.RREPORT_VIEW], //todo
-      //     },
-      //   ],
-      //   permissions: [
-      //     accessType.NOT_VIEW,
-      //     //accessType.SEG_VIEW,
-      //     accessType.NOTGRP_VIEW,
-      //     accessType.NOTSUBS_VIEW,
-      //     accessType.CHNLCOM_VIEW,
-      //     accessType.TRCV_VIEW,
-      //     accessType.PSHPRM_VIEW,
-      //     accessType.NOTNEW_ADD,
-      //     accessType.NOTSCHED_VIEW,
-      //     accessType.NOTSNDH_VIEW,
-      //     accessType.MTDA_VIEW,
-      //   ],
-      // },
-
-
-
-      {
-        label: "Reporting",
-        icon: RiFolderHistoryLine,
-        root: "Reporting",
-        href: "/report",
-        // permissions: [
-        // ],
-      },
-
     ],
   },
 ];
