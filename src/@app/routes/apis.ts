@@ -117,6 +117,29 @@ export const API_ROUTES = {
   REPORT_DOWNLOAD: "report/download",
   REPORT_FORECAST: "report/forecast",
   REPORT_DETAILFORECAST: "report/findForecast",
+
+  // HOLIDAY
+  HOLIDAY_LIST: "psholpar/list",
+  HOLIDAY_DETAIL: "psholpar/detail",
+  HOLIDAY_CREATE: "psholpar/create",
+  HOLIDAY_UPDATE: "psholpar/update",
+  HOLIDAY_DELETE: "psholpar/delete",
+
+  // WORK DAY
+  WORKDAY_LIST: "pswdypar/list",
+  WORKDAY_DETAIL: "pswdypar/detail",
+  WORKDAY_CREATE: "pswdypar/create",
+  WORKDAY_UPDATE: "pswdypar/update",
+  WORKDAY_DELETE: "pswdypar/delete",
+
+  // TABLE MANAGEMENT
+  TABLE_KEY_LIST: "pstblmas/key_list",
+  TABLE_KEY_DETAIL: "pstblmas/key_detail",
+  CREATE_TABLE_KEY: "pstblmas/key_create",
+  UPDATE_TABLE_KEY: "pstblmas/key_update",
+  DELETE_TABLE_KEY: "pstblmas/key_delete",
+ 
+
   //-----::;
   DASHBOARD_SALES: "dashboard/getMonthlySalesForPast12MonthsWithDescription",
   DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",
@@ -128,27 +151,7 @@ export const API_ROUTES = {
   MEMBER_UPDATE_PROFILE: "psmbrprf/update_profile",
   MEMBER_PROFILE: "psmbrprf/profile",
   MEMBER_SALES: "psmbrprf/sales",
-  AGENT_LIST: "psagtinc/list",
-  AGENT_CREATE: "psagtinc/create",
-  AGENT_DETAIL: "psagtinc/detail",
-  AGENT_UPDATE: "psagtinc/update",
-  AGENT_DELETE: "psagtinc/delete",
-  APPLICATION_DETAIL: "application/detail",
-  APPLICATION_LIST: "application/list",
-  APPLICATION_CREATE: "application/create",
-  APPLICATION_DELETE: "application/delete",
-  APPLICATION_UPDATE: "application/update",
-  APPLICATION_APPROVAL: "application/approval",
-  APPLICATION_DOC_DETAIL: "application/document_detail",
-  APPLICATION_DOC_LIST: "application/list_documents",
-  APPLICATION_DOC_UPDATE: "application/update_document",
-  APPLICATION_DOC_DELETE: "application/delete_document",
-  APPLICATION_DOC_UPLOAD: "application/upload_document",
-  CONTRACT_DOC_DETAIL: "psconmas/document_detail",
-  CONTRACT_DOC_LIST: "psconmas/list_documents",
-  CONTRACT_DOC_UPDATE: "psconmas/update_document",
-  CONTRACT_DOC_DELETE: "psconmas/delete_document",
-  CONTRACT_DOC_UPLOAD: "psconmas/upload_document",
+
 
   REQUEST_LIST: "pscmkrqt/list",
   REQUEST_DETAIL: "pscmkrqt/detail",
@@ -169,12 +172,6 @@ export const API_ROUTES = {
   DDL_PRODUCT: "ddl/psprdpar",
   DDL_AGENT: "ddl/psmbrprf",
 
-  CONTRACT_LIST: "psconmas/list",
-  CONTRACT_DETAIL: "psconmas/detail",
-  CONTRACT_CREATE: "psconmas/create",
-  CONTRACT_UPDATE: "psconmas/update",
-  CONTRACT_DELETE: "psconmas/delete",
-
 
 
 
@@ -190,23 +187,7 @@ export const API_ROUTES = {
   WORKGROUP_USER_LINK: "prawrkgrp/linkUser",
   WORKGROUP_USER_UNLINK: "prawrkgrp/unLinkUser",
 
-  DSAGENT_LIST: "psdsgpar/list",
-  DSAGENT_DETAIL: "psdsgpar/detail",
-  DSAGENT_CREATE: "psdsgpar/create",
-  DSAGENT_UPDATE: "psdsgpar/update",
-  DSAGENT_DELETE: "psdsgpar/delete",
 
-  HOLIDAY_LIST: "psholpar/list",
-  HOLIDAY_DETAIL: "psholpar/detail",
-  HOLIDAY_CREATE: "psholpar/create",
-  HOLIDAY_UPDATE: "psholpar/update",
-  HOLIDAY_DELETE: "psholpar/delete",
-
-  WORKDAY_LIST: "pswdypar/list",
-  WORKDAY_DETAIL: "pswdypar/detail",
-  WORKDAY_CREATE: "pswdypar/create",
-  WORKDAY_UPDATE: "pswdypar/update",
-  WORKDAY_DELETE: "pswdypar/delete",
 
 
   // TRANSACTION CODE
@@ -216,22 +197,6 @@ export const API_ROUTES = {
   TRAN_CODE_UPDATE: "pstrnscd/update",
   TRAN_CODE_DELETE: "pstrnscd/delete",
 
-  // Company Parameter
-  COMPAR_LIST: "pscompar/list",
-  COMPAR_DETAIL: "pscompar/detail",
-  COMPAR_CREATE: "pscompar/create",
-  COMPAR_UPDATE: "pscompar/update",
-  COMPAR_DELETE: "pscompar/delete",
-
-
-
-  // CREDIT APPROVAL LIMIT
-  CRED_APP_LIST: "pscraplm/list",
-  CRED_APP_DETAIL: "pscraplm/detail",
-  CRED_APP_CREATE: "pscraplm/create",
-  CRED_APP_UPDATE: "pscraplm/update",
-  CRED_APP_DELETE: "pscraplm/delete",
-
   LIST_BACKUP: "backup/list",
   BACKUP_GENBACKUP: "backup/backup",
   DOWNLOAD_BACKUP: "backup/download",
@@ -239,72 +204,11 @@ export const API_ROUTES = {
   PASSWORD_POLICY_DETAIL: "prpwdpol/detail",
   PASSWORD_POLICY_UPDATE: "prpwdpol/update",
 
-  APPLICATION: "application/application",
-
-  APPLICATION_UPLOAD_DOC: "application/upload_document",
-  APPLICATION_UPDATE_DOC: "application/update_document",
-  APPLICATION_LIST_DOCS: "application/list_documents",
-  APPLICATION_DELETE_DOC: "application/delete_document",
-
-
   FILE_MANAGE_LIST: "pstblmas/list",
   CREATE_FILE_MANAGE: "pstblmas/create",
   UPDATE_FILE_MANAGE: "pstblmas/update",
   FILE_MANAGE_DETAIL: "pstblmas/detail",
   DELETE_FILE_MANAGE: "pstblmas/delete",
 
-  TABLE_KEY_LIST: "pstblmas/key_list",
-  TABLE_KEY_DETAIL: "pstblmas/key_detail",
-  CREATE_TABLE_KEY: "pstblmas/key_create",
-  UPDATE_TABLE_KEY: "pstblmas/key_update",
-  DELETE_TABLE_KEY: "pstblmas/key_delete",
-  ENTITY_LIST: "psentmas/list",
-  ENTITY_TREE_LIST: "psentmas/tree_list",
-  ENTITY_DETAIL: "psentmas/detail",
-  CREATE_ENTITY: "psentmas/create",
-  UPDATE_ENTITY: "psentmas/update",
-  DELETE_ENTITY: "psentmas/delete",
-
-
-
-  //LOAN
-  CALCULATE_LOAN: "loancalr/calculate_loan",
-  ACCOUNT_LIST: "psaccmas/list",
-  ACCOUNT_DETAIL_LIST: "psaccmas/detail",
-  ACCOUNT_DETAIL: "psaccmas/account_detail",
-  ACCOUNT_DETAIL_UPDATE: "psaccmas/account_update",
-  ACCOUNT_PRE_CALCULATE: "psaccmas/pre_calculate",
-  ACCOUNT_BILLING_LIST: "psaccbil/list",
-  ACCOUNT_TRANSACTION_LIST: "psacctrx/list",
-  ACCOUNT_RELATIONSHIP_LIST: "psaccrls/list",
-  ACCOUNT_CUSTOMER_RELATIONSHIP_LIST: "pscifspo/list",
-  ACCOUNT_MESSAGE_LIST: "psaccmsg/list",
-
-  DDL_ENTITY_BANK: "ddl/entitybank",
-  DDL_CHANNEL_SENDER: "ddl/channelSender",
-  DDL_CUSTOMER: "ddl/pscifmas",
-
-  MANUAL_TRANS_RAISE_REQ: "psacctrx/raise_request",
-
-  DEAL_DATE_LIST: "psddtpar/list",
-  DEAL_DATE_DETAIL: "psddtpar/detail",
-  DEAL_DATE_CREATE: "psddtpar/create",
-  DEAL_DATE_UPDATE: "psddtpar/update",
-  DEAL_DATE_DELETE: "psddtpar/delete",
-
-
-
-
-  PROMOTION_LISTING: "psmbrprm/list",
-  PROMOTION_SALES: "psmbrprm/list_sales",
-  PROMOTION_DOWNLINE_PROMOTION: "psmbrprm/list_promotions",
-  PROMOTION_RECRUITS_LISTING: "psmbrprm/list_recruits",
-  PROMOTION_DETAIL: "psmbrprm/detail",
-  PROMOTION_UPDATE: "psmbrprm/update",
-
-  PERSONAL_COMMISSION_LISTING: "psconcom/list_personal_com",
-  GROUP_COMMISSION_LISTING: "psconcom/list_group_com",
-  COMMISSION_LISTING: "psconcom/list",
-  COMPANY_DDL: "ddl/psmbrcom",
 
 };

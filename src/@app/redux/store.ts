@@ -24,26 +24,17 @@ import announcement from './announcement/slice';
 //::;
 
 import tranCodes from "./tranCode/slice";
-import credAppLims from "./credAppLim/slice";
 
 import backupDatabase from "./backup/slice";
 import application from "./application/slice";
 
-import entity from "./entity/slice";
 import request from "./request/slice";
 import loancalculator from "./loanCalculator/slice";
 import loanAccount from "./accountManagement/slice";
 
 import reports from './reports/slice';
 import member from './member/slice';
-import dsagent from './dsagent/slice';
-import contract from './contract/slice';
 
-import promotion from './promotion/slice';
-import commission from './commission/slice';
-import agent from './agentIncentive/slice';
-import compars from './compar/slice';
-import dealDate from './dealDate/slice';
 
 export function makeStore() {
   return configureStore({
@@ -59,23 +50,18 @@ export function makeStore() {
       accessibility,
       holiday,
       workday,
-      dsagent,
-      agent,
       functions,
       generalParam,
       adminAccounts,
       products,
       productsR,
       tranCodes,
-      compars,
       roleCodes,
-      credAppLims,
       fileManagement,
       tableKey,
       passwordPolicy,
       backupDatabase,
       application,
-      entity,
       request,
       loancalculator,
       loanAccount,
@@ -83,10 +69,6 @@ export function makeStore() {
       reports,
       rewards,
       member,
-      promotion,
-      contract,
-      commission,
-      dealDate,
     },
   });
 }
