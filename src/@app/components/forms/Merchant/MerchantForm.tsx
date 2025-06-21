@@ -8,10 +8,12 @@ import {
   Input,
   Button,
   Select,
-  FormControl, Image,
+  FormControl,
+  Image,
   FormLabel,
   FormErrorMessage,
-  NumberInput, Menu,
+  NumberInput,
+  Menu,
   MenuList,
   MenuItem,
   MenuButton,
@@ -418,7 +420,7 @@ export default function MerchantForm(props: any) {
 
     }
   }, [detailData]);
-useEffect(() => {
+  useEffect(() => {
     if (formik.values.psmrcuid) {
       reloadDDLData1(formik.values.psmrcuid);
     }
@@ -1398,102 +1400,102 @@ useEffect(() => {
 
       </Card>
 
-   
-       
-          <Card
-            p={4}
-            mt={`${Spacing.containerPx}`}
-            className="grid grid-cols-1 gap-6"
-          >
-            <SubHeader labelText="Merchant Label" />
-            <div className="flex flex-col sm:flex-row gap-6">
-              <Box display="flex" flexDir="column" gap={6} width="100%">
-                <Box display={"flex"} justifyContent={"space-between"}>
-                  <Text fontSize={"xs"} fontWeight={"semibold"} color={"#526069"} textTransform={"uppercase"}>Type</Text>
-                  <Box display={"flex"} justifyContent={"flex-end"} alignItems={"center"} >
-                    <Space size="small" >
-                      <Menu>
-                        <MenuButton as={IconButton} icon={<IoAddSharp />}></MenuButton>
-                        <MenuList minWidth={"5rem"}>
-                          {
-                            avaAction && avaAction.length > 0 ? (
-                              avaAction.map((r: any, i: number) =>
-                                <MenuItem onClick={() => { onAddAction(i) }} >{r.label}</MenuItem>)
-                            ) : (
-                              <MenuItem>No Available Type</MenuItem>
-                            )
-                          }
-                        </MenuList>
-                      </Menu>
-                      <Text fontSize={"md"} fontWeight={"bold"}>
-                        Add Type
-                      </Text>
-                    </Space>
-                  </Box>
-                </Box>
-                {
-                  action ? (
-                    <Box>
+
+
+      <Card
+        p={4}
+        mt={`${Spacing.containerPx}`}
+        className="grid grid-cols-1 gap-6"
+      >
+        <SubHeader labelText="Merchant Label" />
+        <div className="flex flex-col sm:flex-row gap-6">
+          <Box display="flex" flexDir="column" gap={6} width="100%">
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <Text fontSize={"xs"} fontWeight={"semibold"} color={"#526069"} textTransform={"uppercase"}>Type</Text>
+              <Box display={"flex"} justifyContent={"flex-end"} alignItems={"center"} >
+                <Space size="small" >
+                  <Menu>
+                    <MenuButton as={IconButton} icon={<IoAddSharp />}></MenuButton>
+                    <MenuList minWidth={"5rem"}>
                       {
-                        action.map((r: any, i: number) => {
-                          return (
-                            <Box p={2} m={2} display={"flex"} borderWidth={1} borderColor={Colors.GRAY} borderRadius={15} justifyContent={"space-between"} alignItems={"center"}>
-                              <Text>{r.key} - {r.label}</Text>
-                              <HStack>
-
-                                <IconButton
-                                  variant={"outline"}
-                                  // variant="danger"
-                                  color={Colors.DANGER}
-                                  icon={<IoCloseCircle size={18} />}
-                                  aria-label={"delete"}
-                                  onClick={() => onRemoveAction(i)}
-                                />
-                              </HStack>
-                            </Box>
-                          )
-                        })
+                        avaAction && avaAction.length > 0 ? (
+                          avaAction.map((r: any, i: number) =>
+                            <MenuItem onClick={() => { onAddAction(i) }} >{r.label}</MenuItem>)
+                        ) : (
+                          <MenuItem>No Available Type</MenuItem>
+                        )
                       }
-                    </Box>
-                  ) : (
-                    <Box></Box>
-                  )
-                }
+                    </MenuList>
+                  </Menu>
+                  <Text fontSize={"md"} fontWeight={"bold"}>
+                    Add Type
+                  </Text>
+                </Space>
               </Box>
-              <Box display="flex" flexDir="column" gap={6} width="100%">
-                <FormControl
-                  id="psmrcrmk"
-                  isInvalid={
-                    Boolean(formik.errors.psmrcrmk) &&
-                    Boolean(formik.touched.psmrcrmk)
+            </Box>
+            {
+              action ? (
+                <Box>
+                  {
+                    action.map((r: any, i: number) => {
+                      return (
+                        <Box p={2} m={2} display={"flex"} borderWidth={1} borderColor={Colors.GRAY} borderRadius={15} justifyContent={"space-between"} alignItems={"center"}>
+                          <Text>{r.key} - {r.label}</Text>
+                          <HStack>
+
+                            <IconButton
+                              variant={"outline"}
+                              // variant="danger"
+                              color={Colors.DANGER}
+                              icon={<IoCloseCircle size={18} />}
+                              aria-label={"delete"}
+                              onClick={() => onRemoveAction(i)}
+                            />
+                          </HStack>
+                        </Box>
+                      )
+                    })
                   }
-                  width="100%"
-                >
-                  <FormLabel>Remarks</FormLabel>
-                  <Textarea
-                    placeholder="Enter Remarks"
-                    value={formik.values.psmrcrmk || ""}
-                    name="psmrcrmk"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.errors.psmrcrmk && (
-                    <FormErrorMessage>
-                      {formik.errors.psmrcrmk}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
-              </Box>
-            </div>
+                </Box>
+              ) : (
+                <Box></Box>
+              )
+            }
+          </Box>
+          <Box display="flex" flexDir="column" gap={6} width="100%">
+            <FormControl
+              id="psmrcrmk"
+              isInvalid={
+                Boolean(formik.errors.psmrcrmk) &&
+                Boolean(formik.touched.psmrcrmk)
+              }
+              width="100%"
+            >
+              <FormLabel>Remarks</FormLabel>
+              <Textarea
+                placeholder="Enter Remarks"
+                value={formik.values.psmrcrmk || ""}
+                name="psmrcrmk"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.psmrcrmk && (
+                <FormErrorMessage>
+                  {formik.errors.psmrcrmk}
+                </FormErrorMessage>
+              )}
+            </FormControl>
+          </Box>
+        </div>
 
 
 
 
 
-          </Card>
+      </Card>
 
-      
-     
+
+
       <Flex justifyContent="flex-end" pl={10} pr={10} pt={10} >
         <Box>
           <Space size="small">

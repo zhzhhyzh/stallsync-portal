@@ -498,6 +498,23 @@ export const accessType = {
     function: "PROD",
     action: "DEL",
   },
+
+    INV_VIEW: {
+    type: "PARAM",
+    function: "INV",
+    action: "VIEW",
+  },
+  INV_ADD: {
+    type: "PARAM",
+    function: "INV",
+    action: "ADD",
+  },
+  INV_EDIT: {
+    type: "PARAM",
+    function: "INV",
+    action: "EDIT",
+  },
+ 
 };
 
 const accessPath = {
@@ -658,6 +675,12 @@ const accessPath = {
     accessType.PROD_ADD,
     accessType.PROD_EDIT,
     accessType.PROD_DEL,
+  ],
+
+   "/product/inventory": accessType.INV_VIEW,
+  "/product/inventory/Detail": [
+    accessType.INV_ADD,
+    accessType.INV_EDIT,
   ],
 };
 

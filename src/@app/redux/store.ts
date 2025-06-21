@@ -16,6 +16,7 @@ import tableKey from "./tableKey/slice";
 import staffs from "./staff/slice";
 import merchants from "./merchant/slice";
 import products from "./product/slice";
+import productsR from "./inventory/slice";
 import rewards from './reward/slice';
 import holiday from './holiday/slice';
 import workday from './workday/slice';
@@ -64,6 +65,7 @@ export function makeStore() {
       generalParam,
       adminAccounts,
       products,
+      productsR,
       tranCodes,
       compars,
       roleCodes,

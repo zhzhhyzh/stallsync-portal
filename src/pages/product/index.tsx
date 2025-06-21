@@ -53,10 +53,10 @@ export default function ProductPage() {
   const homeData = useAppSelector(selectHome);
 
   //sample code how to use this hook
-  const [tableData, refreshFn, totalRecords, extra] = useFetchProducts({});
+  const [tableData, refreshFn, totalRecords, extra, headerInfo] = useFetchProducts({});
   // const [ddlData] = useFetchDDL({ code: ["GTCAT"] });
   //pass tableData to table
-  const [ddlData] = useFetchDDL({ code: ["YESORNO", "PRODTYP","PRODCAT"] });
+  const [ddlData] = useFetchDDL({ code: ["YESORNO", "PRODTYP", "PRODCAT"] });
   const [search, setSearch] = useState();
   const [category, setCategory] = useState();
   const [type, setType] = useState();
@@ -106,21 +106,26 @@ export default function ProductPage() {
       )
     },
     {
-      title: "Active",
+      title: "Product Status",
       dataIndex: "psprdsts",
       key: "psprdsts",
       render: (_: any, record: any) => (
-        _ === "Y" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
+        _ === "A" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+          width: 90,
           height: 20,
           backgroundColor: Colors.SUCCESS,
           borderRadius: 10
-        }}>Yes</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
+        }}>Available</Text> : _ === "L" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+          width: 90,
+          height: 20,
+          backgroundColor: Colors.WARNING,
+          borderRadius: 10
+        }}>Low Stock</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+          width: 100,
           height: 20,
           backgroundColor: Colors.DANGER,
           borderRadius: 10,
-        }}>No</Text>
+        }}>Out of Stock</Text>
       )
     },
     {
@@ -258,7 +263,8 @@ export default function ProductPage() {
       pathname: "/product/Detail",
       query: {
         id: "",
-        mode: "ADD"
+        mode: "ADD",
+        mrcId: headerInfo
       },
     });
   }
@@ -268,7 +274,9 @@ export default function ProductPage() {
       pathname: "/product/Detail",
       query: {
         id: id,
-        mode: "EDIT"
+        mode: "EDIT",
+        mrcId: headerInfo
+
       },
     });
   }
@@ -278,7 +286,10 @@ export default function ProductPage() {
       pathname: "/product/Detail",
       query: {
         id: id,
-        mode: "VIEW"
+        mode: "VIEW",
+        mrcId: headerInfo
+
+
       },
     });
   }
@@ -291,11 +302,11 @@ export default function ProductPage() {
     setType(event.target.value);
   }
 
-   function statusOnChange(event: any) {
+  function statusOnChange(event: any) {
     setStatus(event.target.value);
   }
 
-   function categoryOnChange(event: any) {
+  function categoryOnChange(event: any) {
     setCategory(event.target.value);
   }
 
@@ -373,7 +384,7 @@ export default function ProductPage() {
                     </option>
                   ))}
                 </Select>
-                 <Select
+                <Select
                   name="status"
                   onChange={statusOnChange}
                   placeholder="Please Select Product Status"
@@ -385,7 +396,7 @@ export default function ProductPage() {
                     </option>
                   ))}
                 </Select>
-                
+
               </Space>
             </Box>
           </Flex>
@@ -399,7 +410,7 @@ export default function ProductPage() {
               psprdsts: status,
               psprdtyp: type,
               psprdcat: category
-              
+
 
             }}
           //onDoubleClick={showInfo}

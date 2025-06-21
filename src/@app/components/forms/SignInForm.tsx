@@ -96,14 +96,14 @@ import {
               <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
             )}
           </FormControl>
-          <Stack spacing={10}>
+          <Stack spacing={5}>
             <Stack
               direction={{ base: "column", sm: "row" }}
               align={"start"}
               justify={"end"}
             >
               <Link href="/forgot_password" color={"blue.400"}>
-                <Text fontSize="sm">?</Text>
+                <Text fontSize="sm" color={"blue.600"}>Forgot Password ?</Text>
               </Link>
             </Stack>
             <div className="flex flex-col gap-3">

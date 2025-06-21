@@ -49,7 +49,13 @@ export const API_ROUTES = {
   PROD_CREATE: "psprdpar/create",
   PROD_UPDATE: "psprdpar/update",
   PROD_DELETE: "psprdpar/delete",
-  PROD_LISTRDMP: "psprdpar/listRdmp",
+
+  // INVENTORY
+  INV_LIST: "psprdinv/list",
+  INV_DETAIL: "psprdinv/detail",
+  INV_CREATE: "psprdinv/create",
+  INV_UPDATE: "psprdinv/update",
+  INV_DELETE: "psprdinv/delete",
 
 
   // MAINTENANCE LOG
@@ -202,9 +208,6 @@ export const API_ROUTES = {
   WORKDAY_UPDATE: "pswdypar/update",
   WORKDAY_DELETE: "pswdypar/delete",
 
-  PRODUCT_LIST: "prquecde/prodList", //PRODUCT_QUEUE_LIST
-  PRODUCT_QUEUE_LINK: "prquecde/prodLink",
-  PRODUCT_QUEUE_UNLINK: "prquecde/prodUnLink",
 
   // TRANSACTION CODE
   TRAN_CODE_LIST: "pstrnscd/list",

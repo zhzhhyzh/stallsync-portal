@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { AppState, AppThunk } from "../store";
-import { listProducts,manageProduct,productDetail,removeProduct } from "./api";
+import { listProducts, manageProduct, productDetail, removeProduct } from "./api";
 
 export interface State {
   products: any[];
   productDetail: any;
   total: number;
   extra: any;
+  headerInfo: any;
 }
 
 const initialState: State = {
@@ -14,6 +15,7 @@ const initialState: State = {
   productDetail: {},
   total: 0,
   extra: {},
+  headerInfo: {}
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -59,6 +61,7 @@ export const reducerSlice = createSlice({
           state.products = action.payload?.message?.data;
           state.total = action.payload?.message?.total;
           state.extra = action.payload?.message?.extra;
+          state.headerInfo = action.payload?.message?.headerInfo;
         }
       })
       .addCase(getproductDetail.fulfilled, (state, action) => {
@@ -72,5 +75,6 @@ export const selectProducts = (state: AppState) =>
 export const selectProduct = (state: AppState) => state.products?.productDetail;
 export const selectTotal = (state: AppState) => state.products?.total;;
 export const selectExtra = (state: AppState) => state.products?.extra;
+export const selectHeader = (state: AppState) => state.products?.headerInfo;
 
 export default reducerSlice.reducer;

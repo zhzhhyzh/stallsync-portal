@@ -49,6 +49,7 @@ export const menus: Array<NavItem> = [
         href: "/staff",
         root: "Staff",
         icon: RiBriefcase2Line,
+        permissions: [accessType.STAFF_VIEW]
 
       },
 
@@ -117,7 +118,7 @@ export const menus: Array<NavItem> = [
             // permissions: [
             // ],
           },
-           {
+          {
             label: "Transaction",
             root: "Transaction",
             href: "/transaction",

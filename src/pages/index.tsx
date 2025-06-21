@@ -63,7 +63,7 @@ export default function Root() {
           backgroundSize="cover"
           filter='grayscale(30%)'
         >
-          <Flex bgColor={"white"} flexDir={"column"} alignItems={"center"} w={"400px"} alignSelf={"center"} pt={6} pb={10} px={5}>
+          <Flex bgColor={"white"} flexDir={"column"} alignItems={"center"} w={"400px"} alignSelf={"center"} pb={10} px={5} borderRadius={30}>
             <Image
               src={LogoImage}
               width={240}
