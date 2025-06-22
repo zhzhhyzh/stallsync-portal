@@ -160,16 +160,15 @@ export const API_ROUTES = {
   MEMBER_SALES: "psmbrprf/sales",
 
 
-  REQUEST_LIST: "pscmkrqt/list",
-  REQUEST_DETAIL: "pscmkrqt/detail",
-  REQUEST_CREATE: "pscmkrqt/create",
-  REQUEST_APPROVE: "pscmkrqt/approve",
+  
   DDL_USER: "ddl/psusrprf",
   DDL_WORKGROUPS: "ddl/workgroup",
 
   MAINT_SUBFILE_LOG: "mntlog/sub_list",
 
   DOC_DOWNLOAD: "document/download",
+
+  
   DDL_ENTITY: "ddl/psentmas",
   DDL_DSAGENT: "ddl/psdsgpar",
   DDL_TRANSCODE: "ddl/transactioncode",
