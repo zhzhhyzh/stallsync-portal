@@ -294,11 +294,12 @@ export default function calendarPage(props: any) {
     holiday: {
       paddingTop: '1px',
       color: 'red',
+      fontWeight:"bold",
       cursor: 'pointer',
       fontSize: "13px"
     },
     selectedDay: {
-      backgroundColor: 'lightblue',
+      backgroundColor: 'yellow',
       cursor: 'pointer',
       borderRadius: '50%',
     },
@@ -310,8 +311,10 @@ export default function calendarPage(props: any) {
 
     },
     normalDay: {
-      color: 'grey',
+      color: 'blue',
       paddingTop: '1px',
+      // fontWeight:"bold",
+
       cursor: 'pointer',
       fontSize: "13px"
 
