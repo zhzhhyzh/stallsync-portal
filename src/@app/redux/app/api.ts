@@ -6,19 +6,6 @@ export async function login(data: any = {}): Promise<any> {
     return result
 }
 
-export async function ddlCompany(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.COMPANY_DDL, 'GET', data)
-    return result
-}
-export async function ddlAgent(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_AGENT, 'GET', data)
-    return result
-}
-export async function ddlProduct(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_PRODUCT, 'GET', data)
-    return result
-}
-
 export async function ddl(data: any = {}): Promise<any> {
     const result = await api(API_ROUTES.DDL_GENERAL, "GET", data);
     return {
@@ -47,24 +34,13 @@ export async function uploadBulkFile(data: any): Promise<any> {
     return result
 }
 
-export async function ddlTransCode(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_TRANSCODE, 'GET', data)
-    return result
-}
 
-export async function ddlDsagent(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_DSAGENT, 'GET', data)
-    return result
-}
 
 export async function ddlAction(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_ACTION, 'GET', data)
     return result
 }
-export async function ddlEntity(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_ENTITY, 'GET', data)
-    return result
-}
+
 
 
 export async function ddlAvluser(data: any = []): Promise<any> {
@@ -72,10 +48,6 @@ export async function ddlAvluser(data: any = []): Promise<any> {
     return result
 }
 
-export async function ddlPriceCode(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_PRICODE, 'GET', data)
-    return result
-}
 
 
 
@@ -89,10 +61,7 @@ export async function ddlUser(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_USER, 'GET', data)
     return result
 }
-export async function ddlProdCode(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_PROCODE, 'GET', data)
-    return result
-}
+
 
 export async function forgot_password(data: any = {}): Promise<any> {
     const result = await api(API_ROUTES.FORGOT_PASSWORD, 'POST', data)
@@ -111,26 +80,10 @@ export async function ddlTableKeys(data: any = []): Promise<any> {
     const result = await api(API_ROUTES.DDL_TABLE_KEYS, 'GET', data)
     return result
 }
-export async function ddlWorkgroups(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_WORKGROUPS, 'GET', data)
-    return result
-}
+
 
 export async function listSubFileMaintlog(data: any = {}): Promise<any> {
     const result = await api(API_ROUTES.MAINT_SUBFILE_LOG, 'GET', data)
-    return result
-}
-
-export async function ddlEntityBank(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_ENTITY_BANK, 'GET', data)
-    return result
-}
-
-
-
-
-export async function ddlCustomer(data: any = []): Promise<any> {
-    const result = await api(API_ROUTES.DDL_CUSTOMER, 'GET', data)
     return result
 }
 
