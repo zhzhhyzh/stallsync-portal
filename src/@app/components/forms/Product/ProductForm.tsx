@@ -17,10 +17,6 @@ import {
   Checkbox,
   Switch,
   Image,
-  Grid,
-  GridItem,
-  CloseButton,
-  Link,
   Tabs,
   TabList,
   IconButton
@@ -748,25 +744,27 @@ export default function ProductForm(props: any) {
 
                 <div className="flex flex-col sm:flex-row gap-6">
                   <Box display="flex" flexDir="column" gap={6} width="100%">
-                    <FormControl
-                      id="psprduid"
-                      isInvalid={Boolean(formik.errors.psprduid) && Boolean(formik.touched.psprduid)}
-                      isReadOnly={mode === "VIEW" ? true : false}
-                    >
-                      {/* <FormLabel>Product*</FormLabel> */}
-                      <CustomFormLabel labelText="Product Code" />
-                      <Input
-                        placeholder={"Enter Product Code"}
-                        type="text"
-                        name="psprduid"
-                        onChange={formik.handleChange}
-                        value={formik.values.psprduid || ""}
-                        isDisabled={mode === "EDIT"}
-                      />
-                      {formik.errors.psprduid && (
-                        <FormErrorMessage>{formik.errors.psprduid}</FormErrorMessage>
-                      )}
-                    </FormControl>
+                    {mode != "ADD" && (
+                      <FormControl
+                        id="psprduid"
+                        isInvalid={Boolean(formik.errors.psprduid) && Boolean(formik.touched.psprduid)}
+                        isReadOnly={mode === "VIEW" ? true : false}
+                      >
+                        {/* <FormLabel>Product*</FormLabel> */}
+                        <CustomFormLabel labelText="Product Code" />
+                        <Input
+                          placeholder={"Enter Product Code"}
+                          type="text"
+                          name="psprduid"
+                          onChange={formik.handleChange}
+                          value={formik.values.psprduid || ""}
+                          isDisabled={mode === "EDIT"}
+                        />
+                        {formik.errors.psprduid && (
+                          <FormErrorMessage>{formik.errors.psprduid}</FormErrorMessage>
+                        )}
+                      </FormControl>
+                    )}
                     <FormControl
                       id="psprdnme"
                       isInvalid={Boolean(formik.errors.psprdnme) && Boolean(formik.touched.psprdnme)}
@@ -940,9 +938,9 @@ export default function ProductForm(props: any) {
                         Boolean(formik.touched.psmrcuid)
                       }
                     >
-                      <FormLabel>Merchants</FormLabel>
+                      <FormLabel>Merchant</FormLabel>
                       <Select
-                        placeholder="Please Select User"
+                        placeholder="Please Select Merchant"
                         value={mchId ? mchId : formik.values.psmrcuid}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

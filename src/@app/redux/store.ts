@@ -21,6 +21,7 @@ import rewards from './reward/slice';
 import holiday from './holiday/slice';
 import workday from './workday/slice';
 import announcement from './announcement/slice';
+import mbrs from './mbrProfile/slice';
 //::;
 
 import tranCodes from "./tranCode/slice";
@@ -42,7 +43,7 @@ export function makeStore() {
       //::;
       staffs,
       merchants,
-      //::;
+      mbrs,
       announcement,
       app,
       dashboard,
@@ -55,19 +56,23 @@ export function makeStore() {
       adminAccounts,
       products,
       productsR,
-      tranCodes,
       roleCodes,
       fileManagement,
       tableKey,
       passwordPolicy,
+      reports,
+      rewards,
+      //::;
+
+      tranCodes,
+
       backupDatabase,
       application,
       request,
       loancalculator,
       loanAccount,
 
-      reports,
-      rewards,
+
       member,
     },
   });

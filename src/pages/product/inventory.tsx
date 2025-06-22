@@ -99,7 +99,7 @@ export default function InventoryForm(props: any) {
         if (mode !== "ADD" && id && Object.keys(detailData).length > 0) {
             formik.setValues({
                 ...detailData,
-                id: detailData.psprduid,
+                id: detailData.psstkuid,
                 psinvsdt: dayjs(detailData?.psinvsdt),
             });
         }
@@ -251,7 +251,7 @@ export default function InventoryForm(props: any) {
                                         <Input
                                             type="text"
                                             name="psinvpri"
-                                            placeholder="Enter Minimum Amount"
+                                            placeholder="Enter Stock Price"
                                             value={numberWithCommas(formik.values.psinvpri)}
                                             pattern={numberPattern}
                                             onChange={(event) => {

@@ -140,6 +140,13 @@ export const API_ROUTES = {
   DELETE_TABLE_KEY: "pstblmas/key_delete",
  
 
+  //MEMBER LIST
+    // WORK DAY
+  MBR_LIST: "psmbrprf/list",
+  MBR_DETAIL: "psmbrprf/detail",
+  MBR_CREATE: "psmbrprf/create",
+  MBR_UPDATE: "psmbrprf/update",
+  MBR_DELETE: "psmbrprf/delete",
   //-----::;
   DASHBOARD_SALES: "dashboard/getMonthlySalesForPast12MonthsWithDescription",
   DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",

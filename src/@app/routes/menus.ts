@@ -54,9 +54,9 @@ export const menus: Array<NavItem> = [
       },
 
       {
-        label: "Customer",
-        href: "/customer",
-        root: "Customer",
+        label: "Member",
+        href: "/mbrProfile",
+        root: "Member",
         icon: FaUserCircle,
       },
 
