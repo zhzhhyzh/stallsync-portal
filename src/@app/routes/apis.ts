@@ -73,7 +73,7 @@ export const API_ROUTES = {
   ADMIN_UPDATE: "psusrprf/update",
   ADMIN_DELETE: "psusrprf/delete",
   ADMIN_PW_RESET: "psusrprf/change_admin_pwd",
-  FORGOT_PASSWORD: "psusrprf/admin_reset",
+  FORGOT_PASSWORD: "psusrprf/reset",
 
   // DOCUMENT
   DOCUMENT_UPLOAD: "document/upload",
@@ -138,10 +138,15 @@ export const API_ROUTES = {
   CREATE_TABLE_KEY: "pstblmas/key_create",
   UPDATE_TABLE_KEY: "pstblmas/key_update",
   DELETE_TABLE_KEY: "pstblmas/key_delete",
- 
+
+  FILE_MANAGE_LIST: "pstblmas/list",
+  CREATE_FILE_MANAGE: "pstblmas/create",
+  UPDATE_FILE_MANAGE: "pstblmas/update",
+  FILE_MANAGE_DETAIL: "pstblmas/detail",
+  DELETE_FILE_MANAGE: "pstblmas/delete",
 
   //MEMBER LIST
-    // WORK DAY
+  // WORK DAY
   MBR_LIST: "psmbrprf/list",
   MBR_DETAIL: "psmbrprf/detail",
   MBR_CREATE: "psmbrprf/create",
@@ -152,47 +157,18 @@ export const API_ROUTES = {
   DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",
 
   ANNOUNCEMENT_ANNOUNCEMENT: "pssysann/announcement",
-  MEMBER_DETAIL: "psmbrprf/detail",
-  MEMBER_LIST: "psmbrprf/list",
-  MEMBER_CREATE: "psmbrprf/create",
-  MEMBER_UPDATE_PROFILE: "psmbrprf/update_profile",
-  MEMBER_PROFILE: "psmbrprf/profile",
-  MEMBER_SALES: "psmbrprf/sales",
 
 
-  REQUEST_LIST: "pscmkrqt/list",
-  REQUEST_DETAIL: "pscmkrqt/detail",
-  REQUEST_CREATE: "pscmkrqt/create",
-  REQUEST_APPROVE: "pscmkrqt/approve",
+
+
   DDL_USER: "ddl/psusrprf",
-  DDL_WORKGROUPS: "ddl/workgroup",
 
   MAINT_SUBFILE_LOG: "mntlog/sub_list",
 
   DOC_DOWNLOAD: "document/download",
-  DDL_ENTITY: "ddl/psentmas",
-  DDL_DSAGENT: "ddl/psdsgpar",
-  DDL_TRANSCODE: "ddl/transactioncode",
-  DDL_PRICODE: "ddl/pricingplan",
-  DDL_PROCODE: "ddl/products",
+
+
   DDL_ACTION: "ddl/action",
-  DDL_PRODUCT: "ddl/psprdpar",
-  DDL_AGENT: "ddl/psmbrprf",
-
-
-
-
-
-  //WORKGROUP
-  WORKGROUP_DETAIL: "prawrkgrp/detail",
-  WORKGROUP_LIST: "prawrkgrp/list",
-  WORKGROUP_CREATE: "prawrkgrp/create",
-  WORKGROUP_UPDATE: "prawrkgrp/update",
-  WORKGROUP_DELETE: "prawrkgrp/delete",
-
-  WORKGROUP_USER_LIST: "prawrkgrp/listUser",
-  WORKGROUP_USER_LINK: "prawrkgrp/linkUser",
-  WORKGROUP_USER_UNLINK: "prawrkgrp/unLinkUser",
 
 
 
@@ -211,11 +187,6 @@ export const API_ROUTES = {
   PASSWORD_POLICY_DETAIL: "prpwdpol/detail",
   PASSWORD_POLICY_UPDATE: "prpwdpol/update",
 
-  FILE_MANAGE_LIST: "pstblmas/list",
-  CREATE_FILE_MANAGE: "pstblmas/create",
-  UPDATE_FILE_MANAGE: "pstblmas/update",
-  FILE_MANAGE_DETAIL: "pstblmas/detail",
-  DELETE_FILE_MANAGE: "pstblmas/delete",
 
 
 };

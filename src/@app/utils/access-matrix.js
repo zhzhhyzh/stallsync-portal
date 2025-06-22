@@ -1,9 +1,5 @@
 export const accessType = {
-  COM_VIEW: {
-    type: "AGT",
-    function: "COM",
-    action: "VIEW",
-  },
+ 
   ANNOUNCE_VIEW: {
     type: "ANNOUNCE",
     function: "ANNOUNCE",
@@ -24,36 +20,7 @@ export const accessType = {
     function: "ANNOUNCE",
     action: "DEL",
   },
-  DEAL_DATE_VIEW: {
-    type: "AGT",
-    function: "DDATE",
-    action: "VIEW",
-  },
-  DEAL_DATE_ADD: {
-    type: "AGT",
-    function: "DDATE",
-    action: "ADD",
-  },
-  DEAL_DATE_EDIT: {
-    type: "AGT",
-    function: "DDATE",
-    action: "EDIT",
-  },
-  DEAL_DATE_DEL: {
-    type: "AGT",
-    function: "DDATE",
-    action: "DEL",
-  },
-  PROMOTION_EDIT: {
-    type: "AGT",
-    function: "PROMOTION",
-    action: "EDIT",
-  },
-  PROMOTION_VIEW: {
-    type: "AGT",
-    function: "PROMOTION",
-    action: "VIEW",
-  },
+  
   FILEMANAGE_VIEW: {
     type: "SET",
     function: "FILEMANAGE",
@@ -162,27 +129,6 @@ export const accessType = {
     action: "DEL",
   }
   ,
-  COMPAR_VIEW: {
-    type: "PARAM",
-    function: "COMPAR",
-    action: "VIEW",
-  },
-  COMPAR_ADD: {
-    type: "PARAM",
-    function: "COMPAR",
-    action: "ADD",
-  },
-  COMPAR_EDIT: {
-    type: "PARAM",
-    function: "COMPAR",
-    action: "EDIT",
-  },
-  COMPAR_DEL: {
-    type: "PARAM",
-    function: "COMPAR",
-    action: "DEL",
-  }
-  ,
 
 
   TRANCODE_VIEW: {
@@ -206,26 +152,7 @@ export const accessType = {
     action: "DEL",
   },
 
-  DSAGENT_VIEW: {
-    type: "PARAM",
-    function: "DSAGENT",
-    action: "VIEW",
-  },
-  DSAGENT_ADD: {
-    type: "PARAM",
-    function: "DSAGENT",
-    action: "ADD",
-  },
-  DSAGENT_EDIT: {
-    type: "PARAM",
-    function: "DSAGENT",
-    action: "EDIT",
-  },
-  DSAGENT_DEL: {
-    type: "PARAM",
-    function: "DSAGENT",
-    action: "DEL",
-  },
+
 
   PROF_VIEW: {
     type: "SET",
@@ -237,26 +164,7 @@ export const accessType = {
     function: "PROF",
     action: "EDIT",
   },
-  CREDAPP_VIEW: {
-    type: "PARAM",
-    function: "CREDAPP",
-    action: "VIEW",
-  },
-  CREDAPP_ADD: {
-    type: "PARAM",
-    function: "CREDAPP",
-    action: "ADD",
-  },
-  CREDAPP_EDIT: {
-    type: "PARAM",
-    function: "CREDAPP",
-    action: "EDIT",
-  },
-  CREDAPP_DEL: {
-    type: "PARAM",
-    function: "CREDAPP",
-    action: "DEL",
-  },
+
   PWPOLICY_VIEW: {
     type: "PARAM",
     function: "PWPOLICY",
@@ -268,41 +176,22 @@ export const accessType = {
     action: "EDIT",
   },
   BACKUP_VIEW: {
-    type: "SET",
+    type: "CONFIG",
     function: "BACKUP",
     action: "VIEW",
   },
   BACKUP_ADD: {
-    type: "SET",
+    type: "CONFIG",
     function: "BACKUP",
     action: "ADD",
   },
   BACKUP_DOWNLOAD: {
-    type: "SET",
+    type: "CONFIG",
     function: "BACKUP",
     action: "DOWNLOAD",
   },
 
-  ENTITY_VIEW: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "VIEW",
-  },
-  ENTITY_ADD: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "ADD",
-  },
-  ENTITY_EDIT: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "EDIT",
-  },
-  ENTITY_DEL: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "DEL",
-  },
+
   ROLE_VIEW: {
     type: "PARAM",
     function: "ROLE",
@@ -325,85 +214,8 @@ export const accessType = {
   },
 
 
-  ENTITY_VIEW: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "VIEW",
-  },
-  ENTITY_ADD: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "ADD",
-  },
-  ENTITY_EDIT: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "EDIT",
-  },
-  ENTITY_DEL: {
-    type: "PARAM",
-    function: "ENTITY",
-    action: "DEL",
-  },
-  
- 
-  MBRPROF_VIEW: {
-    type: "SET",
-    function: "NOTSCHED",
-    action: "VIEW",
-  },
-  MBRPROF_EDIT: {
-    type: "SET",
-    function: "NOTSCHED",
-    action: "EDIT",
-  },
-  MBRPROF_DEL: {
-    type: "SET",
-    function: "NOTSCHED",
-    action: "DEL",
-  },
-  APPLAPV_VIEW: {
-    type: "AGT",
-    function: "APPLAPV",
-    action: "VIEW",
-  },
-  APPLAGT_VIEW: {
-    type: "AGT",
-    function: "APPLAGT",
-    action: "VIEW",
-  },
-  AGTPRF_VIEW: {
-    type: "AGT",
-    function: "AGTPRF",
-    action: "VIEW",
-  },
-  AGTLST_VIEW: {
-    type: "AGT",
-    function: "AGTLST",
-    action: "VIEW",
-  },
-  CON_VIEW: {
-    type: "AGT",
-    function: "CON",
-    action: "VIEW",
-  },
 
-  CON_ADD: {
-    type: "AGT",
-    function: "CON",
-    action: "ADD",
-  },
 
-  CON_EDIT: {
-    type: "AGT",
-    function: "CON",
-    action: "EDIT",
-  },
-  CON_DEL: {
-    type: "AGT",
-    function: "CON",
-    action: "DEL",
-  },
 
   // ----------Seperator----------- ::;
   ACES_VIEW: {
@@ -499,7 +311,7 @@ export const accessType = {
     action: "DEL",
   },
 
-    INV_VIEW: {
+  INV_VIEW: {
     type: "PARAM",
     function: "INV",
     action: "VIEW",
@@ -514,41 +326,15 @@ export const accessType = {
     function: "INV",
     action: "EDIT",
   },
- 
+
 };
 
 const accessPath = {
-  // "/functions": accessType.FUNC_VIEW,
-  // "/functions/Detail": [
-  //   accessType.FUNC_ADD,
-  //   accessType.FUNC_EDIT,
-  //   accessType.FUNC_DEL,
-  // ],
- 
-  "/dsagent": accessType.DSAGENT_VIEW,
-  "/dsagent/Detail": [
-    // accessType.CON_ADD,
-    accessType.DSAGENT_ADD,
-    accessType.DSAGENT_DEL,
-    accessType.DSAGENT_EDIT,
-  ],
-  "/contract": accessType.CON_VIEW,
-  "/contract/Detail": [
-    // accessType.CON_ADD,
-    accessType.CON_EDIT,
-    // accessType.CON_DEL,
-  ],
-  "/contract": accessType.CON_VIEW,
-  "/contract/Detail": [
-    // accessType.CON_ADD,
-    accessType.CON_EDIT,
-    // accessType.CON_DEL,
-  ],
-  "/entity": accessType.ENTITY_VIEW,
-  "/entity/Detail": [
-    accessType.ENTITY_ADD,
-    accessType.ENTITY_EDIT,
-    accessType.ENTITY_DEL,
+  "/functions": accessType.FUNC_VIEW,
+  "/functions/Detail": [
+    accessType.FUNC_ADD,
+    accessType.FUNC_EDIT,
+    accessType.FUNC_DEL,
   ],
 
 
@@ -573,14 +359,6 @@ const accessPath = {
     accessType.ADMA_DEL
   ],
 
-  "/company": accessType.COMPAR_VIEW,
-  "/company/Detail": [
-    accessType.COMPAR_ADD,
-    accessType.COMPAR_EDIT,
-    accessType.COMPAR_DEL
-  ],
-
-  
 
   "/roleCode": accessType.ROLE_VIEW,
   "/roleCode/Detail": [
@@ -595,16 +373,6 @@ const accessPath = {
     accessType.TRANCODE_EDIT,
     accessType.TRANCODE_DEL,
   ],
-  "/commissions": accessType.COM_VIEW,
-
-
-  "/credAppLim": accessType.CREDAPP_VIEW,
-  "/credAppLim/Detail": [
-    accessType.CREDAPP_ADD,
-    accessType.CREDAPP_EDIT,
-    accessType.CREDAPP_DEL,
-  ],
-
 
   "/profile/changePassword": accessType.PROF_EDIT,
   "/profile/myProfile": accessType.PROF_EDIT,
@@ -622,35 +390,7 @@ const accessPath = {
     accessType.ANNOUNCE_EDIT,
     accessType.ANNOUNCE_DEL,
   ],
-  
-  "/dealDate": accessType.DEAL_DATE_VIEW,
-  "/dealDate/Detail": [
-    accessType.DEAL_DATE_ADD,
-    accessType.DEAL_DATE_EDIT,
-    accessType.DEAL_DATE_DEL,
-  ],
 
-  "/application": accessType.APPLAPV_VIEW,
-  "/application/Detail": [
-    //   accessType.CHNLCOM_ADD,
-    //   accessType.CHNLCOM_EDIT,
-    //   accessType.CHNLCOM_DEL,
-  ],
-  "/applicationAgent": accessType.APPLAGT_VIEW,
-  "/applicationAgent/Detail": [
-    //   accessType.CHNLCOM_ADD,
-    //   accessType.CHNLCOM_EDIT,
-    //   accessType.CHNLCOM_DEL,
-  ],
-  "/agentProfile": accessType.AGTPRF_VIEW,
-  // "/member": accessType.AGTPRF_VIEW,
-  "/member/Detail": [
-    //   accessType.CHNLCOM_ADD,
-    //   accessType.CHNLCOM_EDIT,
-    //   accessType.CHNLCOM_DEL,
-  ],
-
-  // ----------Seperator----------- ::;
   "/accessibility": accessType.ACES_VIEW,
   "/staff": accessType.STAFF_VIEW,
   "/staff/Detail": [
@@ -677,7 +417,7 @@ const accessPath = {
     accessType.PROD_DEL,
   ],
 
-   "/product/inventory": accessType.INV_VIEW,
+  "/product/inventory": accessType.INV_VIEW,
   "/product/inventory/Detail": [
     accessType.INV_ADD,
     accessType.INV_EDIT,

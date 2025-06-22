@@ -2,13 +2,8 @@ import {
   RiHome5Line,
   RiBriefcase2Line,
   RiSettings2Line,
-  RiUser2Line,
-  RiAppsLine,
-  RiFilePaper2Line,
-  RiListOrdered2,
-  RiFileHistoryLine,
+ 
   RiFolderHistoryLine,
-  RiBellFill,
   RiExchangeBoxLine,
 } from "react-icons/ri";
 
@@ -20,18 +15,7 @@ import {
   FaBullhorn
 } from "react-icons/fa";
 import { accessType } from "../utils/access-matrix";
-import { CgBrowser } from "react-icons/cg";
-import { GoChecklist } from "react-icons/go";
-import { FaCalculator, FaToolbox } from "react-icons/fa";
-import { BiSolidReport } from "react-icons/bi";
-import { IoPersonOutline } from "react-icons/io5";
-import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
-import {
-  closeGlobalModal,
-  openGlobalModal,
-  refreshTable,
-  selectHome,
-} from "@app/redux/app/slice";
+
 
 //label must be unique !!!
 export const menus: Array<NavItem> = [
@@ -78,18 +62,6 @@ export const menus: Array<NavItem> = [
         root: "Param",
         children: [
 
-          // {
-          //   label: "Company Parameter",
-          //   href: "/company",
-          //   permissions: [accessType.COMPAR_VIEW],
-          // },
-
-
-          // {
-          //   label: "Agent Designation",
-          //   href: "/dsagent",
-          //   permissions: [accessType.DSAGENT_VIEW],
-          // },
           // {
           //   label: "Transaction Code",
           //   href: "/tranCode",

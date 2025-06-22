@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MouseEventHandler } from 'react';
 import type { AppState, AppThunk } from '../store';
-import { ddlRoleCode, ddlMerchant, ddlAction, downloadDocument, ddl, ddlDsagent, ddlPriceCode, ddlTransCode, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlEntity, ddlProdCode, ddlUser, ddlWorkgroups, ddlEntityBank, ddlCustomer, ddlAgent, ddlProduct, ddlCompany, ddlMchuser, ddlAvluser } from './api';
+import { ddlRoleCode, ddlMerchant, ddlAction, downloadDocument, ddl, forgot_password, home, listMaintlog, login, uploadBulkFile, uploadFile, ddlTableKeys, listSubFileMaintlog, ddlUser,   ddlMchuser, ddlAvluser } from './api';
 import { StepStatus } from '@chakra-ui/react';
 
 
@@ -28,29 +28,19 @@ export interface State {
   maintTotal: number;
   tableRefreshCount: number;
   home: any;
-  transCode: any[];
-  priceCode: any[];
-  prodCode: any[];
   showHide: boolean;
   merchant: any[];
   breadcrumbInfo: any[];
   sideBarRoot: string;
 
-  dsagent: any[];
   roleCode: any[];
   actions: any[];
   tableKeys: any[];
   subMaintLogs: any[];
   subMaintTotal: number;
-  entities: any[];
   user: any[]
 
-  entitybanks: any[];
   extraDataField: any[];
-  customer: any[];
-  product: any[];
-  agent: any[];
-  companies: any[];
   mchUser: any[];
   avluser: any[];
 }
@@ -71,38 +61,22 @@ const initialState: State = {
   mchUser: [],
   maintLogs: [],
   merchant: [],
-  dsagent: [],
   roleCode: [],
   maintTotal: 0,
   tableRefreshCount: 0,
   home: {},
-  transCode: [],
-  priceCode: [],
-  prodCode: [],
   showHide: false,
   breadcrumbInfo: [],
   sideBarRoot: "",
   tableKeys: [],
-  entities: [],
   actions: [],
   user: [],
-  entitybanks: [],
   extraDataField: [],
-  customer: [],
-  product: [],
-  agent: [],
-  companies: [],
   maintExtra: undefined,
   avluser: [],
 };
 
-export const fetchDDLWorkgroup = createAsyncThunk(
-  "app/fetchDDLWorkgroup",
-  async (data: any) => {
-    const response = await ddlWorkgroups(data);
-    return response;
-  }
-);
+
 export const postLogin = createAsyncThunk(
   'app/postLogin',
   async (data: any = {}) => {
@@ -115,13 +89,6 @@ export const postLogin = createAsyncThunk(
   }
 );
 
-export const fetchCompanies = createAsyncThunk(
-  "app/fetchCompanies",
-  async (data: any) => {
-    const response = await ddlCompany(data);
-    return response;
-  }
-);
 export const fetchSubFileMaintlogs = createAsyncThunk(
   "app/fetchSubFileMaintlogs",
   async (data: any) => {
@@ -176,63 +143,7 @@ export const fetchDDL = createAsyncThunk(
   }
 );
 
-export const fetchDDLTransCode = createAsyncThunk(
-  "app/fetchDDLTransCode",
-  async (data: any) => {
-    const response = await ddlTransCode(data);
-    return response;
-  }
-);
 
-export const fetchDDLPriceCode = createAsyncThunk(
-  "app/fetchDDLPriceCode",
-  async (data: any) => {
-    const response = await ddlPriceCode(data);
-    return response;
-  }
-);
-
-export const fetchDDLProdCode = createAsyncThunk(
-  "app/fetchDDLProdCode",
-  async (data: any) => {
-    const response = await ddlProdCode(data);
-    return response;
-  }
-);
-
-export const fetchDDLProduct = createAsyncThunk(
-  "app/fetchDDLProduct",
-  async (data: any) => {
-    const response = await ddlProduct(data);
-    return response;
-  }
-);
-export const fetchDDLAgent = createAsyncThunk(
-  "app/fetchDDLAgent",
-  async (data: any) => {
-    const response = await ddlAgent(data);
-    return response;
-  }
-);
-
-
-
-
-export const fetchDDLDsagent = createAsyncThunk(
-  "app/fetchDDLDsagent",
-  async (data: any) => {
-    const response = await ddlDsagent(data);
-    return response;
-  }
-);
-export const fetchDDLEntity = createAsyncThunk(
-  "app/fetchDDLEntity",
-  async (data: any) => {
-
-    const response = await ddlEntity(data);
-    return response;
-  }
-);
 
 export const fetchDDLRoleCode = createAsyncThunk(
   "app/fetchDDLRoleCode",
@@ -298,22 +209,7 @@ export const fetchDDLUser = createAsyncThunk(
   }
 );
 
-export const fetchDDLEntityBank = createAsyncThunk(
-  "app/fetchDDLEntityBank",
-  async (data: any) => {
-    const response = await ddlEntityBank(data);
-    return response;
-  }
-);
 
-
-export const fetchDDLCustomer = createAsyncThunk(
-  "app/fetchDDLCustomer",
-  async (data: any) => {
-    const response = await ddlCustomer(data);
-    return response;
-  }
-);
 
 
 
@@ -424,33 +320,8 @@ export const reducerSlice = createSlice({
       .addCase(fetchDDLMerchant.fulfilled, (state, action) => {
         state.merchant = action.payload?.message.data
       })
-      .addCase(fetchDDLTransCode.fulfilled, (state, action) => {
-        // Check if action.payload and action.payload.message are defined
-        if (action.payload && action.payload.message && action.payload.message.data) {
-          state.transCode = action.payload.message.data;
-        } else {
-          console.error('Unexpected payload structure:', action.payload);
-          // Handle the case where the expected structure is not met
-          state.transCode = []; // or whatever default state you prefer
-        }
-      })
-      .addCase(fetchDDLPriceCode.fulfilled, (state, action) => {
-        state.priceCode = action.payload?.message.data
-      })
-      .addCase(fetchDDLProdCode.fulfilled, (state, action) => {
-        state.prodCode = action.payload?.message.data
-      })
-
-      .addCase(fetchDDLDsagent.fulfilled, (state, action) => {
-        // state.dsagent = action.payload?.message.data
-        if (action.payload && action.payload.message && action.payload.message.data) {
-          state.dsagent = action.payload.message.data;
-        } else {
-          console.error('Unexpected payload structure:', action.payload);
-          // Handle the case where the expected structure is not met
-          state.dsagent = []; // or whatever default state you prefer
-        }
-      })
+      
+     
 
       .addCase(fetchDDLRoleCode.fulfilled, (state, action) => {
         state.roleCode = action.payload?.message?.data
@@ -465,15 +336,7 @@ export const reducerSlice = createSlice({
       })
 
 
-      .addCase(fetchDDLEntity.fulfilled, (state, action) => {
-        state.entities = action.payload?.message.data
-      })
-      // .addCase(fetchDDLEntity.fulfilled, (state, action) => {
-      //   state.entities = action.payload?.message.data
-      // })
-      // .addCase(fetchDDLActWrkGrp.fulfilled, (state, action) => {
-      //   state.actWrkGrp = action.payload?.message.data
-      // })  
+      
       .addCase(fetchDDLTableKeys.fulfilled, (state, action) => {
         state.tableKeys = action.payload?.message
       })
@@ -485,22 +348,8 @@ export const reducerSlice = createSlice({
         state.actions = action.payload?.message
       })
 
-      .addCase(fetchDDLEntityBank.fulfilled, (state, action) => {
-        state.entitybanks = action.payload?.message.data;
-      })
+    
 
-      .addCase(fetchDDLCustomer.fulfilled, (state, action) => {
-        state.customer = action.payload?.message?.data
-      })
-      .addCase(fetchDDLProduct.fulfilled, (state, action) => {
-        state.product = action.payload?.message?.data
-      })
-      .addCase(fetchDDLAgent.fulfilled, (state, action) => {
-        state.agent = action.payload?.message?.data
-      })
-      .addCase(fetchCompanies.fulfilled, (state, action) => {
-        state.companies = action.payload?.message?.data
-      })
 
   },
 });
@@ -514,15 +363,10 @@ export const selectGlobalModalStatus = (state: AppState) => state.app?.globalMod
 export const selectGlobalModalTitle = (state: AppState) => state.app?.globalModalTitle;
 export const selectGlobalModalActions = (state: AppState) => state.app?.globalModalActions;
 export const selectDDL = (state: AppState) => state.app?.ddl
-export const selectTransCode = (state: AppState) => state.app?.transCode
-export const selectPriceCode = (state: AppState) => state.app?.priceCode
-export const selectProdCode = (state: AppState) => state.app?.prodCode
 
-export const selectDsagent = (state: AppState) => state.app?.dsagent
 export const selectRoleCode = (state: AppState) => state.app?.roleCode
 export const selectSubMaintLog = (state: AppState) => state.app?.subMaintLogs;
 export const selectSubMaintTotal = (state: AppState) => state.app?.subMaintTotal;
-export const selectEntities = (state: AppState) => state.app?.entities;
 
 export const selectToken = (state: AppState) => state.app?.token;
 export const selectIsLogined = (state: AppState) => state.app?.isLogined;
@@ -540,13 +384,8 @@ export const selectSideBarRoot = (state: AppState) => state.app.sideBarRoot;
 export const selectTableKeys = (state: AppState) => state.app?.tableKeys;
 export const selectMaintExtra = (state: AppState) => state.app?.maintExtra;
 export const selectActions = (state: AppState) => state.app?.actions;
-export const selectEntityBanks = (state: AppState) => state.app?.entitybanks;
 
 export const selectExtraDataField = (state: AppState) => state.app?.extraDataField;
-export const selectCustomer = (state: AppState) => state.app?.customer;
-export const selectDDLAgent = (state: AppState) => state.app?.agent;
-export const selectDDLProduct = (state: AppState) => state.app?.product;
-export const selectDDLCompany = (state: AppState) => state.app?.companies;
 export const selectMchuser = (state: AppState) => state.app?.mchUser;
 export const selectAvluser = (state: AppState) => state.app?.avluser;
 export const selectMerchant = (state: AppState) => state.app?.merchant;

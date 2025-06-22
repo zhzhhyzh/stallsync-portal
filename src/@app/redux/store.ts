@@ -22,25 +22,20 @@ import holiday from './holiday/slice';
 import workday from './workday/slice';
 import announcement from './announcement/slice';
 import mbrs from './mbrProfile/slice';
+import reports from './reports/slice';
+
 //::;
 
 import tranCodes from "./tranCode/slice";
 
 import backupDatabase from "./backup/slice";
-import application from "./application/slice";
 
-import request from "./request/slice";
-import loancalculator from "./loanCalculator/slice";
-import loanAccount from "./accountManagement/slice";
 
-import reports from './reports/slice';
-import member from './member/slice';
 
 
 export function makeStore() {
   return configureStore({
     reducer: {
-      //::;
       staffs,
       merchants,
       mbrs,
@@ -62,18 +57,12 @@ export function makeStore() {
       passwordPolicy,
       reports,
       rewards,
-      //::;
 
       tranCodes,
 
       backupDatabase,
-      application,
-      request,
-      loancalculator,
-      loanAccount,
 
 
-      member,
     },
   });
 }
