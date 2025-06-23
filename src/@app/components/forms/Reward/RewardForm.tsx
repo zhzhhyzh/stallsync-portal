@@ -337,9 +337,9 @@ export default function RewardForm(props: any) {
                     isReadOnly={mode === "VIEW" ? true : false}
                   >
                     {/* <FormLabel>Reward*</FormLabel> */}
-                    <CustomFormLabel labelText="Reward" />
+                    <CustomFormLabel labelText="Reward Code" />
                     <Input
-                      placeholder={"Enter Reward"}
+                      placeholder={"Enter Reward Code"}
                       type="text"
                       name="psrwduid"
                       onChange={formik.handleChange}
