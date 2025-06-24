@@ -1,5 +1,5 @@
 export const accessType = {
- 
+
   ANNOUNCE_VIEW: {
     type: "ANNOUNCE",
     function: "ANNOUNCE",
@@ -20,7 +20,7 @@ export const accessType = {
     function: "ANNOUNCE",
     action: "DEL",
   },
-  
+
   FILEMANAGE_VIEW: {
     type: "SET",
     function: "FILEMANAGE",
@@ -310,6 +310,26 @@ export const accessType = {
     function: "PROD",
     action: "DEL",
   },
+   ORD_VIEW: {
+    type: "ORD",
+    function: "ORD",
+    action: "VIEW",
+  },
+  ORD_ADD: {
+    type: "ORD",
+    function: "ORD",
+    action: "ADD",
+  },
+  ORD_EDIT: {
+    type: "ORD",
+    function: "ORD",
+    action: "EDIT",
+  },
+  ORD_DEL: {
+    type: "ORD",
+    function: "ORD",
+    action: "DEL",
+  },
 
   INV_VIEW: {
     type: "PARAM",
@@ -324,6 +344,17 @@ export const accessType = {
   INV_EDIT: {
     type: "PARAM",
     function: "INV",
+    action: "EDIT",
+  },
+  MBR_VIEW: {
+    type: "MBR",
+    function: "MBR",
+    action: "VIEW",
+  },
+
+  MBR_EDIT: {
+    type: "MBR",
+    function: "MBR",
     action: "EDIT",
   },
 
@@ -415,6 +446,18 @@ const accessPath = {
     accessType.PROD_ADD,
     accessType.PROD_EDIT,
     accessType.PROD_DEL,
+  ],
+
+  "/order": accessType.ORD_VIEW,
+  "/order/Detail": [
+    // accessType.ORD_ADD,
+    accessType.ORD_EDIT,
+    // accessType.ORD_DEL,
+  ],
+
+  "/mbrProfile": accessType.MBR_VIEW,
+  "/mbrProfile/Detail": [
+    accessType.MBR_EDIT,
   ],
 
   "/product/inventory": accessType.INV_VIEW,

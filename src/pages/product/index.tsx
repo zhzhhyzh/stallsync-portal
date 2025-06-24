@@ -199,7 +199,7 @@ export default function ProductPage() {
                 label: "Maint Log",
                 breadcrumbRoute: [
                   {
-                    title: "TranCode",
+                    title: "Product",
                     href: `/product`,// Add parameter if needed eg. /generalParameter/?id=123
                   },
                   {

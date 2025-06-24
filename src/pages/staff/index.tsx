@@ -141,7 +141,7 @@ export default function StaffPage() {
               )
             }
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.STAFF_EDIT)) && (
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.MCH_EDIT)) && (
                 <Tooltip label='Edit' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -159,7 +159,7 @@ export default function StaffPage() {
             }
             {
               // todo
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.STAFF_DEL)) && (
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.MCH_DEL)) && (
                 <Tooltip label='Delete' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -185,7 +185,7 @@ export default function StaffPage() {
                 label: "Maint Log",
                 breadcrumbRoute: [
                   {
-                    title: "TranCode",
+                    title: "Staff",
                     href: `/staff`,// Add parameter if needed eg. /generalParameter/?id=123
                   },
                   {
@@ -322,7 +322,7 @@ export default function StaffPage() {
             }}
           >
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.STAFF_ADD)) && (
+              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.MCH_ADD)) && (
                 <Buttons
                   buttonDefaultType={"ADD"} onclick={() => goAdd()}
                 />

@@ -1,6 +1,4 @@
 export const API_ROUTES = {
-  //-----::;
-
   //DASHBOARD
   DASHBOARD_MAIN: "dashboard/main",
   DASHBOARD_TOP_10: "dashboard/getTopMerchants",
@@ -12,7 +10,8 @@ export const API_ROUTES = {
   DDL_MCH: "ddl/psmrcpar",
   DDL_AVLUSER: "ddl/availableUser",
   DDL_TABLE_KEYS: "ddl/fieldNames",
-
+  DDL_USER: "ddl/psusrprf",
+  DDL_ACTION: "ddl/action",
 
   //ANNOUNCEMENT
   ANNOUNCEMENT_LIST: "pssysann/list",
@@ -78,6 +77,7 @@ export const API_ROUTES = {
   // DOCUMENT
   DOCUMENT_UPLOAD: "document/upload",
   DOCUMENT_BULK_UPLOAD: "document/bulk_upload",
+  DOC_DOWNLOAD: "document/download",
 
   // FUNCTION
   FUNCTIONS_LIST: "prfuncde/list",
@@ -139,6 +139,7 @@ export const API_ROUTES = {
   UPDATE_TABLE_KEY: "pstblmas/key_update",
   DELETE_TABLE_KEY: "pstblmas/key_delete",
 
+  // TABLE MASTER
   FILE_MANAGE_LIST: "pstblmas/list",
   CREATE_FILE_MANAGE: "pstblmas/create",
   UPDATE_FILE_MANAGE: "pstblmas/update",
@@ -146,32 +147,29 @@ export const API_ROUTES = {
   DELETE_FILE_MANAGE: "pstblmas/delete",
 
   //MEMBER LIST
-  // WORK DAY
   MBR_LIST: "psmbrprf/list",
   MBR_DETAIL: "psmbrprf/detail",
   MBR_CREATE: "psmbrprf/create",
   MBR_UPDATE: "psmbrprf/update",
   MBR_DELETE: "psmbrprf/delete",
-  //-----::;
+
+  //BACKUP
+  LIST_BACKUP: "backup/list",
+  BACKUP_GENBACKUP: "backup/backup",
+  DOWNLOAD_BACKUP: "backup/download",
+
+  //PASSWORD POLICY
+  PASSWORD_POLICY_DETAIL: "prpwdpol/detail",
+  PASSWORD_POLICY_UPDATE: "prpwdpol/update",
+
+  //MAINTENANCE LOG
+  MAINT_SUBFILE_LOG: "mntlog/sub_list",
+
+
   DASHBOARD_SALES: "dashboard/getMonthlySalesForPast12MonthsWithDescription",
   DASHBOARD_COMMISSION: "dashboard/getTotalCommissionPaidByMonthInPast12Months",
 
   ANNOUNCEMENT_ANNOUNCEMENT: "pssysann/announcement",
-
-
-
-
-  DDL_USER: "ddl/psusrprf",
-
-  MAINT_SUBFILE_LOG: "mntlog/sub_list",
-
-  DOC_DOWNLOAD: "document/download",
-
-
-  DDL_ACTION: "ddl/action",
-
-
-
 
   // TRANSACTION CODE
   TRAN_CODE_LIST: "pstrnscd/list",
@@ -180,13 +178,16 @@ export const API_ROUTES = {
   TRAN_CODE_UPDATE: "pstrnscd/update",
   TRAN_CODE_DELETE: "pstrnscd/delete",
 
-  LIST_BACKUP: "backup/list",
-  BACKUP_GENBACKUP: "backup/backup",
-  DOWNLOAD_BACKUP: "backup/download",
 
-  PASSWORD_POLICY_DETAIL: "prpwdpol/detail",
-  PASSWORD_POLICY_UPDATE: "prpwdpol/update",
+  //ORDER
+  ORDER_LIST: "psordpar/list",
+  ORDER_DETAIL: "psordpar/detail",
+  ORDER_CANCEL: "psordpar/update_cancelled",
+  ORDER_PAID: "psordpar/update_paid",
+  ORDER_DONE: "psordpar/update_completed",
+  ORDER_READY: "psordpar/update_preparing",
 
-
-
+  //TRANSACTION
+  TRAN_LIST: 'pstrxpar/list',
+  TRAN_DETAIL: 'pstrxpar/detail'
 };

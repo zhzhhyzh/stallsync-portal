@@ -42,6 +42,8 @@ export const menus: Array<NavItem> = [
         href: "/mbrProfile",
         root: "Member",
         icon: FaUserCircle,
+        permissions: [accessType.MBR_VIEW]
+
       },
 
       {
@@ -49,6 +51,7 @@ export const menus: Array<NavItem> = [
         href: "/order",
         root: "Order",
         icon: FaRegClipboard,
+        permissions:[accessType.ORD_VIEW]
       },
       {
         label: "Announcement",

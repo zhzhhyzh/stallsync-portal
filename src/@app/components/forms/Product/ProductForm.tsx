@@ -69,7 +69,6 @@ import Buttons from "@app/components/common/Buttons/Buttons";
 import Breadcrumbs from "@app/components/common/Breadcrumbs/Breadcrumbs";
 // import TextArea from "antd/es/input/TextArea";
 import { api } from "@app/utils/AxiosUtils"
-import { manageTranCode } from "@app/redux/tranCode/api";
 import { ProductSchema } from "@app/components/forms/@schemas/productSchema";
 import dayjs from 'dayjs'
 import { formatDate } from "@app/utils/DateUtils";
