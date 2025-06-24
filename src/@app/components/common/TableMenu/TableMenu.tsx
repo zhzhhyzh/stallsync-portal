@@ -34,23 +34,32 @@ export default function TableMenu(props: TableMenuDefaultProps) {
     });
   };
 
-  const generateMenuList = (data: MENU_TYPES[]) => {
-    return data.map((item, index) => {
-      if(item.onclick && typeof item.onclick === 'function'){
+  useEffect(() => {
+  if (!props.menus || !Array.isArray(props.menus)) {
+    console.warn("TableMenu: 'menus' prop is missing or invalid.");
+  }
+}, [props.menus]);
+
+const generateMenuList = (data: MENU_TYPES[] = []) => {
+  return data
+    .filter((item) => item && typeof item === 'object') // prevent undefined/null
+    .map((item, index) => {
+      if (typeof item.onclick === 'function') {
         return {
           label: item.label,
           key: `${index}`,
           onClick: item.onclick,
         };
-      }else{
+      } else {
         return {
           label: item.label,
           key: `${index}`,
-          onClick: () => handleClick(item.url || "", item.query || {}, item.breadcrumbRoute || []),
+          onClick: () =>
+            handleClick(item.url || "", item.query || {}, item.breadcrumbRoute || []),
         };
       }
     });
-  };
+};
 
   let items: MenuProps["items"] = generateMenuList(props.menus);
 

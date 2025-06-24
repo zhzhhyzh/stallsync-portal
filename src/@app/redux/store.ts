@@ -23,6 +23,7 @@ import workday from './workday/slice';
 import announcement from './announcement/slice';
 import mbrs from './mbrProfile/slice';
 import reports from './reports/slice';
+import order from './order/slice';
 
 //::;
 
@@ -59,7 +60,7 @@ export function makeStore() {
       rewards,
 
       tranCodes,
-
+      order,
       backupDatabase,
 
 

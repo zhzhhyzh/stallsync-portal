@@ -220,7 +220,7 @@ export default function TranCodePage() {
                 label: "Maint Log",
                 breadcrumbRoute: [
                   {
-                    title: "TranCode",
+                    title: "Reward",
                     href: `/reward`,// Add parameter if needed eg. /generalParameter/?id=123
                   },
                   {
