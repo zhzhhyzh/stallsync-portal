@@ -51,7 +51,7 @@ export default function AdminAccountsForm(props: any) {
   const mode = props.mode;
   const [detailData] = useFetchAdminAccountsDetail(id);
 
-  const [ddlData] = useFetchDDL({ code: ["USRSTS", "HPPRE", "USRROLE"] });
+  const [ddlData] = useFetchDDL({ code: ["USRSTS", "HPPRE", "USRROLE", "USRTYP"] });
 
   const initialValues = {
     psusrunm: "",
@@ -62,6 +62,7 @@ export default function AdminAccountsForm(props: any) {
     psusrrol: "",
     psusrsts: "",
     psusrpre: "",
+    psusrtyp: "",
     psisagnt: "N",
     //psaplaid: "",
     psentuid: "",
@@ -272,6 +273,36 @@ export default function AdminAccountsForm(props: any) {
                           )}
                         </FormControl>
                       )}
+                      <FormControl
+                        id="psusrtyp"
+                        isInvalid={
+                          Boolean(formik.errors.psusrtyp) &&
+                          Boolean(formik.touched.psusrtyp)
+                        }
+                      >
+                        <FormLabel>User Type</FormLabel>
+                        <Select
+                          placeholder="Please Select User Type"
+                          value={formik.values.psusrtyp}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          isDisabled={mode === "VIEW" ? true : false}
+                        >
+                          {ddlData?.USRTYP?.map((option: DDL_TYPES) => (
+                            <option
+                              key={option.prgecode}
+                              value={option.prgecode}
+                            >
+                              {option.prgedesc}
+                            </option>
+                          ))}
+                        </Select>
+                        {formik.errors.psusrtyp && (
+                          <FormErrorMessage>
+                            {formik.errors.psusrtyp}
+                          </FormErrorMessage>
+                        )}
+                      </FormControl>
                     </Box>
                     <Box display="flex" flexDir="column" gap={6} width="100%">
                       <FormControl
