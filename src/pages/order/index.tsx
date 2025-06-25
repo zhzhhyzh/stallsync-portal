@@ -113,7 +113,7 @@ export default function OrderPage() {
       dataIndex: "psmrcuid",
       key: "psmrcuid",
       render: (_: any, record: any) => (
-        <Text>{`${record.psmrcuiddsc}`}</Text>
+        <Text>{`${record.psmrcuid}-${record.psmrcuiddsc}`}</Text>
       )
     },
 
@@ -122,7 +122,7 @@ export default function OrderPage() {
       dataIndex: "psordsts",
       key: "psordsts",
       render: (_: any, record: any) => (
-        _ === "N" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+        _ === "N" ? <Text fontWeight={"normal"} color={"black"} textAlign="center" style={{
           width: 40,
           height: 20,
           // backgroundColor: Colors.SUCCESS,
@@ -137,7 +137,7 @@ export default function OrderPage() {
           height: 20,
           backgroundColor: Colors.DANGER,
           borderRadius: 10
-        }}>Pending</Text> : _ === "A" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+        }}>Pending</Text> : _ === "A" ? <Text fontWeight={"normal"} color={"black"} textAlign="center" style={{
           width: 40,
           height: 20,
           // backgroundColor: Colors.DANGER,
