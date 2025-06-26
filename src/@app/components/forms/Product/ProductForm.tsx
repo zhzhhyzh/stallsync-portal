@@ -315,6 +315,7 @@ export default function ProductForm(props: any) {
       fn: getmanageProduct({
         id: mode === "EDIT" ? data.id : "",
         ...data,
+        psmrcuid: mchId ? mchId : formik.values.psprdcid,
         psprdlsr: formik.values.psprdcid ? formik.values.psprdlsr : 0,
         psprdtpr: formik.values.psprdtak ? formik.values.psprdtpr : 0,
         psprdtak: formik.values.psprdtak ? "Y" : "N",
@@ -930,38 +931,42 @@ export default function ProductForm(props: any) {
 
 
 
-                    <FormControl
-                      id="psmrcuid"
-                      isInvalid={
-                        Boolean(formik.errors.psmrcuid) &&
-                        Boolean(formik.touched.psmrcuid)
-                      }
-                    >
-                      <FormLabel>Merchant</FormLabel>
-                      <Select
-                        placeholder="Please Select Merchant"
-                        value={mchId ? mchId : formik.values.psmrcuid}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        isDisabled={mode === "VIEW" ? true : false}
+                    {
+                      (mchId ==false || mchId =="") &&
+                      <FormControl
+                        id="psmrcuid"
+                        isInvalid={
+                          Boolean(formik.errors.psmrcuid) &&
+                          Boolean(formik.touched.psmrcuid)
+                        }
                       >
-                        {Array.isArray(ddlData2) &&
-                          ddlData2
-                            .map((option: any) => (
-                              <option
-                                key={option.psmrcuid}
-                                value={option.psmrcuid}
-                              >
-                                {option.psmrcuid + " - " + option.psmrcnme}
-                              </option>
-                            ))}
-                      </Select>
-                      {formik.errors.psmrcuid && (
-                        <FormErrorMessage>
-                          {formik.errors.psmrcuid}
-                        </FormErrorMessage>
-                      )}
-                    </FormControl>
+                        <FormLabel>Merchant</FormLabel>
+                        <Select
+                          placeholder="Please Select Merchant"
+                          value={mchId ? mchId : formik.values.psmrcuid}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          isDisabled={mode === "VIEW" ? true : false}
+                        >
+                          {Array.isArray(ddlData2) &&
+                            ddlData2
+                              .map((option: any) => (
+                                <option
+                                  key={option.psmrcuid}
+                                  value={option.psmrcuid}
+                                >
+                                  {option.psmrcuid + " - " + option.psmrcnme}
+                                </option>
+                              ))}
+                        </Select>
+                        {formik.errors.psmrcuid && (
+                          <FormErrorMessage>
+                            {formik.errors.psmrcuid}
+                          </FormErrorMessage>
+                        )}
+                      </FormControl>
+
+                    }
                     <FormControl
                       id="psprdrtg"
                       isInvalid={Boolean(formik.errors.psprdrtg) && Boolean(formik.touched.psprdrtg)}

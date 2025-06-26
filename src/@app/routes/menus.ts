@@ -151,7 +151,7 @@ export const menus: Array<NavItem> = [
           },
           {
             label: "System",
-            permissions: [accessType.FILEMANAGE_VIEW, accessType.BACKUP_VIEW],
+            // permissions: [accessType.FILEMANAGE_VIEW, accessType.BACKUP_VIEW],
             children: [
               {
                 label: "System Table",
@@ -189,9 +189,9 @@ export const menus: Array<NavItem> = [
             permissions: [accessType.PROF_VIEW],
           },
         ],
-        permissions: [
-          accessType.PROF_VIEW,
-        ],
+        // permissions: [
+        //   accessType.PROF_VIEW,
+        // ],
       },
     ],
   },

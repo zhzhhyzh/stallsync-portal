@@ -68,43 +68,43 @@ export const accessType = {
     action: "EDIT",
   },
   FUNC_VIEW: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "FUNC",
     action: "VIEW",
   },
   FUNC_ADD: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "FUNC",
     action: "ADD",
   },
   FUNC_EDIT: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "FUNC",
     action: "EDIT",
   },
   FUNC_DEL: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "FUNC",
     action: "DEL",
   },
 
   GEN_VIEW: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "GEN",
     action: "VIEW",
   },
   GEN_ADD: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "GEN",
     action: "ADD",
   },
   GEN_EDIT: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "GEN",
     action: "EDIT",
   },
   GEN_DEL: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "GEN",
     action: "DEL",
   },
@@ -166,12 +166,12 @@ export const accessType = {
   },
 
   PWPOLICY_VIEW: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "PWPOLICY",
     action: "VIEW",
   },
   PWPOLICY_EDIT: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "PWPOLICY",
     action: "EDIT",
   },
@@ -193,22 +193,22 @@ export const accessType = {
 
 
   ROLE_VIEW: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "ROLE",
     action: "VIEW",
   },
   ROLE_ADD: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "ROLE",
     action: "ADD",
   },
   ROLE_EDIT: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "ROLE",
     action: "EDIT",
   },
   ROLE_DELETE: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "ROLE",
     action: "DEL",
   },
@@ -219,12 +219,12 @@ export const accessType = {
 
   // ----------Seperator----------- ::;
   ACES_VIEW: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "ACES",
     action: "VIEW",
   },
   ACES_EDIT: {
-    type: "PARAM",
+    type: "CONFIG",
     function: "ACES",
     action: "EDIT",
   },

@@ -189,7 +189,7 @@ export default function OrderForm(props: any) {
               <Flex key={index} flex="1" direction="column" align="center" zIndex={1}>
                 <Circle
                   size="10"
-                  bg={isCompleted ? "purple.500" : "gray.300"}
+                  bg={isCompleted ? Colors.PRIMARY : "gray.300"}
                   color="white"
                 >
                   {isCompleted ? <CheckIcon boxSize={4} /> : <Icon as={step.icon} boxSize={5} />}

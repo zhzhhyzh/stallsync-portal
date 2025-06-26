@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
 import { logout, } from "@app/redux/app/slice";
 import { selectIsLogined } from "@app/redux/app/slice";
 import { useRouter } from "next/router";
-import { fetchProducts, selectExtra, selectProducts, selectTotal , selectHeader} from "@app/redux/product/slice";
+import { fetchProducts, selectExtra, selectProducts, selectTotal, selectHeader } from "@app/redux/product/slice";
 
-function useFetchProducts(props:any) {
+function useFetchProducts(props: any) {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -36,7 +36,7 @@ function useFetchProducts(props:any) {
     }
     setLoading(false);
   }
-  return [data, onInit, total, extra, loading, headerInfo];
+  return [data, onInit, total, extra, headerInfo, loading,];
 }
 
 interface useFetchProductsProps {
