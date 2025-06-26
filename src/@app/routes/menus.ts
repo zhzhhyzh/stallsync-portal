@@ -93,13 +93,13 @@ export const menus: Array<NavItem> = [
             // permissions: [
             // ],
           },
-          {
-            label: "Transaction",
-            root: "Transaction",
-            href: "/transaction",
-            // permissions: [
-            // ],
-          },
+          // {
+          //   label: "Transaction",
+          //   root: "Transaction",
+          //   href: "/transaction",
+          //   // permissions: [
+          //   // ],
+          // },
 
 
 

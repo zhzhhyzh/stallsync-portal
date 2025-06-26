@@ -334,7 +334,7 @@ export default function StaffForm(props: any) {
           <Breadcrumbs breadcrumbItems={[
             {
               title: "Staff",
-              href: `/tranCode`,// Add parameter if needed eg. /generalParameter/?id=123
+              href: `/staff`,// Add parameter if needed eg. /generalParameter/?id=123
             },
             {
               title: "Staff (" + mode + ")",
