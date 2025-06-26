@@ -258,7 +258,7 @@ export default function RewardForm(props: any) {
           <Breadcrumbs breadcrumbItems={[
             {
               title: "Reward",
-              href: `/tranCode`,// Add parameter if needed eg. /generalParameter/?id=123
+              href: `/reward`,// Add parameter if needed eg. /generalParameter/?id=123
             },
             {
               title: "Reward (" + mode + ")",

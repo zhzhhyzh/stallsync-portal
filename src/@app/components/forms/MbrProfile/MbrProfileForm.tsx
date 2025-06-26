@@ -142,7 +142,7 @@ export default function MbrProfileForm(props: any) {
           <Breadcrumbs breadcrumbItems={[
             {
               title: "Member Profile",
-              href: `/tranCode`,// Add parameter if needed eg. /generalParameter/?id=123
+              href: `/mbrProfile`,// Add parameter if needed eg. /generalParameter/?id=123
             },
             {
               title: "Member Profile (" + mode + ")",

@@ -130,20 +130,20 @@ export default function OrderPage() {
         }}>New</Text> : _ === "P" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
           width: 40,
           height: 20,
-          backgroundColor: Colors.DANGER,
+          backgroundColor: Colors.WARNING,
           borderRadius: 10
         }}>Paid</Text> : _ === "G" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
           width: 40,
           height: 20,
-          backgroundColor: Colors.DANGER,
+          // backgroundColor: Colors.WARNING,
           borderRadius: 10
-        }}>Pending</Text> : _ === "A" ? <Text fontWeight={"normal"} color={"black"} textAlign="center" style={{
-          width: 40,
+        }}>Pending</Text> : _ === "A" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+          width: 80,
           height: 20,
-          // backgroundColor: Colors.DANGER,
+          backgroundColor: Colors.WARNING,
           borderRadius: 10
         }}>Preparing</Text> : _ === "D" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
+          width: 85,
           height: 20,
           backgroundColor: Colors.SUCCESS,
           borderRadius: 10
@@ -181,7 +181,7 @@ export default function OrderPage() {
                 </Tooltip>
               )
             }
-            {
+            {/* {
               (homeData?.access && checkAccessMatrix(homeData?.access, accessType.ORD_EDIT)) && (
                 <Tooltip label='Edit' fontSize='sm'>
                   <IconButton
@@ -197,7 +197,7 @@ export default function OrderPage() {
                 </Tooltip>
 
               )
-            }
+            } */}
             {/* {
               // todo
               (homeData?.access && checkAccessMatrix(homeData?.access, accessType.ORD_DEL)) && (
@@ -460,8 +460,8 @@ export default function OrderPage() {
             totalRecords={totalRecords}
             extraParams={{
               psordphn: search,
-              from: new Date(tempFromDate),
-              to: new Date(tempToDate),
+              ...(tempFromDate ? { from: new Date(tempFromDate) } : {}),
+              ...(tempToDate ? { to: new Date(tempToDate) } : {}),
               psmrcuid: status
 
             }}

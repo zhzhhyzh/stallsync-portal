@@ -33,6 +33,7 @@ export async function manageOrder(data: any = {}): Promise<any> {
   }
 
   const result = await api(route, 'POST', data);
+  console.log(result)
   return result;
 }
 

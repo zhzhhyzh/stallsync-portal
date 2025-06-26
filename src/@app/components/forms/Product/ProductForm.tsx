@@ -659,7 +659,7 @@ export default function ProductForm(props: any) {
           <Breadcrumbs breadcrumbItems={[
             {
               title: "Product",
-              href: `/tranCode`,// Add parameter if needed eg. /generalParameter/?id=123
+              href: `/product`,// Add parameter if needed eg. /generalParameter/?id=123
             },
             {
               title: "Product (" + mode + ")",
