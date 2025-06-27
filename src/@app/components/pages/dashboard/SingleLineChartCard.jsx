@@ -1,42 +1,52 @@
 import Spacing from "@app/constants/Spacing";
 import { useAppDispatch } from "@app/hooks/useRedux";
-import { fetchCommissions } from "@app/redux/dashboard/slice";
 import {
   Box,
   Card,
   CardBody,
   Flex,
-  Radio,
-  RadioGroup,
-  Select,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
 const SingleLineChartCard = ({ data }) => {
+  const dispatch = useAppDispatch();
+  const [groupInd, setGroupInd] = useState("false");
+
+  // Transform data into ApexChart format
+  function transformOrderData(data) {
+    return [
+      {
+        name: "Total Orders",
+        data: data.map(item => item.totalOrders),
+        color: "#00BFFF",
+      },
+    ];
+  }
+
+  const lineChartSeries = transformOrderData(data);
+
   const lineChartOptions = {
     chart: {
       type: "line",
-      zoom: {
-        enabled: false,
-      },
-      toolbar: {
-        show: false,
-      },
+      zoom: { enabled: false },
+      toolbar: { show: false },
     },
     xaxis: {
-      categories: [...new Set(data?.map((item) => item.month))],
+      categories: data.map(item => item.month),
     },
     yaxis: {
       labels: {
-        formatter: value=>new Intl.NumberFormat("en-US", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }).format(value),
+        formatter: value =>
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(value),
       },
     },
     stroke: {
@@ -46,38 +56,9 @@ const SingleLineChartCard = ({ data }) => {
       size: 5,
     },
     legend: {
-      show: false, // Hide the legend from ApexCharts
+      show: false,
     },
   };
-
-  const lineChartSeries = transformCommissionData(data);
-
-  const onChange = async (value) => {
-    setGroupInd(value);
-
-    await dispatch(fetchCommissions({ groupInd: Boolean(value) })); //fire api (call action)
-  };
-
-  function transformCommissionData(data) {
-    // Extract unique months in order
-    // const months = [...new Set(data.map((item) => item.month))];
-
-    // Map totalCommission values into an array
-    const commissionData = data?.map((item) => item.totalCommission);
-
-    // Create the result
-    const result = [
-      {
-        name: "Total Commission",
-        data: commissionData,
-        color: "#00BFFF", // Example color for the commission line
-      },
-    ];
-
-    return result;
-  }
-  const [groupInd, setGroupInd] = useState("false");
-  const dispatch = useAppDispatch();
 
   return (
     <Card
@@ -88,7 +69,6 @@ const SingleLineChartCard = ({ data }) => {
       h="400px"
       bgColor="#fff"
       borderRadius={0}
-      //   ml={0}
     >
       <CardBody
         h="100%"
@@ -99,8 +79,7 @@ const SingleLineChartCard = ({ data }) => {
       >
         <Flex
           w="100%"
-          flexDir="row"
-          alignItems={"center"}
+          alignItems="center"
           justifyContent="space-between"
         >
           <Text
@@ -112,32 +91,11 @@ const SingleLineChartCard = ({ data }) => {
             color="black"
             pl="18px"
             fontWeight="medium"
-            verticalAlign={"middle"}
           >
-            Total Commission Paid (Year To Date)
+            Total Order Counts
           </Text>
-
-          <RadioGroup
-            onChange={onChange}
-            value={groupInd}
-            gap="10px"
-            display="flex"
-            flexDir="row"
-            flex={1}
-          >
-            <Radio value={"false"}>Personal</Radio>
-            <Radio value={"true"}>Group</Radio>
-          </RadioGroup>
-          {/* <Select>
-                  <option value="personal">
-                      Personal
-                  </option>
-                  <option value="group">
-                      Group
-                  </option>
-                </Select> */}
         </Flex>
-        {/* Chart */}
+
         <Box width="100%" h="100%" mt={9}>
           <ReactApexChart
             options={lineChartOptions}

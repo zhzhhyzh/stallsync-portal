@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { AppState, AppThunk } from '../store'
-import { getMain, getTop10, getCommission, getSales } from './api'
+import { getMain, getTop10 } from './api'
 
 export interface State {
     numberBoard: any[];
-    totalCommission : any[];
+    orderChart: any[];
     top10Agents: any[];
     applications: any[];
     totalSales: any[];
@@ -12,16 +12,16 @@ export interface State {
 
 const initialState: State = {
     numberBoard: [],
-    totalCommission: [],
+    orderChart: [],
     top10Agents: [],
     applications: [],
     totalSales: [],
-    
+
 }
 
 export const fetchMain = createAsyncThunk(
     'app/fetchMain',
-    async (data:any) => {
+    async (data: any) => {
         const response = await getMain(data)
         return response
     }
@@ -29,27 +29,13 @@ export const fetchMain = createAsyncThunk(
 
 export const fetchTop10 = createAsyncThunk(
     'app/fetchTop10',
-    async (data:any) => {
+    async (data: any) => {
         const response = await getTop10(data)
         return response
     }
 )
 
-export const fetchCommissions = createAsyncThunk(
-    'app/fetchCommissions',
-    async (data:any) => {
-        const response = await getCommission(data)
-        return response
-    }
-)
 
-export const fetchSales = createAsyncThunk(
-    'app/fetchSales',
-    async (data:any) => {
-        const response = await getSales(data)
-        return response
-    }
-)
 
 
 export const reducerSlice = createSlice({
@@ -67,21 +53,13 @@ export const reducerSlice = createSlice({
             .addCase(fetchMain.fulfilled, (state, action) => {
                 state.applications = action.payload?.message?.applications
                 state.numberBoard = action.payload?.message?.numberBoard
-                state.totalSales = action.payload?.message?.totalSales
-                state.totalCommission = action.payload?.message?.totalCommission
+                state.totalSales = action.payload?.message?.salesChart
+                state.orderChart = action.payload?.message?.orderChart
                 state.top10Agents = action.payload?.message?.top10Agents
             })
-            .addCase(fetchCommissions.fulfilled, (state, action) => {
-               
-                state.totalCommission = action.payload?.message?.totalCommission
-            })
-            .addCase(fetchSales.fulfilled, (state, action) => {
-               
-                state.totalSales = action.payload?.message?.totalSales
-            })
-  
+
             .addCase(fetchTop10.fulfilled, (state, action) => {
-               
+
                 state.top10Agents = action.payload?.message?.top10Agents
             })
     },
@@ -91,7 +69,7 @@ export const { clearDashboardData } = reducerSlice.actions
 
 export const selectApplications = (state: AppState) => state.dashboard?.applications
 export const selectTotalSales = (state: AppState) => state.dashboard?.totalSales
-export const selectTotalCommission = (state: AppState) => state.dashboard?.totalCommission
+export const selectorderChart = (state: AppState) => state.dashboard?.orderChart
 export const selectMemberTiers = (state: AppState) => state.dashboard?.numberBoard
 export const selecTop10Agents = (state: AppState) => state.dashboard?.top10Agents
 
