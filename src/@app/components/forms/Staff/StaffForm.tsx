@@ -247,15 +247,17 @@ export default function StaffForm(props: any) {
         setSelectedSfi([]);
       }
 
-      reloadDDLData1(detailData?.psstftyp);
+      // reloadDDLData1(detailData?.psstftyp);
     }
   }, [detailData]);
 
   useEffect(() => {
-    if (formik.values.psstftyp) {
-      reloadDDLData1(formik.values.psstftyp);
+    if (detailData?.psstftyp) {
+      reloadDDLData1(detailData.psstftyp);
     }
-  }, [formik.values.psstftyp]);
+  }, [detailData?.psstftyp]);
+
+
   async function onSubmit(data: any) {
     let uploadedSfi: string[] = [];
     if (sfi.length > 0) {
@@ -689,11 +691,11 @@ export default function StaffForm(props: any) {
               >
                 <FormLabel>Merchants</FormLabel>
                 <Select
-                  placeholder="Please Select User"
+                  placeholder="Please Select Merchants"
                   value={formik.values.psmrcuid}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  isDisabled={mode === "VIEW" ? true : false}
+                  isDisabled={mode === "VIEW" || formik.values.psstftyp == "A"? true : false}
                 >
                   {Array.isArray(ddlData2) &&
                     ddlData2

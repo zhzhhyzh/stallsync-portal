@@ -35,11 +35,11 @@ import { closeGlobalModal, openGlobalModal, refreshTable, selectHome } from "@ap
 import { showModal } from "@app/helpers/modalHelper";
 import { useRouter } from "next/router";
 import useApi from "@app/hooks/useApi";
-import useFetchOrders from "@app/hooks/selector/useFetchOrders";
+import useFetchTransactions from "@app/hooks/selector/useFetchTransactions";
 import {
-  fetchOrders,
+  fetchTransactions,
 
-} from "@app/redux/order/slice";
+} from "@app/redux/transaction/slice";
 import useFetchDDL from "@app/hooks/selector/useFetchDDL";
 import { DDL_TYPES } from "@app/interfaces/ddl.types";
 import TableMenu from "@app/components/common/TableMenu/TableMenu";
@@ -50,17 +50,17 @@ import Breadcrumbs from "@app/components/common/Breadcrumbs/Breadcrumbs";
 import { MdLockReset } from "react-icons/md";
 import useFetchMerchants from "@app/hooks/selector/useFetchMerchants";
 
-export default function OrderPage() {
+export default function TransactionPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { sendRequest, loading } = useApi({ title: "Order" });
+  const { sendRequest, loading } = useApi({ title: "Transaction" });
   const homeData = useAppSelector(selectHome);
 
   //sample code how to use this hook
-  const [tableData, refreshFn, totalRecords, extra] = useFetchOrders({});
+  const [tableData, refreshFn, totalRecords, extra] = useFetchTransactions({});
   // const [ddlData] = useFetchDDL({ code: ["GTCAT"] });
   //pass tableData to table
-  // const [ddlData] = useFetchDDL({ code: ["STAFFTYP", "YESORNO", "NATION"] });
+  const [ddlData] = useFetchDDL({ code: ["TRXSTS"] });
   const [ddlData1] = useFetchMerchants({});
   const [search, setSearch] = useState();
   const [status, setStatus] = useState();
@@ -76,20 +76,21 @@ export default function OrderPage() {
 
   const columns: any[] = [
     {
-      title: "Date",
-      dataIndex: "psordodt",
-      key: "psordodt",
+      title: "Transaction Date",
+      dataIndex: "pstrxdat",
+      key: "pstrxdat",
+    },
+    {
+      title: "Transaction Id",
+      dataIndex: "pstrxuid",
+      key: "pstrxuid",
     },
     {
       title: "Order Id",
       dataIndex: "psorduid",
       key: "psorduid",
     },
-    {
-      title: "Order Grand Total",
-      dataIndex: "psordgra",
-      key: "psordgra",
-    },
+
 
     // {
     //   title: "Member",
@@ -100,61 +101,22 @@ export default function OrderPage() {
     //   )
     // },
     {
-      title: "Phone No.",
-      dataIndex: "psordphn",
-      key: "psordphn",
+      title: "Status",
+      dataIndex: "pstrxsts",
+      key: "pstrxsts",
       render: (_: any, record: any) => (
-        <Text>{`${record.psordpredsc}${record.psordphn}`}</Text>
+        <Text>{`${record.pstrxsts} - ${record.pstrxstsdsc}`}</Text>
       )
     },
 
-    {
-      title: "Merchant",
-      dataIndex: "psmrcuid",
-      key: "psmrcuid",
-      render: (_: any, record: any) => (
-        <Text>{`${record.psmrcuid}-${record.psmrcuiddsc}`}</Text>
-      )
-    },
-
-    {
-      title: "Order Status",
-      dataIndex: "psordsts",
-      key: "psordsts",
-      render: (_: any, record: any) => (
-        _ === "N" ? <Text fontWeight={"normal"} color={"black"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          // backgroundColor: Colors.SUCCESS,
-          borderRadius: 10
-        }}>New</Text> : _ === "P" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.WARNING,
-          borderRadius: 10
-        }}>Paid</Text> : _ === "G" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          // backgroundColor: Colors.WARNING,
-          borderRadius: 10
-        }}>Pending</Text> : _ === "A" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 80,
-          height: 20,
-          backgroundColor: Colors.WARNING,
-          borderRadius: 10
-        }}>Preparing</Text> : _ === "D" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 85,
-          height: 20,
-          backgroundColor: Colors.SUCCESS,
-          borderRadius: 10
-        }}>Completed</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
-          height: 20,
-          backgroundColor: Colors.DANGER,
-          borderRadius: 10,
-        }}>Cancelled</Text>
-      )
-    },
+    // {
+    //   title: "Merchant",
+    //   dataIndex: "psmrcuid",
+    //   key: "psmrcuid",
+    //   render: (_: any, record: any) => (
+    //     <Text>{`${record.psmrcuid}-${record.psmrcuiddsc}`}</Text>
+    //   )
+    // },
     {
       title: "Action",
       key: "action",
@@ -216,25 +178,8 @@ export default function OrderPage() {
               )
             } */}
 
-            <TableMenu menus={[
-              {
-                url: `/order/transaction`,
-                query: {
-                  id: record?.id,
-                  date: record?.psordodt, 
-                  file: extra.file
-                },
-                label: "Transaction",
-                breadcrumbRoute: [
-                  {
-                    title: "Order",
-                    href: `/order`,// Add parameter if needed eg. /generalParameter/?id=123
-                  },
-                  {
-                    title: "Transaction",
-                  },
-                ]
-              },
+            {/* <TableMenu menus={[
+            
               {
                 url: `/maintLogs`,
                 query: {
@@ -247,12 +192,16 @@ export default function OrderPage() {
                     title: "Order",
                     href: `/order`,// Add parameter if needed eg. /generalParameter/?id=123
                   },
+                    {
+                    title: "Transaction",
+                    href: `/order/transaction`,// Add parameter if needed eg. /generalParameter/?id=123
+                  },
                   {
                     title: "Maintenance Log",
                   },
                 ]
               }
-            ]} />
+            ]} /> */}
 
           </Space>
         </Flex>
@@ -333,9 +282,11 @@ export default function OrderPage() {
 
   function goView(id: string) {
     router.push({
-      pathname: "/order/Detail",
+      pathname: "/order/transaction/Detail",
       query: {
         id: id,
+        ordId: String(router?.query.id),
+        ordDate: String(router?.query.date),
         mode: "VIEW"
       },
     });
@@ -357,11 +308,11 @@ export default function OrderPage() {
         <Flex justifyContent={"space-between"} pl={4} pr={4} pt={4}>
           <Flex direction={"column"} alignSelf={"center"}>
             <Text fontSize={"3xl"} fontWeight="normal" mb={1}>
-              Order
+              Transaction
             </Text>
             <Breadcrumbs breadcrumbItems={[
               {
-                title: "Order"
+                title: "Transaction"
               },
             ]} />
           </Flex>
@@ -383,6 +334,16 @@ export default function OrderPage() {
           </Box>
         </Flex>
         <Card p={1} mt={4}>
+          <Text fontSize={"sm"} fontWeight="normal" mb={1}>
+            Order ID: <span style={{ fontWeight: "bold" }}>{String(router?.query.id)}</span>
+          </Text>
+
+
+
+          <Text fontSize={"sm"} fontWeight="normal" mb={1}>
+            Order Date: <span style={{ fontWeight: "bold" }}>{String(router?.query.date)}</span>
+          </Text>
+
           <Flex bgColor="#fff" justifyContent={"space-between"} p={3}>
             <Box
               pr={{
@@ -396,26 +357,23 @@ export default function OrderPage() {
                   type="text"
                   name="search"
                   onChange={searchOnChange}
-                  placeholder="Order Phone No."
+                  placeholder="Transaction Id"
                   value={search}
                 />
 
+
+
                 <Select
                   name="status"
-                  placeholder="Please Select Merchants"
-                  value={status}
                   onChange={statusOnChange}
+                  placeholder="Please Select Transaction Status"
+                  value={status}
                 >
-                  {Array.isArray(ddlData1) &&
-                    ddlData1
-                      .map((option: any) => (
-                        <option
-                          key={option.psmrcuid}
-                          value={option.psmrcuid}
-                        >
-                          {option.psmrcuid + " - " + option.psmrcnme}
-                        </option>
-                      ))}
+                  {ddlData?.TRXSTS?.map((option: DDL_TYPES) => (
+                    <option key={option.prgecode} value={option.prgecode}>
+                      {option.prgedesc}
+                    </option>
+                  ))}
                 </Select>
 
                 {/* Everyone can use*/}
@@ -474,13 +432,13 @@ export default function OrderPage() {
           <Table
             columns={columns}
             data={tableData}
-            refreshFn={fetchOrders}
+            refreshFn={fetchTransactions}
             totalRecords={totalRecords}
             extraParams={{
-              psordphn: search,
+              search,
               ...(tempFromDate ? { from: new Date(tempFromDate) } : {}),
               ...(tempToDate ? { to: new Date(tempToDate) } : {}),
-              psmrcuid: status
+              pstrxsts: status
 
             }}
           //onDoubleClick={showInfo}

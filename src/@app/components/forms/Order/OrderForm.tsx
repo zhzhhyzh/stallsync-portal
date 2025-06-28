@@ -155,14 +155,23 @@ export default function OrderForm(props: any) {
 
     return (
       <Box bg="white" borderRadius="xl" p={5} boxShadow="lg">
-        <Flex justify="space-between" align="center" mb={4}>
-          <Text fontWeight="bold" color="gray.600">
-            ORDER <Text as="span" color="blue.500">{invoiceNumber}</Text>
+        <Flex
+          justify="space-between"
+          align="left"
+          mb={4}
+          gap={4}
+          direction="column"
+          wrap="nowrap"
+        >
+          <Text fontWeight="bold" whiteSpace="nowrap" color="gray.600">
+            ORDER <Text as="span" color={Colors.PRIMARY}>{invoiceNumber}</Text>
           </Text>
-          <Box textAlign="right">
-            <Text fontSize="sm">invoice Date: <b>{invoiceDate}</b></Text>
-          </Box>
+
+          <Text fontSize="sm" whiteSpace="nowrap" textAlign="left">
+            Invoice Date: <b>{invoiceDate}</b>
+          </Text>
         </Flex>
+
 
         <Flex position="relative" justify="space-between" align="center">
           {/* Line behind all steps */}
@@ -178,7 +187,7 @@ export default function OrderForm(props: any) {
             <Box
               width={`${(currentIndex) / (steps.length - 1) * 100}%`}
               height="100%"
-              bg="purple.500"
+              bg={Colors.PRIMARY}
             />
           </Box>
 
@@ -385,13 +394,26 @@ export default function OrderForm(props: any) {
                 ))}
               </table>
 
-              <div>
+              {/* <div>
                 <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
                   RM {total.toLocaleString()}
                 </h2>
+              </div> */}
+
+              <div className="flex flex-col items-end gap-1 text-right text-gray-800 mt-6 pt-4 border-t border-gray-300">
+                <div className="text-l">
+                  <span className="font-medium mr-2">Subtotal:</span>
+                  RM {Number(detailData?.psordamt || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                </div>
+                <div className="text-l">
+                  <span className="font-medium mr-2">SST (6%):</span>
+                  RM {Number(detailData?.psordsst || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                </div>
+                <div className="text-xl font-bold mt-2">
+                  <span className="mr-2">Total:</span>
+                  RM {Number(detailData?.psordgra || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                </div>
               </div>
-
-
 
               <footer className="footer border-t-2 border-gray-300 pt-5">
                 <ul className="flex flex-col items-center justify-center gap-2">

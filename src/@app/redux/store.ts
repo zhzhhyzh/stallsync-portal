@@ -28,6 +28,7 @@ import order from './order/slice';
 //::;
 
 import tranCodes from "./tranCode/slice";
+import transactions from "./transaction/slice";
 
 import backupDatabase from "./backup/slice";
 
@@ -39,6 +40,7 @@ export function makeStore() {
     reducer: {
       staffs,
       merchants,
+      transactions,
       mbrs,
       announcement,
       app,
