@@ -313,9 +313,9 @@ export default function ProductForm(props: any) {
 
     const { success } = await sendRequest({
       fn: getmanageProduct({
-        id: mode === "EDIT" ? data.id : "",
         ...data,
-        psmrcuid: mchId ? mchId : formik.values.psprdcid,
+        id: mode === "EDIT" ? data.id : "",
+        psmrcuid: mchId ? mchId : formik.values.psmrcuid,
         psprdlsr: formik.values.psprdcid ? formik.values.psprdlsr : 0,
         psprdtpr: formik.values.psprdtak ? formik.values.psprdtpr : 0,
         psprdtak: formik.values.psprdtak ? "Y" : "N",
@@ -932,7 +932,7 @@ export default function ProductForm(props: any) {
 
 
                     {
-                      (mchId ==false || mchId =="") &&
+                      (mchId !== false || mchId !== "") &&
                       <FormControl
                         id="psmrcuid"
                         isInvalid={

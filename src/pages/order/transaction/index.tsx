@@ -435,7 +435,7 @@ export default function TransactionPage() {
             refreshFn={fetchTransactions}
             totalRecords={totalRecords}
             extraParams={{
-              search,
+              psordphn: search,
               ...(tempFromDate ? { from: new Date(tempFromDate) } : {}),
               ...(tempToDate ? { to: new Date(tempToDate) } : {}),
               pstrxsts: status

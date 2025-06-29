@@ -616,18 +616,22 @@ export default function StaffForm(props: any) {
                 <FormControl
                   id="psstftyp"
                   isInvalid={Boolean(formik.errors.psstftyp) && Boolean(formik.touched.psstftyp)}
-                  isReadOnly={mode === "VIEW" ? true : false}
+                  isReadOnly={mode === "VIEW" || mode === "EDIT" ? true : false}
                 >
                   {/* <FormLabel>Debit/Credit*</FormLabel> */}
-                  <CustomFormLabel labelText="Staff Type" />
+                  <CustomFormLabel labelText="StaffsType" />
                   <Select
                     placeholder="Select Staff Type"
                     value={formik.values.psstftyp || ""}
-                    onChange={formik.handleChange}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      formik.setFieldValue("psstftyp", value);
+                      reloadDDLData1(value);
+                    }}
                     style={{
                       fontSize: 14,
                     }}
-                  // isDisabled={mode === "VIEW" ? true : false}
+                    isDisabled={mode === "VIEW" || mode === "EDIT" ? true : false}
                   >
                     {ddlData?.STAFFTYP?.map((option: DDL_TYPES) => ( //change code
                       <option key={option.prgecode} value={option.prgecode}>
@@ -644,42 +648,67 @@ export default function StaffForm(props: any) {
 
 
 
+                {mode === "ADD" ?
 
-                <FormControl
-                  id="psusrunm"
-                  isInvalid={
-                    Boolean(formik.errors.psusrunm) &&
-                    Boolean(formik.touched.psusrunm)
-                  }
-                  isReadOnly={mode == "VIEW" || formik.values.psstftyp != ""}
-                >{
-                    formik.values.psstftyp == "" ? <FormLabel>User Account</FormLabel> : <CustomFormLabel labelText="User Account" />
-                  }
+                  <FormControl
+                    id="psusrunm"
+                    isInvalid={
+                      Boolean(formik.errors.psusrunm) &&
+                      Boolean(formik.touched.psusrunm)
+                    }
+                    isReadOnly={mode === "VIEW" || mode === "EDIT" || formik.values.psstftyp != ""}
+                  >{
+                      formik.values.psstftyp == "" ? <FormLabel>User Account</FormLabel> : <CustomFormLabel labelText="User Account" />
+                    }
 
-                  <Select
-                    placeholder="Please Select User Account"
-                    value={formik.values.psstftyp != "" ? formik.values.psusrunm : ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isDisabled={mode === "VIEW" || formik.values.psstftyp == "" ? true : false}
-                  >
-                    {Array.isArray(ddlData1) &&
-                      ddlData1
-                        .map((option: any) => (
-                          <option
-                            key={option.psusrunm}
-                            value={option.psusrunm}
-                          >
-                            {option.psusrunm + " - " + option.psusrnam}
-                          </option>
-                        ))}
-                  </Select>
-                  {formik.errors.psusrunm && (
-                    <FormErrorMessage>
-                      {formik.errors.psusrunm}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
+                    <Select
+                      placeholder="Please Select User Account"
+                      value={formik.values.psstftyp != "" ? formik.values.psusrunm : ""}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      isDisabled={mode === "VIEW" || mode === "EDIT" || formik.values.psstftyp == "" ? true : false}
+                    >
+                      {Array.isArray(ddlData1) &&
+                        ddlData1
+                          .map((option: any) => (
+                            <option
+                              key={option.psusrunm}
+                              value={option.psusrunm}
+                            >
+                              {option.psusrunm + " - " + option.psusrnam}
+                            </option>
+                          ))}
+                    </Select>
+                    {formik.errors.psusrunm && (
+                      <FormErrorMessage>
+                        {formik.errors.psusrunm}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
+                  :
+
+                  <FormControl
+                    id="psusrunm"
+                    isInvalid={
+                      Boolean(formik.errors.psusrunm) &&
+                      Boolean(formik.touched.psusrunm)
+                    }
+                    isReadOnly={mode === "VIEW" || mode === "EDIT" || formik.values.psstftyp != ""}
+                  > <FormLabel>User Account</FormLabel>
+                    <Input
+                      placeholder={"Enter Emergency Contact No."}
+                      type="text"
+                      name="psstfehp"
+                      onChange={formik.handleChange}
+                      value={`${detailData.psusrunm} - ${detailData.psusrnam} `}
+                      isDisabled
+                    />
+                    {formik.errors.psusrunm && (
+                      <FormErrorMessage>
+                        {formik.errors.psusrunm}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>}
               </Flex>
 
               <FormControl
@@ -695,7 +724,7 @@ export default function StaffForm(props: any) {
                   value={formik.values.psmrcuid}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  isDisabled={mode === "VIEW" || formik.values.psstftyp == "A"? true : false}
+                  isDisabled={mode === "VIEW" || formik.values.psstftyp == "A" ? true : false}
                 >
                   {Array.isArray(ddlData2) &&
                     ddlData2
