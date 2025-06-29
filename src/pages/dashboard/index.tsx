@@ -30,7 +30,7 @@ import SingleLineChartCard from "@app/components/pages/dashboard/SingleLineChart
 import Leaderboard from "@app/components/pages/dashboard/Leaderboard";
 import AnnouncementCard from "@app/components/pages/dashboard/AnnouncementCard";
 import { useAppDispatch, useAppSelector } from "@app/hooks/useRedux";
-import { selectApplications, fetchMain, selectMemberTiers, selecTop10Agents, selectorderChart, selectTotalSales } from "@app/redux/dashboard/slice";
+import { selectApplications, fetchMain, selectMemberTiers, selectTopMerchants, selectorderChart, selectTotalSales } from "@app/redux/dashboard/slice";
 
 export default function Dashboard() {
   const dispatch = useAppDispatch();
@@ -38,7 +38,7 @@ export default function Dashboard() {
   const totalSales = useAppSelector(selectTotalSales)
   const orderChart = useAppSelector(selectorderChart)
   const numberBoard = useAppSelector(selectMemberTiers)
-  const top10Agents = useAppSelector(selecTop10Agents)
+  const topMerchants = useAppSelector(selectTopMerchants)
 
   useEffect(() => {
     // Define an async function
@@ -55,18 +55,6 @@ export default function Dashboard() {
     fetchData()
   }, [])
 
-  const leaderboardData = [
-    { ranking: 1, name: "Alice", points: 1500 },
-    { ranking: 2, name: "Bob", points: 1200 },
-    { ranking: 3, name: "Charlie", points: 1000 },
-    { ranking: 4, name: "David", points: 900 },
-    { ranking: 5, name: "Eve", points: 850 },
-    { ranking: 6, name: "Frank", points: 800 },
-    { ranking: 7, name: "Grace", points: 750 },
-    { ranking: 8, name: "Janice", points: 600 },
-    { ranking: 9, name: "Quinton", points: 300 },
-    { ranking: 10, name: "Anson", points: 150 },
-  ];
   const iconBoxInside = useColorModeValue("white", "white");
   const test = [
     { counts: 8, description: "Merchant" },
@@ -105,6 +93,46 @@ export default function Dashboard() {
     { month: "Jun", totalOrders: 18 },
   ];
 
+  const ratingLeaderboardData = [
+  { psmrcuid: "M001", psmrcnme: "Masakan Malaysia", value: "4.9" },
+  { psmrcuid: "M002", psmrcnme: "One Two Three", value: "4.8" },
+  { psmrcuid: "M003", psmrcnme: "Mee Rebus King", value: "4.7" },
+  { psmrcuid: "M004", psmrcnme: "Ayam Penyet World", value: "4.6" },
+  { psmrcuid: "M005", psmrcnme: "Kopi Tradisi", value: "4.5" },
+  { psmrcuid: "M006", psmrcnme: "Spicy Corner", value: "4.5" },
+  { psmrcuid: "M007", psmrcnme: "Warung Kita", value: "4.4" },
+  { psmrcuid: "M008", psmrcnme: "Roti Canai Boss", value: "4.3" },
+  { psmrcuid: "M009", psmrcnme: "Sup Power", value: "4.3" },
+  { psmrcuid: "M010", psmrcnme: "Sambal Legend", value: "4.2" },
+];
+
+const salesLeaderboardData = [
+  { psmrcuid: "M001", psmrcnme: "Masakan Malaysia", value: "15230.75" },
+  { psmrcuid: "M002", psmrcnme: "One Two Three", value: "13900.00" },
+  { psmrcuid: "M003", psmrcnme: "Mee Rebus King", value: "12250.50" },
+  { psmrcuid: "M004", psmrcnme: "Ayam Penyet World", value: "11200.10" },
+  { psmrcuid: "M005", psmrcnme: "Kopi Tradisi", value: "10100.20" },
+  { psmrcuid: "M006", psmrcnme: "Spicy Corner", value: "9500.00" },
+  { psmrcuid: "M007", psmrcnme: "Warung Kita", value: "8875.25" },
+  { psmrcuid: "M008", psmrcnme: "Roti Canai Boss", value: "7650.60" },
+  { psmrcuid: "M009", psmrcnme: "Sup Power", value: "7400.40" },
+  { psmrcuid: "M010", psmrcnme: "Sambal Legend", value: "6999.90" },
+];
+
+const orderCountLeaderboardData = [
+  { psmrcuid: "M001", psmrcnme: "Masakan Malaysia", value: "320" },
+  { psmrcuid: "M002", psmrcnme: "One Two Three", value: "310" },
+  { psmrcuid: "M003", psmrcnme: "Mee Rebus King", value: "290" },
+  { psmrcuid: "M004", psmrcnme: "Ayam Penyet World", value: "285" },
+  { psmrcuid: "M005", psmrcnme: "Kopi Tradisi", value: "275" },
+  { psmrcuid: "M006", psmrcnme: "Spicy Corner", value: "260" },
+  { psmrcuid: "M007", psmrcnme: "Warung Kita", value: "250" },
+  { psmrcuid: "M008", psmrcnme: "Roti Canai Boss", value: "240" },
+  { psmrcuid: "M009", psmrcnme: "Sup Power", value: "230" },
+  { psmrcuid: "M010", psmrcnme: "Sambal Legend", value: "225" },
+];
+
+
 
   return (
     <Flex flexDirection="column" gap={Spacing.containerPx} pt={`${Spacing.containerPx}`}>
@@ -118,7 +146,7 @@ export default function Dashboard() {
         <SingleLineChartCard data={orderChart} />
       </Flex>
       <Flex flexDirection="row" gap={Spacing.containerPx} >
-        <Leaderboard leaderboardData={Array.isArray(top10Agents) ? top10Agents : []} />
+        <Leaderboard leaderboardData={Array.isArray(topMerchants) ? topMerchants : []} />
         <AnnouncementCard />
       </Flex>
     </Flex>

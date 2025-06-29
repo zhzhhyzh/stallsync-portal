@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { AppState, AppThunk } from '../store'
-import { getMain, getTop10 } from './api'
+import { getMain, getTopMerchants} from './api'
 
 export interface State {
     numberBoard: any[];
     orderChart: any[];
-    top10Agents: any[];
+    topMerchants: any[];
     applications: any[];
     totalSales: any[];
 }
@@ -13,7 +13,7 @@ export interface State {
 const initialState: State = {
     numberBoard: [],
     orderChart: [],
-    top10Agents: [],
+    topMerchants: [],
     applications: [],
     totalSales: [],
 
@@ -27,10 +27,10 @@ export const fetchMain = createAsyncThunk(
     }
 )
 
-export const fetchTop10 = createAsyncThunk(
-    'app/fetchTop10',
+export const fetchTopMerchants = createAsyncThunk(
+    'app/fetchTopMerchants',
     async (data: any) => {
-        const response = await getTop10(data)
+        const response = await getTopMerchants(data)
         return response
     }
 )
@@ -55,12 +55,12 @@ export const reducerSlice = createSlice({
                 state.numberBoard = action.payload?.message?.numberBoard
                 state.totalSales = action.payload?.message?.salesChart
                 state.orderChart = action.payload?.message?.orderChart
-                state.top10Agents = action.payload?.message?.top10Agents
+                state.topMerchants = action.payload?.message?.topMerchants
             })
 
-            .addCase(fetchTop10.fulfilled, (state, action) => {
+            .addCase(fetchTopMerchants.fulfilled, (state, action) => {
 
-                state.top10Agents = action.payload?.message?.top10Agents
+                state.topMerchants = action.payload?.message?.topMerchants
             })
     },
 })
@@ -71,6 +71,6 @@ export const selectApplications = (state: AppState) => state.dashboard?.applicat
 export const selectTotalSales = (state: AppState) => state.dashboard?.totalSales
 export const selectorderChart = (state: AppState) => state.dashboard?.orderChart
 export const selectMemberTiers = (state: AppState) => state.dashboard?.numberBoard
-export const selecTop10Agents = (state: AppState) => state.dashboard?.top10Agents
+export const selectTopMerchants = (state: AppState) => state.dashboard?.topMerchants
 
 export default reducerSlice.reducer

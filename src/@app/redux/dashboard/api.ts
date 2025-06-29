@@ -5,7 +5,7 @@ export async function getMain(data: any = {}): Promise<any> {
     const result = await api(API_ROUTES.DASHBOARD_MAIN, 'GET',data)
     return result
 }
-export async function getTop10(data: any = {}): Promise<any> {
-    const result = await api(API_ROUTES.DASHBOARD_TOP_10, 'GET',data)
+export async function getTopMerchants(data: any = {}): Promise<any> {
+    const result = await api(API_ROUTES.DASHBOARD_TOP_MCH, 'GET',data)
     return result
 }

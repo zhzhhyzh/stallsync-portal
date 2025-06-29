@@ -1,7 +1,7 @@
 export const API_ROUTES = {
   //DASHBOARD
   DASHBOARD_MAIN: "dashboard/main",
-  DASHBOARD_TOP_10: "dashboard/getTopMerchants",
+  DASHBOARD_TOP_MCH: "dashboard/getTopMerchants",
 
   //DDL
   DDL_GENERAL: "ddl/general",
