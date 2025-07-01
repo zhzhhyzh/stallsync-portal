@@ -163,10 +163,13 @@ export default function RewardForm(props: any) {
         psrwdica: detailData?.psrwdica == "Y" ? true : false,
         psrwdism: detailData?.psrwdism == "Y" ? true : false,
         psrwdaam: detailData?.psrwdaam == "Y" ? true : false,
-        psrwddtl: detailData?.psrwddtl ? setSkillArr(detailData?.psrwddtl) : setSkillArr([])
+
       });
+
+      setSkillArr(detailData?.psrwddtl || []);
     }
   }, [detailData]);
+  
 
   async function onSubmit(data: any) {
 
@@ -213,7 +216,7 @@ export default function RewardForm(props: any) {
 
   // Second tab - List
 
-  const [tableData, refreshFn, totalRecords, extra] = useFetchRewardRedemptions({});
+  const [tableData, refreshFn, totalRecords, extra] = useFetchRewardRedemptions({ id });
   const columns: any[] = [
     {
       title: "Order Id",

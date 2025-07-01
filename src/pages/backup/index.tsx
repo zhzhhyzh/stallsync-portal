@@ -256,7 +256,7 @@ async function onBackUp() {
                   placeholder="Search"
                   value={search}
                 />
-                <Select
+                {/* <Select
                   name="mode"
                   onChange={modeOnChange}
                   placeholder="Please Select Mode"
@@ -267,7 +267,7 @@ async function onBackUp() {
                       {option.prgedesc}
                     </option>
                   ))}
-                </Select>
+                </Select> */}
                 <Select
                   name="status"
                   onChange={statusOnChange}

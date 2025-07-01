@@ -77,6 +77,13 @@ export default function ProductPage() {
       title: "Description",
       dataIndex: "psprddsc",
       key: "psprddsc",
+      render: (text: string) => (
+        <Tooltip label={text} placement="top" hasArrow>
+          <Text noOfLines={1} maxW="200px">
+            {text}
+          </Text>
+        </Tooltip>
+      ),
     },
     {
       title: "Type",
