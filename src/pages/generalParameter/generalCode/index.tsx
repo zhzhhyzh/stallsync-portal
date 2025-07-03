@@ -209,6 +209,7 @@ export default function GeneralCodePage() {
           pathname: "/generalParameter/generalCode",
           query: {
             id: id,
+            desc: desc,
           },
         });
       }, 200);
