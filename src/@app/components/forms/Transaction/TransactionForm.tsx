@@ -350,31 +350,7 @@ export default function TransactionForm(props: any) {
                   )}
                 </FormControl>
 
-                <FormControl
-                  id="pstrxcrc"
-                  isInvalid={Boolean(formik.errors.pstrxcrc) && Boolean(formik.touched.pstrxcrc)}
-                  isReadOnly={mode === "VIEW" ? true : false}
-                >
-                  <FormLabel>Currency</FormLabel>
-                  {/* <CustomFormLabel labelText="Reward Status" /> */}
-                  <Select
-                    placeholder="Select Currency"
-                    value={formik.values.pstrxcrc || ""}
-                    onChange={formik.handleChange}
-                    style={{
-                      fontSize: 14,
-                    }}
-                  >
-                    {ddlData?.CRCY?.map((option: DDL_TYPES) => ( //change code
-                      <option key={option.prgecode} value={option.prgecode}>
-                        {option.prgedesc}
-                      </option>
-                    ))}
-                  </Select>
-                  {formik.errors.pstrxcrc && (
-                    <FormErrorMessage>{formik.errors.pstrxcrc}</FormErrorMessage>
-                  )}
-                </FormControl>
+
 
                 <FormControl
                   id="pstrxamt"
@@ -383,7 +359,7 @@ export default function TransactionForm(props: any) {
                 >
 
 
-                  <FormLabel>Transaction Amount</FormLabel>
+                  <FormLabel>Transaction Amount (RM)</FormLabel>
 
                   <Stack spacing={4}>
                     <InputGroup>
@@ -434,104 +410,6 @@ export default function TransactionForm(props: any) {
                   <FormErrorMessage>{formik.errors.pstrxstr}</FormErrorMessage>
                 )}
               </FormControl>
-              <FormControl
-                id="pstrxba1"
-                isInvalid={Boolean(formik.errors.pstrxba1) && Boolean(formik.touched.pstrxba1)}
-                isReadOnly={mode === "VIEW" ? true : false}
-              >
-                <FormLabel>Billing Address 1</FormLabel>
-                <Input
-                  placeholder={"Enter Billing Address 1"}
-                  type="text"
-                  name="pstrxba1"
-                  onChange={formik.handleChange}
-                  value={formik.values.pstrxba1 || ""}
-                />
-                {formik.errors.pstrxba1 && (
-                  <FormErrorMessage>{formik.errors.pstrxba1}</FormErrorMessage>
-                )}
-              </FormControl>
-
-              <FormControl
-                id="pstrxba2"
-                isInvalid={Boolean(formik.errors.pstrxba2) && Boolean(formik.touched.pstrxba2)}
-                isReadOnly={mode === "VIEW" ? true : false}
-              >
-                <FormLabel>Billing Address 2</FormLabel>
-                {/* <CustomFormLabel labelText="Billing Address 2" /> */}
-                <Input
-                  placeholder={"Enter Billing Address 2"}
-                  type="text"
-                  name="pstrxba2"
-                  onChange={formik.handleChange}
-                  value={formik.values.pstrxba2 || ""}
-                />
-                {formik.errors.pstrxba2 && (
-                  <FormErrorMessage>{formik.errors.pstrxba2}</FormErrorMessage>
-                )}
-              </FormControl>
-
-
-
-              <Flex justifyContent="space-between" alignItems="center" gap={5}>
-                <FormControl
-                  id="pstrxbci"
-                  isInvalid={Boolean(formik.errors.pstrxbci) && Boolean(formik.touched.pstrxbci)}
-                  isReadOnly={mode === "VIEW" ? true : false}
-                >
-                  <FormLabel>Billing City</FormLabel>
-                  <Input
-                    placeholder={"Enter Billing City"}
-                    type="text"
-                    name="pstrxbci"
-                    onChange={formik.handleChange}
-                    value={formik.values.pstrxbci || ""}
-                  />
-                  {formik.errors.pstrxbci && (
-                    <FormErrorMessage>{formik.errors.pstrxbci}</FormErrorMessage>
-                  )}
-                </FormControl>
-
-                <FormControl
-                  id="pstrxbst"
-                  isInvalid={Boolean(formik.errors.pstrxbst) && Boolean(formik.touched.pstrxbst)}
-                  isReadOnly={mode === "VIEW" ? true : false}
-                >
-                  <FormLabel>Billing State</FormLabel>
-                  <Input
-                    placeholder={"Enter Billing State"}
-                    type="text"
-                    name="pstrxbst"
-                    onChange={formik.handleChange}
-                    value={formik.values.pstrxbst || ""}
-                  />
-                  {formik.errors.pstrxbst && (
-                    <FormErrorMessage>{formik.errors.pstrxbst}</FormErrorMessage>
-                  )}
-                </FormControl>
-
-                <FormControl
-                  id="pstrxbpo"
-                  isInvalid={Boolean(formik.errors.pstrxbpo) && Boolean(formik.touched.pstrxbpo)}
-                  isReadOnly={mode === "VIEW" ? true : false}
-                >
-                  <FormLabel>Billing Postcode</FormLabel>
-                  <Input
-                    placeholder={"Enter Billing Postcode"}
-                    type="text"
-                    name="pstrxbpo"
-                    onChange={formik.handleChange}
-                    value={formik.values.pstrxbpo || ""}
-                  />
-                  {formik.errors.pstrxbpo && (
-                    <FormErrorMessage>{formik.errors.pstrxbpo}</FormErrorMessage>
-                  )}
-                </FormControl>
-
-
-
-              </Flex>
-
 
 
 
@@ -543,8 +421,6 @@ export default function TransactionForm(props: any) {
 
 
             </Box>
-
-
 
 
 
@@ -568,6 +444,8 @@ export default function TransactionForm(props: any) {
                 />
               )}
           </Space>
+
+
         </Box>
       </Flex>
     </form>

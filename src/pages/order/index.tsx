@@ -132,7 +132,7 @@ export default function OrderPage() {
           height: 20,
           backgroundColor: Colors.WARNING,
           borderRadius: 10
-        }}>Paid</Text> : _ === "G" ? <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
+        }}>Paid</Text> : _ === "G" ? <Text fontWeight={"normal"} color={"black"} textAlign="center" style={{
           width: 40,
           height: 20,
           // backgroundColor: Colors.WARNING,

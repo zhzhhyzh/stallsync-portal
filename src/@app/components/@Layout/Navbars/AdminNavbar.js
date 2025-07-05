@@ -103,6 +103,17 @@ export default function AdminNavbar(props) {
   }, []);
   const fetchWeather = async () => {
     try {
+       if (!navigator.onLine) {
+      console.warn("Offline: Weather cannot be fetched.");
+      setWeather(<FaThermometerHalf />);
+      return;
+    }
+
+    if (!navigator.geolocation) {
+      console.warn("Geolocation not supported.");
+      setWeather(<FaThermometerHalf />);
+      return;
+    }
       // Get user's current location
       navigator.geolocation.getCurrentPosition(async (position) => {
         const latitude = position.coords.latitude;
