@@ -130,13 +130,13 @@ export default function ReportPage() {
                     sx={{ _hover: { backgroundColor: Colors.PRIMARY, color: Colors.BACKGROUND } }}
                     icon={<IoDownload />}
                     aria-label={"edit"}
-                    onClick={() => fetchForecast(record?.prrptnme)}
+                    onClick={() => goDownload(record?.prrptnme)}
                   />
                 </Tooltip>
               )}
             {
 
-              record?.prrptsts === "C" && record?.prrptfcs == "N" &&(
+              record?.prrptsts === "C" && record?.prrptfcs == "N" && (
                 <Tooltip label='Forecast Sales' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -152,7 +152,7 @@ export default function ReportPage() {
               )}
             {
 
-              record?.prrptsts === "C" && record?.prrptfco == "N" &&(
+              record?.prrptsts === "C" && record?.prrptfco == "N" && (
                 <Tooltip label='Forecast Order Counts' fontSize='sm'>
                   <IconButton
                     variant="outline"
@@ -168,7 +168,7 @@ export default function ReportPage() {
               )}
             {
 
-              record?.prrptsts === "C" && (
+              record?.prrptsts === "C" && (record?.prrptfcs == "Y" || record?.prrptfco == "Y") && (
                 <TableMenu menus={[
                   {
                     url: `/report/forecast`,
@@ -198,10 +198,44 @@ export default function ReportPage() {
         actions: [
           {
             title: "Confirm",
-            onClick: () => {
-              fetchForecast({ prrptnme, forecast_type });
-            },
+            onClick: async () => {
+              try {
+                const result = await dispatch(fetchForecast({ prrptnme, forecast_type })).unwrap();
 
+                if (result?.result === "success") {
+                  dispatch(
+                    openGlobalModal({
+                      title: "Forecast Triggered",
+                      message: `${forecast_type === "O" ? "Order Count Forecast" : "Sales Forecast"} successfully initiated for ${prrptnme}.`,
+                      status: "success",
+                      actions: [
+                        {
+                          title: "OK",
+                          isClose: true,
+                        },
+                      ],
+                    })
+                  );
+                } else {
+                  throw new Error("Unexpected response");
+                }
+              } catch (err) {
+                console.error("Error triggering forecast:", err);
+                dispatch(
+                  openGlobalModal({
+                    title: "Error",
+                    message: "Something went wrong while triggering the forecast.",
+                    status: "error",
+                    actions: [
+                      {
+                        title: "Close",
+                        isClose: true,
+                      },
+                    ],
+                  })
+                );
+              }
+            },
           },
           {
             title: "Cancel",

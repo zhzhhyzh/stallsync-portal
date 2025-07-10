@@ -260,7 +260,7 @@ export default function OrderForm(props: any) {
   }
 
   const showActions = !['C', 'D', 'N'].includes(status);
-  const showCancel = !['A', 'D'].includes(status);
+  const showCancel = !['A', 'D','C'].includes(status);
 
   async function onSubmitCancel(data: any) {
 

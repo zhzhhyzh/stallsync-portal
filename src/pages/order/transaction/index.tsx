@@ -57,7 +57,7 @@ export default function TransactionPage() {
   const homeData = useAppSelector(selectHome);
 
   //sample code how to use this hook
-  const [tableData, refreshFn, totalRecords, extra] = useFetchTransactions({});
+  const [tableData, refreshFn, totalRecords, extra] = useFetchTransactions({psorduid: String(router?.query.id)});
   // const [ddlData] = useFetchDDL({ code: ["GTCAT"] });
   //pass tableData to table
   const [ddlData] = useFetchDDL({ code: ["TRXSTS"] });
@@ -435,6 +435,7 @@ export default function TransactionPage() {
             refreshFn={fetchTransactions}
             totalRecords={totalRecords}
             extraParams={{
+              psorduid: String(router?.query.id),
               psordphn: search,
               ...(tempFromDate ? { from: new Date(tempFromDate) } : {}),
               ...(tempToDate ? { to: new Date(tempToDate) } : {}),

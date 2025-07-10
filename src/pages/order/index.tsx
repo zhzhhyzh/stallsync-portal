@@ -65,6 +65,11 @@ export default function OrderPage() {
   const [search, setSearch] = useState();
   const [status, setStatus] = useState();
   const [dateError, setDateError] = useState(false);
+  const [type, setType] = useState();
+  function typeOnChange(event: any) {
+    setType(event.target.value);
+  }
+  const [ddlData] = useFetchDDL({ code: ["ODRSTS"] });
 
   const [tempFromDate, setTempFromDate] = useState<any>();
   const [tempToDate, setTempToDate] = useState<any>();
@@ -148,7 +153,7 @@ export default function OrderPage() {
           backgroundColor: Colors.SUCCESS,
           borderRadius: 10
         }}>Completed</Text> : <Text fontWeight={"normal"} color={"white"} textAlign="center" style={{
-          width: 40,
+          width:85,
           height: 20,
           backgroundColor: Colors.DANGER,
           borderRadius: 10,
@@ -221,7 +226,7 @@ export default function OrderPage() {
                 url: `/order/transaction`,
                 query: {
                   id: record?.id,
-                  date: record?.psordodt, 
+                  date: record?.psordodt,
                   file: extra.file
                 },
                 label: "Transaction",
@@ -417,6 +422,18 @@ export default function OrderPage() {
                         </option>
                       ))}
                 </Select>
+                <Select
+                  name="type"
+                  onChange={typeOnChange}
+                  placeholder="Please Select Order Status"
+                  value={type}
+                >
+                  {ddlData?.ODRSTS?.map((option: DDL_TYPES) => (
+                    <option key={option.prgecode} value={option.prgecode}>
+                      {option.prgedesc}
+                    </option>
+                  ))}
+                </Select>
 
                 {/* Everyone can use*/}
                 <Box display="flex" flexDir={"row"} gap={4} alignItems={"center"}>
@@ -480,7 +497,8 @@ export default function OrderPage() {
               psordphn: search,
               ...(tempFromDate ? { from: new Date(tempFromDate) } : {}),
               ...(tempToDate ? { to: new Date(tempToDate) } : {}),
-              psmrcuid: status
+              psmrcuid: status,
+              psordsts: type
 
             }}
           //onDoubleClick={showInfo}
