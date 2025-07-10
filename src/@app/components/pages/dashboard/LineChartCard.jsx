@@ -103,11 +103,11 @@ const LineChartCard = ({ data }) => {
             Total Sales (Year To Date)
           </Text>
 
-          <Select w="150px" value={range} onChange={(e) => setRange(e.target.value)}>
+          {/* <Select w="150px" value={range} onChange={(e) => setRange(e.target.value)}>
             <option value="year">A Year</option>
             <option value="3month">3 Month</option>
             <option value="month">Month</option>
-          </Select>
+          </Select> */}
         </Flex>
 
         <Box w="full" display="flex" justifyContent="flex-end" alignItems="center" mt={4}>

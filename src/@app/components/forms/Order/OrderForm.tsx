@@ -119,7 +119,10 @@ export default function OrderForm(props: any) {
   const [status, setStatus] = useState("")
   const [statusDsc, setStatusDsc] = useState("")
   const [updatedAt, setUpdatedAt] = useState("")
-
+  const [sst, setSst] = useState("");
+  const [reward, setReward] = useState("");
+  const [rewardDv, setRewardDv] = useState("");
+  const [pointDv, setPointDv] = useState("");
 
   useEffect(() => {
     if (mode !== "ADD" && id && Object.keys(detailData).length > 0) {
@@ -139,6 +142,11 @@ export default function OrderForm(props: any) {
       setTotal(detailData?.total)
       setUpdatedAt(detailData?.updatedAt);
       setStatusDsc(detailData?.psordstsdsc);
+      setSst(detailData?.psordsst);
+      setReward(detailData?.psrwduid);
+      setRewardDv(detailData?.psordrdv);
+      setPointDv(detailData?.psordpdv);
+
 
     }
 
@@ -409,10 +417,30 @@ export default function OrderForm(props: any) {
                   <span className="font-medium mr-2">Subtotal:</span>
                   RM {Number(detailData?.psordamt || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                 </div>
-                <div className="text-l">
+                {(reward !== "" || pointDv !== "0.00") && (
+                  <div className="flex flex-col items-start text-red-600 text-sm mt-1">
+                    <span className="font-semibold underline mb-1">Deduction:</span>
+                    {reward !== "" && (
+                      <div className="text-red-600">
+                        <span className="mr-2">Reward ({reward}):</span>
+                        - RM {Number(detailData?.psordrdv || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                      </div>
+                    )}
+                    {pointDv !== "0.00" && (
+                      <div className="text-red-600">
+                        <span className="mr-2">Points Used:</span>
+                        - RM {Number(detailData?.psordpdv || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Additional Tax */}
+                <div className="text-sm text-green-700 mt-1">
                   <span className="font-medium mr-2">SST (6%):</span>
-                  RM {Number(detailData?.psordsst || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  + RM {Number(detailData?.psordsst || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                 </div>
+
                 <div className="text-xl font-bold mt-2">
                   <span className="mr-2">Total:</span>
                   RM {Number(detailData?.psordgra || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}

@@ -731,7 +731,7 @@ export default function StaffForm(props: any) {
                       .map((option: any) => (
                         <option
                           key={option.psmrcuid}
-                          value={option.psmrcnme}
+                          value={option.psmrcuid}
                         >
                           {option.psmrcuid + " - " + option.psmrcnme}
                         </option>
