@@ -158,7 +158,7 @@ export default function AdminAccountsPage() {
               )
             }
             {
-              (homeData?.access && checkAccessMatrix(homeData?.access, accessType.ADMA_DEL)) && (
+            _.psusrtyp != "MBR" &&   (homeData?.access && checkAccessMatrix(homeData?.access, accessType.ADMA_DEL)) && (
                 <Tooltip label='Delete' fontSize='sm'>
                   <IconButton
                     variant="outline"

@@ -92,14 +92,14 @@ export default function TransactionPage() {
     },
 
 
-    {
-      title: "Transaction Method",
-      dataIndex: "pstrxmtd",
-      key: "pstrxmtd",
-      render: (_: any, record: any) => (
-        <Text>{`${record.pstrxmtd} - ${record.pstrxmtddsc}`}</Text>
-      )
-    },
+    // {
+    //   title: "Member",
+    //   dataIndex: "psmbruid",
+    //   key: "psmbruid",
+    //   render: (_: any, record: any) => (
+    //     <Text>{`${record.psmbruid}-${record.psmbruiddsc}`}</Text>
+    //   )
+    // },
     {
       title: "Status",
       dataIndex: "pstrxsts",

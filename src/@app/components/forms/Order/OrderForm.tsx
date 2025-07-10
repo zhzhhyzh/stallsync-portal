@@ -85,7 +85,7 @@ import useFetchDDLMchuser from "@app/hooks/selector/useFetchDDLMchuser";
 import { useReactToPrint } from "react-to-print";
 import { manageOrder } from "@app/redux/order/api";
 // import { useRef } from "react";
-import { FaClipboardList, FaDollarSign, FaTruckLoading, FaCheckCircle } from "react-icons/fa";
+import { FaClipboardList, FaDollarSign, FaTruckLoading, FaCheckCircle, FaClock } from "react-icons/fa";
 
 import { CheckIcon } from "@chakra-ui/icons";
 
@@ -145,6 +145,7 @@ export default function OrderForm(props: any) {
   }, [detailData]);
   const steps = [
     { label: "New", icon: FaClipboardList, code: "N" },
+    { label: "Pending", icon: FaClock, code: "G" },
     { label: "Paid", icon: FaDollarSign, code: "P" },
     { label: "Preparing", icon: FaTruckLoading, code: "A" },
     { label: "Completed", icon: FaCheckCircle, code: "D" },
@@ -249,6 +250,9 @@ export default function OrderForm(props: any) {
       });
     }
   }
+
+  const showActions = !['C', 'D', 'N'].includes(status);
+  const showCancel = !['A', 'D'].includes(status);
 
   async function onSubmitCancel(data: any) {
 
@@ -444,8 +448,9 @@ export default function OrderForm(props: any) {
 
             </div>
             {/* Bottom Action Buttons */}
-            {(status !== 'C' && status !== 'D') && (
-              <div className="mt-5 flex flex-row gap-4">
+            <div className="mt-5 flex flex-row gap-4">
+              {showActions && (
+
                 <button
                   onClick={onSubmit}
                   style={{ backgroundColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR }}
@@ -453,18 +458,17 @@ export default function OrderForm(props: any) {
                 >
                   Update Status
                 </button>
-                {
-                  (status != 'A' && status != 'D') && (
-                    <button
-                      onClick={onSubmitCancel}
-                      className="w-1/3 text-red-700 font-bold py-2 px-4 rounded border border-red-400 hover:bg-red-200 transition-all duration-150"
-                    >
-                      Cancel Order
-                    </button>
-                  )
-                }
-              </div>
-            )}
+              )}
+
+              {showCancel && (
+                <button
+                  onClick={onSubmitCancel}
+                  className={`w-1/3 text-red-700 font-bold py-2 px-4 rounded border border-red-400 hover:bg-red-200 transition-all duration-150 ${!showActions ? "ml-auto" : ""
+                    }`}                >
+                  Cancel Order
+                </button>
+              )}
+            </div>
 
 
           </div>

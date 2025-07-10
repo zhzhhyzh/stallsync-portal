@@ -19,6 +19,9 @@ export async function manageOrder(data: any = {}): Promise<any> {
       case "N":
         route = API_ROUTES.ORDER_PAID;
         break;
+      case "G":
+        route = API_ROUTES.ORDER_PAID;
+        break;
       case "P":
         route = API_ROUTES.ORDER_READY;
         break;
