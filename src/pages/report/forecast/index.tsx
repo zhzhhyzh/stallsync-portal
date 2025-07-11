@@ -28,7 +28,7 @@ import {
     Box,
     useColorModeValue,
     Flex,
-    Stat, Button,Divider,
+    Stat, Button, Divider,
     StatLabel,
     StatNumber, Image, Tooltip as JTooltip
 } from "@chakra-ui/react";
@@ -314,7 +314,7 @@ export default function ForecastPage() {
                                                         borderWidth="2px" borderColor="#689f77" mr={2} opacity={"100%"} />
 
                                                     <Text fontSize="15pt" fontWeight={"500"} color={"#689f77"}>
-                                                       Order Counts Forecast (Next 30 Days)
+                                                        Order Counts Forecast (Next 30 Days)
                                                     </Text>
                                                 </Flex>
                                                 <StatNumber fontSize="xl" color="white" mb={4}>in Count</StatNumber>

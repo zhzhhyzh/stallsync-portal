@@ -187,9 +187,86 @@ export default function ReportPage() {
       ),
     },
   ];
+  const ProcessingMessage = () => {
+    const [dots, setDots] = useState("");
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setDots((prev) => (prev.length >= 3 ? "" : prev + "."));
+      }, 300);
+      return () => clearInterval(interval);
+    }, []);
+
+    return (
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Text fontSize="lg" py={3}>
+          Processing{dots}
+        </Text>
+      </Box>
+    );
+  };
 
   function alertForecast(prrptnme: string, forecast_type: string) {
+    const handleConfirm = async () => {
+      // show loading modal with animated component
+      dispatch(
+        openGlobalModal({
+          title: "",
+          message: <ProcessingMessage />,
+          status: "warning",
+          actions: [],
+        })
+      );
 
+      try {
+        const result = await dispatch(fetchForecast({ prrptnme, forecast_type })).unwrap();
+
+        if (result?.result === "success") {
+          dispatch(
+            openGlobalModal({
+              title: "Forecast Triggered",
+              message: (
+                <Box>
+                  <Text>
+                    {`${forecast_type === "O" ? "Order Count Forecast" : "Sales Forecast"} successfully initiated for ${prrptnme}.`}
+                  </Text>
+                  <Text color="red.500" fontWeight="semibold" mt={2}>
+                    Please refresh the screen manually.
+                  </Text>
+                </Box>
+              ),
+              status: "success",
+              actions: [
+                {
+                  title: "OK",
+                  isClose: true,
+
+                },
+              ],
+            })
+          );
+        } else {
+          throw new Error("Unexpected response");
+        }
+      } catch (err) {
+        console.error("Error triggering forecast:", err);
+        dispatch(
+          openGlobalModal({
+            title: "Error",
+            message: "Something went wrong while triggering the forecast.",
+            status: "error",
+            actions: [
+              {
+                title: "Close",
+                isClose: true,
+              },
+            ],
+          })
+        );
+      }
+    };
+
+    // initial confirm modal
     dispatch(
       openGlobalModal({
         title: "",
@@ -198,44 +275,7 @@ export default function ReportPage() {
         actions: [
           {
             title: "Confirm",
-            onClick: async () => {
-              try {
-                const result = await dispatch(fetchForecast({ prrptnme, forecast_type })).unwrap();
-
-                if (result?.result === "success") {
-                  dispatch(
-                    openGlobalModal({
-                      title: "Forecast Triggered",
-                      message: `${forecast_type === "O" ? "Order Count Forecast" : "Sales Forecast"} successfully initiated for ${prrptnme}.`,
-                      status: "success",
-                      actions: [
-                        {
-                          title: "OK",
-                          isClose: true,
-                        },
-                      ],
-                    })
-                  );
-                } else {
-                  throw new Error("Unexpected response");
-                }
-              } catch (err) {
-                console.error("Error triggering forecast:", err);
-                dispatch(
-                  openGlobalModal({
-                    title: "Error",
-                    message: "Something went wrong while triggering the forecast.",
-                    status: "error",
-                    actions: [
-                      {
-                        title: "Close",
-                        isClose: true,
-                      },
-                    ],
-                  })
-                );
-              }
-            },
+            onClick: handleConfirm,
           },
           {
             title: "Cancel",
@@ -245,6 +285,7 @@ export default function ReportPage() {
       })
     );
   }
+
 
   async function goDownload(filename: string) {
     var fileDownload = require("js-file-download");
