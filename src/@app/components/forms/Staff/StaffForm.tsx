@@ -619,7 +619,7 @@ export default function StaffForm(props: any) {
                   isReadOnly={mode === "VIEW" || mode === "EDIT" ? true : false}
                 >
                   {/* <FormLabel>Debit/Credit*</FormLabel> */}
-                  <CustomFormLabel labelText="StaffsType" />
+                  <CustomFormLabel labelText="Staff Type" />
                   <Select
                     placeholder="Select Staff Type"
                     value={formik.values.psstftyp || ""}
@@ -847,9 +847,9 @@ export default function StaffForm(props: any) {
                 isReadOnly={mode === "VIEW" ? true : false}
               >
                 {/* <FormLabel>Description*</FormLabel> */}
-                <CustomFormLabel labelText="Bank Account" />
+                <CustomFormLabel labelText="Bank Account No." />
                 <Input
-                  placeholder={"Enter Bank Account"}
+                  placeholder={"Enter Bank Account No."}
                   type="text"
                   name="psstfacc"
                   onChange={formik.handleChange}
