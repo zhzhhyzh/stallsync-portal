@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 // assets
 import React, { ChangeEventHandler, useEffect, useState } from "react";
+import { Rate } from "antd";
 
 import { DatePicker, Space, Tag } from "antd";
 import Spacing from "@app/constants/Spacing";
@@ -112,6 +113,22 @@ export default function ProductPage() {
 
       )
     },
+     {
+          title: "Rating",
+          dataIndex: "psprdrtg",
+          key: "psprdrtg",
+          render: (rating: any) => {
+            const numericRating = parseFloat(rating) || 0;
+    
+            return (
+              <Flex alignItems="center" gap={2}>
+                <Rate allowHalf disabled defaultValue={numericRating} />
+                {/* <Text fontSize="sm">{numericRating.toFixed(1)}</Text> */}
+              </Flex>
+            );
+          },
+    
+        },
     {
       title: "Product Status",
       dataIndex: "psprdsts",

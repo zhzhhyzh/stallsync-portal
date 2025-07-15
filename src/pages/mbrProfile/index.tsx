@@ -85,14 +85,45 @@ export default function MemberPage() {
     },
 
 
-    {
-      title: "Member Type",
-      dataIndex: "psmbrtyp",
-      key: "psmbrtyp",
-      render: (_: any, record: any) => (
-        <Text>{`${record.psmbrtyp} - ${record.psmbrtypdsc}`}</Text>
-      )
-    },
+  {
+  title: "Member Type",
+  dataIndex: "psmbrtyp",
+  key: "psmbrtyp",
+  render: (_: any, record: any) => {
+    const { psmbrtyp, psmbrtypdsc } = record;
+
+    const getBoxStyle = (type: string) => {
+      switch (type) {
+        case 'B':
+          return { bg: "#cd7f32", color: "white" }; // Bronze
+        case 'S':
+          return { bg: "#c0c0c0", color: "black" }; // Silver
+        case 'G':
+          return { bg: "#ffd700", color: "black" }; // Gold
+        default:
+          return { bg: "gray.300", color: "black" }; // Default
+      }
+    };
+
+    const style = getBoxStyle(psmbrtyp);
+
+    return (
+      <Box
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
+        width="30px"
+        height="30px"
+        borderRadius="md"
+        fontWeight="bold"
+        {...style}
+        mr={2}
+      >
+        {psmbrtyp}
+      </Box>
+    );
+  }
+},
     {
       title: "Phone No.",
       dataIndex: "psmbrphn",
