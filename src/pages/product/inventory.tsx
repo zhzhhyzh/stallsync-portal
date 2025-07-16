@@ -109,10 +109,10 @@ export default function InventoryForm(props: any) {
 
         const { success } = await sendRequest({
             fn: getmanageProductR({
-                id: mode === "EDIT" ? data.id : "",...data,
+                id: mode === "EDIT" ? data.id : "", ...data,
                 psprduid: prduid,
                 psinvsdt: formik.values.psinvsdt ? formik.values.psinvsdt : new Date(),
-                
+
             }),
             formik,
         });
@@ -274,14 +274,14 @@ export default function InventoryForm(props: any) {
                                     <FormErrorMessage>{formik.errors.psinvpri}</FormErrorMessage>
                                 )}
                             </FormControl>
-                         
+
 
 
                         </Box>
 
 
                         <Box display="flex" flexDir="column" gap={6} width="100%">
-   <FormControl
+                            <FormControl
                                 id="psinvsty"
                                 isInvalid={Boolean(formik.errors.psinvsty) && Boolean(formik.touched.psinvsty)}
                                 isReadOnly={mode === "VIEW" ? true : false}
@@ -313,7 +313,7 @@ export default function InventoryForm(props: any) {
                                 isReadOnly={mode === "VIEW" ? true : false}
                             >
                                 {/* <FormLabel>Quantity</FormLabel> */}
-                                <CustomFormLabel labelText="Quantity"/>
+                                <CustomFormLabel labelText="Quantity" />
                                 <Input
                                     placeholder={"Enter Quantity"}
                                     type="number"

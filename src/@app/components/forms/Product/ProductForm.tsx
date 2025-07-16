@@ -1588,9 +1588,9 @@ export default function ProductForm(props: any) {
               refreshFn={fetchProductsR}
               totalRecords={totalRecords}
               extraParams={{
-                from: new Date(tempFromDate),
-                to: new Date(tempToDate),
-                psprdinv: "I",
+                from: tempFromDate? new Date(tempFromDate): null,
+                to: tempToDate?new Date(tempToDate):null,
+                psinvsty: "I",
                 prodId: detailData?.psprduid
               }}
             />
@@ -1708,9 +1708,9 @@ export default function ProductForm(props: any) {
               refreshFn={fetchProductsR}
               totalRecords={totalRecords}
               extraParams={{
-                from: new Date(tempFromDate),
-                to: new Date(tempToDate),
-                psprdinv: "O",
+                   from: tempFromDate? new Date(tempFromDate): null,
+                to: tempToDate?new Date(tempToDate):null,
+                psinvsty: "O",
                 prodId: detailData?.psprduid
 
               }}

@@ -78,13 +78,13 @@ export default function ProdTypeForm(props: any) {
     // // const nowTs = new Date().getTime();
 
     return file_link
-}
+  }
   const { sendRequest, loading } = useApi({ title: "Announcement" });
   const router = useRouter();
   const dispatch = useAppDispatch();
   const id = props.id;
   const mode = props.mode;
-  const { data: detailData } =useFetchAnnouncementDetail(id);
+  const { data: detailData } = useFetchAnnouncementDetail(id);
   const [ddlData] = useFetchDDL({ code: ["YESORNO", "ANNTYP"] });
 
   const { Dragger } = Upload;
@@ -94,7 +94,7 @@ export default function ProdTypeForm(props: any) {
   >([]);
 
   const initialValues = {
-    psanncde: "",
+    psannuid: "",
     psannttl: "",
     psanntyp: "",
     psannsts: true,
@@ -119,7 +119,7 @@ export default function ProdTypeForm(props: any) {
       if (Object.keys(detailData).length > 0) {
         formik.setValues({
           ...detailData,
-          id: detailData?.psanncde,
+          id: detailData?.psannuid,
           pstypstd: dayjs(detailData?.pstypstd),
           psannsts: detailData?.psannsts === "Y" ? true : false,
         });
@@ -140,7 +140,7 @@ export default function ProdTypeForm(props: any) {
               url: genDocumentUrl(detailData?.document_link),
               thumbUrl: genDocumentUrl(detailData?.document_link),
               preview: genDocumentUrl(detailData?.document_link),
-          },
+            },
           ]);
         } else {
           setSelectedAnnouncementFile([]);
@@ -189,10 +189,10 @@ export default function ProdTypeForm(props: any) {
       data.attachments = [];
       data.psannimg = "";
     }
-
     const { success } = await sendRequest({
       fn: manage({
         ...data,
+        id: mode === "EDIT" ? data.id : "",
         psdocnme: data.attachments[0],
         psannsts: formik.values.psannsts === true ? "Y" : "N",
       }),
@@ -258,30 +258,30 @@ export default function ProdTypeForm(props: any) {
   //   });
   // }
 
-   async function handleDownload(link: string, filename:string) {
-          // await sendRequest({
-          //     fn: download({
-          //         filename,
-          //     }),
-          // });
-          try{
+  async function handleDownload(link: string, filename: string) {
+    // await sendRequest({
+    //     fn: download({
+    //         filename,
+    //     }),
+    // });
+    try {
 
-            const response = await fetch(link);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-    
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = filename; // Set desired file name
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-          }catch(err){
-            console.log(err)
-          }
-        
-      }
+      const response = await fetch(link);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename; // Set desired file name
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
 
   const handleRemove = (file: any) => {
     // Remove the file from the fileList state
@@ -342,10 +342,10 @@ export default function ProdTypeForm(props: any) {
               <Box display="flex" flexDir="column" gap={6} width="50%">
                 {mode != "ADD" ? (
                   <FormControl
-                    id="psanncde"
+                    id="psannuid"
                     isInvalid={
-                      Boolean(formik.errors.psanncde) &&
-                      Boolean(formik.touched.psanncde)
+                      Boolean(formik.errors.psannuid) &&
+                      Boolean(formik.touched.psannuid)
                     }
                     isReadOnly={mode === "VIEW" ? true : false}
                   >
@@ -354,15 +354,15 @@ export default function ProdTypeForm(props: any) {
                     <Input
                       placeholder={"Enter Announcement Code"}
                       type="text"
-                      name="psanncde"
+                      name="psannuid"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.psanncde}
+                      value={formik.values.psannuid}
                       isDisabled={mode === "EDIT" ? true : false}
                     />
-                    {formik.errors.psanncde && (
+                    {formik.errors.psannuid && (
                       <FormErrorMessage>
-                        {formik.errors.psanncde}
+                        {formik.errors.psannuid}
                       </FormErrorMessage>
                     )}
                   </FormControl>
@@ -428,7 +428,7 @@ export default function ProdTypeForm(props: any) {
                   id="psannsts"
                   isReadOnly={mode === "VIEW" ? true : false}
                   isInvalid={Boolean(formik.errors.psannsts)}
-                  // columns={{ base: 2, lg: 4 }}
+                // columns={{ base: 2, lg: 4 }}
                 >
                   <CustomFormLabel labelText={"Status"} />
 
@@ -452,7 +452,7 @@ export default function ProdTypeForm(props: any) {
                     </FormErrorMessage>
                   )}
                 </FormControl>
-                
+
                 {/* </Box>
               <Box display="flex" flexDir="column" gap={6} width="100%"> */}
 
@@ -507,7 +507,7 @@ export default function ProdTypeForm(props: any) {
                       disabled={selectedAnnouncementFile.length > 0 ? true : false}
                       onChange={(e: any) => handleFileUpload(e)}
                       customRequest={dummyReq}
-                      itemRender={(originNode, file:any , fileList, action) => {
+                      itemRender={(originNode, file: any, fileList, action) => {
                         const isImage = /\.(jpg|jpeg|png|gif|bmp)$/.test(
                           file.name
                         );
@@ -563,23 +563,23 @@ export default function ProdTypeForm(props: any) {
                                   item.uid === file.uid &&
                                   item.fileStatus === "old"
                               ).length > 0 && (
-                                <Tooltip title="Download">
-                                  <DownloadOutlined
-                                    style={{
-                                      color: "gray",
-                                      fontSize: 14,
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      cursor: "pointer",
-                                      marginBottom: "6px",
-                                    }}
-                                    onClick={() => handleDownload(file?.url, file?.name)}
+                                  <Tooltip title="Download">
+                                    <DownloadOutlined
+                                      style={{
+                                        color: "gray",
+                                        fontSize: 14,
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        cursor: "pointer",
+                                        marginBottom: "6px",
+                                      }}
+                                      onClick={() => handleDownload(file?.url, file?.name)}
                                     // onClick={() => {
                                     //   window.open(file?.url, "_blank");
                                     // }}
-                                  />
-                                </Tooltip>
-                              )}
+                                    />
+                                  </Tooltip>
+                                )}
                               <Tooltip title="Preview">
                                 <ExportOutlined
                                   style={{

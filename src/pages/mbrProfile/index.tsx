@@ -95,7 +95,7 @@ export default function MemberPage() {
     const getBoxStyle = (type: string) => {
       switch (type) {
         case 'B':
-          return { bg: "#cd7f32", color: "white" }; // Bronze
+          return { bg: "#cd7f32", color: "black" }; // Bronze
         case 'S':
           return { bg: "#c0c0c0", color: "black" }; // Silver
         case 'G':
