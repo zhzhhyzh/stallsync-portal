@@ -127,9 +127,9 @@ export default function ProductForm(props: any) {
     },
   });
 
-useEffect(()=>{
-console.log(mchId)
-},[mchId])
+  useEffect(() => {
+    console.log("watch me: ",mchId)
+  }, [mchId])
   useEffect(() => {
     if (mode !== "ADD" && id && Object.keys(detailData).length > 0) {
       formik.setValues({
@@ -934,7 +934,7 @@ console.log(mchId)
 
 
                     {
-                      ( mchId !== "") &&
+                      (mchId == "") &&
                       <FormControl
                         id="psmrcuid"
                         isInvalid={
@@ -1590,8 +1590,8 @@ console.log(mchId)
               refreshFn={fetchProductsR}
               totalRecords={totalRecords}
               extraParams={{
-                from: tempFromDate? new Date(tempFromDate): null,
-                to: tempToDate?new Date(tempToDate):null,
+                from: tempFromDate ? new Date(tempFromDate) : null,
+                to: tempToDate ? new Date(tempToDate) : null,
                 psinvsty: "I",
                 prodId: detailData?.psprduid
               }}
@@ -1710,8 +1710,8 @@ console.log(mchId)
               refreshFn={fetchProductsR}
               totalRecords={totalRecords}
               extraParams={{
-                   from: tempFromDate? new Date(tempFromDate): null,
-                to: tempToDate?new Date(tempToDate):null,
+                from: tempFromDate ? new Date(tempFromDate) : null,
+                to: tempToDate ? new Date(tempToDate) : null,
                 psinvsty: "O",
                 prodId: detailData?.psprduid
 

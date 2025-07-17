@@ -48,7 +48,7 @@ export default function PaymentMethodsPage() {
   const homeData = useAppSelector(selectHome);
 
   //sample code how to use this hook
-  const [tableData, refreshFn, totalRecords, extra] = useFetchAnnouncements();
+  const [tableData, refreshFn, totalRecords, extra] = useFetchAnnouncements({});
   //pass tableData to table
   // const [pageSize, setPageSize] = useState(10);
   // const [page, setPage] = useState(1);

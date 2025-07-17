@@ -1282,7 +1282,24 @@ export default function MerchantForm(props: any) {
                   <FormErrorMessage>{formik.errors.psmrcbnk}</FormErrorMessage>
                 )}
               </FormControl>
-
+ <FormControl
+                id="psmrcbnm"
+                isInvalid={Boolean(formik.errors.psmrcbnm) && Boolean(formik.touched.psmrcbnm)}
+                isReadOnly={mode === "VIEW" ? true : false}
+              >
+                {/* <FormLabel>Description*</FormLabel> */}
+                <CustomFormLabel labelText="Bank Account Username" />
+                <Input
+                  placeholder={"Enter Bank Account Username"}
+                  type="text"
+                  name="psmrcbnm"
+                  onChange={formik.handleChange}
+                  value={formik.values.psmrcbnm || ""}
+                />
+                {formik.errors.psmrcbnm && (
+                  <FormErrorMessage>{formik.errors.psmrcbnm}</FormErrorMessage>
+                )}
+              </FormControl>
               <FormControl
                 id="psmrcacc"
                 isInvalid={Boolean(formik.errors.psmrcacc) && Boolean(formik.touched.psmrcacc)}
@@ -1301,24 +1318,7 @@ export default function MerchantForm(props: any) {
                   <FormErrorMessage>{formik.errors.psmrcacc}</FormErrorMessage>
                 )}
               </FormControl>
-              <FormControl
-                id="psmrcbnm"
-                isInvalid={Boolean(formik.errors.psmrcbnm) && Boolean(formik.touched.psmrcbnm)}
-                isReadOnly={mode === "VIEW" ? true : false}
-              >
-                {/* <FormLabel>Description*</FormLabel> */}
-                <CustomFormLabel labelText="Bank Name" />
-                <Input
-                  placeholder={"Enter Bank Name"}
-                  type="text"
-                  name="psmrcbnm"
-                  onChange={formik.handleChange}
-                  value={formik.values.psmrcbnm || ""}
-                />
-                {formik.errors.psmrcbnm && (
-                  <FormErrorMessage>{formik.errors.psmrcbnm}</FormErrorMessage>
-                )}
-              </FormControl>
+             
               {
                 mode != "ADD" ?
                   <FormControl

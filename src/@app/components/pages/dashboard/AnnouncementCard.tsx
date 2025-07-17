@@ -63,7 +63,7 @@ export default function AnnouncementCard() {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     //sample code how to use this hook
-    const [tableData, refreshFn, totalRecords, extra] = useFetchAnnouncements();
+    const [tableData, refreshFn, totalRecords, extra] = useFetchAnnouncements({status: 'Y'});
     //pass tableData to table
     // const [pageSize, setPageSize] = useState(10);
     // const [page, setPage] = useState(1);
@@ -378,6 +378,7 @@ export default function AnnouncementCard() {
                             refreshFn={list}
                             totalRecords={tableData?.length}
                             extraParams={{
+                                status:'Y'
                             }}
                         />
                     </Box>

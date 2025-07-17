@@ -424,35 +424,36 @@ export default function ProdTypeForm(props: any) {
                   )}
                 </FormControl>
 
-                <FormControl
-                  id="psannsts"
-                  isReadOnly={mode === "VIEW" ? true : false}
-                  isInvalid={Boolean(formik.errors.psannsts)}
-                // columns={{ base: 2, lg: 4 }}
-                >
-                  <CustomFormLabel labelText={"Status"} />
-
-                  <Switch
+                {mode != "ADD" &&
+                  <FormControl
                     id="psannsts"
-                    size="md"
-                    name="psannsts"
-                    isChecked={formik.values.psannsts}
-                    onChange={handleSwitch}
-                    colorScheme={"green"}
-                    sx={{
-                      "span.chakra-switch__track:not([data-checked])": {
-                        backgroundColor: Colors.DANGER,
-                      },
-                    }}
-                  />
+                    isReadOnly={mode === "VIEW" ? true : false}
+                    isInvalid={Boolean(formik.errors.psannsts)}
+                  // columns={{ base: 2, lg: 4 }}
+                  >
+                    <CustomFormLabel labelText={"Status"} />
 
-                  {formik.errors.psannsts && (
-                    <FormErrorMessage>
-                      {formik.errors.psannsts}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
+                    <Switch
+                      id="psannsts"
+                      size="md"
+                      name="psannsts"
+                      isChecked={formik.values.psannsts}
+                      onChange={handleSwitch}
+                      colorScheme={"green"}
+                      sx={{
+                        "span.chakra-switch__track:not([data-checked])": {
+                          backgroundColor: Colors.DANGER,
+                        },
+                      }}
+                    />
 
+                    {formik.errors.psannsts && (
+                      <FormErrorMessage>
+                        {formik.errors.psannsts}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
+                }
                 {/* </Box>
               <Box display="flex" flexDir="column" gap={6} width="100%"> */}
 

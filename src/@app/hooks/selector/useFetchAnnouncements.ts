@@ -6,7 +6,7 @@ import { selectIsLogined } from "@app/redux/app/slice";
 import { useRouter } from "next/router";
 import { selectExtra, list, manage, detail, selectAnnouncements, selectAnnouncement, selectTotal } from "@app/redux/announcement/slice";
 
-function useFetchAnnouncements() {
+function useFetchAnnouncements(props: any) {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -27,6 +27,7 @@ function useFetchAnnouncements() {
       list({
         page: page || 0,
         limit: limit || 10,
+        ...props
       })
     ); //fire api (call action)
 

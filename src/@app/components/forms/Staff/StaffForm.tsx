@@ -829,9 +829,9 @@ export default function StaffForm(props: any) {
                 isReadOnly={mode === "VIEW" ? true : false}
               >
                 {/* <FormLabel>Description*</FormLabel> */}
-                <CustomFormLabel labelText="Bank User Name" />
+                <CustomFormLabel labelText="Bank Account Username" />
                 <Input
-                  placeholder={"Enter Bank User Name"}
+                  placeholder={"Enter Bank Account Username"}
                   type="text"
                   name="psstfbnm"
                   onChange={formik.handleChange}
