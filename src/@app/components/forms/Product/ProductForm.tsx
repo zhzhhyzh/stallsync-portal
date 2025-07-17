@@ -85,7 +85,7 @@ export default function ProductForm(props: any) {
   const dispatch = useAppDispatch();
   const id = props.id;
   const mode = props.mode;
-  const mchId = props.mchId
+  const mchId = String(router?.query.mrcId)
   const [detailData] = useFetchProductDetail(id);
 
   const initialValues = {
@@ -127,7 +127,9 @@ export default function ProductForm(props: any) {
     },
   });
 
-
+useEffect(()=>{
+console.log(mchId)
+},[mchId])
   useEffect(() => {
     if (mode !== "ADD" && id && Object.keys(detailData).length > 0) {
       formik.setValues({
@@ -932,7 +934,7 @@ export default function ProductForm(props: any) {
 
 
                     {
-                      (mchId !== false || mchId !== "") &&
+                      ( mchId !== "") &&
                       <FormControl
                         id="psmrcuid"
                         isInvalid={

@@ -90,8 +90,18 @@ export default function ReportForm(props: any) {
             fn: fetchGenerateReport({ ...data }),
             formik,
         });
+        if (success) {
+            reload()
 
-        reload()
+        } else {
+            setTimeout(() => {
+                showModal(dispatch, {
+                    title: "Record Not Enough",
+                    message: "Need to have at least 100 of transactions",
+                });
+
+            }, 200);
+        }
         // if (success) {
         //   setTimeout(() => {
         //     showModal(dispatch, {
@@ -102,6 +112,9 @@ export default function ReportForm(props: any) {
         //   }, 200);
         // }
     }
+
+
+
     useEffect(() => {
 
         console.log(formik.values)

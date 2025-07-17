@@ -204,7 +204,7 @@ export default function MemberPage() {
               )
             } */}
 
-            <TableMenu menus={[
+            {/* <TableMenu menus={[
               {
                 url: `/maintLogs`,
                 query: {
@@ -222,7 +222,7 @@ export default function MemberPage() {
                   },
                 ]
               }
-            ]} />
+            ]} /> */}
 
           </Space>
         </Flex>

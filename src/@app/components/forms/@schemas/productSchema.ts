@@ -12,7 +12,7 @@ export const ProductSchema = Yup.object().shape({
   psprdtyp: Yup.string().nullable().max(10, "Length cannot more than 10").required("Field is required"),
   psprdsts: Yup.string().nullable(),
   psprdpri: Yup.number().nullable().required("Field is Required"),
-  psmrcuid: Yup.string().nullable().max(25, "Length cannot more than 25").required("Field is required"),
+  // psmrcuid: Yup.string().nullable().max(25, "Length cannot more than 25").required("Field is required"),
   psprdimg: Yup.string().nullable().max(255, "Length cannot more than 255"),
 
 
