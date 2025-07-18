@@ -5,6 +5,13 @@ export async function listAnnouncement(data: any = {}): Promise<any> {
   const result = await api(API_ROUTES.ANNOUNCEMENT_LIST, "GET", data);
   return result;
 }
+export async function listAnnouncement2(data: any = {}): Promise<any> {
+  const result = await api(API_ROUTES.ANNOUNCEMENT_LIST2, "GET", data);
+  return result;
+}
+
+
+
 
 export async function manageAnnouncement(data: any = {}): Promise<any> {
   const result = await api(data.id ? API_ROUTES.ANNOUNCEMENT_UPDATE : API_ROUTES.ANNOUNCEMENT_CREATE, 

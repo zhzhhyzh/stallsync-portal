@@ -17,36 +17,24 @@ import { menus } from "@app/routes/menus";
 import { CiBellOn } from "react-icons/ci";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
-
 import Link from "next/link";
 import { logout, setSideBarRoot } from "@app/redux/app/slice";
 import { useAppDispatch } from "@app/hooks/useRedux";
 import { useRouter } from "next/router";
-import useFetchAnnouncements from "@app/hooks/selector/useFetchAnnouncements";
+import useFetchAnnouncements2 from "@app/hooks/selector/useFetchAnnouncements2";
+import { list2 } from "@app/redux/announcement/slice";
+
 
 export default function HeaderLinks(props) {
   const { variant, children, fixed, secondary, onOpen, ...rest } = props;
-  const dispatch = useAppDispatch()
-  const router = useRouter()
-  const [notifications, refreshFn, totalRecords, extra] = useFetchAnnouncements();
-  // const notifications = [
-  //   { id: 1, psannttl: "System maintenance on 20 June" },
-  //   { id: 2, psannttl: "New feature: POS Summary Report" },
-  //   { id: 3, psannttl: "Reminder: Update your profile info" },
-  //   { id: 4, psannttl: "System maintenance on 20 June" },
-  //   { id: 5, psannttl: "New feature: POS Summary Report" },
-  //   { id: 6, psannttl: "Reminder: Update your profile info" },
-  //   { id: 7, psannttl: "System maintenance on 20 June" },
-  //   { id: 8, psannttl: "New feature: POS Summary Report" },
-  //   { id: 9, psannttl: "Reminder: Update your profile info" },
-  // ];
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const [notifications, setNotifications] = React.useState([]);
 
   // Chakra Color Mode
-  let mainTeal = useColorModeValue("teal.300", "teal.300");
-  let inputBg = useColorModeValue("white", "gray.800");
   let mainText = useColorModeValue("gray.700", "gray.200");
   let navbarIcon = useColorModeValue("gray.500", "gray.200");
-  let searchIcon = useColorModeValue("gray.700", "gray.200");
 
   if (secondary) {
     navbarIcon = "white";
@@ -58,7 +46,6 @@ export default function HeaderLinks(props) {
     router.replace("/");
   }
 
-  const settingsRef = React.useRef();
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}
@@ -67,23 +54,27 @@ export default function HeaderLinks(props) {
       flexDirection="row"
       gap={2}
     >
+      {/* Sidebar */}
       <SidebarResponsive
-
         logoText={"StallSync Portal"}
         secondary={props.secondary}
         routes={menus}
-        // logo={logo}
         {...rest}
       />
-      <Menu>
+
+      {/* 🔔 Notification Bell */}
+      <Menu
+     onOpen={async () => {
+  const res = await dispatch(list2({ status: "Y" }));
+  const records = res?.payload?.message?.data ?? [];
+  setNotifications(records);
+}}
+
+      >
         <MenuButton>
           <CiBellOn strokeWidth={0} color={navbarIcon} size={32} />
         </MenuButton>
-        <MenuList
-          p="16px 8px"
-          maxH="180px"
-          overflowY="auto"
-        >
+        <MenuList p="16px 8px" maxH="180px" overflowY="auto">
           {notifications.length === 0 ? (
             <MenuItem borderRadius="8px">
               <Text>No notifications found.</Text>
@@ -96,19 +87,23 @@ export default function HeaderLinks(props) {
             ))
           )}
         </MenuList>
-
-
       </Menu>
+
+      {/* 👤 User Profile */}
       <Menu>
         <MenuButton>
           <HiOutlineUserCircle strokeWidth={1} color={navbarIcon} size={32} />
         </MenuButton>
         <MenuList p="16px 8px">
           <Flex flexDirection="column">
-            <MenuItem borderRadius="8px" mb="10px" onClick={() => {
-              dispatch(setSideBarRoot("Settings"));
-              router.push("/profile/myProfile/");
-            }}>
+            <MenuItem
+              borderRadius="8px"
+              mb="10px"
+              onClick={() => {
+                dispatch(setSideBarRoot("Settings"));
+                router.push("/profile/myProfile/");
+              }}
+            >
               <Text>Profile</Text>
             </MenuItem>
             <MenuItem borderRadius="8px" onClick={onLogout}>

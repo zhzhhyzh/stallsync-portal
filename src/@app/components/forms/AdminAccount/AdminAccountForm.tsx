@@ -41,7 +41,7 @@ import {
 import { DDL_TYPES } from "@app/interfaces/ddl.types";
 import Breadcrumbs from "@app/components/common/Breadcrumbs/Breadcrumbs";
 import Buttons from "@app/components/common/Buttons/Buttons";
-import Accessibility from "@app/components/pages/accessibility/Accessibility";
+import Accessibility2 from "@app/components/pages/accessibility/Accessibility2";
 
 export default function AdminAccountsForm(props: any) {
   const { sendRequest, loading } = useApi({ title: "Admin Account" });
@@ -459,7 +459,7 @@ export default function AdminAccountsForm(props: any) {
           }}
         >
           <Card className="relative overflow-hidden">
-            <Accessibility selectedRole={formik.values.psusrrol} />
+            <Accessibility2 selectedRole={formik.values.psusrrol} />
             {!formik.values.psusrrol && (
               <Box
                 w="100%"

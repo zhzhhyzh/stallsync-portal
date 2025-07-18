@@ -15,6 +15,7 @@ export const API_ROUTES = {
 
   //ANNOUNCEMENT
   ANNOUNCEMENT_LIST: "pssysann/list",
+  ANNOUNCEMENT_LIST2: "pssysann/list2",
   ANNOUNCEMENT_DETAIL: "pssysann/detail",
   ANNOUNCEMENT_CREATE: "pssysann/create",
   ANNOUNCEMENT_UPDATE: "pssysann/update",
