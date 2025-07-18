@@ -222,7 +222,53 @@ export default function OrderForm(props: any) {
     );
   }
 
-  async function onSubmit(data: any) {
+
+  function alertUpdate(data: any) {
+    dispatch(
+      openGlobalModal({
+        title: "Confirm Update",
+        message: "Are you sure you want to update this order status?",
+        status: "warning",
+        actions: [
+          {
+            title: "Confirm",
+            onClick: () => {
+              onSubmit();
+            },
+          },
+          {
+            title: "Cancel",
+            isClose: true,
+          },
+        ],
+      })
+    );
+  }
+
+  function alertCancel(data: any) {
+    dispatch(
+      openGlobalModal({
+        title: "Confirm Cancellation",
+        message: "Are you sure you want to cancel this order?",
+        status: "warning",
+        actions: [
+          {
+            title: "Confirm",
+            onClick: () => {
+              onSubmitCancel();
+            },
+          },
+          {
+            title: "Cancel",
+            isClose: true,
+          },
+        ],
+      })
+    );
+  }
+
+
+  async function onSubmit() {
 
     try {
 
@@ -260,9 +306,9 @@ export default function OrderForm(props: any) {
   }
 
   const showActions = !['C', 'D', 'N'].includes(status);
-  const showCancel = !['A', 'D','C'].includes(status);
+  const showCancel = !['A', 'D', 'C'].includes(status);
 
-  async function onSubmitCancel(data: any) {
+  async function onSubmitCancel() {
 
     try {
 
@@ -480,7 +526,7 @@ export default function OrderForm(props: any) {
               {showActions && (
 
                 <button
-                  onClick={onSubmit}
+                  onClick={alertUpdate}
                   style={{ backgroundColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR }}
                   className="w-2/3 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition-all duration-150 hover:ring-4 hover:ring-blue-400"
                 >
@@ -490,7 +536,7 @@ export default function OrderForm(props: any) {
 
               {showCancel && (
                 <button
-                  onClick={onSubmitCancel}
+                  onClick={alertCancel}
                   className={`w-1/3 text-red-700 font-bold py-2 px-4 rounded border border-red-400 hover:bg-red-200 transition-all duration-150 ${!showActions ? "ml-auto" : ""
                     }`}                >
                   Cancel Order
