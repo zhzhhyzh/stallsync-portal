@@ -31,6 +31,8 @@ import tranCodes from "./tranCode/slice";
 import transactions from "./transaction/slice";
 
 import backupDatabase from "./backup/slice";
+import review from "./review/slice";
+
 
 
 
@@ -60,7 +62,7 @@ export function makeStore() {
       passwordPolicy,
       reports,
       rewards,
-
+      review,
       tranCodes,
       order,
       backupDatabase,

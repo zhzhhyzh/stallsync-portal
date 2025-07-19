@@ -190,5 +190,8 @@ export const API_ROUTES = {
 
   //TRANSACTION
   TRAN_LIST: 'pstrxpar/list',
-  TRAN_DETAIL: 'pstrxpar/detail'
+  TRAN_DETAIL: 'pstrxpar/detail',
+
+  //REVIEW
+  RVW_LISTM: "psordrvw/list_m",
 };

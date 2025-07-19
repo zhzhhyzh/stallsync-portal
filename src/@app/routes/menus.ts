@@ -139,11 +139,11 @@ export const menus: Array<NavItem> = [
             href: "/roleCode",
             permissions: [accessType.ROLE_VIEW],
           },
-          {
-            label: "System Table",
-            href: "/fileManagements",
-            permissions: [accessType.FILEMANAGE_VIEW],
-          },
+          // {
+          //   label: "System Table",
+          //   href: "/fileManagements",
+          //   permissions: [accessType.FILEMANAGE_VIEW],
+          // },
           {
             label: "User Accounts",
             href: "/adminAccounts",

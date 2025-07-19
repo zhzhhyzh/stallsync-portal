@@ -191,6 +191,24 @@ export default function MerchantPage() {
 
             <TableMenu menus={[
               {
+                url: `/merchant/review`,
+                query: {
+                  id: record?.id,
+                  name: record?.psmrcnme,
+                  rating: record?.psmrcrtg
+                  // file: extra.file
+                },
+                label: "Review",
+                breadcrumbRoute: [
+                  {
+                    title: "Merchant",
+                    href: `/merchant`,// Add parameter if needed eg. /generalParameter/?id=123
+                  },
+                  {
+                    title: "Review",
+                  },
+                ]
+              }, {
                 url: `/maintLogs`,
                 query: {
                   id: record?.id,
