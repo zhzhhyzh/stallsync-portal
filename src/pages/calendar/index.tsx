@@ -660,31 +660,21 @@ export default function calendarPage(props: any) {
   const [load, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isDataInitialized, setIsDataInitialized] = useState(false);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        // Call the API function with the appropriate requestURL
-        const data = await api(
-          'pswdypar/list/', // Your endpoint
-          'GET',                          // HTTP method
-          {},                             // No additional data
-          {},                             // No headers if not needed
-          false,                                                    // extraType parameters if needed
-        );
+  const fetchWorkDayData = async () => {
+  try {
+    const data = await api('pswdypar/list/', 'GET', {}, {}, false);
+    setFetchedData(data.message.data);
+    setWorkdays(data.message.data);
+  } catch (err: any) {
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
-
-        setFetchedData(data.message.data);
-        setWorkdays(data.message.data)
-        // console.log(data.message.data, "data.message.data")
-      } catch (err: any) {
-        setError(err.message); // Handle any errors
-      } finally {
-        setLoading(false); // Stop loading when the fetch is complete
-      }
-    }
-
-    fetchData();
-  }, []);// Empty dependency array to run only on component mount
+useEffect(() => {
+  fetchWorkDayData();
+}, []);
 
   // Define initialValues with the correct type
   const initialValues = {
@@ -731,12 +721,13 @@ export default function calendarPage(props: any) {
       });
 
       if (success) {
-        setTimeout(() => {
+        setTimeout(async () => {
           showModal(dispatch, {
             title: "Update item",
             message: "Record Updated",
           });
-          router.back();
+         await fetchWorkDayData();  // <== This will refetch the latest data from backend
+
         }, 200);
       } else {
         // Handle failure (optional)

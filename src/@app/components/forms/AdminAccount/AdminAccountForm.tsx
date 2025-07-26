@@ -160,6 +160,7 @@ export default function AdminAccountsForm(props: any) {
         }}
         gap={Spacing.gap}
         mt={Spacing.gap}
+        // wrap={"wrap"}
       >
         <Box display={"flex"} flexDir={"column"} w={"100%"}>
           <Box>
@@ -455,7 +456,7 @@ export default function AdminAccountsForm(props: any) {
         <Box
           w={{
             base: "100%",
-            lg: "50%",
+            lg: "100%",
           }}
         >
           <Card className="relative overflow-hidden">
